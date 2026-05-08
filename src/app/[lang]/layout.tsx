@@ -46,7 +46,10 @@ export default async function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <body
+        className="min-h-full flex flex-col"
+        suppressHydrationWarning
+      >
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -35,13 +35,24 @@ export type Brand = {
   storyViewed?: boolean;
 };
 
+export type ShopTag = {
+  label: string;
+  variant: "shipping" | "topSeller";
+};
+
 export type Shop = {
   id: string;
   name: string;
+  category: string;
   avatar: string;
   banner: string;
+  verified?: boolean;
   rating: number;
-  itemsSold: string;
+  reviews: number;
+  itemsSoldCount: string;
+  yearsSelling: string;
+  tag?: ShopTag;
+  isFollowing?: boolean;
 };
 
 export type HeroSlide = {

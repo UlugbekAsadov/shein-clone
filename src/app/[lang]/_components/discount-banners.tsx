@@ -12,7 +12,7 @@ export function DiscountBanners({ discountLabel }: Props) {
         {discountTiles.map((tile) => (
           <article
             key={tile.id}
-            className="relative flex h-32 items-center justify-between overflow-hidden rounded-3xl px-6 text-white"
+            className="relative flex h-32 items-center justify-between overflow-hidden rounded-xl px-6 text-white"
             style={{ background: tile.background }}
           >
             <div className="flex flex-col">

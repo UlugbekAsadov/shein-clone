@@ -18,7 +18,7 @@ export function Footer({ dict }: Props) {
   const i = f.items;
 
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-t border-border bg-secondary">
       <div className="mx-auto max-w-[1440px] px-6 py-10">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           <FeatureItem
@@ -108,9 +108,7 @@ export function Footer({ dict }: Props) {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <p className="text-sm text-muted-foreground">{f.rights}</p>
-          <p className="text-sm text-muted-foreground">
-            {f.downloadApp}
-          </p>
+          <p className="text-sm text-muted-foreground">{f.downloadApp}</p>
         </div>
       </div>
     </footer>
@@ -127,8 +125,8 @@ function FeatureItem({
   description: string;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="grid size-10 place-items-center rounded-full bg-muted text-foreground">
+    <div className="flex items-center gap-3 p-3 rounded-md bg-background">
+      <span className="grid size-16 place-items-center rounded-sm bg-muted text-foreground">
         {icon}
       </span>
       <div>
@@ -139,13 +137,7 @@ function FeatureItem({
   );
 }
 
-function FooterColumn({
-  title,
-  items,
-}: {
-  title: string;
-  items: string[];
-}) {
+function FooterColumn({ title, items }: { title: string; items: string[] }) {
   return (
     <div>
       <h4 className="mb-3 text-xs font-semibold tracking-wider text-foreground">
