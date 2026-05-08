@@ -1,0 +1,12 @@
+{
+  "home": {
+    "title": "Welcome",
+    "greeting": "Hello"
+  },
+  "language": {
+    "label": "Language",
+    "uz": "Uzbek",
+    "ru": "Russian",
+    "en": "English"
+  }
+}
