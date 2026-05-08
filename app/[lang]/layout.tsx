@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { cn } from "@/lib/utils";
 import { hasLocale, locales } from "@/lib/i18n-config";
+import { Providers } from "../providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -46,7 +47,7 @@ export default async function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
