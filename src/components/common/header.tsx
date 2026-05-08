@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/i18n-config";
 import type { Dictionary } from "@/lib/dictionaries";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
-import { CurrencySwitcher } from "./category/currency-switcher";
+import { CurrencySwitcher } from "./currency-switcher";
 
 type Props = {
   lang: Locale;
@@ -40,7 +40,7 @@ export function Header({ lang, dict }: Props) {
             aria-label="Cart"
             className="relative rounded-full p-2 hover:bg-muted"
           >
-            <ShoppingCart className="size-6" />
+            <ShoppingCart className="size-6 text-muted-foreground" />
             <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
               8
             </span>
@@ -50,7 +50,7 @@ export function Header({ lang, dict }: Props) {
             aria-label="Wishlist"
             className="rounded-full p-2 hover:bg-muted"
           >
-            <Heart className="size-6" />
+            <Heart className="size-6 text-muted-foreground" />
           </button>
 
           <button

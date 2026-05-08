@@ -22,7 +22,7 @@ export function ShopByCategory({ title, viewAllLabel }: Props) {
             type="button"
             className="flex flex-col items-center gap-2"
           >
-            <span className="relative grid aspect-square w-full place-items-center overflow-hidden rounded-full bg-muted">
+            <span className="relative grid aspect-square w-full place-items-center  rounded-full bg-muted">
               <Image
                 src={c.image ?? "/placeholders/category.svg"}
                 alt={c.name}
@@ -31,7 +31,7 @@ export function ShopByCategory({ title, viewAllLabel }: Props) {
                 className="size-full object-cover"
               />
               {c.badge && (
-                <span className="absolute right-1 top-1 grid h-6 min-w-10 place-items-center rounded-full bg-rose-500 px-2 text-[11px] font-semibold text-white">
+                <span className="absolute z-20 right-1 top-1 grid h-6 min-w-10 place-items-center rounded-full bg-rose-500 px-2 text-[11px] font-semibold text-white">
                   {c.badge}
                 </span>
               )}

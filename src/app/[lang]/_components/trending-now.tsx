@@ -12,7 +12,7 @@ type Props = {
 export function TrendingNow({ title, subtitle, viewAllLabel }: Props) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
-      <div className="rounded-3xl bg-rose-50/40 p-5">
+      <div className="rounded-xl bg-[#FF3C0614] p-5">
         <SectionHeader
           title={
             <span className="flex items-center gap-2">

@@ -31,7 +31,7 @@ export function HotDeals({ title, viewAllLabel }: Props) {
 
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
-      <div className="rounded-3xl bg-gradient-to-br from-rose-500 via-rose-600 to-red-700 p-5">
+      <div className="rounded-xl bg-gradient-to-br from-rose-500 via-rose-600 to-red-700 p-5">
         <SectionHeader
           title={
             <span className="flex items-center gap-3 text-white">

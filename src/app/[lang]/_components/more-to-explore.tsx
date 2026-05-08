@@ -11,7 +11,7 @@ type Props = {
 export function MoreToExplore({ title, subtitle, viewAllLabel }: Props) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
-      <div className="rounded-3xl bg-blue-50/50 p-5">
+      <div className="rounded-xl bg-blue-50/50 p-5">
         <SectionHeader
           title={title}
           subtitle={subtitle}

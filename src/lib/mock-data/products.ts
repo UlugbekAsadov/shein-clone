@@ -5,12 +5,14 @@ const baseProduct = (id: string, badge?: Product["badge"]): Product => ({
   title: "Sweatshirt",
   subtitle: "Women's Casual Pullover Sweats...",
   price: 33.49,
-  originalPrice: 60.45,
+  originalPrice: 63.49,
   image: "/placeholders/product.svg",
   rating: 4.5,
-  reviews: 1.5,
+  reviews: 324,
   badge,
-  saveLabel: "Save 20%",
+  saveLabel: "Save $30",
+  discountLabel: "30%",
+  delivery: "1-2 days",
 });
 
 export const trendingProducts: Product[] = [

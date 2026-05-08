@@ -23,13 +23,16 @@ export type Product = {
   reviews: number;
   badge?: "Original" | "New" | "Sale";
   saveLabel?: string;
+  discountLabel?: string;
+  delivery?: string;
 };
 
 export type Brand = {
   id: string;
   name: string;
   image: string;
-  ringColor?: string;
+  brandBg?: string;
+  storyViewed?: boolean;
 };
 
 export type Shop = {
