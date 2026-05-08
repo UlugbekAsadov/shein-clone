@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bgr" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bgr)"/>
+  <text x="100" y="115" text-anchor="middle" fill="#f9fafb" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="800" letter-spacing="2">BRAND</text>
+</svg>

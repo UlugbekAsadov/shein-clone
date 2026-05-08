@@ -1,0 +1,96 @@
+{
+  "home": {
+    "title": "Добро пожаловать",
+    "greeting": "Здравствуйте"
+  },
+  "language": {
+    "label": "Язык",
+    "uz": "Узбекский",
+    "ru": "Русский",
+    "en": "Английский"
+  },
+  "header": {
+    "searchPlaceholder": "Поиск платьев, кроссовок, мужских сумок",
+    "search": "Поиск",
+    "helloSignIn": "Здравствуйте, войдите"
+  },
+  "nav": {
+    "categories": "Категории",
+    "filters": {
+      "onSale": "Распродажа",
+      "freeDelivery": "Бесплатная доставка",
+      "original": "Оригинал",
+      "new": "Новинки"
+    }
+  },
+  "promo": {
+    "label": "ВЕСЕННЯЯ РАСПРОДАЖА",
+    "text": "Скидки до 50% на избранные товары",
+    "cta": "Купить сейчас"
+  },
+  "sections": {
+    "shopByCategory": "Магазин по категориям",
+    "trendingNow": "В тренде сейчас",
+    "trendingSubtitle": "То, что любят все",
+    "womensFashion": "Женская мода",
+    "womensSubtitle": "Модные стили",
+    "featuredShops": "Избранные магазины",
+    "featuredSubtitle": "Подборка лучших магазинов",
+    "moreToExplore": "Больше для изучения",
+    "moreSubtitle": "Подобрано для вас",
+    "hotDeals": "Горячие скидки",
+    "viewAll": "Смотреть все",
+    "filters": "Фильтры",
+    "follow": "Подписаться",
+    "following": "Подписан",
+    "discount": "Скидка"
+  },
+  "categoryMenu": {
+    "picksForYou": "Подборка для вас",
+    "featured": "Рекомендуемое"
+  },
+  "footer": {
+    "buyerProtection": "Защита покупателя",
+    "buyerProtectionDesc": "100% возврат денег",
+    "securePayment": "Безопасная оплата",
+    "securePaymentDesc": "256-битное шифрование SSL",
+    "fastDelivery": "Быстрая доставка",
+    "fastDeliveryDesc": "1-3 рабочих дня",
+    "easyReturns": "Лёгкий возврат",
+    "easyReturnsDesc": "30 дней бесплатный возврат",
+    "forShoppers": "ПОКУПАТЕЛЯМ",
+    "forSellers": "ПРОДАВЦАМ",
+    "helpSupport": "ПОМОЩЬ И ПОДДЕРЖКА",
+    "legal": "ЮРИДИЧЕСКАЯ ИНФОРМАЦИЯ",
+    "contactUs": "СВЯЗАТЬСЯ С НАМИ",
+    "mobileApp": "МОБИЛЬНОЕ ПРИЛОЖЕНИЕ",
+    "downloadApp": "Скачать наше приложение",
+    "rights": "© 2026 SHEIN. Все права защищены.",
+    "items": {
+      "howToBuy": "Как купить",
+      "paymentMethods": "Способы оплаты",
+      "shipping": "Доставка",
+      "returnsExchanges": "Возврат и обмен",
+      "buyerProtection": "Защита покупателя",
+      "startSelling": "Начать продавать",
+      "sellerCenter": "Центр продавца",
+      "commissionRates": "Комиссии",
+      "advertising": "Реклама",
+      "sellerGuarantees": "Гарантии продавца",
+      "helpCenter": "Центр помощи",
+      "contactUs": "Связаться с нами",
+      "reportAnIssue": "Сообщить о проблеме",
+      "faq": "Частые вопросы",
+      "termsOfService": "Условия обслуживания",
+      "privacyPolicy": "Политика конфиденциальности",
+      "cookiePolicy": "Политика cookie",
+      "copyrightPolicy": "Авторское право",
+      "support": "+998 12 345 67 67",
+      "supportLabel": "Поддержка 24/7",
+      "email": "store@yourbrand.com",
+      "emailLabel": "Email-поддержка",
+      "address": "Лос-Анджелес, Калифорния",
+      "addressLabel": "США"
+    }
+  }
+}

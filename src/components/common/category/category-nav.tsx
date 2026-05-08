@@ -1,0 +1,101 @@
+"use client";
+
+import { useState } from "react";
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  LayoutGrid,
+} from "lucide-react";
+import { navCategories } from "@/lib/mock-data";
+import { CategoryMegaMenu } from "./category-mega-menu";
+import { cn } from "@/lib/utils";
+
+type Props = {
+  categoriesLabel: string;
+  picksTitle: string;
+  featuredTitle: string;
+  filters: {
+    onSale: string;
+    freeDelivery: string;
+    original: string;
+    new: string;
+  };
+};
+
+export function CategoryNav({
+  categoriesLabel,
+  picksTitle,
+  featuredTitle,
+  filters,
+}: Props) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="relative border-b border-border bg-background"
+      onMouseLeave={() => setOpen(false)}
+    >
+      <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-6 px-6">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          onMouseEnter={() => setOpen(true)}
+          className={cn(
+            "flex items-center gap-2 rounded-lg px-2 py-1.5 text-[15px] font-semibold hover:bg-muted",
+            open && "bg-muted",
+          )}
+          aria-expanded={open}
+        >
+          <LayoutGrid className="size-4" />
+          {categoriesLabel}
+          <ChevronDown className="size-4" />
+        </button>
+
+        <nav className="flex flex-1 items-center gap-7 overflow-hidden">
+          {navCategories.map((c, idx) => (
+            <button
+              key={c.id}
+              type="button"
+              className={cn(
+                "whitespace-nowrap text-[15px] transition-colors hover:text-foreground",
+                idx === 0 ? "font-medium text-foreground" : "text-muted-foreground",
+              )}
+            >
+              {c.name}
+            </button>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-label="Scroll left"
+            className="grid size-8 place-items-center rounded-full hover:bg-muted"
+          >
+            <ChevronLeft className="size-4" />
+          </button>
+          <button
+            type="button"
+            aria-label="Scroll right"
+            className="grid size-8 place-items-center rounded-full hover:bg-muted"
+          >
+            <ChevronRight className="size-4" />
+          </button>
+        </div>
+      </div>
+
+      {open && (
+        <div className="absolute inset-x-0 top-full z-30 mx-auto max-w-[1440px] px-6">
+          <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
+            <CategoryMegaMenu
+              picksTitle={picksTitle}
+              featuredTitle={featuredTitle}
+              filters={filters}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
