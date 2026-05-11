@@ -1,13 +1,13 @@
-import { Ruler, Shirt, Store, Truck } from "lucide-react";
+import { Info, Layers, Ruler, Scissors, Truck } from "lucide-react";
 import type { IProductDetail } from "../../_lib/interface/product-detail.interface";
 import { ProductInfoAccordion } from "./product-info-accordion";
 import { ProductSpecTags } from "./product-spec-tags";
 
 const accordionIcons = {
   "size-fit": Ruler,
-  materials: Shirt,
+  materials: Scissors,
   delivery: Truck,
-  "shop-info": Store,
+  "shop-info": Info,
 } as const;
 
 interface IProps {
@@ -16,8 +16,8 @@ interface IProps {
 
 export function ProductDescriptionSection({ product }: IProps) {
   return (
-    <div className="flex flex-col gap-3">
-      <ProductInfoAccordion title="Description" defaultOpen>
+    <div className="flex flex-col border rounded-lg overflow-hidden">
+      <ProductInfoAccordion title="Description" icon={Layers} defaultOpen>
         <p className="mb-4 text-foreground">{product.subtitle}</p>
         <ProductSpecTags specs={product.specs} />
       </ProductInfoAccordion>

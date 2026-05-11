@@ -10,8 +10,8 @@ interface IProps {
 
 export function ProductSellerCard({ seller }: IProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-card">
-      <div className="relative h-32">
+    <div className="overflow-hidden p-2 rounded-lg border border-border bg-card">
+      <div className="relative h-32 rounded-[12px] overflow-hidden">
         <Image
           src={seller.banner}
           alt={seller.name}
@@ -25,8 +25,8 @@ export function ProductSellerCard({ seller }: IProps) {
         </span>
       </div>
 
-      <div className="flex items-center gap-3 p-4">
-        <div className="-mt-10 size-14 shrink-0 overflow-hidden rounded-full ring-4 ring-background">
+      <div className="flex flex-col gap-3 p-4">
+        <div className="-mt-10 size-14 shrink-0 overflow-hidden rounded-full ring-4 ring-background z-10">
           <Image
             src={seller.avatar}
             alt={seller.name}
@@ -37,26 +37,31 @@ export function ProductSellerCard({ seller }: IProps) {
           />
         </div>
 
-        <div className="flex-1">
-          <div className="flex items-center gap-1.5">
-            <span className="font-semibold">{seller.name}</span>
-            <BadgeCheck className="size-4 fill-blue-500 text-white" />
-          </div>
-          <div className="text-xs text-muted-foreground">{seller.tag}</div>
-          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="flex items-center gap-1 text-xs">
-              <Star className="size-3 fill-amber-400 text-amber-400" />
-              <span className="font-semibold">
-                {seller.rating.toFixed(1)}
+        <div className="flex items-start">
+          <div className="flex-1">
+            <div className="flex items-center gap-1">
+              <span className="font-semibold font-sm">{seller.name}</span>
+              <BadgeCheck className="size-4 fill-blue-500 text-white" />
+            </div>
+            <p className="text-xs text-muted-foreground">{seller.tag}</p>
+            <span className="flex items-center gap-1 text-xs mt-3">
+              <Star className="size-4 fill-amber-400 text-amber-400" />
+              <span className="font-semibold text-xs">
+                {seller.rating.toFixed(1)}{" "}
+                <span className="text-muted-foreground text-[10px] font-normal">
+                  (324)
+                </span>
               </span>
             </span>
-            {seller.stats.map((stat) => (
-              <ProductSellerStat key={stat.id} stat={stat} />
-            ))}
+            <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+              {seller.stats.map((stat) => (
+                <ProductSellerStat key={stat.id} stat={stat} />
+              ))}
+            </div>
           </div>
-        </div>
 
-        <Button className="rounded-full px-5">Follow</Button>
+          <Button className="rounded-full px-5">Follow</Button>
+        </div>
       </div>
     </div>
   );

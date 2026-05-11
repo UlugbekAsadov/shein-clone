@@ -1,4 +1,4 @@
-import { ChevronDown, LucideIcon } from "lucide-react";
+import { ChevronRight, LucideIcon } from "lucide-react";
 
 interface IProps {
   title: string;
@@ -14,16 +14,13 @@ export function ProductInfoAccordion({
   children,
 }: IProps) {
   return (
-    <details
-      open={defaultOpen}
-      className="group rounded-2xl border border-border bg-card"
-    >
+    <details open={defaultOpen} className="group bg-card  border-b last:border-b-0">
       <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3.5 text-sm font-semibold">
         <span className="flex items-center gap-2">
-          {Icon && <Icon className="size-4 text-muted-foreground" />}
+          {Icon && <Icon className="size-5 text-foreground" />}
           {title}
         </span>
-        <ChevronDown className="size-4 text-muted-foreground transition-transform group-open:rotate-180" />
+        <ChevronRight className="size-4 text-muted-foreground transition-transform group-open:-rotate-90" />
       </summary>
       <div className="px-4 pb-4 text-sm text-muted-foreground">{children}</div>
     </details>

@@ -7,7 +7,7 @@ interface IProps {
 
 export function ProductSpecTags({ specs }: IProps) {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="flex flex-wrap gap-2">
       {specs.map((spec) => (
         <ProductSpecTag key={spec.id} spec={spec} />
       ))}
