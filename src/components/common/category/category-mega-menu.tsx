@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { BadgeCheck, ChevronRight, Sparkles, Tag, Truck } from "lucide-react";
 import {
@@ -8,10 +9,12 @@ import {
   picksForYou,
   featuredCategories,
 } from "@/lib/mock-data";
+import type { locales } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
 import { FilterChip } from "./filter-chip";
 
 interface IProps {
+  lang: (typeof locales)[number];
   picksTitle: string;
   featuredTitle: string;
   filters: {
@@ -23,6 +26,7 @@ interface IProps {
 }
 
 export function CategoryMegaMenu({
+  lang,
   picksTitle,
   featuredTitle,
   filters,
@@ -58,8 +62,8 @@ export function CategoryMegaMenu({
         <ul className="flex flex-col">
           {sidebarCategories.map((c) => (
             <li key={c.id}>
-              <button
-                type="button"
+              <Link
+                href={`/${lang}/category/${c.slug}`}
                 onMouseEnter={() => setActiveId(c.id)}
                 onFocus={() => setActiveId(c.id)}
                 className={cn(
@@ -69,7 +73,7 @@ export function CategoryMegaMenu({
               >
                 <span>{c.name}</span>
                 <ChevronRight className="size-4 text-muted-foreground" />
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -78,9 +82,9 @@ export function CategoryMegaMenu({
           <h3 className="mb-4 text-base font-bold">{picksTitle}</h3>
           <div className="grid grid-cols-8 gap-x-3 gap-y-5">
             {picksForYou.map((item) => (
-              <button
+              <Link
                 key={item.id}
-                type="button"
+                href={`/${lang}/category/${item.slug}`}
                 className="flex flex-col items-center gap-2 text-center cursor-pointer"
               >
                 <span className="relative size-16 overflow-hidden rounded-full bg-muted">
@@ -96,7 +100,7 @@ export function CategoryMegaMenu({
                 <span className="line-clamp-1 text-xs text-foreground">
                   {item.name}
                 </span>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -105,9 +109,9 @@ export function CategoryMegaMenu({
           <h3 className="mb-4 text-base font-bold">{featuredTitle}</h3>
           <div className="grid grid-cols-3 gap-x-3 gap-y-5">
             {featuredCategories.map((item) => (
-              <button
+              <Link
                 key={item.id}
-                type="button"
+                href={`/${lang}/category/${item.slug}`}
                 className="flex flex-col items-center gap-2 text-center cursor-pointer"
               >
                 <span
@@ -133,7 +137,7 @@ export function CategoryMegaMenu({
                 <span className="line-clamp-1 text-xs text-foreground">
                   {item.name}
                 </span>
-              </button>
+              </Link>
             ))}
           </div>
         </div>

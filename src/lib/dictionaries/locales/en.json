@@ -49,6 +49,41 @@
     "picksForYou": "Picks fot you",
     "featured": "Featured"
   },
+  "category": {
+    "breadcrumb": {
+      "home": "Home",
+      "shop": "Shop"
+    },
+    "tabs": {
+      "similar": "Similar items",
+      "deals": "Deals & Offers"
+    },
+    "toolbar": {
+      "productFound": "Product found",
+      "mostPopular": "Most popular",
+      "price": "Price",
+      "sortNewest": "Newest",
+      "sortPriceLow": "Price: low to high",
+      "sortPriceHigh": "Price: high to low",
+      "sortRating": "Top rated"
+    },
+    "filter": {
+      "title": "Filter",
+      "quickFilters": "Quick Filters",
+      "category": "Category",
+      "size": "Size",
+      "sizeClothing": "Clothing",
+      "sizeShoes": "Shoes",
+      "color": "Color",
+      "priceRange": "Price Range",
+      "priceFrom": "$",
+      "priceTo": "to",
+      "brands": "Brands",
+      "brandsSearch": "Search brands",
+      "style": "Style",
+      "material": "Material"
+    }
+  },
   "footer": {
     "buyerProtection": "Buyer Protection",
     "buyerProtectionDesc": "100% money back guarantee",

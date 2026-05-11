@@ -25,6 +25,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <>
       <Header lang={lang} dict={dict} />
       <CategoryNav
+        lang={lang}
         categoriesLabel={dict.nav.categories}
         picksTitle={dict.categoryMenu.picksForYou}
         featuredTitle={dict.categoryMenu.featured}
@@ -40,6 +41,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <BrandStrip />
         <HeroCarousel />
         <ShopByCategory
+          lang={lang}
           title={dict.sections.shopByCategory}
           viewAllLabel={dict.sections.viewAll}
         />

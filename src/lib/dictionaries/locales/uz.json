@@ -49,6 +49,41 @@
     "picksForYou": "Siz uchun tanlangan",
     "featured": "Tavsiya etiladi"
   },
+  "category": {
+    "breadcrumb": {
+      "home": "Bosh sahifa",
+      "shop": "Do'kon"
+    },
+    "tabs": {
+      "similar": "O'xshash mahsulotlar",
+      "deals": "Chegirmalar va takliflar"
+    },
+    "toolbar": {
+      "productFound": "Topilgan mahsulotlar",
+      "mostPopular": "Mashhur",
+      "price": "Narx",
+      "sortNewest": "Yangi",
+      "sortPriceLow": "Narx: arzondan qimmatga",
+      "sortPriceHigh": "Narx: qimmatdan arzonga",
+      "sortRating": "Reyting bo'yicha"
+    },
+    "filter": {
+      "title": "Filtr",
+      "quickFilters": "Tezkor filtrlar",
+      "category": "Kategoriya",
+      "size": "O'lcham",
+      "sizeClothing": "Kiyim",
+      "sizeShoes": "Poyabzal",
+      "color": "Rang",
+      "priceRange": "Narx oralig'i",
+      "priceFrom": "$",
+      "priceTo": "dan",
+      "brands": "Brendlar",
+      "brandsSearch": "Brendlarni qidirish",
+      "style": "Uslub",
+      "material": "Material"
+    }
+  },
   "footer": {
     "buyerProtection": "Xaridor himoyasi",
     "buyerProtectionDesc": "100% pulni qaytarish kafolati",

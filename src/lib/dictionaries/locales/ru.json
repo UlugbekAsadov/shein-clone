@@ -49,6 +49,41 @@
     "picksForYou": "Подборка для вас",
     "featured": "Рекомендуемое"
   },
+  "category": {
+    "breadcrumb": {
+      "home": "Главная",
+      "shop": "Магазин"
+    },
+    "tabs": {
+      "similar": "Похожие товары",
+      "deals": "Скидки и предложения"
+    },
+    "toolbar": {
+      "productFound": "Найдено товаров",
+      "mostPopular": "Популярные",
+      "price": "Цена",
+      "sortNewest": "Новинки",
+      "sortPriceLow": "Цена: по возрастанию",
+      "sortPriceHigh": "Цена: по убыванию",
+      "sortRating": "По рейтингу"
+    },
+    "filter": {
+      "title": "Фильтр",
+      "quickFilters": "Быстрые фильтры",
+      "category": "Категория",
+      "size": "Размер",
+      "sizeClothing": "Одежда",
+      "sizeShoes": "Обувь",
+      "color": "Цвет",
+      "priceRange": "Диапазон цен",
+      "priceFrom": "$",
+      "priceTo": "до",
+      "brands": "Бренды",
+      "brandsSearch": "Поиск брендов",
+      "style": "Стиль",
+      "material": "Материал"
+    }
+  },
   "footer": {
     "buyerProtection": "Защита покупателя",
     "buyerProtectionDesc": "100% возврат денег",

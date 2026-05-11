@@ -1,13 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import { shopByCategory } from "@/lib/mock-data";
+import type { locales } from "@/lib/i18n-config";
 import { SectionHeader } from "./section-header";
 
 interface IProps {
+  lang: (typeof locales)[number];
   title: string;
   viewAllLabel: string;
 }
 
-export function ShopByCategory({ title, viewAllLabel }: IProps) {
+export function ShopByCategory({ lang, title, viewAllLabel }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-8">
       <SectionHeader
@@ -17,9 +20,9 @@ export function ShopByCategory({ title, viewAllLabel }: IProps) {
       />
       <div className="flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {shopByCategory.map((c) => (
-          <button
+          <Link
             key={c.id}
-            type="button"
+            href={`/${lang}/category/${c.slug}`}
             className="flex w-[126px] shrink-0 flex-col items-center gap-2 cursor-pointer relative"
           >
             <span className="relative aspect-square w-full max-h-[120px] max-w-[120px] overflow-hidden rounded-full bg-muted ">
@@ -40,7 +43,7 @@ export function ShopByCategory({ title, viewAllLabel }: IProps) {
             <span className="text-sm font-medium text-foreground">
               {c.name}
             </span>
-          </button>
+          </Link>
         ))}
       </div>
     </section>

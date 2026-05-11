@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   ChevronDown,
   ChevronLeft,
@@ -8,10 +9,12 @@ import {
   LayoutGrid,
 } from "lucide-react";
 import { navCategories } from "@/lib/mock-data";
+import type { locales } from "@/lib/i18n-config";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
 
 interface IProps {
+  lang: (typeof locales)[number];
   categoriesLabel: string;
   picksTitle: string;
   featuredTitle: string;
@@ -24,6 +27,7 @@ interface IProps {
 }
 
 export function CategoryNav({
+  lang,
   categoriesLabel,
   picksTitle,
   featuredTitle,
@@ -54,16 +58,16 @@ export function CategoryNav({
 
         <nav className="flex flex-1 items-center gap-7 overflow-hidden">
           {navCategories.map((c, idx) => (
-            <button
+            <Link
               key={c.id}
-              type="button"
+              href={`/${lang}/category/${c.slug}`}
               className={cn(
                 "whitespace-nowrap text-[15px] transition-colors hover:text-foreground",
                 idx === 0 ? "font-medium text-foreground" : "text-muted-foreground",
               )}
             >
               {c.name}
-            </button>
+            </Link>
           ))}
         </nav>
 
@@ -104,6 +108,7 @@ export function CategoryNav({
       >
         <div className="origin-top overflow-hidden rounded-b-2xl border border-border bg-background shadow-2xl">
           <CategoryMegaMenu
+            lang={lang}
             picksTitle={picksTitle}
             featuredTitle={featuredTitle}
             filters={filters}
