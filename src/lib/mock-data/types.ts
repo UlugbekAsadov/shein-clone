@@ -33,6 +33,7 @@ export type Brand = {
   image: string;
   brandBg?: string;
   storyViewed?: boolean;
+  contents: string[];
 };
 
 export type ShopTag = {

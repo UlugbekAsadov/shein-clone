@@ -1,16 +1,23 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { brands } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import { BrandStoryViewer } from "./brand-story-viewer";
 
 export function BrandStrip() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
     <div className="mx-auto max-w-[1440px] px-6">
       <div className="flex gap-6 overflow-x-auto pb-2 scrollbar-thin">
-        {brands.map((b) => (
+        {brands.map((b, i) => (
           <button
             key={b.id}
             type="button"
-            className="group flex shrink-0 flex-col items-center gap-2"
+            onClick={() => setActiveIndex(i)}
+            className="group flex shrink-0 cursor-pointer flex-col items-center gap-2"
           >
             <span
               className={cn(
@@ -40,6 +47,14 @@ export function BrandStrip() {
           </button>
         ))}
       </div>
+
+      {activeIndex !== null && (
+        <BrandStoryViewer
+          brands={brands}
+          initialIndex={activeIndex}
+          onClose={() => setActiveIndex(null)}
+        />
+      )}
     </div>
   );
 }

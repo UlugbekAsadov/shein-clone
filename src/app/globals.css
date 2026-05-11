@@ -128,3 +128,35 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  @keyframes dialog-overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes dialog-overlay-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  @keyframes dialog-content-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes dialog-content-out {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0.96); }
+  }
+
+  .dialog-overlay-enter {
+    animation: dialog-overlay-in 200ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+  .dialog-overlay-exit {
+    animation: dialog-overlay-out 200ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+  .dialog-content-enter {
+    animation: dialog-content-in 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+  .dialog-content-exit {
+    animation: dialog-content-out 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  }
+}

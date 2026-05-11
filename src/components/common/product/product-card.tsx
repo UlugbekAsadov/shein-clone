@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 import { Heart, ShoppingCart, Star, Truck } from "lucide-react";
 import type { Product } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import { ProductPreviewDialog } from "./product-preview-dialog";
 
 type Props = {
   product: Product;
@@ -10,6 +14,7 @@ type Props = {
 
 export function ProductCard({ product, variant = "default" }: Props) {
   const isDark = variant === "dark";
+  const [previewOpen, setPreviewOpen] = useState(false);
 
   return (
     <article
@@ -82,6 +87,7 @@ export function ProductCard({ product, variant = "default" }: Props) {
           </div>
           <button
             type="button"
+            onClick={() => setPreviewOpen(true)}
             aria-label="Add to cart"
             className="ml-auto grid cursor-pointer size-9 place-items-center rounded-sm bg-foreground text-background transition-colors hover:bg-foreground/90"
           >
@@ -89,6 +95,12 @@ export function ProductCard({ product, variant = "default" }: Props) {
           </button>
         </div>
       </div>
+
+      <ProductPreviewDialog
+        product={product}
+        open={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+      />
     </article>
   );
 }
