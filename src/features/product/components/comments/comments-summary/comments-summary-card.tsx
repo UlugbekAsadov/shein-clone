@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import type { IRatingBucket } from "@/features/product/types";
+import type { IRatingBucket } from "@/features/product/interfaces/rating-distribution.interface";
 import { RatingHistogram } from "./rating-histogram";
 
 interface IProps {

@@ -1,4 +1,4 @@
-import type { IReview } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
 import { CommentsReviewItem } from "./comments-review-item";
 
 interface IProps {

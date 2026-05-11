@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, X } from "lucide-react";
-import type { IGalleryItem } from "@/features/product/types";
+import type { IGalleryItem } from "@/features/product/interfaces/gallery-item.interface";
 import { GalleryGridItem } from "./gallery-grid-item";
 
 interface IProps {

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { CommentsStickyBar } from "@/features/product/components/comments/comments-sticky-bar";
-import type { IProductDetail } from "@/features/product/types";
-import type { IGalleryItem } from "@/features/product/types";
+import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
+import type { IGalleryItem } from "@/features/product/interfaces/gallery-item.interface";
 import { GalleryDetail } from "./gallery-detail";
 import { GalleryGrid } from "./gallery-grid";
 

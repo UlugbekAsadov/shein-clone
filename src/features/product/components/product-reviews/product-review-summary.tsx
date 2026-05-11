@@ -1,5 +1,5 @@
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
-import type { IFitStat } from "@/features/product/types";
+import type { IFitStat } from "@/features/product/interfaces/review.interface";
 import { ProductReviewFitBar } from "./product-review-fit-bar";
 
 interface IProps {

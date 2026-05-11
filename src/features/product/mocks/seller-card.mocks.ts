@@ -1,4 +1,4 @@
-import type { ISellerCard } from "@/features/product/types";
+import type { ISellerCard } from "@/features/product/interfaces/seller-card.interface";
 
 export const sellerCardMock: ISellerCard = {
   id: "ryvang-rens",

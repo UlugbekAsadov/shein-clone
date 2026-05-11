@@ -1,23 +1,23 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "@/lib/i18n-config";
-import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header/header";
-import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer/footer";
-import { ProductPreviewGallery } from "@/components/common/product/product-preview/product-preview-gallery";
-import { trendingProducts, womensFashion } from "@/lib/mock-data";
-import { ProductBreadcrumb } from "./_components/product-breadcrumb";
-import { ProductStickyBar } from "./_components/product-sticky-bar";
-import { ProductInfoPanel } from "./_components/product-info/product-info-panel";
-import { ProductShippingInfo } from "./_components/product-info/product-shipping-info";
-import { ProductSellerCard } from "./_components/product-info/product-seller-card";
-import { ProductDescriptionSection } from "./_components/product-info/product-description-section";
-import { ProductReviewsSection } from "./_components/product-reviews/product-reviews-section";
-import { SimilarProducts } from "./_components/similar-products";
-import { productBreadcrumbTrail } from "./_lib/mocks/breadcrumb.mocks";
-import { productDetailMock } from "./_lib/mocks/product-detail.mocks";
-import { sellerCardMock } from "./_lib/mocks/seller-card.mocks";
-import { fitStatsMock, reviewMediaMock, reviewsMock } from "./_lib/mocks/review.mocks";
+import { hasLocale } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { CategoryNav } from "@/shared/components/category/category-nav";
+import { Footer } from "@/shared/components/footer/footer";
+import { ProductPreviewGallery } from "@/shared/components/product/product-preview/product-preview-gallery";
+import { trendingProducts, womensFashion } from "@/shared/mocks";
+import { ProductBreadcrumb } from "@/features/product/components/product-breadcrumb";
+import { ProductStickyBar } from "@/features/product/components/product-sticky-bar";
+import { ProductInfoPanel } from "@/features/product/components/product-info/product-info-panel";
+import { ProductShippingInfo } from "@/features/product/components/product-info/product-shipping-info";
+import { ProductSellerCard } from "@/features/product/components/product-info/product-seller-card";
+import { ProductDescriptionSection } from "@/features/product/components/product-info/product-description-section";
+import { ProductReviewsSection } from "@/features/product/components/product-reviews/product-reviews-section";
+import { SimilarProducts } from "@/features/product/components/similar-products";
+import { productBreadcrumbTrail } from "@/features/product/mocks/breadcrumb.mocks";
+import { productDetailMock } from "@/features/product/mocks/product-detail.mocks";
+import { sellerCardMock } from "@/features/product/mocks/seller-card.mocks";
+import { fitStatsMock, reviewMediaMock, reviewsMock } from "@/features/product/mocks/review.mocks";
 
 export default async function ProductPage({
   params,

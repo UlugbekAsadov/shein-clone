@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { Progress } from "@/shared/components/ui/progress";
-import type { IRatingBucket } from "@/features/product/types";
+import type { IRatingBucket } from "@/features/product/interfaces/rating-distribution.interface";
 
 interface IProps {
   bucket: IRatingBucket;

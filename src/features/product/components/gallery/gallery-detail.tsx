@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import type { IGalleryItem } from "@/features/product/types";
+import type { IGalleryItem } from "@/features/product/interfaces/gallery-item.interface";
 import { GalleryDetailMedia } from "./gallery-detail-media";
 import { GalleryDetailReview } from "./gallery-detail-review";
 

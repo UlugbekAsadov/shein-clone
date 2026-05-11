@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Heart } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { IProductDetail } from "@/features/product/types";
+import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
 
 interface IProps {
   product: IProductDetail;

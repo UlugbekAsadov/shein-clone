@@ -1,19 +1,19 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "@/lib/i18n-config";
-import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header/header";
-import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer/footer";
-import { PromoBanner } from "./_components/promo-banner";
-import { BrandStrip } from "./_components/brand-strip";
-import { HeroCarousel } from "./_components/hero-carousel";
-import { ShopByCategory } from "./_components/shop-by-category";
-import { TrendingNow } from "./_components/trending-now";
-import { WomensFashion } from "./_components/womens-fashion";
-import { FeaturedShops } from "./_components/featured-shops";
-import { MoreToExplore } from "./_components/more-to-explore";
-import { HotDeals } from "./_components/hot-deals";
-import { DiscountBanners } from "./_components/discount-banners";
+import { hasLocale } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { CategoryNav } from "@/shared/components/category/category-nav";
+import { Footer } from "@/shared/components/footer/footer";
+import { PromoBanner } from "@/features/home/components/promo-banner";
+import { BrandStrip } from "@/features/home/components/brand-strip";
+import { HeroCarousel } from "@/features/home/components/hero-carousel";
+import { ShopByCategory } from "@/features/home/components/shop-by-category";
+import { TrendingNow } from "@/features/home/components/trending-now";
+import { WomensFashion } from "@/features/home/components/womens-fashion";
+import { FeaturedShops } from "@/features/home/components/featured-shops";
+import { MoreToExplore } from "@/features/home/components/more-to-explore";
+import { HotDeals } from "@/features/home/components/hot-deals";
+import { DiscountBanners } from "@/features/home/components/discount-banners";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;

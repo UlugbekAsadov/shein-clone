@@ -51,7 +51,7 @@ export const shoeSizes: ISizeOption[] = [
   { id: "43", label: "43" },
 ];
 
-export const colorSwatches: IColorSwatch[] = [
+export const filterColorSwatches: IColorSwatch[] = [
   { id: "black", name: "Black", hex: "#111111" },
   { id: "gray", name: "Gray", hex: "#9ca3af" },
   { id: "red", name: "Red", hex: "#ef4444" },

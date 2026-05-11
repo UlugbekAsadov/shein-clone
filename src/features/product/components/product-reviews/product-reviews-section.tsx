@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
-import type { IFitStat, IReview } from "@/features/product/types";
+import type {
+  IFitStat,
+  IReview,
+} from "@/features/product/interfaces/review.interface";
 import { ProductReviewCard } from "./product-review-card";
 import { ProductReviewMediaGallery } from "./product-review-media-gallery";
 import { ProductReviewSummary } from "./product-review-summary";

@@ -1,5 +1,5 @@
 import { galleryPool } from "@/shared/mocks";
-import type { IReview } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
 
 const standardMeta = [
   { id: "fit", label: "Overall Fit", value: "Ture to size" },

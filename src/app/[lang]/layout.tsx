@@ -3,8 +3,8 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
 import { cn } from "@/lib/utils";
-import { hasLocale, locales } from "@/lib/i18n-config";
-import { Providers } from "../providers";
+import { hasLocale, locales } from "@/core/config/i18n/i18n-config";
+import { Providers } from "@/core/providers/providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 

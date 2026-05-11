@@ -1,4 +1,4 @@
-import type { IBreadcrumbItem } from "@/features/category/types";
+import type { IBreadcrumbItem } from "@/features/category/interfaces/breadcrumb.interface";
 
 export const breadcrumbTrail: IBreadcrumbItem[] = [
   { id: "home", label: "Home" },

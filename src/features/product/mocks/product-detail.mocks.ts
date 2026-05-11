@@ -1,5 +1,9 @@
-import { colorSwatches, galleryPool, sizes } from "@/shared/mocks";
-import type { IProductDetail } from "@/features/product/types";
+import {
+  colorSwatches,
+  galleryPool,
+  sizes,
+} from "@/shared/mocks/product-preview.mocks";
+import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
 
 export const productDetailMock: IProductDetail = {
   id: "p-1",

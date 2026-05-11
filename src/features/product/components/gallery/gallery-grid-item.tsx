@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Play } from "lucide-react";
-import type { IGalleryItem } from "@/features/product/types";
+import type { IGalleryItem } from "@/features/product/interfaces/gallery-item.interface";
 
 interface IProps {
   item: IGalleryItem;

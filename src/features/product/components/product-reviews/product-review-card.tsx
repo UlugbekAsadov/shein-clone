@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ThumbsUp, UserRound } from "lucide-react";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
-import type { IReview } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
 import { ProductReviewMeta } from "./product-review-meta";
 
 interface IProps {

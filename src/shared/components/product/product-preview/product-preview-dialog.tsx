@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import type { IProduct } from "@/types/product.interface";
-import { colorSwatches, galleryPool, sizes } from "@/shared/mocks";
+import {
+  colorSwatches,
+  galleryPool,
+  sizes,
+} from "@/shared/mocks/product-preview.mocks";
 import {
   DESCRIPTION,
   RECOMMENDED_SIZE,
@@ -101,7 +105,7 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
                 {product.title}
               </h2>
               <div className="mt-3 flex items-center gap-3 text-sm">
-                <ProductRatingStars rating={product.rating} />
+                <ProductRatingStars />
                 <span className="text-muted-foreground">|</span>
                 <span className="text-muted-foreground">
                   {product.reviews} reviews

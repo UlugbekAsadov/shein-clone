@@ -1,5 +1,5 @@
 import { Info, Layers, Ruler, Scissors, Truck } from "lucide-react";
-import type { IProductDetail } from "@/features/product/types";
+import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
 import { ProductInfoAccordion } from "./product-info-accordion";
 import { ProductSpecTags } from "./product-spec-tags";
 

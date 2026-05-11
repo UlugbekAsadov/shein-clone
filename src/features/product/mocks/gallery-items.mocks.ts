@@ -1,6 +1,6 @@
 import { galleryPool } from "@/shared/mocks";
-import type { IReview } from "@/features/product/types";
-import type { IGalleryItem } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
+import type { IGalleryItem } from "@/features/product/interfaces/gallery-item.interface";
 
 const anvarReview: IReview = {
   id: "anvar-gallery",

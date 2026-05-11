@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { IProductDetail } from "@/features/product/types";
+import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
 import { ProductColorSelector } from "@/shared/components/product/product-preview/product-color-selector";
 import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";
@@ -22,7 +22,7 @@ export function ProductInfoPanel({ product }: IProps) {
       <div>
         <h1 className="text-3xl font-bold leading-tight">{product.title}</h1>
         <div className="mt-3 flex items-center gap-3 text-sm">
-          <ProductRatingStars rating={product.rating} />
+          <ProductRatingStars />
           <span className="text-muted-foreground">|</span>
           <span className="text-muted-foreground">
             {product.reviews} reviews

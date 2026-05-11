@@ -1,4 +1,4 @@
-import type { ICountedOption } from "@/features/product/types";
+import type { ICountedOption } from "@/features/product/interfaces/comments-filter.interface";
 
 export const ratingFilterOptions: ICountedOption[] = [
   { id: "5", label: "5 star", count: 1300 },

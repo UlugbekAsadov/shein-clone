@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Checkbox } from "@/shared/components/ui/checkbox";
-import type { ICountedOption } from "@/features/product/types";
+import type { ICountedOption } from "@/features/product/interfaces/comments-filter.interface";
 
 interface IProps {
   options: ICountedOption[];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { colorSwatches } from "@/shared/mocks";
+import { filterColorSwatches } from "@/shared/mocks";
 import { cn } from "@/lib/utils";
 
 export function ColorFilter() {
@@ -9,7 +9,7 @@ export function ColorFilter() {
 
   return (
     <div className="grid grid-cols-6 gap-3">
-      {colorSwatches.map((color) => {
+      {filterColorSwatches.map((color) => {
         const active = selected === color.id;
         return (
           <button

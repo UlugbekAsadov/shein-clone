@@ -1,4 +1,4 @@
-import type { IReviewMeta } from "@/features/product/types";
+import type { IReviewMeta } from "@/features/product/interfaces/review.interface";
 
 interface IProps {
   meta: IReviewMeta[];

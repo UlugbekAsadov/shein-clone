@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "@/lib/i18n-config";
-import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header/header";
-import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer/footer";
-import { ListingShell } from "@/components/common/listing/listing-shell";
-import { trendingProducts, womensFashion } from "@/lib/mock-data";
-import { CategoryBreadcrumb } from "./_components/category-breadcrumb";
+import { hasLocale } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { CategoryNav } from "@/shared/components/category/category-nav";
+import { Footer } from "@/shared/components/footer/footer";
+import { ListingShell } from "@/shared/components/listing/listing-shell";
+import { trendingProducts, womensFashion } from "@/shared/mocks";
+import { CategoryBreadcrumb } from "@/features/category/components/category-breadcrumb";
 
 export default async function CategoryPage({
   params,

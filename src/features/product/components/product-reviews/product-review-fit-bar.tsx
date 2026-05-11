@@ -1,5 +1,5 @@
 import { Progress } from "@/shared/components/ui/progress";
-import type { IFitStat } from "@/features/product/types";
+import type { IFitStat } from "@/features/product/interfaces/review.interface";
 
 interface IProps {
   stat: IFitStat;

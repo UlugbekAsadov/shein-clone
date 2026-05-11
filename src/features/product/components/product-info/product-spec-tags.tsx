@@ -1,4 +1,4 @@
-import type { IProductSpec } from "@/features/product/types";
+import type { IProductSpec } from "@/features/product/interfaces/product-detail.interface";
 import { ProductSpecTag } from "./product-spec-tag";
 
 interface IProps {

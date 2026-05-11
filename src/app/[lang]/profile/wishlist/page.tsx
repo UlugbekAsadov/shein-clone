@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "@/lib/i18n-config";
-import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header/header";
-import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer/footer";
-import { ListingShell } from "@/components/common/listing/listing-shell";
-import { ListingPageHeader } from "@/components/common/listing/listing-page-header";
-import { trendingProducts, womensFashion } from "@/lib/mock-data";
+import { hasLocale } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { CategoryNav } from "@/shared/components/category/category-nav";
+import { Footer } from "@/shared/components/footer/footer";
+import { ListingShell } from "@/shared/components/listing/listing-shell";
+import { ListingPageHeader } from "@/shared/components/listing/listing-page-header";
+import { trendingProducts, womensFashion } from "@/shared/mocks";
 
 export default async function WishlistPage({
   params,

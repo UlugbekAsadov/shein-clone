@@ -3,7 +3,7 @@ import { UserRound } from "lucide-react";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/product/components/product-reviews/product-review-meta";
 import { SellerResponseCard } from "@/features/product/components/comments/comments-list/seller-response-card";
-import type { IReview } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
 
 interface IProps {
   review: IReview;

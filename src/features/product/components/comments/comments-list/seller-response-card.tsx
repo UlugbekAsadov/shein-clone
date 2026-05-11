@@ -1,5 +1,5 @@
 import { Store, CornerUpLeft } from "lucide-react";
-import type { ISellerResponse } from "@/features/product/types";
+import type { ISellerResponse } from "@/features/product/interfaces/review.interface";
 
 interface IProps {
   response: ISellerResponse;

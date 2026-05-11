@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { BadgeCheck, Star } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
-import type { ISellerCard } from "@/features/product/types";
+import type { ISellerCard } from "@/features/product/interfaces/seller-card.interface";
 import { ProductSellerStat } from "./product-seller-stat";
 
 interface IProps {

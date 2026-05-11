@@ -1,4 +1,4 @@
-import type { IRatingBucket } from "@/features/product/types";
+import type { IRatingBucket } from "@/features/product/interfaces/rating-distribution.interface";
 
 export const ratingDistributionMock: IRatingBucket[] = [
   { id: "r-1", stars: 1, percent: 2 },

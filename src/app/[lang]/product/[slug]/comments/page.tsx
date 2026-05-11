@@ -1,24 +1,24 @@
 import { notFound } from "next/navigation";
-import { hasLocale } from "@/lib/i18n-config";
-import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header/header";
-import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer/footer";
-import { ProductBreadcrumb } from "../_components/product-breadcrumb";
-import { productBreadcrumbTrail } from "../_lib/mocks/breadcrumb.mocks";
-import { productDetailMock } from "../_lib/mocks/product-detail.mocks";
-import { CommentsFilterSidebar } from "./_components/comments-filter-sidebar/comments-filter-sidebar";
-import { CommentsHeader } from "./_components/comments-header";
-import { CommentsSummaryCard } from "./_components/comments-summary/comments-summary-card";
-import { CommentsMediaGallery } from "./_components/comments-media-gallery";
-import { CommentsReviewList } from "./_components/comments-list/comments-review-list";
-import { CommentsStickyBar } from "./_components/comments-sticky-bar";
-import { ratingDistributionMock } from "./_lib/mocks/rating-distribution.mocks";
-import { commentsReviewsMock } from "./_lib/mocks/comments-reviews.mocks";
+import { hasLocale } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { CategoryNav } from "@/shared/components/category/category-nav";
+import { Footer } from "@/shared/components/footer/footer";
+import { ProductBreadcrumb } from "@/features/product/components/product-breadcrumb";
+import { productBreadcrumbTrail } from "@/features/product/mocks/breadcrumb.mocks";
+import { productDetailMock } from "@/features/product/mocks/product-detail.mocks";
+import { CommentsFilterSidebar } from "@/features/product/components/comments/comments-filter-sidebar/comments-filter-sidebar";
+import { CommentsHeader } from "@/features/product/components/comments/comments-header";
+import { CommentsSummaryCard } from "@/features/product/components/comments/comments-summary/comments-summary-card";
+import { CommentsMediaGallery } from "@/features/product/components/comments/comments-media-gallery";
+import { CommentsReviewList } from "@/features/product/components/comments/comments-list/comments-review-list";
+import { CommentsStickyBar } from "@/features/product/components/comments/comments-sticky-bar";
+import { ratingDistributionMock } from "@/features/product/mocks/rating-distribution.mocks";
+import { commentsReviewsMock } from "@/features/product/mocks/comments-reviews.mocks";
 import {
   commentsMediaMock,
   commentsVideoIndex,
-} from "./_lib/mocks/comments-media.mocks";
+} from "@/features/product/mocks/comments-media.mocks";
 
 export default async function ProductCommentsPage({
   params,

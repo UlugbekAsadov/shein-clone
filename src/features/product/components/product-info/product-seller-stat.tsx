@@ -1,5 +1,5 @@
 import { Award, MessageCircle, Package, Users } from "lucide-react";
-import type { ISellerStat } from "@/features/product/types";
+import type { ISellerStat } from "@/features/product/interfaces/seller-card.interface";
 
 interface IProps {
   stat: ISellerStat;

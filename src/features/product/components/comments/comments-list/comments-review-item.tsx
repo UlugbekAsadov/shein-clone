@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ThumbsUp, UserRound } from "lucide-react";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/product/components/product-reviews/product-review-meta";
-import type { IReview } from "@/features/product/types";
+import type { IReview } from "@/features/product/interfaces/review.interface";
 import { SellerResponseCard } from "./seller-response-card";
 
 interface IProps {

@@ -4,9 +4,58 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+# Folder structure
+
+```
+src/
+├── app/                         # Next.js App Router (pages only)
+│   └── [lang]/...               # Locale segment; pages are thin shells importing from features/
+│
+├── features/                    # Vertical-slice feature modules (CORE)
+│   ├── home/
+│   ├── product/                 # incl. comments and gallery as nested component folders
+│   ├── category/
+│   └── <feature>/
+│       ├── components/
+│       ├── hooks/
+│       ├── services/
+│       ├── api/
+│       ├── store/
+│       ├── constants/
+│       ├── mocks/
+│       └── interfaces/          # *.interface.ts files, one per concern
+│
+├── shared/                      # Cross-feature reusable code
+│   ├── components/              # shadcn ui/, layout (header, footer), and shared domain components
+│   │   ├── ui/                  # shadcn primitives
+│   │   ├── header/
+│   │   ├── footer/
+│   │   ├── product/
+│   │   ├── category/
+│   │   └── listing/
+│   ├── hooks/
+│   ├── constants/
+│   ├── mocks/
+│   └── utils/
+│
+├── core/                        # App-level wiring
+│   ├── providers/               # Providers, query client, etc.
+│   ├── config/                  # App config; i18n config + dictionaries
+│   ├── middleware/
+│   └── guards/
+│
+├── services/                    # Global services (rare)
+├── lib/                         # Low-level utilities (e.g. cn)
+├── types/                       # Global cross-app TypeScript types
+├── styles/
+└── tests/
+```
+
+`core/middleware/`, `core/guards/`, `services/`, `styles/`, `tests/`, and the per-feature `hooks/`, `services/`, `api/`, `store/` subfolders are created on demand — only when they have real content. Do not pre-create empty placeholders.
+
 # Project rules
 
-1. **Prefer shadcn/ui components and lucide-react icons** over custom implementations whenever an equivalent exists. Reach for `Button`, `Dialog`, `Select`, `Input`, etc. from `@/components/ui/*` and icons from `lucide-react` first.
+1. **Prefer shadcn/ui components and lucide-react icons** over custom implementations whenever an equivalent exists. Reach for `Button`, `Dialog`, `Select`, `Input`, etc. from `@/shared/components/ui/*` and icons from `lucide-react` first.
 
 2. **One component per `.tsx` file.** Never define two components in the same file — extract each into its own file.
 
@@ -14,16 +63,28 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 4. **No big components.** Decompose large components into smaller subcomponents in their own files and import them. If a component is getting long, split it.
 
-5. **Group connected components into a single folder.** When components are tightly related (e.g. a parent and its subcomponents), put them together in a named folder. Example: `story/story-card.tsx`, `story/story-buttons.tsx`.
+5. **Vertical-slice features.** Each feature is self-contained — it owns its components, hooks, services, API calls, state, mocks, constants, and types. Think of features as mini-apps inside the app.
 
-6. **Use `_lib/` for component-scoped non-component files.** Page-scoped or component-scoped types, mocks, constants, and helpers live in a sibling `_lib/` folder. The pattern mirrors `_components/` for page-scoped components.
+6. **Dependency direction inside a feature:** components → hooks → services → API. Never invert.
 
-7. **Files inside `_lib/` must be split by kind into sibling subfolders and include their kind in the filename.** Each kind lives in its own subfolder: `_lib/interface/*.interface.ts`, `_lib/mocks/*.mocks.ts`, `_lib/constants/*.constants.ts`, `_lib/helpers/*.helpers.ts`. Never mix kinds in one folder. Never place kind-files directly under `_lib/`.
+7. **Group connected components into a single folder.** When components are tightly related (e.g. a parent and its subcomponents), put them together in a named folder. Example: `features/home/components/brand-story-viewer/brand-story-viewer.tsx`, `features/home/components/brand-story-viewer/story-card.tsx`.
 
-8. **Shared components keep their interfaces, mocks, constants, and helpers in the shared `src/lib/` folder, split by kind into sibling subfolders.** Interfaces in `src/lib/interfaces/`, mocks in `src/lib/mock-data/`, constants in `src/lib/constants/`, helpers in `src/lib/helpers/`. Never mix kinds in one folder. Only page-scoped or strictly component-scoped artifacts belong in a local `_lib/`. Apply the same filename-by-kind convention (`*.interface.ts`, `*.constants.ts`, `*.mocks.ts`).
+8. **Feature-scoped interfaces live in `features/<feature>/interfaces/`** with one `*.interface.ts` file per concern (e.g. `product-detail.interface.ts`, `review.interface.ts`). Never create a single `types.ts` at the feature root. Cross-app/global interfaces live in `src/types/` with the same `*.interface.ts` filename convention.
 
-9. **Use `interface IProps` for component prop types.** Never `type Props = { … }`.
+9. **Feature-scoped mocks live in `features/<feature>/mocks/`** with `*.mocks.ts` filenames. Cross-feature mocks live in `src/shared/mocks/`.
 
-10. **All interfaces start with the `I` prefix.** Examples: `IProps`, `IProduct`, `IBrand`, `ICategory`.
+10. **Feature-scoped constants live in `features/<feature>/constants/`** with `*.constants.ts` filenames. Cross-feature constants live in `src/shared/constants/`.
 
-11. **Do not write any `type` aliases.** Prefer `interface` declarations. For union/literal needs, inline them at the usage site instead of creating a `type` alias.
+11. **`app/` pages are thin shells.** They import from `features/<x>/` (and `shared/`, `core/`). Page-scoped components do **not** live under `app/` — they live in the corresponding feature module.
+
+12. **Use `interface IProps` for component prop types.** Never `type Props = { … }`.
+
+13. **All interfaces start with the `I` prefix.** Examples: `IProps`, `IProduct`, `IBrand`, `ICategory`.
+
+14. **Do not write any `type` aliases.** Prefer `interface` declarations. For union/literal needs, inline them at the usage site instead of creating a `type` alias.
+
+# Import conventions
+
+- Use the `@/*` alias (mapped to `./src/*`) for absolute imports across `features/`, `shared/`, `core/`, `lib/`, and `types/`.
+- Relative imports (`./`, `../`) are only acceptable for sibling files within the same folder.
+- Never reach into another feature's internals via relative paths — go through the feature's public surface using `@/features/<other-feature>/...`.

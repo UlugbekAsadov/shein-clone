@@ -1,5 +1,8 @@
 import { galleryPool } from "@/shared/mocks";
-import type { IFitStat, IReview } from "@/features/product/types";
+import type {
+  IFitStat,
+  IReview,
+} from "@/features/product/interfaces/review.interface";
 
 export const fitStatsMock: IFitStat[] = [
   { id: "small", label: "Small", percent: 18 },

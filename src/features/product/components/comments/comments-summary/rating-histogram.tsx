@@ -1,4 +1,4 @@
-import type { IRatingBucket } from "@/features/product/types";
+import type { IRatingBucket } from "@/features/product/interfaces/rating-distribution.interface";
 import { RatingHistogramRow } from "./rating-histogram-row";
 
 interface IProps {
