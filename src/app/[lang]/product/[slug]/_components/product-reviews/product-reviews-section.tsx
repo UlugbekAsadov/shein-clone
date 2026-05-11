@@ -39,7 +39,7 @@ export function ProductReviewsSection({
       </div>
 
       <ProductReviewSummary rating={rating} fitStats={fitStats} />
-      <ProductReviewMediaGallery images={media} />
+      <ProductReviewMediaGallery lang={lang} slug={slug} images={media} />
 
       <div className="mt-4">
         {reviews.map((review) => (

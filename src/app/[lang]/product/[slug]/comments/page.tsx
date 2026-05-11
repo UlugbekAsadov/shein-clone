@@ -23,7 +23,7 @@ import {
 export default async function ProductCommentsPage({
   params,
 }: PageProps<"/[lang]/product/[slug]/comments">) {
-  const { lang } = await params;
+  const { lang, slug } = await params;
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
@@ -54,6 +54,8 @@ export default async function ProductCommentsPage({
                 buckets={ratingDistributionMock}
               />
               <CommentsMediaGallery
+                lang={lang}
+                slug={slug}
                 images={commentsMediaMock}
                 videoIndex={commentsVideoIndex}
               />

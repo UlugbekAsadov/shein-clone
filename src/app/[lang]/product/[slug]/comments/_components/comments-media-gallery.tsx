@@ -1,23 +1,32 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ChevronRight, Play } from "lucide-react";
+import type { locales } from "@/lib/i18n-config";
 
 interface IProps {
+  lang: (typeof locales)[number];
+  slug: string;
   images: string[];
   videoIndex?: number;
 }
 
-export function CommentsMediaGallery({ images, videoIndex }: IProps) {
+export function CommentsMediaGallery({
+  lang,
+  slug,
+  images,
+  videoIndex,
+}: IProps) {
   return (
     <div className="rounded-lg border border-border p-5">
       <div className="mb-3.5 flex items-center justify-between">
         <span className="font-bold">Image and video</span>
-        <button
-          type="button"
+        <Link
+          href={`/${lang}/product/${slug}/comments/gallery`}
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
           View all
           <ChevronRight className="size-5" />
-        </button>
+        </Link>
       </div>
       <div className="grid grid-cols-[repeat(14,minmax(0,1fr))] gap-2">
         {images.map((src, idx) => (
