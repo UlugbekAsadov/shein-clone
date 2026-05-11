@@ -32,7 +32,7 @@ export function FeaturedShops({
         viewAllHref="#"
         viewAllLabel={viewAllLabel}
       />
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {featuredShops.map((shop) => (
           <article
             key={shop.id}
@@ -44,6 +44,7 @@ export function FeaturedShops({
                   src={shop.banner}
                   alt={shop.name}
                   fill
+                  quality={95}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                   className="object-cover"
                 />

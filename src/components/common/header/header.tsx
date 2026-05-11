@@ -14,8 +14,14 @@ type Props = {
 
 export function Header({ lang, dict }: Props) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center gap-6 px-6">
+    <header
+      suppressHydrationWarning
+      className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur"
+    >
+      <div
+        suppressHydrationWarning
+        className="mx-auto flex h-20 max-w-[1440px] items-center gap-6 px-6"
+      >
         <Link
           href={`/${lang}`}
           className="text-2xl font-black tracking-tight"
@@ -29,7 +35,7 @@ export function Header({ lang, dict }: Props) {
           searchLabel={dict.header.search}
         />
 
-        <div className="flex items-center gap-4">
+        <div suppressHydrationWarning className="flex items-center gap-4">
           <LocaleSwitcher current={lang} />
           <CurrencySwitcher />
 

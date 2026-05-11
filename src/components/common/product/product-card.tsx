@@ -20,11 +20,12 @@ export function ProductCard({ product, variant = "default" }: Props) {
           : "border-border bg-card text-card-foreground",
       )}
     >
-      <div className="relative aspect-[4/5] overflow-hidden bg-muted">
+      <div className="relative aspect-4/5 overflow-hidden bg-muted">
         <Image
           src={product.image}
           alt={product.title}
           fill
+          quality={95}
           sizes="(max-width: 1440px) 25vw, 360px"
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />

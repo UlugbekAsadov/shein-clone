@@ -1,6 +1,6 @@
 import { SlidersHorizontal } from "lucide-react";
 import { womensFashion } from "@/lib/mock-data";
-import { ProductGrid } from "./product-grid";
+import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
 type Props = {

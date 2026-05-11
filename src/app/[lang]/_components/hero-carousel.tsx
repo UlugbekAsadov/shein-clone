@@ -34,6 +34,7 @@ export function HeroCarousel() {
                 src={s.image}
                 alt={s.title}
                 fill
+                quality={95}
                 className="object-cover"
                 sizes="(max-width: 1440px) 100vw, 1440px"
                 priority

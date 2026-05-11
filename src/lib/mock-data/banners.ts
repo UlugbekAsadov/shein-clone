@@ -1,27 +1,29 @@
 import type { HeroSlide } from "./types";
 
+const BANNER = "/mocks/images/banner/image%2013.png";
+
 export const heroSlides: HeroSlide[] = [
   {
     id: "hs1",
-    image: "/placeholders/banner.svg",
+    image: BANNER,
     title: "DROP SHOULDER",
     subtitle: "FABRIC WITH 200+ GSM RIBBED",
   },
   {
     id: "hs2",
-    image: "/placeholders/banner.svg",
+    image: BANNER,
     title: "SUMMER COLLECTION",
     subtitle: "Up to 50% off selected styles",
   },
   {
     id: "hs3",
-    image: "/placeholders/banner.svg",
+    image: BANNER,
     title: "NEW ARRIVALS",
     subtitle: "Fresh styles weekly",
   },
   {
     id: "hs4",
-    image: "/placeholders/banner.svg",
+    image: BANNER,
     title: "LIMITED EDITION",
     subtitle: "Premium fabric drops",
   },

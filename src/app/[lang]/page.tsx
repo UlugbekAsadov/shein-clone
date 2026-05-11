@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/dictionaries";
-import { Header } from "@/components/common/header";
+import { Header } from "@/components/common/header/header";
 import { CategoryNav } from "@/components/common/category/category-nav";
 import { Footer } from "@/components/common/footer";
 import { PromoBanner } from "./_components/promo-banner";

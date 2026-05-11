@@ -15,27 +15,28 @@ export function ShopByCategory({ title, viewAllLabel }: Props) {
         viewAllHref="#"
         viewAllLabel={viewAllLabel}
       />
-      <div className="grid grid-cols-10 gap-4">
+      <div className="flex gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {shopByCategory.map((c) => (
           <button
             key={c.id}
             type="button"
-            className="flex flex-col items-center gap-2"
+            className="flex w-[126px] shrink-0 flex-col items-center gap-2 cursor-pointer relative"
           >
-            <span className="relative grid aspect-square w-full place-items-center  rounded-full bg-muted">
+            <span className="relative aspect-square w-full max-h-[120px] max-w-[120px] overflow-hidden rounded-full bg-muted ">
               <Image
                 src={c.image ?? "/placeholders/category.svg"}
                 alt={c.name}
-                width={140}
-                height={140}
-                className="size-full object-cover"
+                fill
+                quality={95}
+                sizes="120px"
+                className="object-contain"
               />
-              {c.badge && (
-                <span className="absolute z-20 right-1 top-1 grid h-6 min-w-10 place-items-center rounded-full bg-rose-500 px-2 text-[11px] font-semibold text-white">
-                  {c.badge}
-                </span>
-              )}
             </span>
+            {c.badge && (
+              <span className="absolute z-20 right-1 top-1 grid h-6 min-w-10 place-items-center rounded-full bg-rose-500 px-2 text-[11px] font-semibold text-white">
+                {c.badge}
+              </span>
+            )}
             <span className="text-sm font-medium text-foreground">
               {c.name}
             </span>

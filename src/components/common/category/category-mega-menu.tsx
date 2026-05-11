@@ -2,13 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import {
-  BadgeCheck,
-  ChevronRight,
-  Sparkles,
-  Tag,
-  Truck,
-} from "lucide-react";
+import { BadgeCheck, ChevronRight, Sparkles, Tag, Truck } from "lucide-react";
 import {
   sidebarCategories,
   picksForYou,
@@ -68,7 +62,7 @@ export function CategoryMegaMenu({
                 onMouseEnter={() => setActiveId(c.id)}
                 onFocus={() => setActiveId(c.id)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-[15px] font-medium hover:bg-muted",
+                  "flex w-full items-center justify-between rounded-sm px-4 py-3 text-left text-[15px] font-medium hover:bg-muted cursor-pointer",
                   activeId === c.id && "bg-muted",
                 )}
               >
@@ -86,15 +80,16 @@ export function CategoryMegaMenu({
               <button
                 key={item.id}
                 type="button"
-                className="flex flex-col items-center gap-2 text-center"
+                className="flex flex-col items-center gap-2 text-center cursor-pointer"
               >
-                <span className="grid size-16 place-items-center overflow-hidden rounded-full bg-muted">
+                <span className="relative size-16 overflow-hidden rounded-full bg-muted">
                   <Image
                     src={item.image ?? "/placeholders/category.svg"}
                     alt={item.name}
-                    width={64}
-                    height={64}
-                    className="size-full object-cover"
+                    fill
+                    quality={95}
+                    sizes="64px"
+                    className="object-cover"
                   />
                 </span>
                 <span className="line-clamp-1 text-xs text-foreground">
@@ -112,20 +107,21 @@ export function CategoryMegaMenu({
               <button
                 key={item.id}
                 type="button"
-                className="flex flex-col items-center gap-2 text-center"
+                className="flex flex-col items-center gap-2 text-center cursor-pointer"
               >
                 <span
                   className={cn(
-                    "relative grid size-16 place-items-center overflow-hidden rounded-full bg-muted",
+                    "relative size-16 overflow-hidden rounded-full bg-muted",
                     item.badge && "ring-2 ring-rose-500 ring-offset-2",
                   )}
                 >
                   <Image
                     src={item.image ?? "/placeholders/category.svg"}
                     alt={item.name}
-                    width={64}
-                    height={64}
-                    className="size-full object-cover"
+                    fill
+                    quality={95}
+                    sizes="64px"
+                    className="object-cover"
                   />
                   {item.badge && (
                     <span className="absolute -right-1 -top-1 grid h-5 min-w-9 place-items-center rounded-full bg-rose-500 px-1.5 text-[10px] font-semibold text-white">

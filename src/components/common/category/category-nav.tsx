@@ -85,17 +85,31 @@ export function CategoryNav({
         </div>
       </div>
 
-      {open && (
-        <div className="absolute inset-x-0 top-full z-30 mx-auto max-w-[1440px] px-6">
-          <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
-            <CategoryMegaMenu
-              picksTitle={picksTitle}
-              featuredTitle={featuredTitle}
-              filters={filters}
-            />
-          </div>
+      <div
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+        className={cn(
+          "fixed inset-x-0 bottom-0 top-[137px] z-30 bg-black/50 transition-opacity duration-300 ease-out",
+          open ? "opacity-100" : "pointer-events-none opacity-0",
+        )}
+      />
+      <div
+        aria-hidden={!open}
+        className={cn(
+          "absolute inset-x-0 top-full z-40 mx-auto max-w-[1440px] px-6 transition-all duration-300 ease-out",
+          open
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-3 opacity-0",
+        )}
+      >
+        <div className="origin-top overflow-hidden rounded-b-2xl border border-border bg-background shadow-2xl">
+          <CategoryMegaMenu
+            picksTitle={picksTitle}
+            featuredTitle={featuredTitle}
+            filters={filters}
+          />
         </div>
-      )}
+      </div>
     </div>
   );
 }

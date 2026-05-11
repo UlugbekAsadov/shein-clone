@@ -1,6 +1,6 @@
 import { Flame } from "lucide-react";
 import { trendingProducts } from "@/lib/mock-data";
-import { ProductGrid } from "./product-grid";
+import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
 type Props = {

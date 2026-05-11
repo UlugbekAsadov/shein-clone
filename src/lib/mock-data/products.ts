@@ -1,12 +1,26 @@
 import type { Product } from "./types";
 
-const baseProduct = (id: string, badge?: Product["badge"]): Product => ({
+const PRODUCT_IMAGES = [
+  "/mocks/images/products/image%2027.png",
+  "/mocks/images/products/image%2027-1.png",
+  "/mocks/images/products/image%2027-2.png",
+  "/mocks/images/products/image%2027-3.png",
+  "/mocks/images/products/image%2027-4.png",
+];
+
+const productImg = (n: number) => PRODUCT_IMAGES[n % PRODUCT_IMAGES.length];
+
+const baseProduct = (
+  id: string,
+  index: number,
+  badge?: Product["badge"],
+): Product => ({
   id,
   title: "Sweatshirt",
   subtitle: "Women's Casual Pullover Sweats...",
   price: 33.49,
   originalPrice: 63.49,
-  image: "/placeholders/product.svg",
+  image: productImg(index),
   rating: 4.5,
   reviews: 324,
   badge,
@@ -15,39 +29,27 @@ const baseProduct = (id: string, badge?: Product["badge"]): Product => ({
   delivery: "1-2 days",
 });
 
-export const trendingProducts: Product[] = [
-  baseProduct("t1", "Original"),
-  baseProduct("t2"),
-  baseProduct("t3"),
-  baseProduct("t4"),
-  baseProduct("t5"),
-  baseProduct("t6"),
-  baseProduct("t7"),
-  baseProduct("t8"),
-];
+export const trendingProducts: Product[] = Array.from({ length: 10 }, (_, i) =>
+  baseProduct(`t${i + 1}`, i, i === 0 ? "Original" : undefined),
+);
 
 export const womensFashion: Product[] = [
-  { ...baseProduct("w1"), title: "FUNNY RACING" },
-  { ...baseProduct("w2"), title: "Street Sears Retro" },
-  { ...baseProduct("w3"), title: "Summer shirts" },
-  { ...baseProduct("w4"), title: "Sweatshirt" },
-  { ...baseProduct("w5"), title: "Sweatshirt" },
-  { ...baseProduct("w6"), title: "Sweatshirt" },
-  { ...baseProduct("w7"), title: "Sweatshirt" },
-  { ...baseProduct("w8"), title: "Sweatshirt" },
+  { ...baseProduct("w1", 0), title: "FUNNY RACING" },
+  { ...baseProduct("w2", 1), title: "Street Sears Retro" },
+  { ...baseProduct("w3", 2), title: "Summer shirts" },
+  { ...baseProduct("w4", 3), title: "Sweatshirt" },
+  { ...baseProduct("w5", 4), title: "Sweatshirt" },
+  { ...baseProduct("w6", 5), title: "Sweatshirt" },
+  { ...baseProduct("w7", 6), title: "Sweatshirt" },
+  { ...baseProduct("w8", 7), title: "Sweatshirt" },
+  { ...baseProduct("w9", 8), title: "Sweatshirt" },
+  { ...baseProduct("w10", 9), title: "Sweatshirt" },
 ];
 
-export const moreToExplore: Product[] = [
-  baseProduct("m1", "Original"),
-  baseProduct("m2"),
-  baseProduct("m3"),
-  baseProduct("m4"),
-  baseProduct("m5"),
-  baseProduct("m6"),
-  baseProduct("m7"),
-  baseProduct("m8"),
-];
+export const moreToExplore: Product[] = Array.from({ length: 10 }, (_, i) =>
+  baseProduct(`m${i + 1}`, i, i === 0 ? "Original" : undefined),
+);
 
-export const hotDeals: Product[] = Array.from({ length: 8 }, (_, i) =>
-  baseProduct(`h${i + 1}`, i === 0 ? "Original" : undefined),
+export const hotDeals: Product[] = Array.from({ length: 10 }, (_, i) =>
+  baseProduct(`h${i + 1}`, i, i === 0 ? "Original" : undefined),
 );

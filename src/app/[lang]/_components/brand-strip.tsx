@@ -21,15 +21,16 @@ export function BrandStrip() {
               )}
             >
               <span
-                className="grid size-full place-items-center overflow-hidden rounded-full ring-2 ring-background"
+                className="relative size-full overflow-hidden rounded-full ring-2 ring-background"
                 style={{ backgroundColor: b.brandBg ?? "#0f172a" }}
               >
                 <Image
                   src={b.image}
                   alt={b.name}
-                  width={80}
-                  height={80}
-                  className="size-full rounded-full object-cover"
+                  fill
+                  quality={95}
+                  sizes="80px"
+                  className="rounded-full object-cover"
                 />
               </span>
             </span>
