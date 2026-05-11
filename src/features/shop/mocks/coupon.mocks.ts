@@ -1,0 +1,58 @@
+import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
+
+export const shopCoupons: ICoupon[] = [
+  {
+    id: "c1",
+    expiresAt: "17.04.2026",
+    daysLeft: 3,
+    discount: "25%",
+    title: "First Order Discount",
+    minOrderAmount: 50,
+    code: "WELCOME16",
+  },
+  {
+    id: "c2",
+    expiresAt: "17.04.2026",
+    daysLeft: 3,
+    discount: "25%",
+    title: "First Order Discount",
+    minOrderAmount: 50,
+    code: "WELCOME16",
+  },
+  {
+    id: "c3",
+    expiresAt: "17.04.2026",
+    daysLeft: 3,
+    discount: "25%",
+    title: "First Order Discount",
+    minOrderAmount: 50,
+    code: "WELCOME16",
+  },
+  {
+    id: "c4",
+    expiresAt: "22.04.2026",
+    daysLeft: 8,
+    discount: "15%",
+    title: "Loyalty Reward",
+    minOrderAmount: 100,
+    code: "LOYAL15",
+  },
+  {
+    id: "c5",
+    expiresAt: "30.04.2026",
+    daysLeft: 16,
+    discount: "Free Ship",
+    title: "Free Shipping Coupon",
+    minOrderAmount: 80,
+    code: "FREESHIP",
+  },
+  {
+    id: "c6",
+    expiresAt: "05.05.2026",
+    daysLeft: 21,
+    discount: "10%",
+    title: "Weekend Deal",
+    minOrderAmount: 60,
+    code: "WEEKEND10",
+  },
+];

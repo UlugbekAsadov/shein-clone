@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import type { IBrand } from "@/types/brand.interface";
 import { cn } from "@/lib/utils";
 import {
@@ -26,6 +28,8 @@ export function StoryCard({
   onAdvance,
   onSelect,
 }: IProps) {
+  const { lang } = useParams<{ lang: string }>();
+  const shopHref = `/${lang}/shop/${brand.slug}`;
   const absDist = Math.abs(distance);
   const renderable = absDist <= 2;
 
@@ -97,7 +101,11 @@ export function StoryCard({
           ))}
         </div>
 
-        <div className="absolute left-3 top-7 flex items-center gap-2">
+        <Link
+          href={shopHref}
+          onClick={(e) => e.stopPropagation()}
+          className="pointer-events-auto absolute left-3 top-7 flex items-center gap-2"
+        >
           <div
             className="size-9 overflow-hidden rounded-full ring-2 ring-white"
             style={{ backgroundColor: brand.brandBg }}
@@ -114,7 +122,7 @@ export function StoryCard({
           <span className="text-sm font-semibold text-white drop-shadow">
             {brand.name}
           </span>
-        </div>
+        </Link>
       </div>
 
       <div

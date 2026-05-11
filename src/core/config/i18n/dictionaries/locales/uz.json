@@ -87,6 +87,28 @@
       "subtitle": "Sizning saqlangan mahsulotlaringiz"
     }
   },
+  "shop": {
+    "tabs": {
+      "allProducts": "Barcha mahsulotlar",
+      "dealsOffers": "Chegirmalar va takliflar",
+      "aboutStore": "Do'kon haqida"
+    },
+    "follow": "Kuzatish",
+    "following": "Kuzatilmoqda",
+    "coupons": {
+      "label": "Kupon",
+      "daysLeft": "kun",
+      "copy": "Nusxalash",
+      "copied": "Nusxalandi",
+      "minOrder": "Min. buyurtma"
+    },
+    "about": {
+      "aboutTitle": "Do'kon haqida",
+      "brandsWeCarry": "Biz sotadigan brendlar",
+      "similarStores": "Shunga o'xshash do'konlar",
+      "verifiedSellersRealProducts": "Tasdiqlangan sotuvchilar, haqiqiy mahsulotlar"
+    }
+  },
   "footer": {
     "buyerProtection": "Xaridor himoyasi",
     "buyerProtectionDesc": "100% pulni qaytarish kafolati",

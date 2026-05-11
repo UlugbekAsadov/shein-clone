@@ -6,6 +6,7 @@ export interface ISellerStat {
 
 export interface ISellerCard {
   id: string;
+  slug: string;
   name: string;
   tag: string;
   avatar: string;

@@ -87,6 +87,28 @@
       "subtitle": "Your saved items"
     }
   },
+  "shop": {
+    "tabs": {
+      "allProducts": "All products",
+      "dealsOffers": "Deals & Offers",
+      "aboutStore": "About Store"
+    },
+    "follow": "Follow",
+    "following": "Following",
+    "coupons": {
+      "label": "Coupon",
+      "daysLeft": "days",
+      "copy": "Copy",
+      "copied": "Copied",
+      "minOrder": "Min order"
+    },
+    "about": {
+      "aboutTitle": "About",
+      "brandsWeCarry": "Brands We Carry",
+      "similarStores": "Similar Stores You May Like",
+      "verifiedSellersRealProducts": "Verified sellers, real products"
+    }
+  },
   "footer": {
     "buyerProtection": "Buyer Protection",
     "buyerProtectionDesc": "100% money back guarantee",

@@ -87,6 +87,28 @@
       "subtitle": "Ваши сохранённые товары"
     }
   },
+  "shop": {
+    "tabs": {
+      "allProducts": "Все товары",
+      "dealsOffers": "Скидки и предложения",
+      "aboutStore": "О магазине"
+    },
+    "follow": "Подписаться",
+    "following": "Подписан",
+    "coupons": {
+      "label": "Купон",
+      "daysLeft": "дн.",
+      "copy": "Копировать",
+      "copied": "Скопировано",
+      "minOrder": "Мин. заказ"
+    },
+    "about": {
+      "aboutTitle": "О магазине",
+      "brandsWeCarry": "Бренды, которые мы продаём",
+      "similarStores": "Похожие магазины",
+      "verifiedSellersRealProducts": "Проверенные продавцы, настоящие товары"
+    }
+  },
   "footer": {
     "buyerProtection": "Защита покупателя",
     "buyerProtectionDesc": "100% возврат денег",

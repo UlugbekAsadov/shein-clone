@@ -2,6 +2,7 @@ import type { ISellerCard } from "@/features/product/interfaces/seller-card.inte
 
 export const sellerCardMock: ISellerCard = {
   id: "ryvang-rens",
+  slug: "fashionrepublic",
   name: "Ryvang rens",
   tag: "Sport Fashion",
   avatar: "/mocks/images/brand-strip/image%20761-1.png",

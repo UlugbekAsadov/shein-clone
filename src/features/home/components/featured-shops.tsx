@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Star, Sparkles, BadgeCheck, Package, Award } from "lucide-react";
+import type { IShop } from "@/types/shop.interface";
 import { featuredShops } from "@/shared/mocks";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "./section-header";
@@ -10,6 +11,7 @@ interface IProps {
   viewAllLabel: string;
   followLabel: string;
   followingLabel: string;
+  shops?: IShop[];
 }
 
 export function FeaturedShops({
@@ -18,6 +20,7 @@ export function FeaturedShops({
   viewAllLabel,
   followLabel,
   followingLabel,
+  shops = featuredShops,
 }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
@@ -33,7 +36,7 @@ export function FeaturedShops({
         viewAllLabel={viewAllLabel}
       />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-        {featuredShops.map((shop) => (
+        {shops.map((shop) => (
           <article
             key={shop.id}
             className="rounded-lg border border-border bg-card p-3"
