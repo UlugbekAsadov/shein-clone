@@ -1,4 +1,4 @@
-import type { Product } from "./types";
+import type { IProduct } from "../interfaces/product.interface";
 
 const PRODUCT_IMAGES = [
   "/mocks/images/products/image%2027.png",
@@ -13,8 +13,8 @@ const productImg = (n: number) => PRODUCT_IMAGES[n % PRODUCT_IMAGES.length];
 const baseProduct = (
   id: string,
   index: number,
-  badge?: Product["badge"],
-): Product => ({
+  badge?: IProduct["badge"],
+): IProduct => ({
   id,
   title: "Sweatshirt",
   subtitle: "Women's Casual Pullover Sweats...",
@@ -29,11 +29,11 @@ const baseProduct = (
   delivery: "1-2 days",
 });
 
-export const trendingProducts: Product[] = Array.from({ length: 10 }, (_, i) =>
+export const trendingProducts: IProduct[] = Array.from({ length: 10 }, (_, i) =>
   baseProduct(`t${i + 1}`, i, i === 0 ? "Original" : undefined),
 );
 
-export const womensFashion: Product[] = [
+export const womensFashion: IProduct[] = [
   { ...baseProduct("w1", 0), title: "FUNNY RACING" },
   { ...baseProduct("w2", 1), title: "Street Sears Retro" },
   { ...baseProduct("w3", 2), title: "Summer shirts" },
@@ -46,10 +46,10 @@ export const womensFashion: Product[] = [
   { ...baseProduct("w10", 9), title: "Sweatshirt" },
 ];
 
-export const moreToExplore: Product[] = Array.from({ length: 10 }, (_, i) =>
+export const moreToExplore: IProduct[] = Array.from({ length: 10 }, (_, i) =>
   baseProduct(`m${i + 1}`, i, i === 0 ? "Original" : undefined),
 );
 
-export const hotDeals: Product[] = Array.from({ length: 10 }, (_, i) =>
+export const hotDeals: IProduct[] = Array.from({ length: 10 }, (_, i) =>
   baseProduct(`h${i + 1}`, i, i === 0 ? "Original" : undefined),
 );

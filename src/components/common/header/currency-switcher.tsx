@@ -6,8 +6,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DollarSignIcon } from "lucide-react";
-
-const currencies = ["USD", "UZS", "RUB", "EUR"] as const;
+import { currencies } from "@/lib/constants/currencies.constants";
 
 export function CurrencySwitcher() {
   return (

@@ -4,13 +4,13 @@ import { featuredShops } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   subtitle: string;
   viewAllLabel: string;
   followLabel: string;
   followingLabel: string;
-};
+}
 
 export function FeaturedShops({
   title,
@@ -18,7 +18,7 @@ export function FeaturedShops({
   viewAllLabel,
   followLabel,
   followingLabel,
-}: Props) {
+}: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
       <SectionHeader

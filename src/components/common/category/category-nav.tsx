@@ -11,7 +11,7 @@ import { navCategories } from "@/lib/mock-data";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
 
-type Props = {
+interface IProps {
   categoriesLabel: string;
   picksTitle: string;
   featuredTitle: string;
@@ -21,14 +21,14 @@ type Props = {
     original: string;
     new: string;
   };
-};
+}
 
 export function CategoryNav({
   categoriesLabel,
   picksTitle,
   featuredTitle,
   filters,
-}: Props) {
+}: IProps) {
   const [open, setOpen] = useState(false);
 
   return (

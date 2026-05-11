@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { brands } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
-import { BrandStoryViewer } from "./brand-story-viewer";
+import { BrandStoryViewer } from "./brand-story-viewer/brand-story-viewer";
 
 export function BrandStrip() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

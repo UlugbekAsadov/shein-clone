@@ -1,4 +1,7 @@
-import type { Category, CategoryGroup } from "./types";
+import type {
+  ICategory,
+  ICategoryGroup,
+} from "../interfaces/category.interface";
 
 const CATEGORY_IMAGES = [
   "/mocks/images/categories/image%2015.png",
@@ -14,7 +17,7 @@ const CATEGORY_IMAGES = [
 
 const catImg = (n: number) => CATEGORY_IMAGES[n % CATEGORY_IMAGES.length];
 
-export const navCategories: Category[] = [
+export const navCategories: ICategory[] = [
   { id: "new-in", name: "New in", slug: "new-in" },
   { id: "sale", name: "Sale", slug: "sale" },
   { id: "woman-clothing", name: "Woman Clothing", slug: "woman-clothing" },
@@ -29,7 +32,7 @@ export const navCategories: Category[] = [
   { id: "toys", name: "Toys", slug: "toys" },
 ];
 
-export const sidebarCategories: Category[] = [
+export const sidebarCategories: ICategory[] = [
   { id: "new-in", name: "New in", slug: "new-in" },
   { id: "sale", name: "Sale", slug: "sale" },
   { id: "women-clothing", name: "Women Clothing", slug: "women-clothing" },
@@ -42,7 +45,7 @@ export const sidebarCategories: Category[] = [
   { id: "home-living", name: "Home & Living", slug: "home-living" },
 ];
 
-export const picksForYou: Category[] = [
+export const picksForYou: ICategory[] = [
   { id: "p1", name: "Suits", slug: "suits", image: catImg(0) },
   { id: "p2", name: "Tops", slug: "tops", image: catImg(1) },
   { id: "p3", name: "Bottoms", slug: "bottoms", image: catImg(2) },
@@ -77,7 +80,7 @@ export const picksForYou: Category[] = [
   { id: "p32", name: "Co ords", slug: "co-ords-3", image: catImg(31) },
 ];
 
-export const featuredCategories: Category[] = [
+export const featuredCategories: ICategory[] = [
   { id: "f1", name: "New in", slug: "new-in", image: catImg(0), badge: "30%" },
   { id: "f2", name: "Top rated", slug: "top-rated", image: catImg(1) },
   { id: "f3", name: "Tops", slug: "tops", image: catImg(2) },
@@ -92,7 +95,7 @@ export const featuredCategories: Category[] = [
   { id: "f12", name: "Bottoms", slug: "bottoms", image: catImg(11) },
 ];
 
-export const shopByCategory: Category[] = [
+export const shopByCategory: ICategory[] = [
   { id: "s1", name: "Women", slug: "women", image: catImg(0) },
   { id: "s2", name: "Kids", slug: "kids", image: catImg(1) },
   { id: "s3", name: "Men", slug: "men", image: catImg(2) },
@@ -115,7 +118,7 @@ export const shopByCategory: Category[] = [
   { id: "s20", name: "Garden", slug: "garden", image: catImg(19), badge: "15%" },
 ];
 
-export const searchCategories: Category[] = [
+export const searchCategories: ICategory[] = [
   { id: "all", name: "All", slug: "all" },
   { id: "men", name: "Men", slug: "men" },
   { id: "women", name: "Women", slug: "women" },
@@ -138,7 +141,7 @@ export const searchHistory: { id: string; text: string }[] = [
   { id: "h8", text: "Sport" },
 ];
 
-export const categoryGroups: CategoryGroup[] = [
+export const categoryGroups: ICategoryGroup[] = [
   {
     id: "picks",
     name: "Picks fot you",

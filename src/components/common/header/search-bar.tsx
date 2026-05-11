@@ -14,12 +14,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type Props = {
+interface IProps {
   placeholder: string;
   searchLabel: string;
-};
+}
 
-export function SearchBar({ placeholder, searchLabel }: Props) {
+export function SearchBar({ placeholder, searchLabel }: IProps) {
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState(initialSearchHistory);
   const containerRef = useRef<HTMLDivElement>(null);

@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## New here? Read the developer guide first
+
+Before writing any code, read [docs/CODE_RULES.md](./docs/CODE_RULES.md). It covers the project's folder layout, naming conventions, and the 11 rules every PR is expected to follow, with do/don't examples.
+
+The short machine-readable version of the same rules is in [AGENTS.md](./AGENTS.md).
+
 ## Getting Started
 
 First, run the development server:

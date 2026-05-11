@@ -6,16 +6,16 @@ import { hotDeals } from "@/lib/mock-data";
 import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   viewAllLabel: string;
-};
+}
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");
 }
 
-export function HotDeals({ title, viewAllLabel }: Props) {
+export function HotDeals({ title, viewAllLabel }: IProps) {
   const [secondsLeft, setSecondsLeft] = useState(2 * 3600 + 24 * 60 + 12);
 
   useEffect(() => {

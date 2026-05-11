@@ -2,12 +2,12 @@ import Image from "next/image";
 import { shopByCategory } from "@/lib/mock-data";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   viewAllLabel: string;
-};
+}
 
-export function ShopByCategory({ title, viewAllLabel }: Props) {
+export function ShopByCategory({ title, viewAllLabel }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-8">
       <SectionHeader

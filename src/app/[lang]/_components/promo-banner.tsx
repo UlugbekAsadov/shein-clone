@@ -1,12 +1,12 @@
 import { ShoppingBag } from "lucide-react";
 
-type Props = {
+interface IProps {
   label: string;
   text: string;
   cta: string;
-};
+}
 
-export function PromoBanner({ label, text, cta }: Props) {
+export function PromoBanner({ label, text, cta }: IProps) {
   return (
     <div className="mx-auto max-w-[1440px] px-6 py-6">
       <div className="flex items-center justify-center gap-4 rounded-full bg-foreground px-8 py-3.5 text-background">

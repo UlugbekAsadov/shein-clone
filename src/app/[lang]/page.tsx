@@ -3,7 +3,7 @@ import { hasLocale } from "@/lib/i18n-config";
 import { getDictionary } from "@/lib/dictionaries";
 import { Header } from "@/components/common/header/header";
 import { CategoryNav } from "@/components/common/category/category-nav";
-import { Footer } from "@/components/common/footer";
+import { Footer } from "@/components/common/footer/footer";
 import { PromoBanner } from "./_components/promo-banner";
 import { BrandStrip } from "./_components/brand-strip";
 import { HeroCarousel } from "./_components/hero-carousel";

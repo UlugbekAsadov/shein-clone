@@ -9,8 +9,9 @@ import {
   featuredCategories,
 } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
+import { FilterChip } from "./filter-chip";
 
-type Props = {
+interface IProps {
   picksTitle: string;
   featuredTitle: string;
   filters: {
@@ -19,13 +20,13 @@ type Props = {
     original: string;
     new: string;
   };
-};
+}
 
 export function CategoryMegaMenu({
   picksTitle,
   featuredTitle,
   filters,
-}: Props) {
+}: IProps) {
   const [activeId, setActiveId] = useState("men-clothing");
 
   return (
@@ -138,39 +139,5 @@ export function CategoryMegaMenu({
         </div>
       </div>
     </div>
-  );
-}
-
-const toneStyles = {
-  rose: "bg-rose-100 text-rose-700",
-  emerald: "bg-emerald-100 text-emerald-700",
-  blue: "bg-blue-100 text-blue-700",
-  amber: "bg-amber-100 text-amber-700",
-} as const;
-
-function FilterChip({
-  icon,
-  label,
-  tone,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  tone: keyof typeof toneStyles;
-}) {
-  return (
-    <button
-      type="button"
-      className="inline-flex items-center gap-1.5 rounded-full bg-muted px-3 py-1.5 text-xs font-medium hover:bg-muted/80"
-    >
-      <span
-        className={cn(
-          "grid size-5 place-items-center rounded-full",
-          toneStyles[tone],
-        )}
-      >
-        {icon}
-      </span>
-      {label}
-    </button>
   );
 }

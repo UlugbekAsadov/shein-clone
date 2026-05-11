@@ -1,71 +1,4 @@
-import type { Shop, DiscountTile } from "./types";
-
-export const featuredShops: Shop[] = [
-  {
-    id: "fs1",
-    name: "PowerFit",
-    category: "Sport Fashion",
-    avatar: "/placeholders/avatar.svg",
-    banner: "/placeholders/lifestyle.svg",
-    verified: true,
-    rating: 4.5,
-    reviews: 324,
-    itemsSoldCount: "2300+ sels",
-    yearsSelling: "3 year seller",
-    tag: { label: "Fast shipping", variant: "shipping" },
-  },
-  {
-    id: "fs2",
-    name: "Nike",
-    category: "Sport Fashion",
-    avatar: "/placeholders/avatar.svg",
-    banner: "/placeholders/lifestyle.svg",
-    verified: true,
-    rating: 5.0,
-    reviews: 3000,
-    itemsSoldCount: "8400+ sels",
-    yearsSelling: "10 year seller",
-    tag: { label: "Top Seller", variant: "topSeller" },
-    isFollowing: true,
-  },
-  {
-    id: "fs3",
-    name: "kymez mini",
-    category: "Casual Wear",
-    avatar: "/placeholders/avatar.svg",
-    banner: "/placeholders/lifestyle.svg",
-    rating: 4.7,
-    reviews: 612,
-    itemsSoldCount: "1500+ sels",
-    yearsSelling: "2 year seller",
-    isFollowing: true,
-  },
-  {
-    id: "fs4",
-    name: "Adam Land",
-    category: "Men's Style",
-    avatar: "/placeholders/avatar.svg",
-    banner: "/placeholders/lifestyle.svg",
-    verified: true,
-    rating: 4.9,
-    reviews: 2104,
-    itemsSoldCount: "5200+ sels",
-    yearsSelling: "6 year seller",
-    tag: { label: "Top Seller", variant: "topSeller" },
-  },
-  {
-    id: "fs5",
-    name: "innovate",
-    category: "Lifestyle",
-    avatar: "/placeholders/avatar.svg",
-    banner: "/placeholders/lifestyle.svg",
-    rating: 4.7,
-    reviews: 198,
-    itemsSoldCount: "900+ sels",
-    yearsSelling: "1 year seller",
-    tag: { label: "Fast shipping", variant: "shipping" },
-  },
-];
+import type { IDiscountTile } from "../interfaces/discount-tile.interface";
 
 const BG_IMAGES = [
   "/mocks/images/discount-banners/background/Group%20427318349.png",
@@ -84,7 +17,7 @@ const MAIN_IMAGES = [
   "/mocks/images/discount-banners/main-images/Frame%20427318398.png",
 ];
 
-export const discountTiles: DiscountTile[] = [
+export const discountTiles: IDiscountTile[] = [
   {
     id: "d1",
     percent: 20,

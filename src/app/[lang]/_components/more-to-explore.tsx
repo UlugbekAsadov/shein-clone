@@ -2,13 +2,13 @@ import { moreToExplore } from "@/lib/mock-data";
 import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   subtitle: string;
   viewAllLabel: string;
-};
+}
 
-export function MoreToExplore({ title, subtitle, viewAllLabel }: Props) {
+export function MoreToExplore({ title, subtitle, viewAllLabel }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
       <div className="rounded-xl bg-blue-50/50 p-5">

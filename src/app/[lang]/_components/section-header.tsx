@@ -2,14 +2,14 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-type Props = {
+interface IProps {
   title: React.ReactNode;
   subtitle?: string;
   viewAllHref?: string;
   viewAllLabel?: string;
   rightAction?: React.ReactNode;
   className?: string;
-};
+}
 
 export function SectionHeader({
   title,
@@ -18,7 +18,7 @@ export function SectionHeader({
   viewAllLabel,
   rightAction,
   className,
-}: Props) {
+}: IProps) {
   return (
     <div className={cn("mb-4 flex items-end justify-between gap-4", className)}>
       <div>

@@ -7,13 +7,16 @@ import {
   Truck,
   Undo2,
 } from "lucide-react";
-import type { Dictionary } from "@/lib/dictionaries";
+import type { IDictionary } from "@/lib/dictionaries";
+import { ContactItem } from "./contact-item";
+import { FeatureItem } from "./feature-item";
+import { FooterColumn } from "./footer-column";
 
-type Props = {
-  dict: Dictionary;
-};
+interface IProps {
+  dict: IDictionary;
+}
 
-export function Footer({ dict }: Props) {
+export function Footer({ dict }: IProps) {
   const f = dict.footer;
   const i = f.items;
 
@@ -112,71 +115,5 @@ export function Footer({ dict }: Props) {
         </div>
       </div>
     </footer>
-  );
-}
-
-function FeatureItem({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex items-center gap-3 p-3 rounded-md bg-background">
-      <span className="grid size-16 place-items-center rounded-sm bg-muted text-foreground">
-        {icon}
-      </span>
-      <div>
-        <h4 className="text-sm font-semibold">{title}</h4>
-        <p className="text-xs text-muted-foreground">{description}</p>
-      </div>
-    </div>
-  );
-}
-
-function FooterColumn({ title, items }: { title: string; items: string[] }) {
-  return (
-    <div>
-      <h4 className="mb-3 text-xs font-semibold tracking-wider text-foreground">
-        {title}
-      </h4>
-      <ul className="space-y-2">
-        {items.map((item) => (
-          <li key={item}>
-            <a
-              href="#"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function ContactItem({
-  icon,
-  primary,
-  secondary,
-}: {
-  icon: React.ReactNode;
-  primary: string;
-  secondary: string;
-}) {
-  return (
-    <li className="flex items-start gap-2">
-      <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-muted text-foreground">
-        {icon}
-      </span>
-      <span className="flex flex-col">
-        <span className="text-sm font-medium text-foreground">{primary}</span>
-        <span className="text-xs text-muted-foreground">{secondary}</span>
-      </span>
-    </li>
   );
 }

@@ -2,13 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { locales, type Locale } from "@/lib/i18n-config";
+import { locales } from "@/lib/i18n-config";
 import { cn } from "@/lib/utils";
 
-export function LanguageSwitcher({ current }: { current: Locale }) {
+interface IProps {
+  current: (typeof locales)[number];
+}
+
+export function LanguageSwitcher({ current }: IProps) {
   const pathname = usePathname();
 
-  const hrefFor = (target: Locale) => {
+  const hrefFor = (target: (typeof locales)[number]) => {
     const segments = pathname.split("/");
     if (segments.length > 1) segments[1] = target;
     return segments.join("/") || `/${target}`;

@@ -1,18 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShoppingCart } from "lucide-react";
-import type { Locale } from "@/lib/i18n-config";
-import type { Dictionary } from "@/lib/dictionaries";
+import type { locales } from "@/lib/i18n-config";
+import type { IDictionary } from "@/lib/dictionaries";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
 
-type Props = {
-  lang: Locale;
-  dict: Dictionary;
-};
+interface IProps {
+  lang: (typeof locales)[number];
+  dict: IDictionary;
+}
 
-export function Header({ lang, dict }: Props) {
+export function Header({ lang, dict }: IProps) {
   return (
     <header
       suppressHydrationWarning

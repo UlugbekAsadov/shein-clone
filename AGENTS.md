@@ -10,8 +10,20 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 2. **One component per `.tsx` file.** Never define two components in the same file — extract each into its own file.
 
-3. **Only one component + one Props interface belong inside a component file.** Everything else (additional types/interfaces, mock data, constants, helpers) lives in a sibling `_utils/` folder organized by kind: `_utils/interfaces/`, `_utils/types/`, `_utils/mocks/`, `_utils/constants/`, etc. The pattern mirrors the existing `_components/` convention for page-scoped components.
+3. **Do not write comments in code.** No `//` line comments, no `/* */` blocks, no JSDoc. Code must be self-documenting via clear names.
 
-4. **Do not write comments in code.** No `//` line comments, no `/* */` blocks, no JSDoc. Code must be self-documenting via clear names.
+4. **No big components.** Decompose large components into smaller subcomponents in their own files and import them. If a component is getting long, split it.
 
-5. **No big components.** Decompose large components into smaller subcomponents in their own files and import them. If a component is getting long, split it.
+5. **Group connected components into a single folder.** When components are tightly related (e.g. a parent and its subcomponents), put them together in a named folder. Example: `story/story-card.tsx`, `story/story-buttons.tsx`.
+
+6. **Use `_lib/` for component-scoped non-component files.** Page-scoped or component-scoped types, mocks, constants, and helpers live in a sibling `_lib/` folder. The pattern mirrors `_components/` for page-scoped components.
+
+7. **Files inside `_lib/` must include their kind in the filename.** Examples: `brand.interface.ts`, `brand.constants.ts`, `brand.mocks.ts`, `brand.types.ts`, `brand.helpers.ts`.
+
+8. **Shared components keep their interfaces, mocks, constants, and helpers in the shared `src/lib/` folder, split by kind into sibling subfolders.** Interfaces in `src/lib/interfaces/`, mocks in `src/lib/mock-data/`, constants in `src/lib/constants/`, helpers in `src/lib/helpers/`. Never mix kinds in one folder. Only page-scoped or strictly component-scoped artifacts belong in a local `_lib/`. Apply the same filename-by-kind convention (`*.interface.ts`, `*.constants.ts`, `*.mocks.ts`).
+
+9. **Use `interface IProps` for component prop types.** Never `type Props = { … }`.
+
+10. **All interfaces start with the `I` prefix.** Examples: `IProps`, `IProduct`, `IBrand`, `ICategory`.
+
+11. **Do not write any `type` aliases.** Prefer `interface` declarations. For union/literal needs, inline them at the usage site instead of creating a `type` alias.

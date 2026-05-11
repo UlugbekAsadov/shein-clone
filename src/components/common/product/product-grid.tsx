@@ -1,14 +1,14 @@
-import type { Product } from "@/lib/mock-data";
+import type { IProduct } from "@/lib/interfaces/product.interface";
 import { ProductCard } from "./product-card";
 import { cn } from "@/lib/utils";
 
-type Props = {
-  products: Product[];
+interface IProps {
+  products: IProduct[];
   className?: string;
   variant?: "default" | "dark";
-};
+}
 
-export function ProductGrid({ products, className, variant }: Props) {
+export function ProductGrid({ products, className, variant }: IProps) {
   return (
     <div
       className={cn(

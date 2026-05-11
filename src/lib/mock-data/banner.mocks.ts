@@ -1,8 +1,8 @@
-import type { HeroSlide } from "./types";
+import type { IHeroSlide } from "../interfaces/hero-slide.interface";
 
 const BANNER = "/mocks/images/banner/image%2013.png";
 
-export const heroSlides: HeroSlide[] = [
+export const heroSlides: IHeroSlide[] = [
   {
     id: "hs1",
     image: BANNER,

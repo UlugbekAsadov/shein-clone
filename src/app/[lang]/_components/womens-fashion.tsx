@@ -3,13 +3,13 @@ import { womensFashion } from "@/lib/mock-data";
 import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   subtitle: string;
   filtersLabel: string;
-};
+}
 
-export function WomensFashion({ title, subtitle, filtersLabel }: Props) {
+export function WomensFashion({ title, subtitle, filtersLabel }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
       <SectionHeader

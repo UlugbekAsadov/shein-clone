@@ -2,7 +2,7 @@
 
 import { Globe } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
-import { locales, type Locale } from "@/lib/i18n-config";
+import { locales } from "@/lib/i18n-config";
 import {
   Select,
   SelectContent,
@@ -11,7 +11,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export function LocaleSwitcher({ current }: { current: Locale }) {
+interface IProps {
+  current: (typeof locales)[number];
+}
+
+export function LocaleSwitcher({ current }: IProps) {
   const router = useRouter();
   const pathname = usePathname();
 

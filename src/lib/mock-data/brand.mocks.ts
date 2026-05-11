@@ -1,4 +1,4 @@
-import type { Brand } from "./types";
+import type { IBrand } from "../interfaces/brand.interface";
 
 const brandImg = (n: number) =>
   n === 0
@@ -16,7 +16,7 @@ const CONTENTS = [
 const brandContents = (offset: number, count = 4): string[] =>
   Array.from({ length: count }, (_, i) => CONTENTS[(offset + i) % CONTENTS.length]);
 
-export const brands: Brand[] = [
+export const brands: IBrand[] = [
   { id: "b1", name: "Beal", image: brandImg(0), brandBg: "#0d3a3f", contents: brandContents(0) },
   { id: "b2", name: "Ryvang rens", image: brandImg(1), brandBg: "#1e3a8a", contents: brandContents(1) },
   { id: "b3", name: "Usem", image: brandImg(2), brandBg: "#3f2a14", storyViewed: true, contents: brandContents(2) },

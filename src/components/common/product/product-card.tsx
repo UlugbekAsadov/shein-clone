@@ -3,16 +3,16 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Heart, ShoppingCart, Star, Truck } from "lucide-react";
-import type { Product } from "@/lib/mock-data";
+import type { IProduct } from "@/lib/interfaces/product.interface";
 import { cn } from "@/lib/utils";
-import { ProductPreviewDialog } from "./product-preview-dialog";
+import { ProductPreviewDialog } from "./product-preview/product-preview-dialog";
 
-type Props = {
-  product: Product;
+interface IProps {
+  product: IProduct;
   variant?: "default" | "dark";
-};
+}
 
-export function ProductCard({ product, variant = "default" }: Props) {
+export function ProductCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
   const [previewOpen, setPreviewOpen] = useState(false);
 

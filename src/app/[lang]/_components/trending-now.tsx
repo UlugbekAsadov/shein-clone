@@ -3,13 +3,13 @@ import { trendingProducts } from "@/lib/mock-data";
 import { ProductGrid } from "@/components/common/product/product-grid";
 import { SectionHeader } from "./section-header";
 
-type Props = {
+interface IProps {
   title: string;
   subtitle: string;
   viewAllLabel: string;
-};
+}
 
-export function TrendingNow({ title, subtitle, viewAllLabel }: Props) {
+export function TrendingNow({ title, subtitle, viewAllLabel }: IProps) {
   return (
     <section className="mx-auto max-w-[1440px] px-6 py-6">
       <div className="rounded-xl bg-[#FF3C0614] p-5">
