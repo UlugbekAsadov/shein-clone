@@ -22,7 +22,7 @@ import { fitStatsMock, reviewMediaMock, reviewsMock } from "./_lib/mocks/review.
 export default async function ProductPage({
   params,
 }: PageProps<"/[lang]/product/[slug]">) {
-  const { lang } = await params;
+  const { lang, slug } = await params;
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
@@ -52,6 +52,8 @@ export default async function ProductPage({
                 alt={product.title}
               />
               <ProductReviewsSection
+                lang={lang}
+                slug={slug}
                 totalLabel="100+"
                 rating={product.rating}
                 fitStats={fitStatsMock}

@@ -4,6 +4,12 @@ export interface IReviewMeta {
   value: string;
 }
 
+export interface ISellerResponse {
+  shopName: string;
+  date: string;
+  text: string;
+}
+
 export interface IReview {
   id: string;
   user: string;
@@ -15,6 +21,7 @@ export interface IReview {
   countryFlag: string;
   countryLabel: string;
   helpful: number;
+  sellerResponse?: ISellerResponse;
 }
 
 export interface IFitStat {

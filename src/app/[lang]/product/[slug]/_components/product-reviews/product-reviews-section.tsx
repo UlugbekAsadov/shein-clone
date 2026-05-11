@@ -1,10 +1,14 @@
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import type { locales } from "@/lib/i18n-config";
 import type { IFitStat, IReview } from "../../_lib/interface/review.interface";
 import { ProductReviewCard } from "./product-review-card";
 import { ProductReviewMediaGallery } from "./product-review-media-gallery";
 import { ProductReviewSummary } from "./product-review-summary";
 
 interface IProps {
+  lang: (typeof locales)[number];
+  slug: string;
   totalLabel: string;
   rating: number;
   fitStats: IFitStat[];
@@ -13,6 +17,8 @@ interface IProps {
 }
 
 export function ProductReviewsSection({
+  lang,
+  slug,
   totalLabel,
   rating,
   fitStats,
@@ -23,13 +29,13 @@ export function ProductReviewsSection({
     <section className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold">Customer Reviews ({totalLabel})</h2>
-        <button
-          type="button"
+        <Link
+          href={`/${lang}/product/${slug}/comments`}
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
           View all
           <ChevronRight className="size-5" />
-        </button>
+        </Link>
       </div>
 
       <ProductReviewSummary rating={rating} fitStats={fitStats} />
