@@ -109,6 +109,93 @@
       "verifiedSellersRealProducts": "Tasdiqlangan sotuvchilar, haqiqiy mahsulotlar"
     }
   },
+  "breadcrumb": {
+    "home": "Bosh sahifa",
+    "profile": "Profil"
+  },
+  "profile": {
+    "account": {
+      "title": "Hisobimni boshqarish",
+      "current": "Hisob sozlamalari",
+      "empty": {
+        "title": "Hisob sozlamalari tez orada",
+        "description": "Bu yerda ism, email, parol va bildirishnoma sozlamalarini o'zgartirishingiz mumkin bo'ladi."
+      }
+    },
+    "payments": {
+      "title": "To'lovlar",
+      "current": "Saqlangan to'lov usullari",
+      "empty": {
+        "title": "Hozircha to'lov usullari yo'q",
+        "description": "Tezroq buyurtma berish uchun kartani saqlang. Karta raqamlari to'liq saqlanmaydi."
+      }
+    },
+    "promocode": {
+      "title": "Promokod",
+      "current": "Sizning kodlaringiz",
+      "empty": {
+        "title": "Hozircha promokodlar yo'q",
+        "description": "Faol promokodlar va mavsumiy kuponlar shu yerda paydo bo'ladi."
+      }
+    },
+    "nav": {
+      "account": "Hisobimni boshqarish",
+      "orders": "Buyurtmalarim",
+      "addresses": "Manzillarim",
+      "payments": "To'lovlar",
+      "measurements": "O'lchamlar",
+      "promocode": "Promokod"
+    },
+    "measurements": {
+      "title": "Mening o'lchovlarim",
+      "sizeGuide": "O'lchov yo'riqnomasi",
+      "placeholder": "Tanlang",
+      "intro": "O'lchovlaringizni kiritish kerakli o'lchamni topishni osonlashtiradi. Quyidagi imkoniyatlarga ega bo'lasiz:",
+      "consent": {
+        "body": "“Saqlash”ni bosish orqali siz SHEIN sizning shaxsiy ma'lumotlaringizni shaxsiy o'lcham tavsiyalari va shaxsiylashtirilgan takliflar uchun qayta ishlashga rozilik bildirasiz. Boshqa kishi uchun profil yaratayotgan bo'lsangiz, uning shaxsiy ma'lumotlarini ulashishga vakolatingiz borligini tasdiqlaysiz. Iltimos, ism kabi shaxsiy identifikatorlardan foydalanmang — \"Ota\" yoki \"Singil\" kabi umumiy nomlarni ishlatishingiz mumkin. Profilni istagan vaqtda o'zgartirishingiz yoki o'chirishingiz mumkin, bu o'lchov ma'lumotlarini qayta ishlashni to'xtatadi.\nMa'lumotlaringizni qanday boshqarishimiz haqida batafsil ma'lumotni",
+        "privacyPolicy": "Maxfiylik siyosatida"
+      },
+      "cancel": "Bekor qilish",
+      "update": "Saqlash",
+      "fields": {
+        "height": "Bo'y",
+        "weight": "Vazn",
+        "bust": "Ko'krak",
+        "braSize": "Byustgalter o'lchami",
+        "waist": "Bel",
+        "hips": "Son",
+        "preference": "Afzal ko'rgan",
+        "footwear": "Poyabzal o'lchami"
+      }
+    },
+    "orders": {
+      "title": "Buyurtmalarim",
+      "current": "Joriy",
+      "soldBy": "Sotuvchi",
+      "color": "Rang",
+      "size": "O'lcham",
+      "qty": "Soni",
+      "location": "Manzil",
+      "save": "Tejash",
+      "status": {
+        "unpaid": "To'lanmagan",
+        "processing": "Qayta ishlanmoqda",
+        "shipped": "Jo'natildi",
+        "delivered": "Yetkazildi",
+        "return": "Qaytarish"
+      }
+    },
+    "addresses": {
+      "title": "Manzillarim",
+      "current": "Joriy",
+      "addAddress": "Manzil qo'shish",
+      "placeholder": "Tanlang",
+      "fields": {
+        "country": "Davlat",
+        "region": "Viloyat"
+      }
+    }
+  },
   "footer": {
     "buyerProtection": "Xaridor himoyasi",
     "buyerProtectionDesc": "100% pulni qaytarish kafolati",

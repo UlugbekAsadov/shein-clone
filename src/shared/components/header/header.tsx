@@ -60,8 +60,8 @@ export function Header({ lang, dict }: IProps) {
             <Heart className="size-6 text-muted-foreground" />
           </Link>
 
-          <button
-            type="button"
+          <Link
+            href={`/${lang}/profile/account`}
             className="flex items-center gap-2 rounded-full pl-1 pr-3 hover:bg-muted"
           >
             <Image
@@ -77,7 +77,7 @@ export function Header({ lang, dict }: IProps) {
                 {dict.header.helloSignIn}
               </span>
             </span>
-          </button>
+          </Link>
         </div>
       </div>
     </header>

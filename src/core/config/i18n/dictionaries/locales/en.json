@@ -109,6 +109,93 @@
       "verifiedSellersRealProducts": "Verified sellers, real products"
     }
   },
+  "breadcrumb": {
+    "home": "Home",
+    "profile": "Profile"
+  },
+  "profile": {
+    "account": {
+      "title": "Manage my account",
+      "current": "Account settings",
+      "empty": {
+        "title": "Account settings coming soon",
+        "description": "This is where you'll update your name, email, password and notification preferences."
+      }
+    },
+    "payments": {
+      "title": "Payments",
+      "current": "Saved payment methods",
+      "empty": {
+        "title": "No payment methods yet",
+        "description": "Save a card to check out faster. We don't store full card numbers on our servers."
+      }
+    },
+    "promocode": {
+      "title": "Promacode",
+      "current": "Your codes",
+      "empty": {
+        "title": "No promo codes yet",
+        "description": "Active promo codes and seasonal coupons will show up here when available."
+      }
+    },
+    "nav": {
+      "account": "Manage my account",
+      "orders": "My Orders",
+      "addresses": "My-addresses",
+      "payments": "Payments",
+      "measurements": "Measurements",
+      "promocode": "Promacode"
+    },
+    "measurements": {
+      "title": "My Measurements",
+      "sizeGuide": "Size guide",
+      "placeholder": "Please select",
+      "intro": "My Measurements helps simplify the process finding your perfect fit! Filling in My Measurements lets you:",
+      "consent": {
+        "body": "By clicking \"Submit,\" you consent to SHEIN processing your personal data to provide personalized product sizing recommendations for your profile and also for the purpose of profiling to provide you with personalized product recommendations. If you create a profile for another person, you confirm that you are authorized to share their personal data, including measurements. Please avoid entering personal identifiers, such as names, and instead use generic labels like \"Father\" or \"Sister.\" You may modify or delete any profile at any time, which will stop the processing of associated measurement data.\nFor more information about how we manage and protect your personal data, please see our",
+        "privacyPolicy": "Privacy Policy"
+      },
+      "cancel": "Cancel",
+      "update": "Update",
+      "fields": {
+        "height": "Height",
+        "weight": "Weight",
+        "bust": "Bust",
+        "braSize": "Bra Size",
+        "waist": "Waist",
+        "hips": "Hips",
+        "preference": "Preference",
+        "footwear": "Footwear size"
+      }
+    },
+    "orders": {
+      "title": "My Orders",
+      "current": "Current",
+      "soldBy": "Sold by",
+      "color": "Color",
+      "size": "Size",
+      "qty": "Cty",
+      "location": "Location",
+      "save": "Save",
+      "status": {
+        "unpaid": "Unpaid",
+        "processing": "Processing",
+        "shipped": "Shipped",
+        "delivered": "Delivered",
+        "return": "Return"
+      }
+    },
+    "addresses": {
+      "title": "My-addresses",
+      "current": "Current",
+      "addAddress": "Add address",
+      "placeholder": "Please select",
+      "fields": {
+        "country": "Country",
+        "region": "Region"
+      }
+    }
+  },
   "footer": {
     "buyerProtection": "Buyer Protection",
     "buyerProtectionDesc": "100% money back guarantee",
