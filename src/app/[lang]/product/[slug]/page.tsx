@@ -7,6 +7,7 @@ import { Footer } from "@/components/common/footer/footer";
 import { ProductPreviewGallery } from "@/components/common/product/product-preview/product-preview-gallery";
 import { trendingProducts, womensFashion } from "@/lib/mock-data";
 import { ProductBreadcrumb } from "./_components/product-breadcrumb";
+import { ProductStickyBar } from "./_components/product-sticky-bar";
 import { ProductInfoPanel } from "./_components/product-info/product-info-panel";
 import { ProductShippingInfo } from "./_components/product-info/product-shipping-info";
 import { ProductSellerCard } from "./_components/product-info/product-seller-card";
@@ -30,6 +31,7 @@ export default async function ProductPage({
 
   return (
     <>
+      <ProductStickyBar product={product} />
       <Header lang={lang} dict={dict} />
       <CategoryNav
         lang={lang}
