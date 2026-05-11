@@ -28,7 +28,7 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
             key={src}
             onClick={() => setImageIndex(i)}
             className={cn(
-              "relative aspect-square cursor-pointer overflow-hidden rounded-xl ring-2 transition",
+              "relative aspect-3/4 cursor-pointer overflow-hidden rounded-sm ring-2 transition",
               i === imageIndex
                 ? "ring-foreground"
                 : "ring-transparent hover:ring-muted-foreground/40",

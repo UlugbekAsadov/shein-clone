@@ -15,9 +15,9 @@ export function ProductColorSelector({ swatches, value, onChange }: IProps) {
 
   return (
     <div>
-      <div className="mb-2 text-sm">
-        <span className="font-semibold">Color:</span>{" "}
-        <span className="text-muted-foreground">{selected?.name}</span>
+      <div className="mb-2">
+        <span className="font-bold">Color:</span>{" "}
+        <span className="text-muted-foreground text-xs">{selected?.name}</span>
       </div>
       <div className="flex flex-wrap gap-2">
         {swatches.map((c) => (
@@ -27,7 +27,7 @@ export function ProductColorSelector({ swatches, value, onChange }: IProps) {
             onClick={() => onChange(c.id)}
             aria-label={c.name}
             className={cn(
-              "relative size-14 cursor-pointer overflow-hidden rounded-xl ring-2 transition",
+              "relative w-16 aspect-3/4 cursor-pointer overflow-hidden rounded-sm ring-2 transition",
               value === c.id
                 ? "ring-foreground"
                 : "ring-transparent hover:ring-muted-foreground/40",

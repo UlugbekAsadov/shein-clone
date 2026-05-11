@@ -18,7 +18,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 6. **Use `_lib/` for component-scoped non-component files.** Page-scoped or component-scoped types, mocks, constants, and helpers live in a sibling `_lib/` folder. The pattern mirrors `_components/` for page-scoped components.
 
-7. **Files inside `_lib/` must include their kind in the filename.** Examples: `brand.interface.ts`, `brand.constants.ts`, `brand.mocks.ts`, `brand.types.ts`, `brand.helpers.ts`.
+7. **Files inside `_lib/` must be split by kind into sibling subfolders and include their kind in the filename.** Each kind lives in its own subfolder: `_lib/interface/*.interface.ts`, `_lib/mocks/*.mocks.ts`, `_lib/constants/*.constants.ts`, `_lib/helpers/*.helpers.ts`. Never mix kinds in one folder. Never place kind-files directly under `_lib/`.
 
 8. **Shared components keep their interfaces, mocks, constants, and helpers in the shared `src/lib/` folder, split by kind into sibling subfolders.** Interfaces in `src/lib/interfaces/`, mocks in `src/lib/mock-data/`, constants in `src/lib/constants/`, helpers in `src/lib/helpers/`. Never mix kinds in one folder. Only page-scoped or strictly component-scoped artifacts belong in a local `_lib/`. Apply the same filename-by-kind convention (`*.interface.ts`, `*.constants.ts`, `*.mocks.ts`).
 

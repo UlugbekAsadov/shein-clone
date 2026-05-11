@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { Heart, ShoppingCart, Star, Truck } from "lucide-react";
 import type { IProduct } from "@/lib/interfaces/product.interface";
@@ -15,11 +17,14 @@ interface IProps {
 export function ProductCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
   const [previewOpen, setPreviewOpen] = useState(false);
+  const { lang } = useParams<{ lang: string }>();
+  const href = `/${lang}/product/${product.slug ?? product.id}`;
 
   return (
-    <article
+    <Link
+      href={href}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-lg border transition-shadow ",
+        "group flex flex-col overflow-hidden rounded-lg border transition-shadow",
         isDark
           ? "border-white/10 bg-white text-foreground"
           : "border-border bg-card text-card-foreground",
@@ -37,6 +42,10 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         <button
           type="button"
           aria-label="Add to wishlist"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
           className="absolute left-3 top-3 grid size-8 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors hover:bg-white/90"
         >
           <Heart className="size-4" />
@@ -87,7 +96,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           </div>
           <button
             type="button"
-            onClick={() => setPreviewOpen(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setPreviewOpen(true);
+            }}
             aria-label="Add to cart"
             className="ml-auto grid cursor-pointer size-9 place-items-center rounded-sm bg-foreground text-background transition-colors hover:bg-foreground/90"
           >
@@ -101,6 +114,6 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         open={previewOpen}
         onClose={() => setPreviewOpen(false)}
       />
-    </article>
+    </Link>
   );
 }

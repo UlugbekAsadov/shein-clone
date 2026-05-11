@@ -1,17 +1,12 @@
 import { Star } from "lucide-react";
 
-interface IProps {
-  rating: number;
-}
-
-export function ProductRatingStars({ rating }: IProps) {
+export function ProductRatingStars() {
   return (
     <div className="flex items-center gap-1">
       {[0, 1, 2, 3].map((i) => (
-        <Star key={i} className="size-4 fill-amber-400 text-amber-400" />
+        <Star key={i} className="size-4 fill-primary text-primary" />
       ))}
-      <Star className="size-4 fill-amber-400/40 text-amber-400" />
-      <span className="ml-1 font-medium">{rating.toFixed(1)}</span>
+      <Star className="size-4 fill-primary/40 text-primary/40" />
     </div>
   );
 }

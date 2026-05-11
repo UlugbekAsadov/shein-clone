@@ -10,24 +10,24 @@ interface IProps {
 export function ProductQtyStepper({ value, onChange }: IProps) {
   return (
     <div>
-      <div className="mb-2 text-sm font-semibold">Qty:</div>
-      <div className="flex items-center gap-2">
+      <div className="mb-2 font-bold">Qty:</div>
+      <div className="flex items-center gap-2 border w-fit rounded-md">
         <button
           type="button"
           onClick={() => onChange(Math.max(1, value - 1))}
           aria-label="Decrease quantity"
-          className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition hover:bg-muted"
+          className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
           <Minus className="size-4" />
         </button>
-        <div className="grid h-11 min-w-14 place-items-center px-3 text-base font-semibold">
+        <div className="grid h-11 min-w-12 place-items-center px-3 text-base font-semibold">
           {value}
         </div>
         <button
           type="button"
           onClick={() => onChange(value + 1)}
           aria-label="Increase quantity"
-          className="grid size-11 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground transition hover:bg-muted"
+          className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
           <Plus className="size-4" />
         </button>

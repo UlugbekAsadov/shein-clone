@@ -19,7 +19,7 @@ export function ProductSizeSelector({
 }: IProps) {
   return (
     <div>
-      <div className="mb-2 text-sm font-semibold">Size:</div>
+      <div className="mb-2 font-bold">Size:</div>
       <div className="flex flex-wrap gap-2">
         {sizes.map((s) => {
           const selected = s.id === value;
@@ -31,28 +31,26 @@ export function ProductSizeSelector({
               disabled={!s.available}
               onClick={() => onChange(s.id)}
               className={cn(
-                "relative h-11 min-w-14 cursor-pointer rounded-full px-5 text-sm font-semibold transition",
+                "relative h-11 min-w-14 cursor-pointer rounded-full border  px-5 text-sm font-semibold transition",
                 selected
-                  ? "bg-foreground text-background"
-                  : "border border-border bg-background text-foreground hover:bg-muted",
+                  ? "bg-foreground text-background border-transparent"
+                  : "border-border bg-background text-foreground hover:bg-muted",
                 !s.available &&
                   "cursor-not-allowed text-muted-foreground line-through opacity-50 hover:bg-background",
               )}
             >
               {s.id}
-              {selected && isRecommended && (
-                <span className="absolute -bottom-1 -right-1 grid size-4 place-items-center rounded-full bg-emerald-500 ring-2 ring-background">
-                  <BadgeCheck className="size-3 text-white" />
-                </span>
+              {isRecommended && (
+                <BadgeCheck className="size-5 text-white fill-emerald-500 absolute -bottom-1 -right-1" />
               )}
             </button>
           );
         })}
       </div>
       <div className="mt-3 flex items-center gap-2 text-sm">
-        <BadgeCheck className="size-4 fill-emerald-500 text-white" />
+        <BadgeCheck className="size-5 text-white fill-emerald-500 " />
         <span className="text-muted-foreground">Recommended for you:</span>
-        <span className="font-semibold">{recommended}</span>
+        <span className="font-semibold text-emerald-500">{recommended}</span>
       </div>
     </div>
   );

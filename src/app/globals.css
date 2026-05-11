@@ -60,7 +60,7 @@
   --secondary: oklch(97.37% 0.003 286.35);
   --secondary-foreground: oklch(8.06% 0.025 294.08);
   --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
+  --muted-foreground: oklch(63.27% 0.012 286.06);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(8.06% 0.025 294.08);
   --destructive: oklch(0.577 0.245 27.325);
@@ -131,20 +131,40 @@
 
 @layer utilities {
   @keyframes dialog-overlay-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
   @keyframes dialog-overlay-out {
-    from { opacity: 1; }
-    to { opacity: 0; }
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
   @keyframes dialog-content-in {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   @keyframes dialog-content-out {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(0.96); }
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.96);
+    }
   }
 
   .dialog-overlay-enter {
