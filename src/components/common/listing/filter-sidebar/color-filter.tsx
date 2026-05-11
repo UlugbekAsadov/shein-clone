@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { colorSwatches } from "../../_lib/category-page.mocks";
+import { colorSwatches } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 export function ColorFilter() {

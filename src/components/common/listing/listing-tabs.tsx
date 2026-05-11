@@ -8,7 +8,7 @@ interface IProps {
   dealsLabel: string;
 }
 
-export function CategoryTabs({ similarLabel, dealsLabel }: IProps) {
+export function ListingTabs({ similarLabel, dealsLabel }: IProps) {
   const [active, setActive] = useState<"similar" | "deals">("similar");
 
   return (

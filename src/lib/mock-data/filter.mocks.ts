@@ -1,23 +1,14 @@
 import type {
   IBrandFilter,
-  IBreadcrumbItem,
   ICategoryNode,
   IColorSwatch,
   IMaterialOption,
   IPricePreset,
   ISizeOption,
   IStyleOption,
-} from "./category-page.interface";
+} from "../interfaces/filter.interface";
 
-export const breadcrumbTrail: IBreadcrumbItem[] = [
-  { id: "home", label: "Home" },
-  { id: "woman-apparel", label: "WOMAN Apparel" },
-  { id: "woman-clothing", label: "Woman Clothing" },
-  { id: "sweatshirt", label: "Sweatshirt" },
-  { id: "shop", label: "Shop" },
-];
-
-export const categoryTree: ICategoryNode[] = [
+export const filterCategoryTree: ICategoryNode[] = [
   {
     id: "woman",
     name: "Woman",

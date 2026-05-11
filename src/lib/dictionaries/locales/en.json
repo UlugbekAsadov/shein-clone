@@ -49,11 +49,7 @@
     "picksForYou": "Picks fot you",
     "featured": "Featured"
   },
-  "category": {
-    "breadcrumb": {
-      "home": "Home",
-      "shop": "Shop"
-    },
+  "listing": {
     "tabs": {
       "similar": "Similar items",
       "deals": "Deals & Offers"
@@ -82,6 +78,13 @@
       "brandsSearch": "Search brands",
       "style": "Style",
       "material": "Material"
+    },
+    "search": {
+      "resultsFound": "Search results found"
+    },
+    "wishlist": {
+      "title": "Wishlist",
+      "subtitle": "Your saved items"
     }
   },
   "footer": {

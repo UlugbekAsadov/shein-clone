@@ -1,8 +1,8 @@
 import {
-  categoryTree,
+  filterCategoryTree,
   materialOptions,
   styleOptions,
-} from "../../_lib/category-page.mocks";
+} from "@/lib/mock-data";
 import { FilterSection } from "./filter-section";
 import { QuickFilters } from "./quick-filters";
 import { CategoryTree } from "./category-tree";
@@ -46,7 +46,7 @@ export function FilterSidebar({ dict, quickFiltersLabels }: IProps) {
       </FilterSection>
 
       <FilterSection title={dict.category}>
-        <CategoryTree nodes={categoryTree} />
+        <CategoryTree nodes={filterCategoryTree} />
       </FilterSection>
 
       <FilterSection title={dict.size}>

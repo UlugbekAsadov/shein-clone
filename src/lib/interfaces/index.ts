@@ -1,6 +1,7 @@
 export * from "./brand.interface";
 export * from "./category.interface";
 export * from "./discount-tile.interface";
+export * from "./filter.interface";
 export * from "./hero-slide.interface";
 export * from "./product.interface";
 export * from "./shop.interface";

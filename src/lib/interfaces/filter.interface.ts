@@ -43,9 +43,3 @@ export interface ISortOption {
   id: string;
   label: string;
 }
-
-export interface IBreadcrumbItem {
-  id: string;
-  label: string;
-  href?: string;
-}

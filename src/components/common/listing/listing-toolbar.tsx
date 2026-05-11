@@ -8,7 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { viewModes, productCountMock } from "../_lib/category-page.constants";
+import {
+  viewModes,
+  productCountMock,
+} from "@/lib/constants/listing.constants";
 import { cn } from "@/lib/utils";
 
 interface IProps {
@@ -23,7 +26,7 @@ interface IProps {
   };
 }
 
-export function CategoryToolbar({
+export function ListingToolbar({
   productFoundLabel,
   mostPopularLabel,
   priceLabel,

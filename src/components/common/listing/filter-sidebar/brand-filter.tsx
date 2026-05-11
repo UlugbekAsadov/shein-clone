@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { brandFilters } from "../../_lib/category-page.mocks";
+import { brandFilters } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 interface IProps {

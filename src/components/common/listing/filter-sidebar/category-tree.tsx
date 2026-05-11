@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import type { ICategoryNode } from "../../_lib/category-page.interface";
+import type { ICategoryNode } from "@/lib/interfaces/filter.interface";
 import { cn } from "@/lib/utils";
 
 interface IProps {

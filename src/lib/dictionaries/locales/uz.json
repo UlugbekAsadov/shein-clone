@@ -49,11 +49,7 @@
     "picksForYou": "Siz uchun tanlangan",
     "featured": "Tavsiya etiladi"
   },
-  "category": {
-    "breadcrumb": {
-      "home": "Bosh sahifa",
-      "shop": "Do'kon"
-    },
+  "listing": {
     "tabs": {
       "similar": "O'xshash mahsulotlar",
       "deals": "Chegirmalar va takliflar"
@@ -82,6 +78,13 @@
       "brandsSearch": "Brendlarni qidirish",
       "style": "Uslub",
       "material": "Material"
+    },
+    "search": {
+      "resultsFound": "Qidiruv natijalari"
+    },
+    "wishlist": {
+      "title": "Saralangan",
+      "subtitle": "Sizning saqlangan mahsulotlaringiz"
     }
   },
   "footer": {

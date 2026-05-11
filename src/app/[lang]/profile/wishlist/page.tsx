@@ -5,12 +5,12 @@ import { Header } from "@/components/common/header/header";
 import { CategoryNav } from "@/components/common/category/category-nav";
 import { Footer } from "@/components/common/footer/footer";
 import { ListingShell } from "@/components/common/listing/listing-shell";
+import { ListingPageHeader } from "@/components/common/listing/listing-page-header";
 import { trendingProducts, womensFashion } from "@/lib/mock-data";
-import { CategoryBreadcrumb } from "./_components/category-breadcrumb";
 
-export default async function CategoryPage({
+export default async function WishlistPage({
   params,
-}: PageProps<"/[lang]/category/[slug]">) {
+}: PageProps<"/[lang]/profile/wishlist">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
@@ -30,7 +30,13 @@ export default async function CategoryPage({
 
       <main className="flex-1">
         <ListingShell
-          header={<CategoryBreadcrumb />}
+          header={
+            <ListingPageHeader
+              title={dict.listing.wishlist.title}
+              subtitle={dict.listing.wishlist.subtitle}
+              productFoundLabel={dict.listing.toolbar.productFound}
+            />
+          }
           products={products}
           dict={{
             tabs: dict.listing.tabs,

@@ -31,6 +31,7 @@ export function Header({ lang, dict }: IProps) {
         </Link>
 
         <SearchBar
+          lang={lang}
           placeholder={dict.header.searchPlaceholder}
           searchLabel={dict.header.search}
         />
@@ -51,13 +52,13 @@ export function Header({ lang, dict }: IProps) {
               8
             </span>
           </button>
-          <button
-            type="button"
+          <Link
+            href={`/${lang}/profile/wishlist`}
             aria-label="Wishlist"
             className="rounded-full p-2 hover:bg-muted"
           >
             <Heart className="size-6 text-muted-foreground" />
-          </button>
+          </Link>
 
           <button
             type="button"

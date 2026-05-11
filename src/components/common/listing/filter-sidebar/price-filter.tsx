@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { Input } from "@/components/ui/input";
-import { pricePresets } from "../../_lib/category-page.mocks";
+import { pricePresets } from "@/lib/mock-data";
 import {
   defaultPriceRange,
   priceBounds,
-} from "../../_lib/category-page.constants";
+} from "@/lib/constants/listing.constants";
 import { cn } from "@/lib/utils";
 
 interface IProps {

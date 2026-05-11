@@ -1,4 +1,4 @@
-import { breadcrumbTrail } from "../_lib/category-page.mocks";
+import { breadcrumbTrail } from "../_lib/breadcrumb.mocks";
 
 export function CategoryBreadcrumb() {
   return (

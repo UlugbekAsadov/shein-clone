@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Camera, Search, X } from "lucide-react";
 import {
   searchCategories,
   searchHistory as initialSearchHistory,
 } from "@/lib/mock-data";
+import type { locales } from "@/lib/i18n-config";
 import {
   Select,
   SelectContent,
@@ -15,11 +17,13 @@ import {
 } from "@/components/ui/select";
 
 interface IProps {
+  lang: (typeof locales)[number];
   placeholder: string;
   searchLabel: string;
 }
 
-export function SearchBar({ placeholder, searchLabel }: IProps) {
+export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState(initialSearchHistory);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -40,6 +44,11 @@ export function SearchBar({ placeholder, searchLabel }: IProps) {
 
   const removeItem = (id: string) => {
     setHistory((prev) => prev.filter((h) => h.id !== id));
+  };
+
+  const goToSearch = (text: string) => {
+    setOpen(false);
+    router.push(`/${lang}/search?q=${encodeURIComponent(text)}`);
   };
 
   return (
@@ -96,6 +105,7 @@ export function SearchBar({ placeholder, searchLabel }: IProps) {
               >
                 <button
                   type="button"
+                  onClick={() => goToSearch(item.text)}
                   className="flex-1 py-3 text-left text-sm text-foreground cursor-pointer"
                 >
                   {item.text}

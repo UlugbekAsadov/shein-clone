@@ -49,11 +49,7 @@
     "picksForYou": "Подборка для вас",
     "featured": "Рекомендуемое"
   },
-  "category": {
-    "breadcrumb": {
-      "home": "Главная",
-      "shop": "Магазин"
-    },
+  "listing": {
     "tabs": {
       "similar": "Похожие товары",
       "deals": "Скидки и предложения"
@@ -82,6 +78,13 @@
       "brandsSearch": "Поиск брендов",
       "style": "Стиль",
       "material": "Материал"
+    },
+    "search": {
+      "resultsFound": "Результаты поиска"
+    },
+    "wishlist": {
+      "title": "Избранное",
+      "subtitle": "Ваши сохранённые товары"
     }
   },
   "footer": {

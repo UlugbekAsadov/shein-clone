@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Check } from "lucide-react";
-import { clothingSizes, shoeSizes } from "../../_lib/category-page.mocks";
+import { clothingSizes, shoeSizes } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 
 interface IProps {
