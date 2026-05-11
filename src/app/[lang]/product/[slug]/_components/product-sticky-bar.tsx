@@ -68,7 +68,7 @@ export function ProductStickyBar({ product }: IProps) {
           <div className=" flex items-center gap-3">
             <Button
               type="button"
-              className="min-w-[220px] rounded-full px-10 py-3 text-sm font-semibold"
+              className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
               size="lg"
             >
               Add to cart
