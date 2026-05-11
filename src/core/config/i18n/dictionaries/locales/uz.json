@@ -1,0 +1,134 @@
+{
+  "home": {
+    "title": "Xush kelibsiz",
+    "greeting": "Salom"
+  },
+  "language": {
+    "label": "Til",
+    "uz": "O'zbekcha",
+    "ru": "Ruscha",
+    "en": "Inglizcha"
+  },
+  "header": {
+    "searchPlaceholder": "Ko'ylak, krossovka, sumka qidiring",
+    "search": "Qidirish",
+    "helloSignIn": "Salom, kiring"
+  },
+  "nav": {
+    "categories": "Kategoriyalar",
+    "filters": {
+      "onSale": "Chegirmada",
+      "freeDelivery": "Bepul yetkazib berish",
+      "original": "Original",
+      "new": "Yangi"
+    }
+  },
+  "promo": {
+    "label": "BAHORGI CHEGIRMA",
+    "text": "Tanlangan mahsulotlarga 50% gacha chegirma",
+    "cta": "Hozir xarid qiling"
+  },
+  "sections": {
+    "shopByCategory": "Kategoriya bo'yicha",
+    "trendingNow": "Hozir trendda",
+    "trendingSubtitle": "Hammaga yoqayotgan mahsulotlar",
+    "womensFashion": "Ayollar modasi",
+    "womensSubtitle": "Trend uslublar",
+    "featuredShops": "Tanlangan do'konlar",
+    "featuredSubtitle": "Eng yaxshi do'konlarni kashf qiling",
+    "moreToExplore": "Yana ko'rish",
+    "moreSubtitle": "Siz uchun tanlangan",
+    "hotDeals": "Issiq takliflar",
+    "viewAll": "Hammasi",
+    "filters": "Filtrlar",
+    "follow": "Kuzatish",
+    "following": "Kuzatilmoqda",
+    "discount": "Chegirma"
+  },
+  "categoryMenu": {
+    "picksForYou": "Siz uchun tanlangan",
+    "featured": "Tavsiya etiladi"
+  },
+  "listing": {
+    "tabs": {
+      "similar": "O'xshash mahsulotlar",
+      "deals": "Chegirmalar va takliflar"
+    },
+    "toolbar": {
+      "productFound": "Topilgan mahsulotlar",
+      "mostPopular": "Mashhur",
+      "price": "Narx",
+      "sortNewest": "Yangi",
+      "sortPriceLow": "Narx: arzondan qimmatga",
+      "sortPriceHigh": "Narx: qimmatdan arzonga",
+      "sortRating": "Reyting bo'yicha"
+    },
+    "filter": {
+      "title": "Filtr",
+      "quickFilters": "Tezkor filtrlar",
+      "category": "Kategoriya",
+      "size": "O'lcham",
+      "sizeClothing": "Kiyim",
+      "sizeShoes": "Poyabzal",
+      "color": "Rang",
+      "priceRange": "Narx oralig'i",
+      "priceFrom": "$",
+      "priceTo": "dan",
+      "brands": "Brendlar",
+      "brandsSearch": "Brendlarni qidirish",
+      "style": "Uslub",
+      "material": "Material"
+    },
+    "search": {
+      "resultsFound": "Qidiruv natijalari"
+    },
+    "wishlist": {
+      "title": "Saralangan",
+      "subtitle": "Sizning saqlangan mahsulotlaringiz"
+    }
+  },
+  "footer": {
+    "buyerProtection": "Xaridor himoyasi",
+    "buyerProtectionDesc": "100% pulni qaytarish kafolati",
+    "securePayment": "Xavfsiz to'lov",
+    "securePaymentDesc": "256-bit SSL shifrlash",
+    "fastDelivery": "Tezkor yetkazib berish",
+    "fastDeliveryDesc": "1-3 ish kuni",
+    "easyReturns": "Oson qaytarish",
+    "easyReturnsDesc": "30 kun bepul qaytarish",
+    "forShoppers": "XARIDORLAR UCHUN",
+    "forSellers": "SOTUVCHILAR UCHUN",
+    "helpSupport": "YORDAM VA QO'LLAB-QUVVATLASH",
+    "legal": "HUQUQIY MA'LUMOT",
+    "contactUs": "BIZ BILAN BOG'LANISH",
+    "mobileApp": "MOBIL ILOVA",
+    "downloadApp": "Ilovamizni yuklab oling",
+    "rights": "© 2026 SHEIN. Barcha huquqlar himoyalangan.",
+    "items": {
+      "howToBuy": "Qanday xarid qilish",
+      "paymentMethods": "To'lov usullari",
+      "shipping": "Yetkazib berish",
+      "returnsExchanges": "Qaytarish va almashtirish",
+      "buyerProtection": "Xaridor himoyasi",
+      "startSelling": "Sotishni boshlash",
+      "sellerCenter": "Sotuvchi markazi",
+      "commissionRates": "Komissiyalar",
+      "advertising": "Reklama",
+      "sellerGuarantees": "Sotuvchi kafolatlari",
+      "helpCenter": "Yordam markazi",
+      "contactUs": "Biz bilan bog'lanish",
+      "reportAnIssue": "Muammo haqida xabar berish",
+      "faq": "Ko'p so'raladigan savollar",
+      "termsOfService": "Foydalanish shartlari",
+      "privacyPolicy": "Maxfiylik siyosati",
+      "cookiePolicy": "Cookie siyosati",
+      "copyrightPolicy": "Mualliflik huquqi",
+      "support": "+998 12 345 67 67",
+      "supportLabel": "24/7 mijozlar xizmati",
+      "email": "store@yourbrand.com",
+      "emailLabel": "Email orqali yordam",
+      "address": "Los Anjeles, CA",
+      "addressLabel": "AQSh"
+    }
+  }
+}
