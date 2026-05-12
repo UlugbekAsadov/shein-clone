@@ -6,7 +6,8 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
-import { CartIcon } from "../icons";
+import { CartIcon } from "../icons/outline";
+import { CategoryNav } from "../category/category-nav";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -17,11 +18,11 @@ export function Header({ lang, dict }: IProps) {
   return (
     <header
       suppressHydrationWarning
-      className="sticky top-0 z-40 hidden border-b border-border bg-background/95 backdrop-blur md:block"
+      className="sticky top-0 z-40 hidden bg-background/95 header-shadow md:block pt-10 space-y-7"
     >
       <div
         suppressHydrationWarning
-        className="mx-auto flex h-20 max-w-360 items-center gap-10 px-6"
+        className="mx-auto flex max-w-360 items-center gap-10 px-6"
       >
         <Link
           href={`/${lang}`}
@@ -46,7 +47,7 @@ export function Header({ lang, dict }: IProps) {
           <button
             type="button"
             aria-label="Cart"
-            className="relative rounded-full"
+            className="relative rounded-full cursor-pointer"
           >
             <CartIcon className="size-6 text-secondary-foreground" />
             <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
@@ -83,6 +84,14 @@ export function Header({ lang, dict }: IProps) {
           </Link>
         </div>
       </div>
+
+      <CategoryNav
+        lang={lang}
+        categoriesLabel={dict.nav.categories}
+        picksTitle={dict.categoryMenu.picksForYou}
+        featuredTitle={dict.categoryMenu.featured}
+        filters={dict.nav.filters}
+      />
     </header>
   );
 }

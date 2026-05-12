@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  LayoutGrid,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { navCategories } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
+import { LayoutGridSolid } from "../icons/solid";
+import { ChevronDownIcon } from "../icons/outline";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -33,39 +30,35 @@ export function CategoryNav({
   featuredTitle,
   filters,
 }: IProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   return (
     <div
-      className="relative hidden border-b border-border bg-background md:block"
+      className="relative hidden md:block "
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="mx-auto flex h-14 max-w-360 items-center gap-6 px-6">
+      <div className="mx-auto flex max-w-360 items-center gap-6 px-6 pb-5">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           onMouseEnter={() => setOpen(true)}
           className={cn(
-            "flex items-center gap-2 rounded-lg px-2 py-1.5 text-[15px] font-semibold hover:bg-muted",
-            open && "bg-muted",
+            "flex items-center gap-2 text-base font-medium",
           )}
           aria-expanded={open}
         >
-          <LayoutGrid className="size-4" />
+          <LayoutGridSolid className="size-6" />
           {categoriesLabel}
-          <ChevronDown className="size-4" />
+          <ChevronDownIcon className="size-6" />
         </button>
 
-        <nav className="flex flex-1 items-center gap-7 overflow-hidden">
-          {navCategories.map((c, idx) => (
+        <nav className="flex flex-1 items-center gap-5.5 overflow-hidden">
+          {navCategories.map((c) => (
             <Link
               key={c.id}
               href={`/${lang}/category/${c.slug}`}
               className={cn(
-                "whitespace-nowrap text-[15px] transition-colors hover:text-foreground",
-                idx === 0
-                  ? "font-medium text-foreground"
-                  : "text-muted-foreground",
+                "whitespace-nowrap font-medium transition-colors text-muted-foreground hover:text-foreground",
               )}
             >
               {c.name}
@@ -77,16 +70,16 @@ export function CategoryNav({
           <button
             type="button"
             aria-label="Scroll left"
-            className="grid size-8 place-items-center rounded-full hover:bg-muted"
+            className="grid size-8 place-items-center cursor-pointer"
           >
-            <ChevronLeft className="size-4" />
+            <ChevronLeft className="size-6" />
           </button>
           <button
             type="button"
             aria-label="Scroll right"
-            className="grid size-8 place-items-center rounded-full hover:bg-muted"
+            className="grid size-8 place-items-center cursor-pointer"
           >
-            <ChevronRight className="size-4" />
+            <ChevronRight className="size-6" />
           </button>
         </div>
       </div>
@@ -95,7 +88,7 @@ export function CategoryNav({
         aria-hidden={!open}
         onClick={() => setOpen(false)}
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[137px] z-30 bg-black/50 transition-opacity duration-300 ease-out",
+          "fixed inset-x-0 bottom-0 top-42.5 z-30 bg-black/50 transition-opacity duration-300 ease-out",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />

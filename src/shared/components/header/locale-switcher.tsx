@@ -14,7 +14,7 @@ import {
   RussiaFlagIcon,
   AmericaFlagIcon,
   GlobeIcon,
-} from "../icons";
+} from "../icons/outline";
 
 interface IProps {
   current: (typeof locales)[number];

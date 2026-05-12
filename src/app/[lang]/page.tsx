@@ -28,13 +28,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <>
       <MobileHeader lang={lang} />
       <Header lang={lang} dict={dict} />
-      <CategoryNav
-        lang={lang}
-        categoriesLabel={dict.nav.categories}
-        picksTitle={dict.categoryMenu.picksForYou}
-        featuredTitle={dict.categoryMenu.featured}
-        filters={dict.nav.filters}
-      />
+     
 
       <main className="flex-1 pb-20 md:pb-0">
         <div className="hidden md:block">

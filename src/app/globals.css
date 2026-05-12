@@ -180,3 +180,7 @@
     animation: dialog-content-out 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
   }
 }
+
+.header-shadow {
+  box-shadow: 0px -6px 20px 0px #00000036;
+}

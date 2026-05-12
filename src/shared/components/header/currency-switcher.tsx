@@ -14,7 +14,7 @@ import {
   DollarSignRoundIcon,
   RussiaFlagIcon,
   UzbekistanFlagIcon,
-} from "../icons";
+} from "../icons/outline";
 
 function getFlagIcon(locale: (typeof currencies)[number]) {
   switch (locale) {
@@ -28,7 +28,9 @@ function getFlagIcon(locale: (typeof currencies)[number]) {
 }
 
 export function CurrencySwitcher() {
-  const [value, setValue] = useState<(typeof currencies)[number]>(currencies[0]);
+  const [value, setValue] = useState<(typeof currencies)[number]>(
+    currencies[0],
+  );
 
   return (
     <Select

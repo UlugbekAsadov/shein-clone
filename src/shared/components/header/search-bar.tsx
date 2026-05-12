@@ -15,7 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import { CameraIcon, SearchIcon } from "../icons";
+import { CameraIcon, SearchIcon } from "../icons/outline";
 
 interface IProps {
   lang: (typeof locales)[number];
