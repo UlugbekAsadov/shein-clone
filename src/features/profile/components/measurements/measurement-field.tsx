@@ -24,9 +24,9 @@ export function MeasurementField({
 }: IProps) {
   return (
     <div className="grid grid-cols-[160px_1fr] items-center gap-6">
-      <label className="text-sm font-medium">{label}:</label>
+      <label className="text-lg font-medium text-secondary-foreground">{label}:</label>
       <Select defaultValue={defaultValue}>
-        <SelectTrigger className="h-12 w-full rounded-lg px-4 text-sm">
+        <SelectTrigger className="h-12! w-full rounded-[8px] px-4 text-lg">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent position="popper">

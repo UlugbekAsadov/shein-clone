@@ -28,7 +28,7 @@ export function AddressForm({ dict, lang }: IProps) {
             <ArrowLeft className="size-4" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold">{t.title}</h1>
+            <h1 className="text-xl font-bold">{t.title}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
           </div>
         </div>

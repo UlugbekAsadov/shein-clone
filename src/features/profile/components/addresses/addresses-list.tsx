@@ -22,18 +22,18 @@ export function AddressesList({ addresses, dict, lang }: IProps) {
 
   return (
     <div>
-      <header className="mb-2 flex items-start justify-between gap-4">
+      <div className="mb-2 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold">{t.title}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
+          <h1 className="text-xl font-bold">{t.title}</h1>
+          <p className="mt-0.5 text-xs text-muted-foreground">{t.current}</p>
         </div>
-        <Button asChild size="lg" className="rounded-xl px-5">
-          <Link href={`/${lang}/profile/addresses/new`}>
+        <Button asChild size="lg" className="rounded-sm px-5">
+          <Link href={`/${lang}/profile/addresses/new`} className="text-base!">
             {t.addAddress}
-            <Plus className="size-4" />
+            <Plus className="size-6" />
           </Link>
         </Button>
-      </header>
+      </div>
 
       <ul className="divide-y divide-border" role="radiogroup">
         {addresses.map((address) => (

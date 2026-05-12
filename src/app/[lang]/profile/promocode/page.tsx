@@ -31,7 +31,7 @@ export default async function PromocodePage({
       <main className="flex-1">
         <ProfileShell lang={lang} dict={dict} activeId="promocode">
           <header className="mb-6">
-            <h1 className="text-2xl font-bold">{t.title}</h1>
+            <h1 className="text-xl font-bold">{t.title}</h1>
             <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
           </header>
           <ProfilePlaceholder

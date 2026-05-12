@@ -13,7 +13,7 @@ export function ListingPageHeader({
 }: IProps) {
   return (
     <div className="flex flex-col gap-1">
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-xl font-bold">{title}</h1>
       <p className="text-sm text-muted-foreground">{subtitle}</p>
       <p className="mt-1 flex items-center gap-1 text-sm">
         <span className="text-muted-foreground">{productFoundLabel}:</span>

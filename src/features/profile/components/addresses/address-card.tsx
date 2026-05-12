@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MapPin, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { IAddress } from "@/features/profile/interfaces/address.interface";
+import { Button } from "@/shared/components/ui/button";
 
 interface IProps {
   address: IAddress;
@@ -30,22 +31,22 @@ export function AddressCard({ address, selected, editHref, onSelect }: IProps) {
         )}
       </button>
 
-      <div className="grid size-12 shrink-0 place-items-center rounded-lg bg-muted">
-        <MapPin className="size-5 text-foreground" />
+      <div className="grid size-[58px] shrink-0 place-items-center rounded-lg bg-muted">
+        <MapPin className="size-6 text-foreground" />
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="text-base font-semibold">{address.title}</p>
-        <p className="mt-0.5 text-sm text-muted-foreground">{address.details}</p>
+        <p className="text-xl font-bold">{address.title}</p>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          {address.details}
+        </p>
       </div>
 
-      <Link
-        href={editHref}
-        aria-label="Edit address"
-        className="grid size-9 shrink-0 place-items-center rounded-md border border-border text-muted-foreground hover:bg-muted hover:text-foreground"
-      >
-        <Pencil className="size-4" />
-      </Link>
+      <Button size="icon" variant="outline" className="size-10 rounded-sm border-border">
+        <Link href={editHref} aria-label="Edit address" className="">
+          <Pencil className="size-4" />
+        </Link>
+      </Button>
     </div>
   );
 }
