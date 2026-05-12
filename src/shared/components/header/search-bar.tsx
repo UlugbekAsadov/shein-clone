@@ -54,17 +54,21 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
 
   return (
     <div ref={containerRef} className="relative flex flex-1">
-      <div className="relative flex h-[50px] w-full items-stretch rounded-md bg-muted/60 ring-1 ring-border">
+      <div className="relative flex h-12.5 w-full items-stretch rounded-md bg-muted/60 ring-1 ring-border">
         <Select defaultValue={searchCategories[0].id}>
           <SelectTrigger
-            className="h-full! rounded-l-full border-0 bg-transparent pl-4 pr-[9px] text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0 border-r"
+            className="h-full! rounded-l-full border-0 bg-transparent pl-4 pr-2.25 text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0 border-r"
             aria-label="Category"
           >
             <SelectValue />
           </SelectTrigger>
-          <SelectContent align="start" position="popper">
+          <SelectContent align="start" position="popper" className="rounded-md">
             {searchCategories.map((c) => (
-              <SelectItem key={c.id} value={c.id}>
+              <SelectItem
+                key={c.id}
+                value={c.id}
+                className="text-lg font-medium text-secondary-foreground py-3 px-3.5"
+              >
                 {c.name}
               </SelectItem>
             ))}
