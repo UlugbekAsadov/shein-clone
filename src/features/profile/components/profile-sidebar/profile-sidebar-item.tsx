@@ -13,10 +13,10 @@ export function ProfileSidebarItem({ item, active }: IProps) {
     <Link
       href={item.href}
       className={cn(
-        "flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors",
+        "flex items-center gap-3 rounded-md px-4 py-3 text-sm font-medium transition-colors",
         active
           ? "bg-foreground text-background"
-          : "text-foreground hover:bg-muted",
+          : "text-secondary-foreground hover:bg-muted",
       )}
     >
       <Icon className="size-5 shrink-0" />

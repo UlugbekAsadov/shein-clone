@@ -61,7 +61,7 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
   ];
 
   return (
-    <aside className="w-full max-w-[260px] shrink-0">
+    <aside className="w-full max-w-[260px] shrink-0 space-y-3">
       <ProfileUserCard user={user} />
       <nav>
         <ul className="flex flex-col gap-1">

@@ -7,7 +7,7 @@ interface IProps {
 
 export function ProfileUserCard({ user }: IProps) {
   return (
-    <div className="flex items-center gap-3 px-4 pb-4">
+    <div className="flex items-center gap-3 px-4 pb-3 border-b border-border">
       <Image
         src={user.avatar}
         alt={user.name}
@@ -16,8 +16,8 @@ export function ProfileUserCard({ user }: IProps) {
         className="size-12 rounded-full bg-muted object-cover"
       />
       <div className="leading-tight">
-        <p className="text-base font-semibold">{user.name}</p>
-        <p className="text-xs text-muted-foreground">{user.subtitle}</p>
+        <p className="text-lg font-semibold">{user.name}</p>
+        <p className="text-sm text-muted-foreground">{user.subtitle}</p>
       </div>
     </div>
   );

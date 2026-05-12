@@ -9,9 +9,9 @@ export function OrderBrandBadge({ brand }: IProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium",
-        brand.variant === "brand" && "bg-emerald-100 text-emerald-700",
-        brand.variant === "trend" && "bg-violet-100 text-violet-700",
+        "inline-flex items-center rounded-[8px] p-1.5 text-xs font-bold",
+        brand.variant === "brand" && "bg-green-400 text-white",
+        brand.variant === "trend" && "text-white bg-violet-600",
       )}
     >
       {brand.label}

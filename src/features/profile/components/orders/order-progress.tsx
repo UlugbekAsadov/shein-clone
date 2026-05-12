@@ -40,11 +40,11 @@ export function OrderProgress({ steps }: IProps) {
           <div key={step.id} className="flex items-center gap-1.5">
             <span
               className={cn(
-                "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium",
+                "inline-flex items-center gap-1.5 rounded-[8px] px-2 py-[5px] text-xs font-bold",
                 palette,
               )}
             >
-              <Icon className="size-3.5" />
+              <Icon className="size-5" />
               {step.label}
             </span>
             {idx < steps.length - 1 && (
