@@ -12,7 +12,7 @@ interface IProps {
 
 export function DealsOffersPanel({ coupons, products, dict }: IProps) {
   return (
-    <div className="mx-auto max-w-[1440px] space-y-6 px-6">
+    <div className="mx-auto max-w-360 space-y-6 px-6">
       <CouponsStrip
         coupons={coupons}
         couponLabel={dict.shop.coupons.label}

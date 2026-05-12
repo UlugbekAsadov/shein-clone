@@ -19,11 +19,11 @@ interface IProps {
 export function ShopPage({ shop, products, coupons, about, dict }: IProps) {
   return (
     <div className="space-y-6 py-6">
-      <div className="mx-auto max-w-[1440px] px-6">
+      <div className="mx-auto max-w-360 px-6">
         <ShopBreadcrumb />
       </div>
 
-      <div className="mx-auto max-w-[1440px] px-6">
+      <div className="mx-auto max-w-360 px-6">
         <ShopProfile
           shop={shop}
           followLabel={dict.shop.follow}

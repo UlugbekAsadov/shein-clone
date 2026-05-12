@@ -28,6 +28,13 @@
     "text": "Tanlangan mahsulotlarga 50% gacha chegirma",
     "cta": "Hozir xarid qiling"
   },
+  "mobileNav": {
+    "home": "Bosh sahifa",
+    "browse": "Ko'rish",
+    "cart": "Savat",
+    "deals": "Chegirmalar",
+    "profile": "Profil"
+  },
   "sections": {
     "shopByCategory": "Kategoriya bo'yicha",
     "trendingNow": "Hozir trendda",

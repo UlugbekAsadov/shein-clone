@@ -28,6 +28,13 @@
     "text": "Up to 50% off selected styles",
     "cta": "Shop Now"
   },
+  "mobileNav": {
+    "home": "Home",
+    "browse": "Browse",
+    "cart": "Cart",
+    "deals": "Deals",
+    "profile": "Profile"
+  },
   "sections": {
     "shopByCategory": "Shop by Category",
     "trendingNow": "Trending Now",

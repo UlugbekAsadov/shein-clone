@@ -17,7 +17,7 @@ interface IProps {
 export function AboutStore({ shop, about, dict }: IProps) {
   return (
     <>
-      <div className="mx-auto max-w-[1440px] space-y-6 px-6">
+      <div className="mx-auto max-w-360 space-y-6 px-6">
         <AboutStoreIntro
           title={`${dict.shop.about.aboutTitle} ${shop.name}`}
           description={about.intro}

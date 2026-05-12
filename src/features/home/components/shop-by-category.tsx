@@ -12,7 +12,7 @@ interface IProps {
 
 export function ShopByCategory({ lang, title, viewAllLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-8">
+    <section className="mx-auto max-w-360 px-4 py-5 md:px-6 md:py-8">
       <SectionHeader
         title={title}
         viewAllHref="#"
@@ -23,7 +23,7 @@ export function ShopByCategory({ lang, title, viewAllLabel }: IProps) {
           <Link
             key={c.id}
             href={`/${lang}/category/${c.slug}`}
-            className="flex w-[126px] shrink-0 flex-col items-center gap-2 cursor-pointer relative"
+            className="relative flex w-[84px] shrink-0 cursor-pointer flex-col items-center gap-2 md:w-[126px]"
           >
             <span className="relative aspect-square w-full max-h-[120px] max-w-[120px] overflow-hidden rounded-full bg-muted ">
               <Image

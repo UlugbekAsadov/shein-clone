@@ -22,14 +22,17 @@ export function HeroCarousel() {
   }, [goNext]);
 
   return (
-    <div className="mx-auto max-w-[1440px] px-6">
-      <div className="relative overflow-hidden rounded-3xl bg-muted">
+    <div className="mx-auto max-w-360 px-4 md:px-6">
+      <div className="relative overflow-hidden rounded-2xl bg-muted md:rounded-3xl">
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
         >
           {heroSlides.map((s) => (
-            <div key={s.id} className="relative aspect-1600/500 w-full shrink-0">
+            <div
+              key={s.id}
+              className="relative aspect-2/1 w-full shrink-0 md:aspect-1600/500"
+            >
               <Image
                 src={s.image}
                 alt={s.title}
@@ -47,7 +50,7 @@ export function HeroCarousel() {
           type="button"
           onClick={goPrev}
           aria-label="Previous slide"
-          className="absolute left-4 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background"
+          className="absolute left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background md:grid"
         >
           <ChevronLeft className="size-5" />
         </button>
@@ -55,7 +58,7 @@ export function HeroCarousel() {
           type="button"
           onClick={goNext}
           aria-label="Next slide"
-          className="absolute right-4 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background"
+          className="absolute right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background md:grid"
         >
           <ChevronRight className="size-5" />
         </button>

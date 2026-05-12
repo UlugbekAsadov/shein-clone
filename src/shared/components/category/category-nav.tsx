@@ -37,10 +37,10 @@ export function CategoryNav({
 
   return (
     <div
-      className="relative border-b border-border bg-background"
+      className="relative hidden border-b border-border bg-background md:block"
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="mx-auto flex h-14 max-w-[1440px] items-center gap-6 px-6">
+      <div className="mx-auto flex h-14 max-w-360 items-center gap-6 px-6">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -63,7 +63,9 @@ export function CategoryNav({
               href={`/${lang}/category/${c.slug}`}
               className={cn(
                 "whitespace-nowrap text-[15px] transition-colors hover:text-foreground",
-                idx === 0 ? "font-medium text-foreground" : "text-muted-foreground",
+                idx === 0
+                  ? "font-medium text-foreground"
+                  : "text-muted-foreground",
               )}
             >
               {c.name}
@@ -100,7 +102,7 @@ export function CategoryNav({
       <div
         aria-hidden={!open}
         className={cn(
-          "absolute inset-x-0 top-full z-40 mx-auto max-w-[1440px] px-6 transition-all duration-300 ease-out",
+          "absolute inset-x-0 top-full z-40 mx-auto max-w-360 px-6 transition-all duration-300 ease-out",
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-3 opacity-0",

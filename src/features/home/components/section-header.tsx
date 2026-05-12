@@ -7,6 +7,7 @@ interface IProps {
   subtitle?: string;
   viewAllHref?: string;
   viewAllLabel?: string;
+  viewAllHiddenOnMobile?: boolean;
   rightAction?: React.ReactNode;
   className?: string;
 }
@@ -16,6 +17,7 @@ export function SectionHeader({
   subtitle,
   viewAllHref,
   viewAllLabel,
+  viewAllHiddenOnMobile,
   rightAction,
   className,
 }: IProps) {
@@ -33,7 +35,10 @@ export function SectionHeader({
           viewAllLabel && (
             <Link
               href={viewAllHref}
-              className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline"
+              className={cn(
+                "inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline",
+                viewAllHiddenOnMobile && "hidden md:inline-flex",
+              )}
             >
               {viewAllLabel}
               <ChevronRight className="size-4" />

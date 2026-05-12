@@ -8,7 +8,7 @@ interface IProps {
 
 export function DiscountBanners({ discountLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-6">
+    <section className="mx-auto max-w-360 px-4 py-4 md:px-6 md:py-6">
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
         {discountTiles.map((tile) => (
           <article

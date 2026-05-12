@@ -41,7 +41,7 @@ export default async function ProductCommentsPage({
       />
 
       <main className="flex-1 pb-24">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-6 py-6">
+        <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
           <ProductBreadcrumb items={productBreadcrumbTrail} />
 
           <div className="flex gap-8">

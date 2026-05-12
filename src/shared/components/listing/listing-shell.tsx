@@ -49,7 +49,7 @@ export function ListingShell({
   quickFiltersLabels,
 }: IProps) {
   return (
-    <div className="mx-auto max-w-[1440px] px-6 py-6">
+    <div className="mx-auto max-w-360 px-6 py-6">
       {header}
 
       <div className="mt-4">

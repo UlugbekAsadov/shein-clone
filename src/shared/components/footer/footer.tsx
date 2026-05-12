@@ -21,8 +21,8 @@ export function Footer({ dict }: IProps) {
   const i = f.items;
 
   return (
-    <footer className="border-t border-border bg-secondary">
-      <div className="mx-auto max-w-[1440px] px-6 py-10">
+    <footer className="hidden border-t border-border bg-secondary md:block">
+      <div className="mx-auto max-w-360 px-6 py-10">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           <FeatureItem
             icon={<Shield className="size-8" />}
@@ -48,7 +48,7 @@ export function Footer({ dict }: IProps) {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-2 gap-8 px-6 py-12 md:grid-cols-5">
+        <div className="mx-auto grid max-w-360 grid-cols-2 gap-8 px-6 py-12 md:grid-cols-5">
           <FooterColumn
             title={f.forShoppers}
             items={[
@@ -109,7 +109,7 @@ export function Footer({ dict }: IProps) {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
+        <div className="mx-auto flex max-w-360 flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <p className="text-sm text-muted-foreground">{f.rights}</p>
           <p className="text-sm text-muted-foreground">{f.downloadApp}</p>
         </div>

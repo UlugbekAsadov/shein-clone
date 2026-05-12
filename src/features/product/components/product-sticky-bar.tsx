@@ -29,7 +29,7 @@ export function ProductStickyBar({ product }: IProps) {
         visible ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0",
       )}
     >
-      <div className="mx-auto max-w-[1440px] px-6">
+      <div className="mx-auto max-w-360 px-6">
         <div
           className={cn(
             "flex items-center  gap-4 bg-background px-4 py-3 ",

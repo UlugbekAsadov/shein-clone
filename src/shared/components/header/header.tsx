@@ -16,11 +16,11 @@ export function Header({ lang, dict }: IProps) {
   return (
     <header
       suppressHydrationWarning
-      className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur"
+      className="sticky top-0 z-40 hidden border-b border-border bg-background/95 backdrop-blur md:block"
     >
       <div
         suppressHydrationWarning
-        className="mx-auto flex h-20 max-w-[1440px] items-center gap-6 px-6"
+        className="mx-auto flex h-20 max-w-360 items-center gap-6 px-6"
       >
         <Link
           href={`/${lang}`}

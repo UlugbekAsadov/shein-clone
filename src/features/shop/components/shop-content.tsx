@@ -20,18 +20,12 @@ interface IProps {
   dict: IDictionary;
 }
 
-export function ShopContent({
-  shop,
-  products,
-  coupons,
-  about,
-  dict,
-}: IProps) {
+export function ShopContent({ shop, products, coupons, about, dict }: IProps) {
   const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
 
   return (
     <div className="space-y-6">
-      <div className="mx-auto max-w-[1440px] px-6 border-b border-border pb-4">
+      <div className="mx-auto max-w-360 px-6 border-b border-border pb-4">
         <ShopTabs
           active={active}
           onChange={setActive}
@@ -42,9 +36,7 @@ export function ShopContent({
         />
       </div>
 
-      {active === "all" && (
-        <AllProductsPanel products={products} dict={dict} />
-      )}
+      {active === "all" && <AllProductsPanel products={products} dict={dict} />}
       {active === "deals" && (
         <DealsOffersPanel coupons={coupons} products={products} dict={dict} />
       )}

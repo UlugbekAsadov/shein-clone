@@ -17,7 +17,11 @@ import { SimilarProducts } from "@/features/product/components/similar-products"
 import { productBreadcrumbTrail } from "@/features/product/mocks/breadcrumb.mocks";
 import { productDetailMock } from "@/features/product/mocks/product-detail.mocks";
 import { sellerCardMock } from "@/features/product/mocks/seller-card.mocks";
-import { fitStatsMock, reviewMediaMock, reviewsMock } from "@/features/product/mocks/review.mocks";
+import {
+  fitStatsMock,
+  reviewMediaMock,
+  reviewsMock,
+} from "@/features/product/mocks/review.mocks";
 
 export default async function ProductPage({
   params,
@@ -42,7 +46,7 @@ export default async function ProductPage({
       />
 
       <main className="flex-1">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-6 py-6">
+        <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
           <ProductBreadcrumb items={productBreadcrumbTrail} />
 
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">

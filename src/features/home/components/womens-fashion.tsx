@@ -11,7 +11,7 @@ interface IProps {
 
 export function WomensFashion({ title, subtitle, filtersLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-[1440px] px-6 py-6">
+    <section className="mx-auto max-w-360 px-4 py-4 md:px-6 md:py-6">
       <SectionHeader
         title={title}
         subtitle={subtitle}

@@ -24,7 +24,7 @@ export function ProfileShell({ lang, dict, activeId, children }: IProps) {
   const sectionLabel = dict.profile.nav[activeId];
 
   return (
-    <div className="mx-auto max-w-[1440px] space-y-6 px-6 py-6">
+    <div className="mx-auto max-w-360 space-y-6 px-6 py-6">
       <ProfileBreadcrumb lang={lang} dict={dict} sectionLabel={sectionLabel} />
 
       <div className="flex flex-col gap-10 lg:flex-row">

@@ -10,7 +10,7 @@ interface IProps {
 export function CommentsStickyBar({ product }: IProps) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
-      <div className="mx-auto flex max-w-[1440px] items-center gap-4 px-6 py-3">
+      <div className="mx-auto flex max-w-360 items-center gap-4 px-6 py-3">
         <div className="flex flex-1 items-center gap-3">
           <div className="relative aspect-3/4 w-14 shrink-0 overflow-hidden rounded-sm bg-muted">
             <Image

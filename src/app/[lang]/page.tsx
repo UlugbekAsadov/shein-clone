@@ -2,8 +2,11 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
+import { MobileHeader } from "@/shared/components/header/mobile-header";
+import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
 import { CategoryNav } from "@/shared/components/category/category-nav";
 import { Footer } from "@/shared/components/footer/footer";
+import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 import { PromoBanner } from "@/features/home/components/promo-banner";
 import { BrandStrip } from "@/features/home/components/brand-strip";
 import { HeroCarousel } from "@/features/home/components/hero-carousel";
@@ -23,6 +26,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
+      <MobileHeader lang={lang} />
       <Header lang={lang} dict={dict} />
       <CategoryNav
         lang={lang}
@@ -32,13 +36,19 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         filters={dict.nav.filters}
       />
 
-      <main className="flex-1">
-        <PromoBanner
-          label={dict.promo.label}
-          text={dict.promo.text}
-          cta={dict.promo.cta}
-        />
+      <main className="flex-1 pb-20 md:pb-0">
+        <div className="hidden md:block">
+          <PromoBanner
+            label={dict.promo.label}
+            text={dict.promo.text}
+            cta={dict.promo.cta}
+          />
+        </div>
         <BrandStrip />
+        <MobileSearchBar
+          lang={lang}
+          placeholder={dict.header.searchPlaceholder}
+        />
         <HeroCarousel />
         <ShopByCategory
           lang={lang}
@@ -75,6 +85,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       </main>
 
       <Footer dict={dict} />
+      <MobileBottomNav lang={lang} dict={dict} />
     </>
   );
 }
