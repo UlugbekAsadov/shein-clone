@@ -10,22 +10,22 @@ export function InlineBenefits({ dict }: IProps) {
   return (
     <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       <FeatureItem
-        icon={<Shield className="size-5" />}
+        icon={<Shield className="size-8" />}
         title={dict.buyerProtection}
         description={dict.buyerProtectionDesc}
       />
       <FeatureItem
-        icon={<ShieldCheck className="size-5" />}
+        icon={<ShieldCheck className="size-8" />}
         title={dict.securePayment}
         description={dict.securePaymentDesc}
       />
       <FeatureItem
-        icon={<Truck className="size-5" />}
+        icon={<Truck className="size-8" />}
         title={dict.fastDelivery}
         description={dict.fastDeliveryDesc}
       />
       <FeatureItem
-        icon={<Undo2 className="size-5" />}
+        icon={<Undo2 className="size-8" />}
         title={dict.easyReturns}
         description={dict.easyReturnsDesc}
       />

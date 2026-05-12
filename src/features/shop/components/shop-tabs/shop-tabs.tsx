@@ -19,7 +19,7 @@ export function ShopTabs({
   dealsCount,
 }: IProps) {
   return (
-    <div className="flex items-center gap-8 border-b border-border">
+    <div className="flex items-center gap-8">
       <ShopTabItem
         label={allProductsLabel}
         active={active === "all"}

@@ -25,22 +25,22 @@ export function Footer({ dict }: IProps) {
       <div className="mx-auto max-w-[1440px] px-6 py-10">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           <FeatureItem
-            icon={<Shield className="size-5" />}
+            icon={<Shield className="size-8" />}
             title={f.buyerProtection}
             description={f.buyerProtectionDesc}
           />
           <FeatureItem
-            icon={<ShieldCheck className="size-5" />}
+            icon={<ShieldCheck className="size-8" />}
             title={f.securePayment}
             description={f.securePaymentDesc}
           />
           <FeatureItem
-            icon={<Truck className="size-5" />}
+            icon={<Truck className="size-8" />}
             title={f.fastDelivery}
             description={f.fastDeliveryDesc}
           />
           <FeatureItem
-            icon={<Undo2 className="size-5" />}
+            icon={<Undo2 className="size-8" />}
             title={f.easyReturns}
             description={f.easyReturnsDesc}
           />

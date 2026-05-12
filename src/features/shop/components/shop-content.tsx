@@ -31,7 +31,7 @@ export function ShopContent({
 
   return (
     <div className="space-y-6">
-      <div className="mx-auto max-w-[1440px] px-6">
+      <div className="mx-auto max-w-[1440px] px-6 border-b border-border pb-4">
         <ShopTabs
           active={active}
           onChange={setActive}

@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export function InfoCardIcon({ name }: IProps) {
-  const className = "size-5 text-foreground";
+  const className = "size-7 text-foreground";
   switch (name) {
     case "mapPin":
       return <MapPin className={className} />;
