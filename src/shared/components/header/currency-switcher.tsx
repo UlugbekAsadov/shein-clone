@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -6,7 +9,12 @@ import {
   SelectValue,
 } from "@/shared/components/ui/select";
 import { currencies } from "@/shared/constants/currencies.constants";
-import { AmericaFlagIcon, RussiaFlagIcon, UzbekistanFlagIcon } from "../icons";
+import {
+  AmericaFlagIcon,
+  DollarSignRoundIcon,
+  RussiaFlagIcon,
+  UzbekistanFlagIcon,
+} from "../icons";
 
 function getFlagIcon(locale: (typeof currencies)[number]) {
   switch (locale) {
@@ -20,13 +28,21 @@ function getFlagIcon(locale: (typeof currencies)[number]) {
 }
 
 export function CurrencySwitcher() {
+  const [value, setValue] = useState<(typeof currencies)[number]>(currencies[0]);
+
   return (
-    <Select defaultValue={currencies[0]}>
+    <Select
+      value={value}
+      onValueChange={(v) => setValue(v as (typeof currencies)[number])}
+    >
       <SelectTrigger
         className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
         aria-label="Currency"
       >
-        <SelectValue className="text-secondary-foreground font-medium" />
+        <DollarSignRoundIcon className="size-5.25" />
+        <SelectValue className="text-secondary-foreground font-medium uppercase">
+          {value}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent align="start" position="popper" className="rounded-md">
         {currencies.map((c) => (
