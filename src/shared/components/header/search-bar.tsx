@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Camera, Search, X } from "lucide-react";
+import { X } from "lucide-react";
 import {
   searchCategories,
   searchHistory as initialSearchHistory,
@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
+import { CameraIcon, SearchIcon } from "../icons";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -53,10 +54,10 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
 
   return (
     <div ref={containerRef} className="relative flex flex-1">
-      <div className="relative flex h-12 w-full items-stretch rounded-full bg-muted/60 ring-1 ring-border">
+      <div className="relative flex h-[50px] w-full items-stretch rounded-md bg-muted/60 ring-1 ring-border">
         <Select defaultValue={searchCategories[0].id}>
           <SelectTrigger
-            className="h-full! rounded-l-full border-0 bg-transparent pl-5 pr-3 text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0"
+            className="h-full! rounded-l-full border-0 bg-transparent pl-4 pr-[9px] text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0 border-r"
             aria-label="Category"
           >
             <SelectValue />
@@ -71,25 +72,25 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
         </Select>
 
         <div className="flex flex-1 items-center pl-2">
-          <Search className="size-6 text-muted-foreground" />
+          <SearchIcon className="size-6 text-muted-foreground" />
           <input
-            type="search"
+            type="text"
             placeholder={placeholder}
             onFocus={() => setOpen(true)}
-            className="flex-1 bg-transparent px-3 text-sm placeholder:text-muted-foreground focus:outline-none"
+            className="flex-1 bg-transparent pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
           />
           <button
             type="button"
             aria-label="Visual search"
             className="rounded-full p-2 text-muted-foreground hover:bg-muted"
           >
-            <Camera className="size-6" />
+            <CameraIcon className="size-6" />
           </button>
         </div>
 
         <button
           type="button"
-          className="rounded-r-full bg-foreground px-7 text-sm font-semibold text-background hover:bg-foreground/90"
+          className="rounded-r-md bg-foreground px-4 text-sm font-semibold text-background hover:bg-foreground/90"
         >
           {searchLabel}
         </button>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Globe } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import { locales } from "@/core/config/i18n/i18n-config";
 import {
@@ -10,9 +9,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
+import { UzbekistanFlagIcon, RussiaFlagIcon, AmericaFlagIcon } from "../icons";
 
 interface IProps {
   current: (typeof locales)[number];
+}
+
+function getFlagIcon(locale: (typeof locales)[number]) {
+  switch (locale) {
+    case "uz":
+      return <UzbekistanFlagIcon className="size-5.25" />;
+    case "ru":
+      return <RussiaFlagIcon className="size-5.25" />;
+    case "en":
+      return <AmericaFlagIcon className="size-5.25" />;
+  }
 }
 
 export function LocaleSwitcher({ current }: IProps) {
@@ -28,16 +39,20 @@ export function LocaleSwitcher({ current }: IProps) {
   return (
     <Select value={current} onValueChange={handleChange}>
       <SelectTrigger
-        className="h-auto gap-1.5 border-0 bg-transparent px-2 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
+        className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
         aria-label="Language"
       >
         <SelectValue className="uppercase" />
       </SelectTrigger>
-      <SelectContent align="start" position="popper" className="min-w-32">
+      <SelectContent
+        align="start"
+        position="popper"
+        className="min-w-32 rounded-md"
+      >
         {locales.map((l) => (
-          <SelectItem key={l} value={l}>
-            <Globe className="size-6 text-muted-foreground" />
-            <span className="uppercase">{l}</span>
+          <SelectItem key={l} value={l} className="px-3 py-3.5">
+            {getFlagIcon(l)}
+            <span className="uppercase text-secondary-foreground">{l}</span>
           </SelectItem>
         ))}
       </SelectContent>

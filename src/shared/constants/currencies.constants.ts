@@ -1,1 +1,1 @@
-export const currencies = ["USD", "UZS", "RUB", "EUR"] as const;
+export const currencies = ["USD", "UZS", "RUB"] as const;

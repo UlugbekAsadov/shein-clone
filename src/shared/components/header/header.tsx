@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
+import { CartIcon } from "../icons";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -20,11 +21,11 @@ export function Header({ lang, dict }: IProps) {
     >
       <div
         suppressHydrationWarning
-        className="mx-auto flex h-20 max-w-360 items-center gap-6 px-6"
+        className="mx-auto flex h-20 max-w-360 items-center gap-10 px-6"
       >
         <Link
           href={`/${lang}`}
-          className="text-2xl font-black tracking-tight"
+          className="text-2xl font-black tracking-tight mr-25"
           aria-label="Home"
         >
           LOGO
@@ -45,24 +46,26 @@ export function Header({ lang, dict }: IProps) {
           <button
             type="button"
             aria-label="Cart"
-            className="relative rounded-full p-2 hover:bg-muted"
+            className="relative rounded-full"
           >
-            <ShoppingCart className="size-6 text-muted-foreground" />
-            <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
+            <CartIcon className="size-6 text-secondary-foreground" />
+            <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
               8
             </span>
           </button>
           <Link
             href={`/${lang}/profile/wishlist`}
             aria-label="Wishlist"
-            className="rounded-full p-2 hover:bg-muted"
+            className="rounded-full"
           >
-            <Heart className="size-6 text-muted-foreground" />
+            <Heart className="size-6 text-secondary-foreground" />
           </Link>
+
+          <div className="h-8 w-px bg-border" aria-hidden />
 
           <Link
             href={`/${lang}/profile/account`}
-            className="flex items-center gap-2 rounded-full pl-1 pr-3 hover:bg-muted"
+            className="flex items-center gap-2 rounded-full pl-1 pr-3"
           >
             <Image
               src="/placeholders/avatar.svg"
@@ -72,8 +75,8 @@ export function Header({ lang, dict }: IProps) {
               className="size-10 rounded-full bg-muted"
             />
             <span className="hidden text-left leading-tight md:block">
-              <span className="block text-sm font-semibold">Arnold</span>
-              <span className="block text-xs text-muted-foreground">
+              <span className="block font-semibold">Arnold</span>
+              <span className="block text-xs text-secondary-foreground">
                 {dict.header.helloSignIn}
               </span>
             </span>
