@@ -102,16 +102,16 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
 
       {open && history.length > 0 && (
         <div className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-lg bg-background shadow-2xl ring-1 ring-border">
-          <ul className="py-1">
+          <ul>
             {history.map((item) => (
               <li
                 key={item.id}
-                className="group flex items-center justify-between px-5 hover:bg-muted"
+                className="group flex items-center justify-between px-3.5 py-2.75 hover:bg-muted cursor-pointer"
               >
                 <button
                   type="button"
                   onClick={() => goToSearch(item.text)}
-                  className="flex-1 py-3 text-left text-sm text-foreground cursor-pointer"
+                  className="flex-1 text-left text-lg cursor-pointer text-secondary-foreground  font-medium"
                 >
                   {item.text}
                 </button>
@@ -119,9 +119,9 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
                   type="button"
                   aria-label="Remove from history"
                   onClick={() => removeItem(item.id)}
-                  className="grid size-8 place-items-center rounded-full text-muted-foreground hover:bg-muted-foreground/10 hover:text-foreground cursor-pointer"
+                  className="grid size-6 place-items-center rounded-full text-muted-foreground cursor-pointer"
                 >
-                  <X className="size-4" />
+                  <X className="size-6" />
                 </button>
               </li>
             ))}
