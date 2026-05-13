@@ -3,13 +3,15 @@
 import Image from "next/image";
 import type { IBrand } from "@/types/brand.interface";
 import { StoryRing } from "./story-ring";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   brand: IBrand;
   onClick: () => void;
+  brandClassName?: string;
 }
 
-export function BrandStoryButton({ brand, onClick }: IProps) {
+export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
   const total = brand.contents.length;
   const viewedCount = brand.viewedCount ?? 0;
 
@@ -35,7 +37,11 @@ export function BrandStoryButton({ brand, onClick }: IProps) {
           />
         </span>
       </span>
-      <span className="text-xs font-medium text-foreground">{brand.name}</span>
+      <span
+        className={cn("text-xs font-medium text-foreground", brandClassName)}
+      >
+        {brand.name}
+      </span>
     </button>
   );
 }

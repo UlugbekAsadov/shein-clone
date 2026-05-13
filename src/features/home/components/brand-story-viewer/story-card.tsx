@@ -10,6 +10,7 @@ import {
   TRANSITION_MS,
 } from "@/features/home/constants/brand-story.constants";
 import { ProgressBar } from "./progress-bar";
+import { BrandStoryButton } from "../brand-strip/brand-story-button";
 
 interface IProps {
   brand: IBrand;
@@ -76,11 +77,11 @@ export function StoryCard({
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/60 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-16 bg-gradient-to-b from-black/60 to-transparent"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-t from-black/70 to-transparent"
       />
 
       <button
@@ -89,6 +90,20 @@ export function StoryCard({
         aria-label={isActive ? "Next strip" : `Open ${brand.name}`}
         className="absolute inset-0 z-10 cursor-pointer"
       />
+
+      <div
+        className="pointer-events-none absolute inset-0 z-30 flex flex-col items-center justify-center gap-2"
+        style={{
+          opacity: isActive ? 0 : 1,
+          transition: `opacity ${TRANSITION_MS}ms ${EASING}`,
+        }}
+      >
+        <BrandStoryButton
+          brand={brand}
+          onClick={() => {}}
+          brandClassName="text-sm font-semibold text-white drop-shadow-md"
+        />
+      </div>
 
       <div
         className="pointer-events-none absolute inset-0 z-20"
@@ -103,7 +118,11 @@ export function StoryCard({
               key={`${brand.id}-${i}`}
               active={isActive}
               status={
-                i < stripIndex ? "done" : i === stripIndex ? "active" : "pending"
+                i < stripIndex
+                  ? "done"
+                  : i === stripIndex
+                    ? "active"
+                    : "pending"
               }
               resetKey={`${brand.id}-${stripIndex}`}
             />
