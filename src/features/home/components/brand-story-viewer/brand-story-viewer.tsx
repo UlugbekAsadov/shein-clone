@@ -70,7 +70,7 @@ export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
         <X className="size-6" />
       </button>
 
-      <div className="relative h-[700px] w-full overflow-hidden">
+      <div className="relative h-175 w-full overflow-hidden">
         <div
           className="absolute left-1/2 top-1/2 flex items-center will-change-transform"
           style={{

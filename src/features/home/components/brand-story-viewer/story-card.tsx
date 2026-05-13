@@ -36,14 +36,14 @@ export function StoryCard({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-3xl bg-muted shadow-2xl",
+        "relative overflow-hidden rounded-[20px] bg-muted shadow-2xl",
         isActive
-          ? "h-[640px] w-[360px] opacity-100"
+          ? "h-160 w-90 opacity-100"
           : absDist === 1
-            ? "h-[540px] w-[300px] opacity-60"
+            ? "h-135 w-75 opacity-60"
             : absDist === 2
-              ? "h-[440px] w-[240px] opacity-30"
-              : "h-[440px] w-[240px] opacity-0",
+              ? "h-110 w-60 opacity-30"
+              : "h-110 w-60 opacity-0",
       )}
       style={{
         transition: `width ${TRANSITION_MS}ms ${EASING}, height ${TRANSITION_MS}ms ${EASING}, opacity ${TRANSITION_MS}ms ${EASING}`,
@@ -88,7 +88,7 @@ export function StoryCard({
           transition: `opacity ${TRANSITION_MS}ms ${EASING}`,
         }}
       >
-        <div className="absolute inset-x-3 top-3 flex gap-1">
+        <div className="absolute inset-x-3 top-4 flex gap-1">
           {brand.contents.map((_, i) => (
             <ProgressBar
               key={`${brand.id}-${i}`}
@@ -126,7 +126,7 @@ export function StoryCard({
       </div>
 
       <div
-        className="absolute inset-x-4 bottom-4 z-30"
+        className="absolute inset-x-4 bottom-5 z-30"
         style={{
           opacity: isActive ? 1 : 0,
           pointerEvents: isActive ? "auto" : "none",
@@ -136,7 +136,7 @@ export function StoryCard({
         <button
           type="button"
           onClick={(e) => e.stopPropagation()}
-          className="w-full cursor-pointer rounded-xl bg-foreground py-3.5 text-base font-semibold text-background transition hover:bg-foreground/90"
+          className="w-full cursor-pointer rounded-[12px] bg-foreground py-3.5 text-sm font-semibold text-background transition hover:bg-foreground/90"
         >
           Buy now
         </button>
