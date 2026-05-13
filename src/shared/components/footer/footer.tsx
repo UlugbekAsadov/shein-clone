@@ -2,7 +2,9 @@ import { Shield, ShieldCheck, Truck, Undo2 } from "lucide-react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { ContactItem } from "./contact-item";
 import { FeatureItem } from "./feature-item";
+import { FooterBottom } from "./footer-bottom";
 import { FooterColumn } from "./footer-column";
+import { MobileAppSection } from "./mobile-app/mobile-app-section";
 import { Letter, MapPointWave, PhoneRounded } from "@solar-icons/react/ssr";
 
 interface IProps {
@@ -41,7 +43,7 @@ export function Footer({ dict }: IProps) {
       </div>
 
       <div className="border-t border-[#DEDEE4]">
-        <div className="mx-auto grid max-w-360 grid-cols-2 gap-8 px-6 py-12 md:grid-cols-5">
+        <div className="mx-auto grid max-w-360 grid-cols-2 gap-8 px-6 py-12 md:grid-cols-[1fr_1fr_1fr_1fr_1.3fr_1.5fr]">
           <FooterColumn
             title={f.forShoppers}
             items={[
@@ -77,7 +79,7 @@ export function Footer({ dict }: IProps) {
           />
 
           <div>
-            <h4 className="mb-3 text-xs font-bold tracking-wider text-foreground">
+            <h4 className="mb-3 text-sm font-bold tracking-wider text-foreground">
               {f.contactUs}
             </h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
@@ -98,15 +100,12 @@ export function Footer({ dict }: IProps) {
               />
             </ul>
           </div>
+
+          <MobileAppSection dict={dict} />
         </div>
       </div>
 
-      <div className="border-t border-[#DEDEE4]">
-        <div className="mx-auto flex max-w-360 flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
-          <p className="text-sm text-muted-foreground">{f.rights}</p>
-          <p className="text-sm text-muted-foreground">{f.downloadApp}</p>
-        </div>
-      </div>
+      <FooterBottom dict={dict} />
     </footer>
   );
 }

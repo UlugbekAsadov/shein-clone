@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import { cn } from "@/lib/utils";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
@@ -14,10 +18,24 @@ interface IProps {
 }
 
 export function Header({ lang, dict }: IProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 0);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <header
       suppressHydrationWarning
-      className="sticky top-0 z-40 hidden bg-background/95 header-shadow md:block pt-10 space-y-7"
+      className={cn(
+        "sticky top-0 z-40 hidden bg-background/95 md:block pt-10 space-y-7",
+        isScrolled && "header-shadow"
+      )}
     >
       <div
         suppressHydrationWarning

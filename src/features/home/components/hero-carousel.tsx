@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { heroSlides } from "@/shared/mocks";
 import { cn } from "@/lib/utils";
+import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 
 export function HeroCarousel() {
   const [index, setIndex] = useState(0);
@@ -50,17 +51,17 @@ export function HeroCarousel() {
           type="button"
           onClick={goPrev}
           aria-label="Previous slide"
-          className="absolute left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background md:grid"
+          className="absolute left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
-          <ChevronLeft className="size-5" />
+          <AltArrowLeft className="size-6" />
         </button>
         <button
           type="button"
           onClick={goNext}
           aria-label="Next slide"
-          className="absolute right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/80 backdrop-blur hover:bg-background md:grid"
+          className="absolute right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
-          <ChevronRight className="size-5" />
+          <AltArrowRight className="size-6" />
         </button>
 
         <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
@@ -71,8 +72,8 @@ export function HeroCarousel() {
               onClick={() => setIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
               className={cn(
-                "h-1.5 rounded-full bg-background/70 transition-all",
-                i === index ? "w-8 bg-background" : "w-1.5",
+                "h-2.5 rounded-full bg-background/70 transition-all",
+                i === index ? "w-11 bg-background" : "w-2.5",
               )}
             />
           ))}
