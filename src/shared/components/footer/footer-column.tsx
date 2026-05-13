@@ -6,15 +6,15 @@ interface IProps {
 export function FooterColumn({ title, items }: IProps) {
   return (
     <div>
-      <h4 className="mb-3 text-xs font-semibold tracking-wider text-foreground">
+      <h4 className="mb-4.5 text-sm font-bold tracking-wider text-foreground">
         {title}
       </h4>
-      <ul className="space-y-2">
+      <ul className="space-y-4.5">
         {items.map((item) => (
           <li key={item}>
             <a
               href="#"
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="text-sm text-secondary-foreground transition-colors hover:text-foreground"
             >
               {item}
             </a>

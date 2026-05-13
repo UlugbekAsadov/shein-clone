@@ -1,16 +1,9 @@
-import {
-  Mail,
-  MapPin,
-  Phone,
-  Shield,
-  ShieldCheck,
-  Truck,
-  Undo2,
-} from "lucide-react";
+import { Shield, ShieldCheck, Truck, Undo2 } from "lucide-react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { ContactItem } from "./contact-item";
 import { FeatureItem } from "./feature-item";
 import { FooterColumn } from "./footer-column";
+import { Letter, MapPointWave, PhoneRounded } from "@solar-icons/react/ssr";
 
 interface IProps {
   dict: IDictionary;
@@ -21,7 +14,7 @@ export function Footer({ dict }: IProps) {
   const i = f.items;
 
   return (
-    <footer className="hidden border-t border-border bg-secondary md:block">
+    <footer className="hidden bg-secondary md:block">
       <div className="mx-auto max-w-360 px-6 py-10">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           <FeatureItem
@@ -47,7 +40,7 @@ export function Footer({ dict }: IProps) {
         </div>
       </div>
 
-      <div className="border-t border-border">
+      <div className="border-t border-[#DEDEE4]">
         <div className="mx-auto grid max-w-360 grid-cols-2 gap-8 px-6 py-12 md:grid-cols-5">
           <FooterColumn
             title={f.forShoppers}
@@ -84,22 +77,22 @@ export function Footer({ dict }: IProps) {
           />
 
           <div>
-            <h4 className="mb-3 text-xs font-semibold tracking-wider text-foreground">
+            <h4 className="mb-3 text-xs font-bold tracking-wider text-foreground">
               {f.contactUs}
             </h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <ContactItem
-                icon={<Phone className="size-4" />}
+                icon={<PhoneRounded className="size-6" weight="Bold" />}
                 primary={i.support}
                 secondary={i.supportLabel}
               />
               <ContactItem
-                icon={<Mail className="size-4" />}
+                icon={<Letter className="size-6" weight="Bold" />}
                 primary={i.email}
                 secondary={i.emailLabel}
               />
               <ContactItem
-                icon={<MapPin className="size-4" />}
+                icon={<MapPointWave className="size-6" weight="Bold" />}
                 primary={i.address}
                 secondary={i.addressLabel}
               />
@@ -108,7 +101,7 @@ export function Footer({ dict }: IProps) {
         </div>
       </div>
 
-      <div className="border-t border-border">
+      <div className="border-t border-[#DEDEE4]">
         <div className="mx-auto flex max-w-360 flex-col items-center justify-between gap-4 px-6 py-6 md:flex-row">
           <p className="text-sm text-muted-foreground">{f.rights}</p>
           <p className="text-sm text-muted-foreground">{f.downloadApp}</p>
