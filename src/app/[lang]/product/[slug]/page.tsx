@@ -4,7 +4,7 @@ import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { CategoryNav } from "@/shared/components/category/category-nav";
 import { Footer } from "@/shared/components/footer/footer";
-import { ProductPreviewGallery } from "@/shared/components/product/product-preview/product-preview-gallery";
+import { ProductPreviewGallery } from "@/shared/components/product/product-preview/product-preview-dialog/product-preview-gallery";
 import { trendingProducts, womensFashion } from "@/shared/mocks";
 import { ProductBreadcrumb } from "@/features/product/components/product-breadcrumb";
 import { ProductStickyBar } from "@/features/product/components/product-sticky-bar";

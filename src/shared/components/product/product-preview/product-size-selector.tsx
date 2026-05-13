@@ -1,8 +1,8 @@
 "use client";
 
-import { BadgeCheck } from "lucide-react";
 import type { ISize } from "@/types/size.interface";
 import { cn } from "@/lib/utils";
+import { VerifiedCheck } from "@solar-icons/react";
 
 interface IProps {
   sizes: ISize[];
@@ -18,7 +18,7 @@ export function ProductSizeSelector({
   onChange,
 }: IProps) {
   return (
-    <div>
+    <div className="mt-4">
       <div className="mb-2 font-bold">Size:</div>
       <div className="flex flex-wrap gap-2">
         {sizes.map((s) => {
@@ -31,24 +31,24 @@ export function ProductSizeSelector({
               disabled={!s.available}
               onClick={() => onChange(s.id)}
               className={cn(
-                "relative h-11 min-w-14 cursor-pointer rounded-full border  px-5 text-sm font-semibold transition",
+                "relative h-10 min-w-14 cursor-pointer rounded-full border  px-5 text-xs font-semibold transition",
                 selected
                   ? "bg-foreground text-background border-transparent"
                   : "border-border bg-background text-foreground hover:bg-muted",
                 !s.available &&
-                  "cursor-not-allowed text-muted-foreground line-through opacity-50 hover:bg-background",
+                  "cursor-not-allowed overflow-hidden text-muted-foreground  hover:bg-background relative after:content-[''] after:absolute  after:w-full after:h-0.5 after:left-0 after:top-1/2 after:bg-border after:rotate-45",
               )}
             >
               {s.id}
               {isRecommended && (
-                <BadgeCheck className="size-5 text-white fill-emerald-500 absolute -bottom-1 -right-1" />
+                <VerifiedCheck className="size-6 text-white fill-emerald-500 absolute -bottom-2 -right-1" />
               )}
             </button>
           );
         })}
       </div>
       <div className="mt-3 flex items-center gap-2 text-sm">
-        <BadgeCheck className="size-5 text-white fill-emerald-500 " />
+        <VerifiedCheck className="size-6 text-white fill-emerald-500 " />
         <span className="text-muted-foreground">Recommended for you:</span>
         <span className="font-semibold text-emerald-500">{recommended}</span>
       </div>

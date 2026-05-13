@@ -14,12 +14,12 @@ export function ProductColorSelector({ swatches, value, onChange }: IProps) {
   const selected = swatches.find((s) => s.id === value);
 
   return (
-    <div>
+    <div className="mt-4.5">
       <div className="mb-2">
         <span className="font-bold">Color:</span>{" "}
         <span className="text-muted-foreground text-xs">{selected?.name}</span>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-3">
         {swatches.map((c) => (
           <button
             type="button"
@@ -27,10 +27,8 @@ export function ProductColorSelector({ swatches, value, onChange }: IProps) {
             onClick={() => onChange(c.id)}
             aria-label={c.name}
             className={cn(
-              "relative w-16 aspect-3/4 cursor-pointer overflow-hidden rounded-sm ring-2 transition",
-              value === c.id
-                ? "ring-foreground"
-                : "ring-transparent hover:ring-muted-foreground/40",
+              "relative w-16 aspect-3/4 cursor-pointer overflow-hidden rounded-[9px] ring-2 ring-offset-[1.5px] transition",
+              value === c.id ? "ring-foreground" : "ring-gray-100",
             )}
           >
             <Image

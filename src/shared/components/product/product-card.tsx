@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
-import { ProductPreviewDialog } from "./product-preview/product-preview-dialog";
+import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { Tag } from "@/shared/components/tag/tag";
 import { CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";

@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AltArrowLeft, AltArrowRight, Heart } from "@solar-icons/react";
 
 interface IProps {
   images: string[];
@@ -28,7 +28,7 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
             key={src}
             onClick={() => setImageIndex(i)}
             className={cn(
-              "relative aspect-3/4 cursor-pointer overflow-hidden rounded-sm ring-2 transition",
+              "relative aspect-3/4 cursor-pointer overflow-hidden rounded-[16px] ring-2 transition",
               i === imageIndex
                 ? "ring-foreground"
                 : "ring-transparent hover:ring-muted-foreground/40",
@@ -91,10 +91,12 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
 
         <button
           type="button"
+          onMouseLeave={() => setZooming(true)}
+          onMouseEnter={() => setZooming(false)}
           aria-label="Add to wishlist"
-          className="absolute right-4 top-4 z-10 grid size-10 cursor-pointer place-items-center rounded-full bg-white/90 text-foreground shadow-sm transition hover:bg-white"
+          className="absolute right-5 top-5 z-10 grid size-12.5 cursor-pointer place-items-center rounded-full bg-white/90 text-foreground shadow-sm transition hover:bg-white"
         >
-          <Heart className="size-5" />
+          <Heart className="size-8.5 text-secondary-foreground" />
         </button>
 
         <button
@@ -103,9 +105,9 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
           onMouseEnter={() => setZooming(false)}
           onClick={goPrev}
           aria-label="Previous image"
-          className="absolute left-3 top-1/2 z-10 grid size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/80 text-foreground shadow-sm transition hover:bg-white"
+          className="absolute left-5 top-1/2 z-10 grid size-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/60 text-foreground shadow-sm transition hover:bg-white"
         >
-          <ChevronLeft className="size-4" />
+          <AltArrowLeft className="size-6" />
         </button>
         <button
           type="button"
@@ -113,9 +115,9 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
           onMouseEnter={() => setZooming(false)}
           onClick={goNext}
           aria-label="Next image"
-          className="absolute right-3 top-1/2 z-10 grid size-9 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/80 text-foreground shadow-sm transition hover:bg-white"
+          className="absolute right-5 top-1/2 z-10 grid size-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white/60 text-foreground shadow-sm transition hover:bg-white"
         >
-          <ChevronRight className="size-4" />
+          <AltArrowRight className="size-6" />
         </button>
       </div>
     </div>
