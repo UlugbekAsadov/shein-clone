@@ -18,7 +18,7 @@ export function QrCode() {
         ></div>
       </foreignObject>
       <g data-figma-bg-blur-radius="50">
-        <g clip-path="url(#clip0_1646_28453)">
+        <g clipPath="url(#clip0_1646_28453)">
           <path d="M120 0H0V120H120V0Z" fill="white" />
           <path
             d="M45.5168 12.4143H49.6548V8.27637C47.3695 8.27638 45.5168 10.129 45.5168 12.4143Z"
