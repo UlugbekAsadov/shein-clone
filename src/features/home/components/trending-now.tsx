@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Flame } from "lucide-react";
 import { trendingProducts } from "@/shared/mocks";
 import { ProductGrid } from "@/shared/components/product/product-grid";
 import { ProductHorizontalList } from "@/shared/components/product/product-horizontal-list";
 import { SectionHeader } from "./section-header";
+import { GraphUp } from "@solar-icons/react/ssr";
 
 interface IProps {
   title: string;
@@ -19,7 +19,7 @@ export function TrendingNow({ title, subtitle, viewAllLabel }: IProps) {
           title={
             <span className="flex items-center gap-2">
               {title}
-              <Flame className="size-5 text-rose-500" />
+              <GraphUp weight="Bold" className="size-5" />
             </span>
           }
           subtitle={subtitle}

@@ -12,7 +12,7 @@ import type { locales } from "@/core/config/i18n/i18n-config";
 import { cn } from "@/lib/utils";
 import { FilterChip } from "./filter-chip";
 import { AltArrowRight, Sale, ShieldCheck, Tag } from "@solar-icons/react";
-import { TruckIcon } from "../icons/solid";
+import { TruckIconSolid } from "../icons/solid";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -43,7 +43,7 @@ export function CategoryMegaMenu({
           tone="rose"
         />
         <FilterChip
-          icon={<TruckIcon className="size-4.5" />}
+          icon={<TruckIconSolid className="size-4.5"  fill="#21BE65"/>}
           label={filters.freeDelivery}
           tone="emerald"
         />

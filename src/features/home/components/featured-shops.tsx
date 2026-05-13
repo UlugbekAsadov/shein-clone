@@ -1,10 +1,13 @@
 import Image from "next/image";
-import { Star, Sparkles, BadgeCheck, Package, Award } from "lucide-react";
+import { BadgeCheck } from "lucide-react";
 import type { IShop } from "@/types/shop.interface";
 import { featuredShops } from "@/shared/mocks";
-import { cn } from "@/lib/utils";
 import { SectionHeader } from "./section-header";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
+import { ShopSolid } from "@/shared/components/icons/solid";
+import { Button } from "@/shared/components/ui/button";
+import { Tag } from "@/shared/components/tag/tag";
+import { MedalRibbonStar, Star, Box } from "@solar-icons/react/ssr";
 
 interface IProps {
   title: string;
@@ -25,12 +28,12 @@ export function FeaturedShops({
 }: IProps) {
   return (
     <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3">
-      <div className="rounded-xl bg-muted/40 p-3 md:bg-transparent md:p-0">
+      <div className="bg-secondary rounded-[28px] p-5">
         <SectionHeader
           title={
             <span className="flex items-center gap-2">
               {title}
-              <Sparkles className="size-5 text-amber-500" />
+              <ShopSolid className="size-6" />
             </span>
           }
           subtitle={subtitle}
@@ -38,7 +41,7 @@ export function FeaturedShops({
           viewAllLabel={viewAllLabel}
         />
 
-        <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-1 md:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="-mx-1 flex snap-x snap-mandatory gap-3 overflow-x-auto px-1 pb-1 md:hidden [&::-webkit-scrollbar]:hidden">
           {shops.map((shop) => (
             <div
               key={shop.id}
@@ -57,10 +60,10 @@ export function FeaturedShops({
           {shops.map((shop) => (
             <article
               key={shop.id}
-              className="rounded-lg border border-border bg-card p-3"
+              className="rounded-lg border border-border bg-card p-2"
             >
               <div className="relative">
-                <div className="relative aspect-16/8 overflow-hidden rounded-lg bg-muted">
+                <div className="relative aspect-246/85 overflow-hidden rounded-[12px] bg-muted">
                   <Image
                     src={shop.banner}
                     alt={shop.name}
@@ -70,16 +73,16 @@ export function FeaturedShops({
                     className="object-cover"
                   />
                   {shop.tag && (
-                    <span
-                      className={cn(
-                        "absolute right-2 top-2 rounded-full px-2.5 py-1 text-xs font-semibold text-white shadow-sm",
+                    <Tag
+                      label={shop.tag.label}
+                      variant={
                         shop.tag.variant === "shipping"
-                          ? "bg-emerald-500"
-                          : "bg-rose-500",
-                      )}
-                    >
-                      {shop.tag.label}
-                    </span>
+                          ? "success"
+                          : "destructive"
+                      }
+                      className="absolute right-3 top-2"
+                      size="sm"
+                    />
                   )}
                 </div>
                 <div className="absolute -bottom-5 left-3 size-12 overflow-hidden rounded-full border-2 border-card bg-background">
@@ -93,46 +96,50 @@ export function FeaturedShops({
                 </div>
               </div>
 
-              <div className="mt-7 flex items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <h3 className="flex items-center gap-1 text-base font-bold">
-                    <span className="truncate">{shop.name}</span>
-                    {shop.verified && (
-                      <BadgeCheck className="size-5 shrink-0 fill-sky-500 text-white" />
-                    )}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {shop.category}
-                  </p>
+              <div className="p-1.5 mt-5">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <h3 className="flex items-center gap-1 text-base">
+                      <span className="truncate text-sm font-bold">
+                        {shop.name}
+                      </span>
+                      {shop.verified && (
+                        <BadgeCheck className="size-4 shrink-0 fill-sky-500 text-white" />
+                      )}
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      {shop.category}
+                    </p>
+                  </div>
+
+                  <Button
+                    variant={shop.isFollowing ? "outline" : "default"}
+                    className="h-8 px-5 text-xs font-bold rounded-[10px]"
+                  >
+                    {shop.isFollowing ? followingLabel : followLabel}
+                  </Button>
                 </div>
-                <button
-                  type="button"
-                  className={cn(
-                    "shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition",
-                    shop.isFollowing
-                      ? "border border-foreground bg-card text-foreground hover:bg-muted"
-                      : "bg-foreground text-background hover:bg-foreground/90",
-                  )}
-                >
-                  {shop.isFollowing ? followingLabel : followLabel}
-                </button>
-              </div>
 
-              <div className="mt-3 flex items-center gap-1.5 text-sm">
-                <Star className="size-5 fill-amber-400 text-amber-400" />
-                <span className="font-semibold">{shop.rating.toFixed(1)}</span>
-                <span className="text-muted-foreground">({shop.reviews})</span>
-              </div>
+                <div className="mt-3 flex items-center gap-1.5 text-sm">
+                  <Star className="size-4 fill-amber-400 text-amber-400" />
+                  <span className="text-xs font-bold">
+                    {shop.rating.toFixed(1)}
+                    <span className="text-secondary-foreground text-[10px] font-normal ml-0.5">
+                      ({shop.reviews})
+                    </span>
+                  </span>
+                </div>
 
-              <div className="mt-3 flex items-center gap-5 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <Package className="size-5" />
-                  {shop.itemsSoldCount}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Award className="size-5" />
-                  {shop.yearsSelling}
-                </span>
+                <div className="mt-3 flex items-center gap-5 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1 text-xs font-medium">
+                    <Box className="size-5" weight="Bold" />
+                    {shop.itemsSoldCount}
+                  </span>
+                  <span className="flex items-center gap-1 text-xs font-medium">
+                    <MedalRibbonStar className="size-5" weight="Bold" />
+                    {shop.yearsSelling}
+                  </span>
+                </div>
               </div>
             </article>
           ))}

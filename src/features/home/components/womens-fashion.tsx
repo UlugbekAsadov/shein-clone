@@ -25,7 +25,7 @@ export function WomensFashion({ title, subtitle, filtersLabel }: IProps) {
           </button>
         }
       />
-      <ProductGrid products={womensFashion} />
+      <ProductGrid products={womensFashion} variant="dark" />
     </section>
   );
 }

@@ -22,11 +22,13 @@ export function SectionHeader({
   className,
 }: IProps) {
   return (
-    <div className={cn("mb-4 flex items-end justify-between gap-4", className)}>
+    <div
+      className={cn("mb-4 flex items-center justify-between gap-4", className)}
+    >
       <div>
         <h2 className="text-xl font-bold leading-tight">{title}</h2>
         {subtitle && (
-          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
+          <p className="mt-1 text-xs text-muted-foreground">{subtitle}</p>
         )}
       </div>
       {rightAction
