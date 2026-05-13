@@ -18,13 +18,6 @@ export default async function NewAddressPage({
   return (
     <>
       <Header lang={lang} dict={dict} />
-      <CategoryNav
-        lang={lang}
-        categoriesLabel={dict.nav.categories}
-        picksTitle={dict.categoryMenu.picksForYou}
-        featuredTitle={dict.categoryMenu.featured}
-        filters={dict.nav.filters}
-      />
 
       <main className="flex-1">
         <ProfileShell lang={lang} dict={dict} activeId="addresses">

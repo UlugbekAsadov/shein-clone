@@ -25,7 +25,7 @@ export const UzbekistanFlagIcon = (props: Props) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <g clip-path="url(#clip0_1050_183366)">
+    <g clipPath="url(#clip0_1050_183366)">
       <path
         d="M22 8.59772H0V4.17242C0 3.96295 0.169855 3.79309 0.379327 3.79309H21.6207C21.8301 3.79309 22 3.96295 22 4.17242L22 8.59772Z"
         fill="#82AFFF"

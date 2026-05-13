@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { navCategories } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { CategoryMegaMenu } from "./category-mega-menu";

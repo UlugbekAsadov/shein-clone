@@ -8,7 +8,7 @@ import { CategoryNav } from "@/shared/components/category/category-nav";
 import { Footer } from "@/shared/components/footer/footer";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 import { PromoBanner } from "@/features/home/components/promo-banner";
-import { BrandStrip } from "@/features/home/components/brand-strip";
+import { BrandStrip } from "@/features/home/components/brand-strip/brand-strip";
 import { HeroCarousel } from "@/features/home/components/hero-carousel";
 import { ShopByCategory } from "@/features/home/components/shop-by-category";
 import { TrendingNow } from "@/features/home/components/trending-now";
@@ -28,7 +28,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <>
       <MobileHeader lang={lang} />
       <Header lang={lang} dict={dict} />
-     
 
       <main className="flex-1 pb-20 md:pb-0">
         <div className="hidden md:block">

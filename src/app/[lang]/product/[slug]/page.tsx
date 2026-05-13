@@ -37,13 +37,6 @@ export default async function ProductPage({
     <>
       <ProductStickyBar product={product} />
       <Header lang={lang} dict={dict} />
-      <CategoryNav
-        lang={lang}
-        categoriesLabel={dict.nav.categories}
-        picksTitle={dict.categoryMenu.picksForYou}
-        featuredTitle={dict.categoryMenu.featured}
-        filters={dict.nav.filters}
-      />
 
       <main className="flex-1">
         <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">

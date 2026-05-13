@@ -44,7 +44,7 @@ export function LocaleSwitcher({ current }: IProps) {
   return (
     <Select value={current} onValueChange={handleChange}>
       <SelectTrigger
-        className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
+        className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0 cursor-pointer"
         aria-label="Language"
       >
         <Global className="size-5.25 text-secondary-foreground" />

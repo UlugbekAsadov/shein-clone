@@ -4,6 +4,6 @@ export interface IBrand {
   name: string;
   image: string;
   brandBg?: string;
-  storyViewed?: boolean;
+  viewedCount?: number;
   contents: string[];
 }
