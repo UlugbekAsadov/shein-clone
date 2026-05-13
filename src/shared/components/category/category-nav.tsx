@@ -30,7 +30,7 @@ export function CategoryNav({
   featuredTitle,
   filters,
 }: IProps) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div
@@ -42,9 +42,7 @@ export function CategoryNav({
           type="button"
           onClick={() => setOpen((v) => !v)}
           onMouseEnter={() => setOpen(true)}
-          className={cn(
-            "flex items-center gap-2 text-base font-medium",
-          )}
+          className={cn("flex items-center gap-2 text-base font-medium")}
           aria-expanded={open}
         >
           <LayoutGridSolid className="size-6" />
