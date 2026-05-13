@@ -8,7 +8,7 @@ import type { locales } from "@/core/config/i18n/i18n-config";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
 import { LayoutGridSolid } from "../icons/solid";
-import { ChevronDownIcon } from "../icons/outline";
+import { AltArrowDown, AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -47,7 +47,7 @@ export function CategoryNav({
         >
           <LayoutGridSolid className="size-6" />
           {categoriesLabel}
-          <ChevronDownIcon className="size-6" />
+          <AltArrowDown className="size-6" />
         </button>
 
         <nav className="flex flex-1 items-center gap-5.5 overflow-hidden">
@@ -64,20 +64,20 @@ export function CategoryNav({
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <button
             type="button"
             aria-label="Scroll left"
             className="grid size-8 place-items-center cursor-pointer"
           >
-            <ChevronLeft className="size-6" />
+            <AltArrowLeft className="size-6" />
           </button>
           <button
             type="button"
             aria-label="Scroll right"
             className="grid size-8 place-items-center cursor-pointer"
           >
-            <ChevronRight className="size-6" />
+            <AltArrowRight className="size-6" />
           </button>
         </div>
       </div>

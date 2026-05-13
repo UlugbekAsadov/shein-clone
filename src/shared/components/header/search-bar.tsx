@@ -15,7 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import { CameraIcon, SearchIcon } from "../icons/outline";
+import { Camera } from "@solar-icons/react";
+import { SearchIcon } from "../icons/outline";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -88,7 +89,7 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
             aria-label="Visual search"
             className="rounded-full p-2 text-muted-foreground hover:bg-muted"
           >
-            <CameraIcon className="size-6" />
+            <Camera className="size-6" />
           </button>
         </div>
 

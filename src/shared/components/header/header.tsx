@@ -1,13 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Heart } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
-import { CartIcon } from "../icons/outline";
 import { CategoryNav } from "../category/category-nav";
+import { CartLarge2, Heart } from "@solar-icons/react/ssr";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -49,7 +48,7 @@ export function Header({ lang, dict }: IProps) {
             aria-label="Cart"
             className="relative rounded-full cursor-pointer"
           >
-            <CartIcon className="size-6 text-secondary-foreground" />
+            <CartLarge2 className="size-6 text-secondary-foreground" />
             <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
               8
             </span>

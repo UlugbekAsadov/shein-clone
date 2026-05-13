@@ -11,10 +11,10 @@ import {
 import { currencies } from "@/shared/constants/currencies.constants";
 import {
   AmericaFlagIcon,
-  DollarSignRoundIcon,
   RussiaFlagIcon,
   UzbekistanFlagIcon,
 } from "../icons/outline";
+import { DollarMinimalistic } from "@solar-icons/react";
 
 function getFlagIcon(locale: (typeof currencies)[number]) {
   switch (locale) {
@@ -41,7 +41,7 @@ export function CurrencySwitcher() {
         className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
         aria-label="Currency"
       >
-        <DollarSignRoundIcon className="size-5.25" />
+        <DollarMinimalistic className="size-5.25 text-secondary-foreground" />
         <SelectValue className="text-secondary-foreground font-medium uppercase">
           {value}
         </SelectValue>

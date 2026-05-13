@@ -13,8 +13,8 @@ import {
   UzbekistanFlagIcon,
   RussiaFlagIcon,
   AmericaFlagIcon,
-  GlobeIcon,
 } from "../icons/outline";
+import { Global } from "@solar-icons/react";
 
 interface IProps {
   current: (typeof locales)[number];
@@ -47,7 +47,7 @@ export function LocaleSwitcher({ current }: IProps) {
         className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0"
         aria-label="Language"
       >
-        <GlobeIcon className="size-5.25" />
+        <Global className="size-5.25 text-secondary-foreground" />
         <SelectValue className="uppercase">
           <span className="uppercase">{current}</span>
         </SelectValue>

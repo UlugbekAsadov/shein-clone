@@ -5,7 +5,7 @@ import { Select as SelectPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
 import { ChevronUpIcon } from "lucide-react";
-import { ChevronDownIcon } from "../icons/outline";
+import { AltArrowDown } from "@solar-icons/react";
 
 function Select({
   ...props
@@ -52,7 +52,7 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon asChild>
-        <ChevronDownIcon className="pointer-events-none size-4 text-secondary-foreground" />
+        <AltArrowDown className="pointer-events-none size-4 text-secondary-foreground" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
   );
@@ -172,7 +172,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      <ChevronDownIcon />
+      <AltArrowDown />
     </SelectPrimitive.ScrollDownButton>
   );
 }
