@@ -1,4 +1,4 @@
-import { Star } from "@solar-icons/react";
+import { Star } from "@solar-icons/react/ssr";
 
 export function ProductRatingStars() {
   return (
