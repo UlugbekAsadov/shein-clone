@@ -15,7 +15,7 @@ import { WomensFashion } from "@/features/home/components/womens-fashion";
 import { FeaturedShops } from "@/features/home/components/featured-shops";
 import { MoreToExplore } from "@/features/home/components/more-to-explore";
 import { HotDeals } from "@/features/home/components/hot-deals/hot-deals";
-import { DiscountBanners } from "@/features/home/components/discount-banners";
+import { DiscountBanners } from "@/features/home/components/discount-banners/discount-banners";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
