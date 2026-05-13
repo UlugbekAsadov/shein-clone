@@ -2,8 +2,8 @@ import { breadcrumbTrail } from "@/features/category/mocks/breadcrumb.mocks";
 
 export function CategoryBreadcrumb() {
   return (
-    <nav aria-label="Breadcrumb" className="text-sm">
-      <ol className="flex flex-wrap items-center gap-1.5 text-muted-foreground">
+    <nav aria-label="Breadcrumb">
+      <ol className="flex flex-wrap items-center gap-1.5 text-muted-foreground font-medium">
         {breadcrumbTrail.map((item, idx) => {
           const isLast = idx === breadcrumbTrail.length - 1;
           return (

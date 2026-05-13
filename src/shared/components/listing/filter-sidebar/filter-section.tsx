@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AltArrowUp } from "@solar-icons/react";
 
 interface IProps {
   title: string;
@@ -27,11 +27,11 @@ export function FilterSection({
         aria-expanded={open}
         className="flex w-full items-center justify-between text-left"
       >
-        <span className="text-sm font-bold">{title}</span>
-        <ChevronDown
+        <span className="font-bold">{title}</span>
+        <AltArrowUp
           className={cn(
-            "size-4 text-muted-foreground transition-transform",
-            !open && "-rotate-90",
+            "size-5 transition-transform",
+            !open && "rotate-180",
           )}
         />
       </button>

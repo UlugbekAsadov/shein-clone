@@ -33,7 +33,7 @@ export function PriceFilter({ toLabel }: IProps) {
 
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#6F6F75]">
             $
           </span>
           <Input
@@ -43,13 +43,13 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([n, range[1]]);
               setActivePreset(null);
             }}
-            className="h-9 pl-7 text-sm"
+            className="h-9 pl-7 text-sm rounded-[12px] bg-secondary font-medium"
             inputMode="numeric"
           />
         </div>
-        <span className="text-xs text-muted-foreground">{toLabel}</span>
+        <span className="text-xs text-muted-foreground font-medium">{toLabel}</span>
         <div className="relative flex-1">
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#6F6F75]">
             $
           </span>
           <Input
@@ -59,7 +59,7 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([range[0], n]);
               setActivePreset(null);
             }}
-            className="h-9 pl-7 text-sm"
+            className="h-9 pl-7 text-sm rounded-[12px] bg-secondary font-medium"
             inputMode="numeric"
           />
         </div>
@@ -74,10 +74,10 @@ export function PriceFilter({ toLabel }: IProps) {
               type="button"
               onClick={() => setActivePreset(preset.id)}
               className={cn(
-                "rounded-md border px-3 py-1 text-xs font-medium transition-colors",
+                "rounded-[8px] border px-3 py-1 text-xs font-medium transition-colors cursor-pointer",
                 active
                   ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-background text-muted-foreground hover:text-foreground",
+                  : "border-border bg-secondary text-foreground hover:text-foreground",
               )}
             >
               {preset.label}

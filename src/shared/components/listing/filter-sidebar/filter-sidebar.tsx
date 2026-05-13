@@ -39,11 +39,9 @@ interface IProps {
 export function FilterSidebar({ dict, quickFiltersLabels }: IProps) {
   return (
     <aside className="w-60 shrink-0">
-      <h2 className="pb-3 text-base font-bold">{dict.title}</h2>
+      <h2 className="pb-3 text-lg font-bold border-b">{dict.title}</h2>
 
-      <FilterSection title={dict.quickFilters}>
-        <QuickFilters filters={quickFiltersLabels} />
-      </FilterSection>
+      <QuickFilters title={dict.quickFilters} filters={quickFiltersLabels} />
 
       <FilterSection title={dict.category}>
         <CategoryTree nodes={filterCategoryTree} />

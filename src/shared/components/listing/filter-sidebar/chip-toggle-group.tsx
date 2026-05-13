@@ -31,10 +31,10 @@ export function ChipToggleGroup({ options, initialSelected = [] }: IProps) {
             type="button"
             onClick={() => toggle(option.id)}
             className={cn(
-              "rounded-md border px-3 py-1.5 text-xs font-medium transition-colors",
+              "rounded-[8px] border px-3 py-1 text-xs font-medium transition-colors cursor-pointer",
               active
                 ? "border-foreground bg-foreground text-background"
-                : "border-border bg-background text-muted-foreground hover:text-foreground",
+                : "border-border bg-secondary text-foreground hover:text-foreground",
             )}
           >
             {option.label}

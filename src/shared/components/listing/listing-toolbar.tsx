@@ -13,6 +13,7 @@ import {
   productCountMock,
 } from "@/shared/constants/listing.constants";
 import { cn } from "@/lib/utils";
+import { Box } from "@solar-icons/react";
 
 interface IProps {
   productFoundLabel: string;
@@ -32,22 +33,24 @@ export function ListingToolbar({
   priceLabel,
   sortLabels,
 }: IProps) {
-  const [view, setView] = useState<(typeof viewModes)[number]["id"]>(
-    "comfortable",
-  );
+  const [view, setView] =
+    useState<(typeof viewModes)[number]["id"]>("comfortable");
 
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <p className="text-sm">
+      <p className="text-sm text-secondary-foreground flex items-center gap-1">
+        <Box weight="Bold" className="size-4.5" />
         <span className="text-muted-foreground">{productFoundLabel}:</span>{" "}
-        <span className="font-semibold">{productCountMock}</span>
+        <span className="font-semibold text-foreground">
+          {productCountMock}
+        </span>
       </p>
 
       <Select defaultValue="popular">
-        <SelectTrigger className="h-9 min-w-40 text-sm">
+        <SelectTrigger className="h-9.5! text-sm font-bold bg-secondary rounded-[10px] border-0 cursor-pointer">
           <SelectValue placeholder={mostPopularLabel} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent align="start" position="popper">
           <SelectItem value="popular">{mostPopularLabel}</SelectItem>
           <SelectItem value="newest">{sortLabels.newest}</SelectItem>
           <SelectItem value="rating">{sortLabels.rating}</SelectItem>
@@ -55,16 +58,16 @@ export function ListingToolbar({
       </Select>
 
       <Select defaultValue="price-low">
-        <SelectTrigger className="h-9 min-w-32 text-sm">
+        <SelectTrigger className="h-9.5! text-sm font-bold bg-secondary rounded-[10px] border-0 cursor-pointer">
           <SelectValue placeholder={priceLabel} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent align="start" position="popper">
           <SelectItem value="price-low">{sortLabels.priceLow}</SelectItem>
           <SelectItem value="price-high">{sortLabels.priceHigh}</SelectItem>
         </SelectContent>
       </Select>
 
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto bg-secondary flex items-center gap-1 p-1 rounded-[12px]">
         {viewModes.map(({ id, icon: Icon }) => {
           const active = view === id;
           return (
@@ -74,13 +77,18 @@ export function ListingToolbar({
               onClick={() => setView(id)}
               aria-label={`View ${id}`}
               className={cn(
-                "grid size-9 place-items-center rounded-md transition-colors",
+                "grid size-7.5 place-items-center rounded-[8px] transition-colors cursor-pointer",
                 active
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-muted",
+                  ? "fill-white text-foreground"
+                  : "fill-black text-muted-foreground hover:bg-muted",
               )}
             >
-              <Icon className="size-4" />
+              <Icon
+                className={cn(
+                  "size-5.5",
+                  active ? "fill-black" : "fill-[#A8A8AE]",
+                )}
+              />
             </button>
           );
         })}
