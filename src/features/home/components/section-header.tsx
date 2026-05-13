@@ -36,7 +36,7 @@ export function SectionHeader({
             <Link
               href={viewAllHref}
               className={cn(
-                "inline-flex items-center gap-1 text-sm font-medium text-foreground hover:underline",
+                "inline-flex items-center gap-1 font-medium text-secondary-foreground",
                 viewAllHiddenOnMobile && "hidden md:inline-flex",
               )}
             >

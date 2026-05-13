@@ -122,7 +122,7 @@ export function CategoryMegaMenu({
               <Link
                 key={item.id}
                 href={`/${lang}/category/${item.slug}`}
-                className="flex flex-col items-center  gap-2.5 text-center cursor-pointer group relative"
+                className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
                 <span
                   className={cn(
