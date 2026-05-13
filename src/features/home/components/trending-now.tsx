@@ -13,7 +13,7 @@ interface IProps {
 
 export function TrendingNow({ title, subtitle, viewAllLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-360 px-4 py-4 md:px-6 md:py-6">
+    <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3">
       <div className="rounded-xl bg-[#FF3C0614] p-3 md:p-5">
         <SectionHeader
           title={

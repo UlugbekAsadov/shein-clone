@@ -24,7 +24,7 @@ export function FeaturedShops({
   shops = featuredShops,
 }: IProps) {
   return (
-    <section className="mx-auto max-w-360 px-4 py-4 md:px-6 md:py-6">
+    <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3">
       <div className="rounded-xl bg-muted/40 p-3 md:bg-transparent md:p-0">
         <SectionHeader
           title={

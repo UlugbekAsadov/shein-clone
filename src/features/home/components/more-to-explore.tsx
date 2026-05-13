@@ -12,7 +12,7 @@ interface IProps {
 
 export function MoreToExplore({ title, subtitle, viewAllLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-360 px-4 py-4 md:px-6 md:py-6">
+    <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3">
       <div className="rounded-xl bg-blue-50/50 p-3 md:p-5">
         <SectionHeader
           title={title}

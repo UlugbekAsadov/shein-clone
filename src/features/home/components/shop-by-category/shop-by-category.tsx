@@ -11,7 +11,7 @@ interface IProps {
 
 export function ShopByCategory({ lang, title, viewAllLabel }: IProps) {
   return (
-    <section className="mx-auto max-w-360 px-4 py-5 md:px-6 md:py-8">
+    <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3 md:pt-6">
       <SectionHeader
         title={title}
         viewAllHref="#"
