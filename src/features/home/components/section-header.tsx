@@ -10,6 +10,7 @@ interface IProps {
   viewAllHiddenOnMobile?: boolean;
   rightAction?: React.ReactNode;
   className?: string;
+  subTitleClassName?: string;
 }
 
 export function SectionHeader({
@@ -20,6 +21,7 @@ export function SectionHeader({
   viewAllHiddenOnMobile,
   rightAction,
   className,
+  subTitleClassName,
 }: IProps) {
   return (
     <div
@@ -28,7 +30,9 @@ export function SectionHeader({
       <div>
         <h2 className="text-xl font-bold leading-tight">{title}</h2>
         {subtitle && (
-          <p className="mt-1 text-xs text-muted-foreground">{subtitle}</p>
+          <p className={cn("mt-1 text-xs text-muted-foreground", subTitleClassName)}>
+            {subtitle}
+          </p>
         )}
       </div>
       {rightAction

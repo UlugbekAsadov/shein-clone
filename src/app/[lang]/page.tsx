@@ -14,7 +14,7 @@ import { TrendingNow } from "@/features/home/components/trending-now";
 import { WomensFashion } from "@/features/home/components/womens-fashion";
 import { FeaturedShops } from "@/features/home/components/featured-shops";
 import { MoreToExplore } from "@/features/home/components/more-to-explore";
-import { HotDeals } from "@/features/home/components/hot-deals";
+import { HotDeals } from "@/features/home/components/hot-deals/hot-deals";
 import { DiscountBanners } from "@/features/home/components/discount-banners";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
@@ -71,6 +71,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         />
         <HotDeals
           title={dict.sections.hotDeals}
+          subtitle={dict.sections.hotSubtitle}
           viewAllLabel={dict.sections.viewAll}
         />
         <DiscountBanners discountLabel={dict.sections.discount} />
