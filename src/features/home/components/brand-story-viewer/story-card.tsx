@@ -40,10 +40,10 @@ export function StoryCard({
         isActive
           ? "h-160 w-90 opacity-100"
           : absDist === 1
-            ? "h-135 w-75 opacity-60"
+            ? "h-135 w-80 opacity-60"
             : absDist === 2
-              ? "h-110 w-60 opacity-30"
-              : "h-110 w-60 opacity-0",
+              ? "h-135 w-80 opacity-60"
+              : "h-110 w-65 opacity-0",
       )}
       style={{
         transition: `width ${TRANSITION_MS}ms ${EASING}, height ${TRANSITION_MS}ms ${EASING}, opacity ${TRANSITION_MS}ms ${EASING}`,
@@ -73,6 +73,15 @@ export function StoryCard({
             </div>
           );
         })}
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/60 to-transparent"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent"
+      />
 
       <button
         type="button"

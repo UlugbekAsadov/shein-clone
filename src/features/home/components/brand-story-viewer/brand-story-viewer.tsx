@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { IBrand } from "@/types/brand.interface";
 import {
+  ACTIVE_SLOT_WIDTH,
   EASING,
   SLOT_WIDTH,
   STRIP_DURATION_MS,
@@ -74,7 +75,7 @@ export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
         <div
           className="absolute left-1/2 top-1/2 flex items-center will-change-transform"
           style={{
-            transform: `translate3d(${-brandIndex * SLOT_WIDTH - SLOT_WIDTH / 2}px, -50%, 0)`,
+            transform: `translate3d(${-brandIndex * SLOT_WIDTH - ACTIVE_SLOT_WIDTH / 2}px, -50%, 0)`,
             transition: `transform ${TRANSITION_MS}ms ${EASING}`,
           }}
         >
@@ -82,7 +83,10 @@ export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
             <div
               key={b.id}
               className="flex shrink-0 items-center justify-center"
-              style={{ width: SLOT_WIDTH }}
+              style={{
+                width: i === brandIndex ? ACTIVE_SLOT_WIDTH : SLOT_WIDTH,
+                transition: `width ${TRANSITION_MS}ms ${EASING}`,
+              }}
             >
               <StoryCard
                 brand={b}
@@ -102,7 +106,7 @@ export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
         onClick={goPrev}
         disabled={isFirst}
         aria-label="Previous brand"
-        className="absolute left-[calc(50%-235px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
+        className="absolute left-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <ChevronLeft className="size-5" />
       </button>
@@ -112,7 +116,7 @@ export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
         onClick={goNext}
         disabled={isLast}
         aria-label="Next brand"
-        className="absolute right-[calc(50%-235px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
+        className="absolute right-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <ChevronRight className="size-5" />
       </button>
