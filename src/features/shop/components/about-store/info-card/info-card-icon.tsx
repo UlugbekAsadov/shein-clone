@@ -1,13 +1,14 @@
-import {
-  Clock,
-  MapPin,
-  MessageSquare,
-  ShieldCheck,
-  Store,
-  ThumbsUp,
-  Truck,
-} from "lucide-react";
 import type { IAboutInfoItem } from "@/features/shop/interfaces/about-info.interface";
+import {
+  ChatRoundLine,
+  ClockCircle,
+  Like,
+  MapPointWave,
+  Shop,
+  VerifiedCheck,
+} from "@solar-icons/react";
+import { TruckIconSolid } from "@/shared/components/icons/solid";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   name: IAboutInfoItem["icon"];
@@ -17,18 +18,23 @@ export function InfoCardIcon({ name }: IProps) {
   const className = "size-7 text-foreground";
   switch (name) {
     case "mapPin":
-      return <MapPin className={className} />;
+      return <MapPointWave className={className} weight="Bold" />;
     case "truck":
-      return <Truck className={className} />;
+      return <TruckIconSolid className={className} />;
     case "store":
-      return <Store className={className} />;
+      return <Shop className={className} weight="Bold" />;
     case "shieldCheck":
-      return <ShieldCheck className={className} />;
+      return (
+        <VerifiedCheck
+          className={cn(className, "text-[#387FF1]")}
+          weight="Bold"
+        />
+      );
     case "thumbsUp":
-      return <ThumbsUp className={className} />;
+      return <Like className={className} weight="Bold" />;
     case "messageSquare":
-      return <MessageSquare className={className} />;
+      return <ChatRoundLine className={className} weight="Bold" />;
     case "clock":
-      return <Clock className={className} />;
+      return <ClockCircle className={className} weight="Bold" />;
   }
 }

@@ -13,7 +13,7 @@ export function ShopTabItem({ label, active, badge, onClick }: IProps) {
       type="button"
       onClick={onClick}
       className={cn(
-        "relative flex cursor-pointer items-center gap-1.5 pb-3 text-sm font-semibold transition-colors",
+        "relative flex cursor-pointer items-center gap-1.5 pb-1.5 text-sm font-semibold transition-colors",
         active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
       )}
     >

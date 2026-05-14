@@ -1,11 +1,10 @@
-import { Shield, ShieldCheck, Truck, Undo2 } from "lucide-react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { ContactItem } from "./contact-item";
-import { FeatureItem } from "./feature-item";
 import { FooterBottom } from "./footer-bottom";
 import { FooterColumn } from "./footer-column";
 import { MobileAppSection } from "./mobile-app/mobile-app-section";
 import { Letter, MapPointWave, PhoneRounded } from "@solar-icons/react/ssr";
+import { FeatureItems } from "./feature-items/feature-items";
 
 interface IProps {
   dict: IDictionary;
@@ -18,30 +17,8 @@ export function Footer({ dict }: IProps) {
   return (
     <footer className="hidden bg-secondary md:block">
       <div className="mx-auto max-w-360 px-6 py-10">
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          <FeatureItem
-            icon={<Shield className="size-8" />}
-            title={f.buyerProtection}
-            description={f.buyerProtectionDesc}
-          />
-          <FeatureItem
-            icon={<ShieldCheck className="size-8" />}
-            title={f.securePayment}
-            description={f.securePaymentDesc}
-          />
-          <FeatureItem
-            icon={<Truck className="size-8" />}
-            title={f.fastDelivery}
-            description={f.fastDeliveryDesc}
-          />
-          <FeatureItem
-            icon={<Undo2 className="size-8" />}
-            title={f.easyReturns}
-            description={f.easyReturnsDesc}
-          />
-        </div>
+        <FeatureItems f={f} />
       </div>
-
       <div className="border-t border-[#DEDEE4]">
         <div className="mx-auto grid max-w-360 grid-cols-2 gap-8 px-6 py-12 md:grid-cols-[1fr_1fr_1fr_1fr_1.3fr_1.5fr]">
           <FooterColumn
