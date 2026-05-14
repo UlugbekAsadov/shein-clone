@@ -1,6 +1,8 @@
 export interface IShopStat {
   id: string;
+  value: string;
   label: string;
+  icon: "box" | "medal" | "users" | "chat";
 }
 
 export interface IShopDetail {

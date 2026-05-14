@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "shein-client",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "/Users/macstore.uz/.nvm/versions/node/v22.22.2/bin/node",
+      "runtimeArgs": ["./node_modules/next/dist/bin/next", "dev"],
       "port": 3000,
       "autoPort": true
     }

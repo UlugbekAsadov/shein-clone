@@ -56,7 +56,6 @@ export function ShopProfile({ shop, followLabel, followingLabel }: IProps) {
 
             <ShopProfileStats stats={shop.stats} />
             <ShopProfileLocation
-              countryFlag={shop.countryFlag}
               countryLabel={shop.countryLabel}
               shipsFrom={shop.shipsFrom}
             />

@@ -1,23 +1,25 @@
+import { UzbekistanFlagIcon } from "@/shared/components/icons/outline";
+import { TruckIconSolid } from "@/shared/components/icons/solid";
+
 interface IProps {
-  countryFlag: string;
   countryLabel: string;
   shipsFrom: string;
 }
 
 export function ShopProfileLocation({
-  countryFlag,
   countryLabel,
   shipsFrom,
 }: IProps) {
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-      <span className="flex items-center gap-1.5">
-        <span aria-hidden className="text-base leading-none">
-          {countryFlag}
-        </span>
-        <span>{countryLabel}</span>
+    <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-secondary-foreground">
+      <span className="flex items-center gap-2">
+        <UzbekistanFlagIcon className="size-5" />
+        <span className="font-medium">{countryLabel}</span>
       </span>
-      <span>{shipsFrom}</span>
+      <span className="flex items-center gap-2">
+        <TruckIconSolid className="size-5 fill-secondary-foreground" />
+        <span className="font-medium">{shipsFrom}</span>
+      </span>
     </div>
   );
 }
