@@ -2,8 +2,8 @@ import { shopBreadcrumbTrail } from "@/features/shop/mocks/shop-breadcrumb.mocks
 
 export function ShopBreadcrumb() {
   return (
-    <nav aria-label="Breadcrumb" className="text-sm">
-      <ol className="flex flex-wrap items-center gap-1.5 text-muted-foreground">
+    <nav aria-label="Breadcrumb">
+      <ol className="flex flex-wrap items-center gap-1.5 text-muted-foreground font-medium">
         {shopBreadcrumbTrail.map((item, idx) => {
           const isLast = idx === shopBreadcrumbTrail.length - 1;
           return (

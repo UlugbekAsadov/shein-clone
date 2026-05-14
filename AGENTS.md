@@ -1,7 +1,9 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
 <!-- END:nextjs-agent-rules -->
 
 # Folder structure
@@ -55,7 +57,7 @@ src/
 
 # Project rules
 
-1. **Prefer shadcn/ui components and lucide-react icons** over custom implementations whenever an equivalent exists. Reach for `Button`, `Dialog`, `Select`, `Input`, etc. from `@/shared/components/ui/*` and icons from `lucide-react` first.
+1. **Prefer shadcn/ui components and @solar-icons/react icons** over custom implementations whenever an equivalent exists. Reach for `Button`, `Dialog`, `Select`, `Input`, etc. from `@/shared/components/ui/*` and icons from `@solar-icons/react` first.
 
 2. **One component per `.tsx` file.** Never define two components in the same file — extract each into its own file.
 
