@@ -1,13 +1,19 @@
-import { Info, Layers, Ruler, Scissors, Truck } from "lucide-react";
+import { Truck } from "lucide-react";
 import type { IProductDetail } from "@/features/product/interfaces/product-detail.interface";
 import { ProductInfoAccordion } from "./product-info-accordion";
 import { ProductSpecTags } from "./product-spec-tags";
+import {
+  InfoCircle,
+  LayersMinimalistic,
+  Ruler,
+  Scissors,
+} from "@solar-icons/react/ssr";
 
 const accordionIcons = {
   "size-fit": Ruler,
   materials: Scissors,
   delivery: Truck,
-  "shop-info": Info,
+  "shop-info": InfoCircle,
 } as const;
 
 interface IProps {
@@ -17,7 +23,11 @@ interface IProps {
 export function ProductDescriptionSection({ product }: IProps) {
   return (
     <div className="flex flex-col border rounded-lg overflow-hidden">
-      <ProductInfoAccordion title="Description" icon={Layers} defaultOpen>
+      <ProductInfoAccordion
+        title="Description"
+        icon={LayersMinimalistic}
+        defaultOpen
+      >
         <p className="mb-4 text-foreground">{product.subtitle}</p>
         <ProductSpecTags specs={product.specs} />
       </ProductInfoAccordion>

@@ -11,7 +11,7 @@ interface IProps {
 export function ProductReviewCard({ review }: IProps) {
   return (
     <>
-      <article className="py-4 bg-secondary p-5 rounded-xl">
+      <article className="py-4 bg-secondary p-5 rounded-[26px]">
         <div className="flex items-center gap-3">
           <div className="grid size-9 place-items-center rounded-full bg-[#DEDEE4] text-sm font-semibold">
             <UserRound className="stroke-[#A8A8AE] size-7" />

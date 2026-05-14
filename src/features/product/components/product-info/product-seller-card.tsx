@@ -3,10 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { BadgeCheck, Star } from "lucide-react";
 import { Button } from "@/shared/components/ui/button";
 import type { ISellerCard } from "@/features/product/interfaces/seller-card.interface";
 import { ProductSellerStat } from "./product-seller-stat";
+import { Tag } from "@/shared/components/tag/tag";
+import { VerifiedCheck, Star } from "@solar-icons/react";
 
 interface IProps {
   seller: ISellerCard;
@@ -28,8 +29,8 @@ export function ProductSellerCard({ seller }: IProps) {
             sizes="(max-width: 768px) 100vw, 500px"
             className="object-cover"
           />
-          <span className="absolute right-3 top-3 rounded-full bg-foreground/80 px-3 py-1 text-xs font-semibold text-background backdrop-blur-sm">
-            {seller.badgeLabel}
+          <span className="absolute right-3 top-2">
+            <Tag label="Fast shipping" size="sm" />
           </span>
         </div>
       </Link>
@@ -56,7 +57,7 @@ export function ProductSellerCard({ seller }: IProps) {
               className="inline-flex items-center gap-1 hover:underline"
             >
               <span className="font-semibold font-sm">{seller.name}</span>
-              <BadgeCheck className="size-4 fill-blue-500 text-white" />
+              <VerifiedCheck className="size-4 fill-blue-500 text-white" />
             </Link>
             <p className="text-xs text-muted-foreground">{seller.tag}</p>
             <span className="flex items-center gap-1 text-xs mt-3">

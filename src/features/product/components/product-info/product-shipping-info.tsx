@@ -1,11 +1,11 @@
-import {
-  BadgeCheck,
-  BadgeDollarSign,
-  ShieldCheck,
-  Store,
-  Truck,
-} from "lucide-react";
 import { ProductShippingRow } from "./product-shipping-row";
+import { TruckIconSolid } from "@/shared/components/icons/solid";
+import {
+  DollarMinimalistic,
+  ShieldCheck,
+  Shop,
+  Unread,
+} from "@solar-icons/react/ssr";
 
 export function ProductShippingInfo() {
   return (
@@ -15,7 +15,9 @@ export function ProductShippingInfo() {
         <span className="text-secondary-foreground">Uzbekistan</span>
       </div>
 
-      <ProductShippingRow icon={<Truck className="size-6 text-emerald-600" />}>
+      <ProductShippingRow
+        icon={<TruckIconSolid className="size-6 fill-emerald-600" />}
+      >
         <div className="font-semibold text-xs text-emerald-600">
           Free Shipping (Orders $20.00)
         </div>
@@ -29,7 +31,12 @@ export function ProductShippingInfo() {
 
       <ProductShippingRow
         className="items-center"
-        icon={<BadgeDollarSign className="size-6 text-foreground" />}
+        icon={
+          <DollarMinimalistic
+            className="size-6 text-foreground"
+            weight="Bold"
+          />
+        }
       >
         <span className="font-semibold text-foreground text-xs">
           30-Day Free Returns
@@ -37,24 +44,26 @@ export function ProductShippingInfo() {
       </ProductShippingRow>
 
       <ProductShippingRow
-        icon={<ShieldCheck className="size-6 text-foreground" />}
+        icon={<ShieldCheck className="size-6 text-foreground" weight="Bold" />}
       >
         <div className="font-semibold text-foreground text-xs">
           Shopping Security
         </div>
-        <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+        <div className="mt-1 flex flex-wrap items-center gap-3 text-[10px] text-muted-foreground bg-emerald-500/20 w-fit py-1 px-2 rounded-[4px]">
           <span className="flex items-center text-foreground gap-1">
-            <BadgeCheck className="size-3.5 text-emerald-600" />
+            <Unread className="size-4 text-foreground font-semibold" />
             Safe Payments
           </span>
           <span className="flex items-center text-foreground gap-1">
-            <BadgeCheck className="size-3.5 text-emerald-600" />
+            <Unread className="size-4 text-foreground font-semibold" />
             Privacy Protection
           </span>
         </div>
       </ProductShippingRow>
 
-      <ProductShippingRow icon={<Store className="size-6 text-foreground" />}>
+      <ProductShippingRow
+        icon={<Shop className="size-6 text-foreground" weight="Bold" />}
+      >
         <div className="flex items-center gap-2">
           <span className="rounded bg-foreground px-1.5 py-0.5 text-xs font-semibold text-background">
             Marketplace

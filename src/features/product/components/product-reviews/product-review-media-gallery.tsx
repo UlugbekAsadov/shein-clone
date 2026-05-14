@@ -26,7 +26,7 @@ export function ProductReviewMediaGallery({ lang, slug, images }: IProps) {
         {images.map((src, idx) => (
           <div
             key={`${src}-${idx}`}
-            className="relative aspect-3/4 overflow-hidden rounded-lg bg-muted"
+            className="relative aspect-3/4 overflow-hidden rounded-lg bg-muted ring-1 ring-secondary-foreground/50 "
           >
             <Image
               src={src}
