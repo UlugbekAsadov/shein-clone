@@ -8,7 +8,7 @@ interface IProps {
 
 export function ProductHorizontalList({ products, variant }: IProps) {
   return (
-    <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden">
       {products.map((p) => (
         <div
           key={p.id}

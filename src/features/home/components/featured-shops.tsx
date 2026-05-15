@@ -31,8 +31,8 @@ export function FeaturedShops({
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
       <div
         className={cn(
-          "bg-secondary p-3 rounded-sm",
-          "md:p-5 md:rounded-[28px]",
+          "bg-secondary p-0 pb-3 rounded-sm overflow-hidden",
+          "md:p-5 md:rounded-[28px] md:overflow-visible",
         )}
       >
         <SectionHeader

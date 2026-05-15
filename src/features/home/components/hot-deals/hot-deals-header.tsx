@@ -13,8 +13,8 @@ export const HotDealsHeader = ({ title, subtitle, viewAllLabel }: IProps) => {
   return (
     <div
       className={cn(
-        "mb-4 flex items-center justify-between gap-4 flex-col",
-        "md:flex-row",
+        "mb-3 flex items-center justify-between gap-4 px-3 pt-3",
+        "md:mb-4 md:p-0",
       )}
     >
       <div

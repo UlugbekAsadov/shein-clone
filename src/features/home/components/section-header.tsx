@@ -25,7 +25,11 @@ export function SectionHeader({
 }: IProps) {
   return (
     <div
-      className={cn("mb-3 flex items-center justify-between gap-4", "md:mb-4", className)}
+      className={cn(
+        "mb-3 flex items-center justify-between gap-4 px-3 pt-3",
+        "md:mb-4 md:p-0",
+        className,
+      )}
     >
       <div>
         <h2 className="text-base md:text-xl font-semibold md:font-bold leading-tight">
