@@ -19,7 +19,10 @@ export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
     <button
       type="button"
       onClick={onClick}
-      className="group flex shrink-0 cursor-pointer flex-col items-center gap-2"
+      className={cn(
+        "group flex shrink-0 cursor-pointer flex-col items-center gap-1",
+        "md:gap-2",
+      )}
     >
       <span className="relative block size-13.5 md:size-24">
         <StoryRing total={total} viewedCount={viewedCount} />
@@ -38,7 +41,11 @@ export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
         </span>
       </span>
       <span
-        className={cn("text-xs font-medium text-foreground", brandClassName)}
+        className={cn(
+          "text-xs font-medium text-foreground",
+          "md:text-sm md:font-semibold",
+          brandClassName,
+        )}
       >
         {brand.name}
       </span>
