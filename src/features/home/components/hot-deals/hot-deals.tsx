@@ -15,9 +15,9 @@ interface IProps {
 
 export function HotDeals({ title, subtitle, viewAllLabel }: IProps) {
   return (
-     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
+    <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
       <div
-        className={cn("rounded-md md:rounded-xl bg-[#FF3C0614]", "md:p-5")} 
+        className={cn("rounded-md md:rounded-xl bg-[#FF3C0614]", "md:p-5")}
         style={{ backgroundImage: "url('/images/hot-deals-background.webp')" }}
       >
         <HotDealsHeader
@@ -31,7 +31,7 @@ export function HotDeals({ title, subtitle, viewAllLabel }: IProps) {
           <div className="px-3 pb-3">
             <Link
               href="#"
-              className="mt-3 grid h-12 w-full place-items-center rounded-[12px] bg-foreground text-base font-semibold text-background hover:bg-foreground/90"
+              className="mt-3 grid h-12 w-full place-items-center rounded-[12px] bg-white text-base font-semibold text-foreground hover:bg-white/90"
             >
               {viewAllLabel}
             </Link>
