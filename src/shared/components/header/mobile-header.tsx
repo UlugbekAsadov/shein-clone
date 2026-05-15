@@ -14,7 +14,7 @@ export function MobileHeader({
   notificationCount = 3,
 }: IProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur md:hidden">
+    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur md:hidden">
       <div className="flex h-14 items-center justify-between gap-3 px-4">
         <button
           type="button"
