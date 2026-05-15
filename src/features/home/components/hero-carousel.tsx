@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { heroSlides } from "@/shared/mocks";
 import { cn } from "@/lib/utils";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
@@ -24,7 +23,7 @@ export function HeroCarousel() {
 
   return (
     <div className="mx-auto max-w-360 px-4 md:px-6">
-      <div className="relative overflow-hidden rounded-2xl bg-muted md:rounded-3xl">
+      <div className="relative overflow-hidden rounded-[14px] bg-muted md:rounded-3xl">
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${index * 100}%)` }}
@@ -32,7 +31,7 @@ export function HeroCarousel() {
           {heroSlides.map((s) => (
             <div
               key={s.id}
-              className="relative aspect-2/1 w-full shrink-0 md:aspect-1600/500"
+              className="relative aspect-351/100 w-full shrink-0 md:aspect-1600/500"
             >
               <Image
                 src={s.image}
@@ -64,7 +63,7 @@ export function HeroCarousel() {
           <AltArrowRight className="size-6" />
         </button>
 
-        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
+        <div className="absolute bottom-2 md:bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
           {heroSlides.map((s, i) => (
             <button
               key={s.id}
@@ -72,8 +71,8 @@ export function HeroCarousel() {
               onClick={() => setIndex(i)}
               aria-label={`Go to slide ${i + 1}`}
               className={cn(
-                "h-2.5 rounded-full bg-background/70 transition-all",
-                i === index ? "w-11 bg-background" : "w-2.5",
+                "h-2 md:h-2.5 rounded-full bg-background/70 transition-all",
+                i === index ? "w-8.75 md:w-11 bg-background" : "w-2 md:w-2.5",
               )}
             />
           ))}

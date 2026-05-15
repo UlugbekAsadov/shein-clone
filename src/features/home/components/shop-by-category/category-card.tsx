@@ -17,7 +17,7 @@ export function CategoryCard({ lang, category }: IProps) {
     >
       <span
         className={cn(
-          "relative size-30 overflow-hidden rounded-full bg-muted ring-3 ring-border",
+          "relative size-15 md:size-30 overflow-hidden rounded-full bg-muted ring-2 md:ring-3 ring-border",
         )}
       >
         <Image
@@ -30,11 +30,11 @@ export function CategoryCard({ lang, category }: IProps) {
         />
       </span>
       {category.badge && (
-        <span className="absolute -right-1 -top-1 grid h-6.75 min-w-10 place-items-center rounded-full bg-rose-500 px-1.5 text-xs font-bold text-white">
+        <span className="absolute -right-2 md:-right-1 -top-1 grid h-4 md:h-6.75 min-w-6 md:min-w-10 place-items-center rounded-full bg-rose-500 px-1.5 text-[10px] md:text-xs font-bold text-white">
           {category.badge}
         </span>
       )}
-      <span className="line-clamp-1 font-medium text-foreground">
+      <span className="text-xs md:text-base line-clamp-1 font-medium text-foreground">
         {category.name}
       </span>
     </Link>

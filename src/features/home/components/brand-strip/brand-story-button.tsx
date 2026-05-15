@@ -21,7 +21,7 @@ export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
       onClick={onClick}
       className="group flex shrink-0 cursor-pointer flex-col items-center gap-2"
     >
-      <span className="relative block size-16 md:size-24">
+      <span className="relative block size-13.5 md:size-24">
         <StoryRing total={total} viewedCount={viewedCount} />
         <span
           className="absolute inset-1.5 overflow-hidden rounded-full ring-2 ring-background md:inset-2"

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Bell, ChevronDown, Heart, MapPin } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
+import { MapPointWave, Heart, Bell } from "@solar-icons/react/ssr";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -18,30 +18,29 @@ export function MobileHeader({
       <div className="flex h-14 items-center justify-between gap-3 px-4">
         <button
           type="button"
-          className="flex items-center gap-1.5 rounded-full px-1.5 py-1 text-sm font-semibold text-foreground"
+          className="flex items-center gap-1 rounded-full font-semibold text-foreground"
           aria-label="Select location"
         >
-          <MapPin className="size-5" />
-          <span>{location}</span>
-          <ChevronDown className="size-4 text-muted-foreground" />
+          <MapPointWave className="size-6" />
+          {location}
         </button>
 
         <div className="flex items-center gap-1">
           <Link
             href={`/${lang}/profile/wishlist`}
             aria-label="Wishlist"
-            className="grid size-10 place-items-center rounded-full hover:bg-muted"
+            className="grid size-9 place-items-center rounded-full bg-secondary hover:bg-secondary/80"
           >
             <Heart className="size-6 text-foreground" />
           </Link>
           <button
             type="button"
             aria-label="Notifications"
-            className="relative grid size-10 place-items-center rounded-full hover:bg-muted"
+            className="relative grid size-9 place-items-center rounded-full bg-secondary hover:bg-secondary/80"
           >
             <Bell className="size-6 text-foreground" />
             {notificationCount > 0 && (
-              <span className="absolute right-1 top-1 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
+              <span className="absolute right-0 top-0 grid h-3.5 min-w-3.5 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
                 {notificationCount}
               </span>
             )}

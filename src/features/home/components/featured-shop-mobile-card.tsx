@@ -15,16 +15,16 @@ export function FeaturedShopMobileCard({
   followingLabel,
 }: IProps) {
   return (
-    <article className="relative flex flex-col items-center rounded-2xl border border-border bg-card p-4 pt-3">
+    <article className="relative flex flex-col items-center rounded-[21px] border border-border bg-card p-4 pt-3">
       <button
         type="button"
         aria-label="Dismiss"
-        className="absolute right-2 top-2 grid size-7 place-items-center rounded-full text-muted-foreground hover:bg-muted"
+        className="absolute right-2 top-2 grid size-7 place-items-center rounded-full text-foreground hover:bg-muted"
       >
-        <X className="size-4" />
+        <X className="size-5" />
       </button>
 
-      <div className="grid size-24 place-items-center overflow-hidden rounded-full bg-foreground">
+      <div className="grid size-22 place-items-center overflow-hidden rounded-full bg-foreground">
         <Image
           src={shop.avatar}
           alt={shop.name}
@@ -52,7 +52,7 @@ export function FeaturedShopMobileCard({
       <button
         type="button"
         className={cn(
-          "mt-3 h-10 w-full rounded-full text-sm font-semibold transition",
+          "mt-3 h-10 w-full rounded-[10px] text-sm font-semibold transition",
           shop.isFollowing
             ? "border border-foreground bg-card text-foreground hover:bg-muted"
             : "bg-foreground text-background hover:bg-foreground/90",

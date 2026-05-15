@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { HotDealsTimerTile } from "./hot-deals-timer-tile";
+import { cn } from "@/lib/utils";
 
 const INITIAL_SECONDS = 24 * 3600 + 12 * 60 + 30;
 
@@ -26,14 +27,34 @@ export function HotDealsTimer() {
   return (
     <div className="flex items-center gap-1">
       <HotDealsTimerTile value={pad(h)} />
-      <div className="flex flex-col gap-1.5">
-        <span className="size-1 rounded-[10px] bg-white" />
-        <span className="size-1 rounded-[10px] bg-white" />
+      <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
+        <span
+          className={cn(
+            "size-0.5 rounded-[8px] bg-white",
+            "md:size-1 md:rounded-[10px]",
+          )}
+        />
+        <span
+          className={cn(
+            "size-0.5 rounded-[8px] bg-white",
+            "md:size-1 md:rounded-[10px]",
+          )}
+        />
       </div>
       <HotDealsTimerTile value={pad(m)} />
-      <div className="flex flex-col gap-1.5">
-        <span className="size-1 rounded-[10px] bg-white" />
-        <span className="size-1 rounded-[10px] bg-white" />
+      <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
+        <span
+          className={cn(
+            "size-0.5 rounded-[8px] bg-white",
+            "md:size-1 md:rounded-[10px]",
+          )}
+        />
+        <span
+          className={cn(
+            "size-0.5 rounded-[8px] bg-white",
+            "md:size-1 md:rounded-[10px]",
+          )}
+        />
       </div>
       <HotDealsTimerTile value={pad(s)} />
     </div>

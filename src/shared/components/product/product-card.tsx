@@ -8,8 +8,9 @@ import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { Tag } from "@/shared/components/tag/tag";
-import { CartLarge2, Heart, Star } from "@solar-icons/react";
+import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";
+import { Button } from "../ui/button";
 
 interface IProps {
   product: IProduct;
@@ -27,20 +28,29 @@ export function ProductCard({ product, variant = "default" }: IProps) {
       <Link
         href={href}
         className={cn(
-          "group flex flex-col overflow-hidden rounded-lg border transition-shadow p-1.5",
+          "group flex flex-col overflow-hidden rounded-[10px] border transition-shadow p-0.5",
+          "md:p-1.5 md:rounded-lg",
           isDark
             ? "border-white/10 bg-secondary text-foreground"
             : "border-border bg-card text-card-foreground",
         )}
       >
-        <div className="relative aspect-4/5 overflow-hidden bg-muted rounded-md">
+        <div
+          className={cn(
+            "relative aspect-4/5 overflow-hidden bg-muted rounded-[10px]",
+            "md:rounded-md",
+          )}
+        >
           <Image
             src={product.image}
             alt={product.title}
             fill
             quality={95}
             sizes="(max-width: 1440px) 25vw, 360px"
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className={cn(
+              "object-cover transition-transform duration-300",
+              "group-hover:scale-105",
+            )}
           />
           <button
             type="button"
@@ -49,12 +59,23 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               e.preventDefault();
               e.stopPropagation();
             }}
-            className="absolute left-3 top-3 grid size-7.5 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors hover:bg-white/90"
+            className={cn(
+              "absolute left-2 top-2 grid size-6 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors",
+              "md:left-3 md:top-3 md:size-7.5",
+              "hover:bg-white/90",
+            )}
           >
-            <Heart className="size-5 text-secondary-foreground" />
+            <Heart
+              className={cn("size-4.5 text-secondary-foreground", "md:size-5")}
+            />
           </button>
           {product.discountLabel && (
-            <span className="absolute right-3 top-3 rounded-[8px] bg-rose-500 px-2 py-1.5 text-xs font-bold text-white">
+            <span
+              className={cn(
+                "absolute right-2 top-2 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
+                "md:right-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
+              )}
+            >
               {product.discountLabel}
             </span>
           )}
@@ -67,27 +88,44 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           )}
         </div>
 
-        <div className="flex flex-col gap-1 p-2.5 pb-3.5">
-          <h3 className="text-lg font-bold leading-tight">{product.title}</h3>
-          <p className="line-clamp-1 text-sm text-muted-foreground">
+        <div className={cn("flex flex-col gap-1 p-0 pt-1 pb-0.5", "md:p-2.5 md:pb-3.5")}>
+          <h3 className={cn("text-sm font-bold leading-tight", "md:text-lg")}>
+            {product.title}
+          </h3>
+          <p className={cn("line-clamp-1 text-sm text-muted-foreground")}>
             {product.subtitle}
           </p>
           <div className="flex items-center gap-2">
-            <span className="text-lg font-extrabold">
+            <span className={cn("text-base font-extrabold", "md:text-lg")}>
               ${product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-muted-foreground line-through font-medium">
+              <span
+                className={cn(
+                  "text-[11px] text-muted-foreground line-through font-medium",
+                  "md:text-xs",
+                )}
+              >
                 ${product.originalPrice.toFixed(2)}
               </span>
             )}
             {product.saveLabel && (
-              <span className="ml-auto text-xs font-bold text-[#21BE65]">
+              <span
+                className={cn(
+                  "ml-auto hidden text-xs font-bold text-[#21BE65]",
+                  "md:block",
+                )}
+              >
                 {product.saveLabel}
               </span>
             )}
           </div>
-          <div className="mt-4 flex items-center justify-between gap-2 rounded-xl">
+          <div
+            className={cn(
+              "mt-4 items-center justify-between gap-2 rounded-xl hidden",
+              "md:flex",
+            )}
+          >
             <div className="bg-secondary px-2.5 py-2 flex items-center gap-1.5 rounded-[10px] h-9">
               {product.delivery && (
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
@@ -116,6 +154,12 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               <CartLarge2 className="size-6" />
             </button>
           </div>
+          <Button
+            className={cn("flex items-center gap-2 rounded-[8px]", "md:hidden")}
+          >
+            <span>12-May</span>
+            <Bag />
+          </Button>
         </div>
       </Link>
 

@@ -25,12 +25,19 @@ export function SectionHeader({
 }: IProps) {
   return (
     <div
-      className={cn("mb-4 flex items-center justify-between gap-4", className)}
+      className={cn("mb-3 flex items-center justify-between gap-4", "md:mb-4", className)}
     >
       <div>
-        <h2 className="text-xl font-bold leading-tight">{title}</h2>
+        <h2 className="text-base md:text-xl font-semibold md:font-bold leading-tight">
+          {title}
+        </h2>
         {subtitle && (
-          <p className={cn("mt-1 text-xs text-muted-foreground", subTitleClassName)}>
+          <p
+            className={cn(
+              "mt-1 text-xs text-muted-foreground",
+              subTitleClassName,
+            )}
+          >
             {subtitle}
           </p>
         )}
@@ -42,12 +49,12 @@ export function SectionHeader({
             <Link
               href={viewAllHref}
               className={cn(
-                "inline-flex items-center gap-1 font-medium text-secondary-foreground",
+                "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground",
                 viewAllHiddenOnMobile && "hidden md:inline-flex",
               )}
             >
               {viewAllLabel}
-              <ChevronRight className="size-4" />
+              <ChevronRight className="size-5" />
             </Link>
           )}
     </div>

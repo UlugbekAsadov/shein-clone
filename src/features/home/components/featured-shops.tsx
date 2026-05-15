@@ -8,6 +8,7 @@ import { ShopSolid } from "@/shared/components/icons/solid";
 import { Button } from "@/shared/components/ui/button";
 import { Tag } from "@/shared/components/tag/tag";
 import { MedalRibbonStar, Star, Box } from "@solar-icons/react/ssr";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   title: string;
@@ -27,11 +28,16 @@ export function FeaturedShops({
   shops = featuredShops,
 }: IProps) {
   return (
-    <section className="mx-auto max-w-360 px-4 py-2 md:px-6 md:py-3">
-      <div className="bg-secondary rounded-[28px] p-5">
+    <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
+      <div
+        className={cn(
+          "bg-secondary p-3 rounded-sm",
+          "md:p-5 md:rounded-[28px]",
+        )}
+      >
         <SectionHeader
           title={
-            <span className="flex items-center gap-2">
+            <span className={cn("flex items-center gap-1", "md:gap-2")}>
               {title}
               <ShopSolid className="size-6" />
             </span>
@@ -56,7 +62,15 @@ export function FeaturedShops({
           ))}
         </div>
 
-        <div className="hidden grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 md:grid">
+        <div
+          className={cn(
+            "hidden grid-cols-1 gap-4",
+            "sm:grid-cols-2",
+            "md:grid",
+            "lg:grid-cols-3",
+            "xl:grid-cols-5",
+          )}
+        >
           {shops.map((shop) => (
             <article
               key={shop.id}

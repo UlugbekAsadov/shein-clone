@@ -1,10 +1,17 @@
+import { cn } from "@/lib/utils";
+
 interface IProps {
   value: string;
 }
 
 export function HotDealsTimerTile({ value }: IProps) {
   return (
-    <div className="grid size-10 place-items-center rounded-[10px] bg-gradient-to-b from-[#FCDADA] from-50% to-white to-50% text-lg font-bold text-red-500 shadow-sm">
+    <div
+      className={cn(
+        "grid size-7.5 place-items-center rounded-[8px] bg-gradient-to-b from-[#FCDADA] from-50% to-white to-50% text-sm font-bold text-red-500 shadow-sm",
+        "md:size-10 md:rounded-8px md:text-lg",
+      )}
+    >
       {value}
     </div>
   );

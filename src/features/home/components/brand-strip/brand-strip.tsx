@@ -12,10 +12,10 @@ export function BrandStrip() {
   const { ref, atStart, atEnd } = useScrollEdges<HTMLDivElement>();
 
   return (
-    <div className="relative mx-auto mb-8 max-w-360 pt-3 md:pt-0">
+    <div className="relative mx-auto mb-3 md:mb-8 max-w-360 pt-3 md:pt-0">
       <div
         ref={ref}
-        className="flex gap-4 overflow-x-auto px-4 md:gap-6 md:px-6 scrollbar-thin [&::-webkit-scrollbar]:hidden scrollbar-hidden"
+        className="flex gap-3 overflow-x-auto px-4 md:gap-6 md:px-6 scrollbar-thin [&::-webkit-scrollbar]:hidden scrollbar-hidden"
       >
         {brands.map((b, i) => (
           <BrandStoryButton

@@ -29,7 +29,7 @@ export function HotDeals({ title, subtitle, viewAllLabel }: IProps) {
           <ProductHorizontalList products={hotDeals} variant="dark" />
           <Link
             href="#"
-            className="mt-3 grid h-12 w-full place-items-center rounded-full bg-background text-base font-semibold text-foreground hover:bg-background/90"
+            className="mt-3 grid h-10.5 w-full place-items-center rounded-sm bg-background text-base font-semibold text-foreground hover:bg-background/90"
           >
             {viewAllLabel}
           </Link>
