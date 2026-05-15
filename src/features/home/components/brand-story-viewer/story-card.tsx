@@ -37,14 +37,14 @@ export function StoryCard({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[20px] bg-muted shadow-2xl",
+        "relative overflow-hidden bg-muted shadow-2xl sm:rounded-[20px]",
         isActive
-          ? "h-160 w-90 opacity-100"
+          ? "h-dvh w-screen opacity-100 sm:h-160 sm:w-90"
           : absDist === 1
-            ? "h-135 w-80 opacity-60"
+            ? "h-0 w-0 opacity-0 sm:h-135 sm:w-80 sm:opacity-60"
             : absDist === 2
-              ? "h-135 w-80 opacity-60"
-              : "h-110 w-65 opacity-0",
+              ? "h-0 w-0 opacity-0 sm:h-135 sm:w-80 sm:opacity-60"
+              : "h-0 w-0 opacity-0 sm:h-110 sm:w-65",
       )}
       style={{
         transition: `width ${TRANSITION_MS}ms ${EASING}, height ${TRANSITION_MS}ms ${EASING}, opacity ${TRANSITION_MS}ms ${EASING}`,
