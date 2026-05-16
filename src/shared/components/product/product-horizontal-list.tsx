@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import type { IProduct } from "@/types/product.interface";
 import { ProductSliderCard } from "./product-slider-card";
 
@@ -12,25 +13,25 @@ interface IProps {
 const MAX_ROTATION_DEG = 3;
 const MAX_SCALE_Y_DOWN = 0.1;
 
-const useIsoLayoutEffect =
-  typeof window !== "undefined" ? useLayoutEffect : useEffect;
-
 export function ProductHorizontalList({ products, variant }: IProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const frameRef = useRef<number | null>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "center",
+    containScroll: false,
+    skipSnaps: false,
+    dragFree: false,
+  });
 
-  useIsoLayoutEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  useEffect(() => {
+    if (!emblaApi) return;
 
-    const slides = Array.from(container.children) as HTMLElement[];
+    const viewport = emblaApi.rootNode();
+    const slideNodes = emblaApi.slideNodes();
 
     const update = () => {
-      frameRef.current = null;
-      const rect = container.getBoundingClientRect();
+      const rect = viewport.getBoundingClientRect();
       const containerCenter = rect.left + rect.width / 2;
 
-      slides.forEach((slide) => {
+      slideNodes.forEach((slide) => {
         const slideRect = slide.getBoundingClientRect();
         const slideCenter = slideRect.left + slideRect.width / 2;
         const distance = slideCenter - containerCenter;
@@ -43,34 +44,28 @@ export function ProductHorizontalList({ products, variant }: IProps) {
       });
     };
 
-    const scheduleUpdate = () => {
-      if (frameRef.current !== null) return;
-      frameRef.current = requestAnimationFrame(update);
-    };
-
+    emblaApi.on("scroll", update);
+    emblaApi.on("reInit", update);
     update();
-    container.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate);
+
     return () => {
-      container.removeEventListener("scroll", scheduleUpdate);
-      window.removeEventListener("resize", scheduleUpdate);
-      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+      emblaApi.off("scroll", update);
+      emblaApi.off("reInit", update);
     };
-  }, [products.length]);
+  }, [emblaApi]);
 
   return (
-    <div
-      ref={containerRef}
-      className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden"
-    >
-      {products.map((p) => (
-        <div
-          key={p.id}
-          className="w-[52%] shrink-0 origin-center snap-center transition-transform duration-150 ease-out first:ml-[20%] last:mr-[14%] will-change-transform"
-        >
-          <ProductSliderCard product={p} variant={variant} />
-        </div>
-      ))}
+    <div ref={emblaRef} className="overflow-hidden pb-1">
+      <div className="flex gap-5">
+        {products.map((p) => (
+          <div
+            key={p.id}
+            className="min-w-0 shrink-0 grow-0 basis-[52%] origin-center will-change-transform first:ml-[20%] last:mr-[14%]"
+          >
+            <ProductSliderCard product={p} variant={variant} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
