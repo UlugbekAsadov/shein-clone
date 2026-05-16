@@ -21,7 +21,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
     <Link
       href={href}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-[12px] border",
+        "group flex flex-col overflow-hidden rounded-[12px] border p-0.5",
         isDark
           ? "border-white/10 bg-white text-foreground"
           : "border-border bg-card text-card-foreground",
@@ -34,7 +34,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
           fill
           quality={95}
           sizes="(max-width: 768px) 75vw, 360px"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-[8px]"
         />
         <button
           type="button"
@@ -43,7 +43,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors hover:bg-white/90"
+          className="absolute left-3 top-3 grid size-9 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors hover:bg-white/90"
         >
           <Heart className="size-5 text-secondary-foreground" />
         </button>

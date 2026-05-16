@@ -24,10 +24,10 @@ export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
         "md:gap-2",
       )}
     >
-      <span className="relative block size-13.5 md:size-24">
+      <span className={cn("relative block size-15", "md:size-24")}>
         <StoryRing total={total} viewedCount={viewedCount} />
         <span
-          className="absolute inset-1.5 overflow-hidden rounded-full ring-2 ring-background md:inset-2"
+          className={cn("absolute inset-1 overflow-hidden rounded-full ring-2 ring-background", "md:inset-2")}
           style={{ backgroundColor: brand.brandBg ?? "#0f172a" }}
         >
           <Image

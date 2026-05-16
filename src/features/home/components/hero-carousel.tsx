@@ -1,49 +1,64 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import { heroSlides } from "@/shared/mocks";
 import { cn } from "@/lib/utils";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 
 export function HeroCarousel() {
-  const [index, setIndex] = useState(0);
-  const total = heroSlides.length;
-
-  const goPrev = useCallback(
-    () => setIndex((i) => (i - 1 + total) % total),
-    [total],
+  const autoplay = useRef(
+    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
-  const goNext = useCallback(() => setIndex((i) => (i + 1) % total), [total]);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start" },
+    [autoplay.current],
+  );
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    const id = setInterval(goNext, 5000);
-    return () => clearInterval(id);
-  }, [goNext]);
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  const goPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const goNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+  const goTo = useCallback(
+    (i: number) => emblaApi?.scrollTo(i),
+    [emblaApi],
+  );
 
   return (
     <div className="mx-auto max-w-360 px-4 md:px-6">
       <div className="relative overflow-hidden rounded-[14px] bg-muted md:rounded-3xl">
-        <div
-          className="flex transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${index * 100}%)` }}
-        >
-          {heroSlides.map((s) => (
-            <div
-              key={s.id}
-              className="relative aspect-351/100 w-full shrink-0 md:aspect-1600/500"
-            >
-              <Image
-                src={s.image}
-                alt={s.title}
-                fill
-                quality={95}
-                className="object-cover"
-                sizes="(max-width: 1440px) 100vw, 1440px"
-                priority
-              />
-            </div>
-          ))}
+        <div ref={emblaRef} className="overflow-hidden">
+          <div className="flex gap-3">
+            {heroSlides.map((s) => (
+              <div
+                key={s.id}
+                className="relative aspect-351/100 w-full shrink-0 grow-0 basis-full overflow-hidden rounded-[14px] md:aspect-1600/500"
+              >
+                <Image
+                  src={s.image}
+                  alt={s.title}
+                  fill
+                  quality={95}
+                  className="object-cover"
+                  sizes="(max-width: 1440px) 100vw, 1440px"
+                  priority
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <button
@@ -68,11 +83,13 @@ export function HeroCarousel() {
             <button
               key={s.id}
               type="button"
-              onClick={() => setIndex(i)}
+              onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}
               className={cn(
                 "h-2 md:h-2.5 rounded-full bg-background/70 transition-all",
-                i === index ? "w-8.75 md:w-11 bg-background" : "w-2 md:w-2.5",
+                i === selectedIndex
+                  ? "w-8.75 md:w-11 bg-background"
+                  : "w-2 md:w-2.5",
               )}
             />
           ))}
