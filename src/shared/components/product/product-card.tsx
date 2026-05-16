@@ -7,6 +7,7 @@ import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
+import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
 import { Tag } from "@/shared/components/tag/tag";
 import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";
@@ -20,6 +21,7 @@ interface IProps {
 export function ProductCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const { lang } = useParams<{ lang: string }>();
   const href = `/${lang}/product/${product.slug ?? product.id}`;
 
@@ -155,6 +157,12 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             </button>
           </div>
           <Button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCartDrawerOpen(true);
+            }}
             className={cn("flex items-center gap-2 rounded-[8px]", "md:hidden")}
           >
             <span>12-May</span>
@@ -167,6 +175,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         product={product}
         open={previewOpen}
         onClose={() => setPreviewOpen(false)}
+      />
+
+      <ProductCardCartDrawer
+        open={cartDrawerOpen}
+        onOpenChange={setCartDrawerOpen}
       />
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import type { ISize } from "@/types/size.interface";
 import { cn } from "@/lib/utils";
 import { VerifiedCheck } from "@solar-icons/react";
@@ -9,6 +10,7 @@ interface IProps {
   value: string;
   recommended: string;
   onChange: (id: string) => void;
+  headerAction?: ReactNode;
 }
 
 export function ProductSizeSelector({
@@ -16,10 +18,14 @@ export function ProductSizeSelector({
   value,
   recommended,
   onChange,
+  headerAction,
 }: IProps) {
   return (
     <div className="mt-4">
-      <div className="mb-2 font-bold">Size:</div>
+      <div className="mb-2 flex items-center justify-between font-bold">
+        <span>Size:</span>
+        {headerAction}
+      </div>
       <div className="flex flex-wrap gap-2">
         {sizes.map((s) => {
           const selected = s.id === value;

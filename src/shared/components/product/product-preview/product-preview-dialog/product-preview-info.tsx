@@ -9,7 +9,6 @@ import {
   DESCRIPTION,
   RECOMMENDED_SIZE,
 } from "@/shared/constants/product-preview.constants";
-import { Button } from "@/shared/components/ui/button";
 
 interface IProps {
   product: IProduct;
