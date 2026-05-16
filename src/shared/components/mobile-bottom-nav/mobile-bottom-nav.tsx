@@ -105,7 +105,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
               ))}
             </MobileBottomNavPill>
           </AnimatePresence>
-          <MobileBottomNavPill key="active">
+          <MobileBottomNavPill key="active" animateInitial={false}>
             <MobileBottomNavItem
               key={activeItem.key}
               itemKey={activeItem.key}

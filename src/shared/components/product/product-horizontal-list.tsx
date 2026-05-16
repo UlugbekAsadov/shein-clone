@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { ProductSliderCard } from "./product-slider-card";
 
@@ -12,11 +12,14 @@ interface IProps {
 const MAX_ROTATION_DEG = 3;
 const MAX_SCALE_Y_DOWN = 0.1;
 
+const useIsoLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function ProductHorizontalList({ products, variant }: IProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
 
-  useEffect(() => {
+  useIsoLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
@@ -44,14 +47,6 @@ export function ProductHorizontalList({ products, variant }: IProps) {
       if (frameRef.current !== null) return;
       frameRef.current = requestAnimationFrame(update);
     };
-
-    const initialSlide = slides[1];
-    if (initialSlide) {
-      const offset =
-        initialSlide.offsetLeft -
-        (container.clientWidth - initialSlide.clientWidth) / 2;
-      container.scrollLeft = offset;
-    }
 
     update();
     container.addEventListener("scroll", scheduleUpdate, { passive: true });

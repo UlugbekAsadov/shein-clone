@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 interface IProps {
   children: ReactNode;
   className?: string;
+  animateInitial?: boolean;
 }
 
 const spring = {
@@ -16,11 +17,15 @@ const spring = {
   mass: 0.8,
 };
 
-export function MobileBottomNavPill({ children, className }: IProps) {
+export function MobileBottomNavPill({
+  children,
+  className,
+  animateInitial = true,
+}: IProps) {
   return (
     <motion.ul
       layout
-      initial={{ opacity: 0, scale: 0.5 }}
+      initial={animateInitial ? { opacity: 0, scale: 0.5 } : false}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5 }}
       transition={spring}
