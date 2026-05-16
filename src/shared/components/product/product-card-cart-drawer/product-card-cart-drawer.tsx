@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { X } from "lucide-react";
+import { ChevronLeft, X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import {
   Drawer,
@@ -9,25 +10,51 @@ import {
   DrawerContent,
   DrawerTitle,
 } from "@/shared/components/ui/drawer";
-import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
-import { sizes } from "@/shared/mocks/product-preview.mocks";
 import { RECOMMENDED_SIZE } from "@/shared/constants/product-preview.constants";
+import { SelectSizeView } from "./select-size-view";
+import { SizeGuideView } from "./size-guide-view";
 
 interface IProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
+type View = "select" | "guide";
+
+const VIEW_TRANSITION_MS = 300;
+
 export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
+  const [view, setView] = useState<View>("select");
   const [selectedSize, setSelectedSize] = useState(RECOMMENDED_SIZE);
 
+  const handleOpenChange = (next: boolean) => {
+    onOpenChange(next);
+    if (!next) {
+      setTimeout(() => setView("select"), VIEW_TRANSITION_MS);
+    }
+  };
+
+  const closeDrawer = () => onOpenChange(false);
+
   return (
-    <Drawer open={open} onOpenChange={onOpenChange}>
-      <DrawerContent className="px-5 pb-6">
-        <div className="mt-2 flex items-center justify-between">
-          <DrawerTitle className="text-lg font-bold">
-            Select a size
-          </DrawerTitle>
+    <Drawer open={open} onOpenChange={handleOpenChange}>
+      <DrawerContent className="pb-6">
+        <div className="flex items-center justify-between gap-2 px-5 pt-2">
+          <div className="flex items-center gap-2">
+            {view === "guide" && (
+              <button
+                type="button"
+                aria-label="Back"
+                onClick={() => setView("select")}
+                className="grid size-7 cursor-pointer place-items-center duration-200 animate-in fade-in slide-in-from-left-2"
+              >
+                <ChevronLeft className="size-6" />
+              </button>
+            )}
+            <DrawerTitle className="text-lg font-bold">
+              Select a size
+            </DrawerTitle>
+          </div>
           <DrawerClose asChild>
             <button
               type="button"
@@ -39,24 +66,35 @@ export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
           </DrawerClose>
         </div>
 
-        <ProductSizeSelector
-          sizes={sizes}
-          value={selectedSize}
-          recommended={RECOMMENDED_SIZE}
-          onChange={setSelectedSize}
-          headerAction={
-            <span className="text-sm font-medium text-sky-500">
-              Size Guide &gt;
-            </span>
-          }
-        />
+        <div className="overflow-hidden">
+          <div
+            className={cn(
+              "flex w-[200%] ease-out",
+              "transition-transform duration-300",
+              view === "select" ? "translate-x-0" : "-translate-x-1/2",
+            )}
+          >
+            <div className="w-1/2 shrink-0 px-5">
+              <SelectSizeView
+                selectedSize={selectedSize}
+                onSizeChange={setSelectedSize}
+                onShowGuide={() => setView("guide")}
+              />
+            </div>
+            <div className="w-1/2 shrink-0 px-5">
+              <SizeGuideView />
+            </div>
+          </div>
+        </div>
 
-        <Button
-          className="mt-6 h-12 w-full rounded-2xl text-base font-semibold"
-          onClick={() => onOpenChange(false)}
-        >
-          Add cart
-        </Button>
+        <div className="mt-6 px-5">
+          <Button
+            className="h-12 w-full rounded-sm text-base font-semibold"
+            onClick={closeDrawer}
+          >
+            Add cart
+          </Button>
+        </div>
       </DrawerContent>
     </Drawer>
   );

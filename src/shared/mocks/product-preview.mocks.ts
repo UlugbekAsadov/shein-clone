@@ -27,3 +27,28 @@ export const sizes = [
   { id: "2XL", available: false },
   { id: "3XL", available: true },
 ];
+
+export const sizeGuide: {
+  label: string;
+  values: Record<string, string>;
+}[] = [
+  {
+    label: "Russian Size",
+    values: { XS: "35", S: "36", M: "37", L: "38", "2XL": "40", "3XL": "42" },
+  },
+  {
+    label: "Manufacturer Size",
+    values: { XS: "35", S: "36", M: "37", L: "38", "2XL": "40", "3XL": "42" },
+  },
+  {
+    label: "Insole Length",
+    values: {
+      XS: "23",
+      S: "24",
+      M: "24.5",
+      L: "25.5",
+      "2XL": "26.5",
+      "3XL": "27.5",
+    },
+  },
+];
