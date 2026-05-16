@@ -38,7 +38,7 @@ export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
 
   return (
     <Drawer open={open} onOpenChange={handleOpenChange}>
-      <DrawerContent className="pb-6">
+      <DrawerContent className="pb-6 z-100">
         <div className="flex items-center justify-between gap-2 px-5 pt-2">
           <div className="flex items-center gap-2">
             {view === "guide" && (
