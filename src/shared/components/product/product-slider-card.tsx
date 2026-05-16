@@ -3,9 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { Heart } from "lucide-react";
 import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
+import { Heart } from "@solar-icons/react";
 
 interface IProps {
   product: IProduct;
@@ -21,7 +21,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
     <Link
       href={href}
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border",
+        "group flex flex-col overflow-hidden rounded-[12px] border",
         isDark
           ? "border-white/10 bg-white text-foreground"
           : "border-border bg-card text-card-foreground",
@@ -45,7 +45,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
           }}
           className="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors hover:bg-white/90"
         >
-          <Heart className="size-5" />
+          <Heart className="size-5 text-secondary-foreground" />
         </button>
       </div>
 

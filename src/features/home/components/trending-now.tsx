@@ -34,7 +34,7 @@ export function TrendingNow({ title, subtitle, viewAllLabel }: IProps) {
           <div className="px-3 pb-3">
             <Link
               href="#"
-              className="mt-3 grid h-12 w-full place-items-center rounded-[12px] bg-foreground text-base font-semibold text-background hover:bg-foreground/90"
+              className="mt-3 grid h-10.5 w-full place-items-center rounded-[12px] bg-foreground text-base font-semibold text-background hover:bg-foreground/90"
             >
               {viewAllLabel}
             </Link>
