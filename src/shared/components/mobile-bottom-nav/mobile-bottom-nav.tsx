@@ -71,8 +71,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
 
   const isItemActive = (item: IItem) => {
     if (item.key === "home") return pathname === homePath;
-    if (item.key === "profile")
-      return pathname.startsWith(`/${lang}/profile`);
+    if (item.key === "profile") return pathname.startsWith(`/${lang}/profile`);
     return pathname.startsWith(item.href);
   };
 
@@ -90,20 +89,21 @@ export function MobileBottomNav({ lang, dict }: IProps) {
       <LayoutGroup>
         <div className="pointer-events-auto flex items-center gap-2">
           <AnimatePresence initial={false} mode="popLayout">
-            {before.length > 0 && (
-              <MobileBottomNavPill key="before">
-                {before.map((item) => (
-                  <MobileBottomNavItem
-                    key={item.key}
-                    itemKey={item.key}
-                    href={item.href}
-                    label={item.label}
-                    icon={item.icon}
-                    active={false}
-                  />
-                ))}
-              </MobileBottomNavPill>
-            )}
+            <MobileBottomNavPill
+              key="before"
+              className={before.length === 0 ? "invisible" : ""}
+            >
+              {before.map((item) => (
+                <MobileBottomNavItem
+                  key={item.key}
+                  itemKey={item.key}
+                  href={item.href}
+                  label={item.label}
+                  icon={item.icon}
+                  active={false}
+                />
+              ))}
+            </MobileBottomNavPill>
           </AnimatePresence>
           <MobileBottomNavPill key="active">
             <MobileBottomNavItem
@@ -116,20 +116,21 @@ export function MobileBottomNav({ lang, dict }: IProps) {
             />
           </MobileBottomNavPill>
           <AnimatePresence initial={false} mode="popLayout">
-            {after.length > 0 && (
-              <MobileBottomNavPill key="after">
-                {after.map((item) => (
-                  <MobileBottomNavItem
-                    key={item.key}
-                    itemKey={item.key}
-                    href={item.href}
-                    label={item.label}
-                    icon={item.icon}
-                    active={false}
-                  />
-                ))}
-              </MobileBottomNavPill>
-            )}
+            <MobileBottomNavPill
+              key="after"
+              className={after.length === 0 ? "invisible" : ""}
+            >
+              {after.map((item) => (
+                <MobileBottomNavItem
+                  key={item.key}
+                  itemKey={item.key}
+                  href={item.href}
+                  label={item.label}
+                  icon={item.icon}
+                  active={false}
+                />
+              ))}
+            </MobileBottomNavPill>
           </AnimatePresence>
         </div>
       </LayoutGroup>
