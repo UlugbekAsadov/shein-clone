@@ -3,7 +3,7 @@ import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interfa
 export const shopDetail: IShopDetail = {
   id: "shop-1",
   slug: "fashionrepublic",
-  name: "Ryvang rens",
+  name: "Ryvang",
   handle: "@fashionrepublic",
   avatar: "/placeholders/brand.svg",
   banner: "/placeholders/lifestyle.svg",

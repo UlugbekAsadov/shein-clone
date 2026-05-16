@@ -4,7 +4,9 @@ import { notFound } from "next/navigation";
 import "../globals.css";
 import { cn } from "@/lib/utils";
 import { hasLocale, locales } from "@/core/config/i18n/i18n-config";
+import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Providers } from "@/core/providers/providers";
+import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -34,6 +36,8 @@ export default async function RootLayout({
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
+  const dict = await getDictionary(lang);
+
   return (
     <html
       lang={lang}
@@ -47,10 +51,13 @@ export default async function RootLayout({
       )}
     >
       <body
-        className="min-h-full flex flex-col"
+        className="min-h-full flex flex-col pb-20 md:pb-0"
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <MobileBottomNav lang={lang} dict={dict} />
+        </Providers>
       </body>
     </html>
   );

@@ -1,0 +1,30 @@
+"use client";
+
+import { motion } from "motion/react";
+import type { ReactNode } from "react";
+
+interface IProps {
+  children: ReactNode;
+}
+
+const spring = {
+  type: "spring" as const,
+  stiffness: 360,
+  damping: 30,
+  mass: 0.8,
+};
+
+export function MobileBottomNavPill({ children }: IProps) {
+  return (
+    <motion.ul
+      layout
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+      transition={spring}
+      className="flex items-center gap-1 rounded-full bg-foreground p-1.5 shadow-lg shadow-black/10"
+    >
+      {children}
+    </motion.ul>
+  );
+}

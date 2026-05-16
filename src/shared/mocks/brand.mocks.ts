@@ -18,7 +18,7 @@ const brandContents = (offset: number, count = 4): string[] =>
 
 export const brands: IBrand[] = [
   { id: "b1", slug: "beal", name: "Beal", image: brandImg(0), brandBg: "#0d3a3f", contents: brandContents(0) },
-  { id: "b2", slug: "fashionrepublic", name: "Ryvang rens", image: brandImg(1), brandBg: "#1e3a8a", contents: brandContents(1), viewedCount: 1 },
+  { id: "b2", slug: "fashionrepublic", name: "Ryvang", image: brandImg(1), brandBg: "#1e3a8a", contents: brandContents(1), viewedCount: 1 },
   { id: "b3", slug: "usem", name: "Usem", image: brandImg(2), brandBg: "#3f2a14", contents: brandContents(2), viewedCount: 4 },
   { id: "b4", slug: "md", name: "MD", image: brandImg(3), brandBg: "#0f172a", contents: brandContents(3) },
   { id: "b5", slug: "vlack-cat", name: "Vlack cat", image: brandImg(4), brandBg: "#facc15", contents: brandContents(4), viewedCount: 4 },
