@@ -1,7 +1,7 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
 import type { IAboutContent } from "@/features/shop/interfaces/about-content.interface";
-import { FeaturedShops } from "@/features/home/components/featured-shops";
+import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
 import { featuredShops } from "@/shared/mocks";
 import { AboutStoreIntro } from "./about-store-intro";
 import { InfoCard } from "./info-card/info-card";

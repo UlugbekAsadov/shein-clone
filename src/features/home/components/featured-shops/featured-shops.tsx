@@ -2,7 +2,7 @@ import Image from "next/image";
 import { BadgeCheck } from "lucide-react";
 import type { IShop } from "@/types/shop.interface";
 import { featuredShops } from "@/shared/mocks";
-import { SectionHeader } from "./section-header";
+import { SectionHeader } from "../section-header";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
 import { ShopSolid } from "@/shared/components/icons/solid";
 import { Button } from "@/shared/components/ui/button";

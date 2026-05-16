@@ -12,7 +12,7 @@ import { HeroCarousel } from "@/features/home/components/hero-carousel";
 import { ShopByCategory } from "@/features/home/components/shop-by-category/shop-by-category";
 import { TrendingNow } from "@/features/home/components/trending-now";
 import { WomensFashion } from "@/features/home/components/womens-fashion";
-import { FeaturedShops } from "@/features/home/components/featured-shops";
+import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
 import { MoreToExplore } from "@/features/home/components/more-to-explore";
 import { HotDeals } from "@/features/home/components/hot-deals/hot-deals";
 import { DiscountBanners } from "@/features/home/components/discount-banners/discount-banners";
