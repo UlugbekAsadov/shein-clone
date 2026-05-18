@@ -30,14 +30,14 @@ export function ProductCard({ product, variant = "default" }: IProps) {
       <Link
         href={href}
         className={cn(
-          "group flex flex-col overflow-hidden rounded-[10px] border transition-shadow p-0.5",
+          "group flex flex-col overflow-hidden rounded-[10px] ",
           "md:p-1.5 md:rounded-lg",
           isDark
             ? "border-white/10 bg-secondary text-foreground"
             : "border-border bg-card text-card-foreground",
         )}
       >
-        <div
+      <div
           className={cn(
             "relative aspect-4/5 overflow-hidden bg-muted rounded-[10px]",
             "md:rounded-md",

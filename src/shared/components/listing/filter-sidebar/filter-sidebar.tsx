@@ -11,6 +11,7 @@ import { ColorFilter } from "./color-filter";
 import { PriceFilter } from "./price-filter";
 import { BrandFilter } from "./brand-filter";
 import { ChipToggleGroup } from "./chip-toggle-group";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   dict: {
@@ -38,7 +39,7 @@ interface IProps {
 
 export function FilterSidebar({ dict, quickFiltersLabels }: IProps) {
   return (
-    <aside className="w-60 shrink-0">
+    <aside className={cn("w-60 shrink-0 hidden", "md:block")}>
       <h2 className="pb-3 text-lg font-bold border-b">{dict.title}</h2>
 
       <QuickFilters title={dict.quickFilters} filters={quickFiltersLabels} />

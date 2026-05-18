@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { productCountMock } from "@/shared/constants/listing.constants";
 
 interface IProps {
@@ -12,7 +13,7 @@ export function ListingPageHeader({
   productFoundLabel,
 }: IProps) {
   return (
-    <div className="flex flex-col gap-1">
+    <div className={cn("hidden", "md:block")}>
       <h1 className="text-xl font-bold">{title}</h1>
       <p className="text-sm text-muted-foreground">{subtitle}</p>
       <p className="mt-1 flex items-center gap-1 text-sm">

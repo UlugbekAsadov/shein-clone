@@ -3,6 +3,7 @@ import { ProductGrid } from "@/shared/components/product/product-grid";
 import { FilterSidebar } from "./filter-sidebar/filter-sidebar";
 import { ListingTabs } from "./listing-tabs";
 import { ListingToolbar } from "./listing-toolbar";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   header: React.ReactNode;
@@ -50,13 +51,14 @@ export function ListingShell({
 }: IProps) {
   return (
     <div className="mx-auto max-w-360 px-6 pb-6 pt-4">
-      {header}
-
-      <div className="mt-4">
-        <ListingTabs
-          similarLabel={dict.tabs.similar}
-          dealsLabel={dict.tabs.deals}
-        />
+      <div className={cn("hidden", "md:block")}>
+        {header}
+        <div className="mt-4">
+          <ListingTabs
+            similarLabel={dict.tabs.similar}
+            dealsLabel={dict.tabs.deals}
+          />
+        </div>
       </div>
 
       <div className="mt-6 flex gap-8">

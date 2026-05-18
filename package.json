@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:limit": "NODE_OPTIONS='--max-old-space-size=1024' next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

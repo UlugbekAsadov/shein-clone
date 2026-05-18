@@ -37,7 +37,7 @@ export function ListingToolbar({
     useState<(typeof viewModes)[number]["id"]>("comfortable");
 
   return (
-    <div className="flex flex-wrap items-center gap-4">
+    <div className={cn("flex-wrap items-center gap-4 hidden", "md:flex")}>
       <p className="text-sm text-secondary-foreground flex items-center gap-1">
         <Box weight="Bold" className="size-4.5" />
         <span className="text-muted-foreground">{productFoundLabel}:</span>{" "}

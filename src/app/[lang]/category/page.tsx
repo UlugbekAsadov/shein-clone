@@ -8,7 +8,7 @@ import { PagePlaceholder } from "@/shared/components/page-placeholder/page-place
 
 export default async function CatalogPage({
   params,
-}: PageProps<"/[lang]/catalog">) {
+}: PageProps<"/[lang]/category">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 

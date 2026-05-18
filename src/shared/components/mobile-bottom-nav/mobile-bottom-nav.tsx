@@ -31,7 +31,7 @@ interface IItem {
 export function MobileBottomNav({ lang, dict }: IProps) {
   const pathname = usePathname();
   const homePath = `/${lang}`;
-  const catalogPath = `/${lang}/catalog`;
+  const categoryPath = `/${lang}/category`;
   const cartPath = `/${lang}/cart`;
   const ordersPath = `/${lang}/orders`;
   const profilePath = `/${lang}/profile/account`;
@@ -44,8 +44,8 @@ export function MobileBottomNav({ lang, dict }: IProps) {
       icon: HomeAngle,
     },
     {
-      key: "catalog",
-      href: catalogPath,
+      key: "category",
+      href: categoryPath,
       label: dict.mobileNav.catalog,
       icon: Widget,
     },
