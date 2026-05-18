@@ -19,7 +19,7 @@ export function PriceFilter({ toLabel }: IProps) {
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 py-4">
       <Slider
         value={range}
         onValueChange={(v) => {
@@ -43,11 +43,16 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([n, range[1]]);
               setActivePreset(null);
             }}
-            className="h-9 pl-7 text-sm rounded-[12px] bg-secondary font-medium"
+            className={cn(
+              "h-12 pl-7 text-sm rounded-[12px] bg-secondary font-medium",
+              "md:h-9",
+            )}
             inputMode="numeric"
           />
         </div>
-        <span className="text-xs text-muted-foreground font-medium">{toLabel}</span>
+        <span className="text-xs text-muted-foreground font-medium">
+          {toLabel}
+        </span>
         <div className="relative flex-1">
           <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-[#6F6F75]">
             $
@@ -59,13 +64,16 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([range[0], n]);
               setActivePreset(null);
             }}
-            className="h-9 pl-7 text-sm rounded-[12px] bg-secondary font-medium"
+            className={cn(
+              "h-12 pl-7 text-sm rounded-[12px] bg-secondary font-medium",
+              "md:h-9",
+            )}
             inputMode="numeric"
           />
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className={cn("hidden flex-wrap gap-2", "md:flex")}>
         {pricePresets.map((preset) => {
           const active = activePreset === preset.id;
           return (

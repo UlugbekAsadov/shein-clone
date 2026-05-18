@@ -29,9 +29,11 @@ export function FilterMobileCheckboxList({
       {options.map((option) => (
         <li key={option.id}>
           <label className="flex w-full cursor-pointer items-center justify-between py-3">
-            <span className="text-sm text-foreground">{option.label}</span>
+            <span className="text-sm text-foreground font-semibold">
+              {option.label}
+            </span>
             <Checkbox
-              className="size-5 rounded-[6px]"
+              className="size-6 rounded-[6px]"
               checked={selected.includes(option.id)}
               onCheckedChange={() => toggle(option.id)}
             />

@@ -39,7 +39,7 @@ export function FilterChipDrawer({
             <X className="size-4" />
           </DrawerClose>
         </DrawerHeader>
-        <div className="min-h-0 flex-1 overflow-y-auto px-4 py-2">
+        <div className="min-h-0 flex-1 overflow-y-auto px-4">
           {children}
         </div>
         <div className="sticky bottom-0 z-10 shrink-0 border-t bg-popover p-4">

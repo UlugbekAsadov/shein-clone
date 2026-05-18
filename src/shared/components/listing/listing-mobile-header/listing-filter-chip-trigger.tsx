@@ -15,13 +15,13 @@ export const ListingFilterChipTrigger = forwardRef<HTMLButtonElement, IProps>(
         ref={ref}
         type="button"
         className={cn(
-          "flex shrink-0 items-center gap-1 rounded-full bg-secondary px-3.5 py-2 text-sm font-medium text-foreground",
+          "flex shrink-0 items-center gap-1 rounded-full bg-secondary px-3.5 py-2 text-xs font-medium text-foreground",
           className,
         )}
         {...props}
       >
         <span>{label}</span>
-        <AltArrowDown className="size-4" />
+        <AltArrowDown className="size-5" />
       </button>
     );
   },
