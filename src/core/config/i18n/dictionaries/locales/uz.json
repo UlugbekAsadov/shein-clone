@@ -93,7 +93,8 @@
       "brands": "Brendlar",
       "brandsSearch": "Brendlarni qidirish",
       "style": "Uslub",
-      "material": "Material"
+      "material": "Material",
+      "apply": "Qo'llash"
     },
     "search": {
       "resultsFound": "Qidiruv natijalari"

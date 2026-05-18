@@ -10,11 +10,15 @@ import { CategoryBreadcrumb } from "@/features/category/components/category-brea
 export default async function CategoryPage({
   params,
 }: PageProps<"/[lang]/category/[slug]">) {
-  const { lang } = await params;
+  const { lang, slug } = await params;
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
   const products = [...trendingProducts, ...womensFashion].slice(0, 16);
+  const title = slug
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
 
   return (
     <>
@@ -22,6 +26,7 @@ export default async function CategoryPage({
 
       <main className="flex-1">
         <ListingShell
+          title={title}
           header={<CategoryBreadcrumb />}
           products={products}
           dict={{

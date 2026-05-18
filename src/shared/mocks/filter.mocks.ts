@@ -7,6 +7,7 @@ import type {
   ISizeOption,
   IStyleOption,
 } from "@/types/filter.interface";
+import type { ISize } from "@/types/size.interface";
 
 export const filterCategoryTree: ICategoryNode[] = [
   {
@@ -40,6 +41,16 @@ export const clothingSizes: ISizeOption[] = [
   { id: "4xl", label: "4XL" },
 ];
 
+export const mobileFilterClothingSizes: ISize[] = [
+  { id: "XS", subLabel: "35", available: true },
+  { id: "S", subLabel: "36", available: true },
+  { id: "M", subLabel: "37", available: true },
+  { id: "L", subLabel: "38", available: false },
+  { id: "2XL", subLabel: "39", available: true },
+  { id: "3XL", subLabel: "40", available: true },
+  { id: "4XL", subLabel: "41", available: true },
+];
+
 export const shoeSizes: ISizeOption[] = [
   { id: "36", label: "36" },
   { id: "37", label: "37" },
@@ -53,16 +64,18 @@ export const shoeSizes: ISizeOption[] = [
 
 export const filterColorSwatches: IColorSwatch[] = [
   { id: "black", name: "Black", hex: "#111111" },
-  { id: "gray", name: "Gray", hex: "#9ca3af" },
+  { id: "white", name: "White", hex: "#ffffff", ring: true },
+  { id: "grey", name: "Grey", hex: "#9ca3af" },
   { id: "red", name: "Red", hex: "#ef4444" },
   { id: "pink", name: "Pink", hex: "#f472b6" },
-  { id: "green", name: "Green", hex: "#22c55e" },
   { id: "yellow", name: "Yellow", hex: "#facc15" },
+  { id: "green", name: "Green", hex: "#22c55e" },
   { id: "blue", name: "Blue", hex: "#2563eb" },
-  { id: "navy", name: "Navy", hex: "#1e3a8a" },
-  { id: "purple", name: "Purple", hex: "#a855f7" },
-  { id: "beige", name: "Beige", hex: "#f5f5dc" },
-  { id: "brown", name: "Brown", hex: "#8b4513" },
+  { id: "sapphire", name: "Sapphire", hex: "#1e3a8a" },
+  { id: "mauve", name: "Mauve", hex: "#a855f7" },
+  { id: "lvory", name: "Lvory", hex: "#f5f5dc" },
+  { id: "co-bronze", name: "Co Bronze", hex: "#8b4513" },
+  { id: "peach", name: "Peach", hex: "#d6c8a8" },
   { id: "orange", name: "Orange", hex: "#f97316" },
 ];
 

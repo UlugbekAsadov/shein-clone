@@ -23,6 +23,7 @@ export default async function WishlistPage({
 
       <main className="flex-1">
         <ListingShell
+          title={dict.listing.wishlist.title}
           header={
             <ListingPageHeader
               title={dict.listing.wishlist.title}

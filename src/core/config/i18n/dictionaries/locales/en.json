@@ -93,7 +93,8 @@
       "brands": "Brands",
       "brandsSearch": "Search brands",
       "style": "Style",
-      "material": "Material"
+      "material": "Material",
+      "apply": "Apply"
     },
     "search": {
       "resultsFound": "Search results found"

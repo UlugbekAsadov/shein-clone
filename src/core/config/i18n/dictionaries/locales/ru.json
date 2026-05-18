@@ -93,7 +93,8 @@
       "brands": "Бренды",
       "brandsSearch": "Поиск брендов",
       "style": "Стиль",
-      "material": "Материал"
+      "material": "Материал",
+      "apply": "Применить"
     },
     "search": {
       "resultsFound": "Результаты поиска"

@@ -1,11 +1,13 @@
 import type { IProduct } from "@/types/product.interface";
 import { ProductGrid } from "@/shared/components/product/product-grid";
 import { FilterSidebar } from "./filter-sidebar/filter-sidebar";
+import { ListingMobileHeader } from "./listing-mobile-header/listing-mobile-header";
 import { ListingTabs } from "./listing-tabs";
 import { ListingToolbar } from "./listing-toolbar";
 import { cn } from "@/lib/utils";
 
 interface IProps {
+  title: string;
   header: React.ReactNode;
   products: IProduct[];
   dict: {
@@ -33,6 +35,7 @@ interface IProps {
       brandsSearch: string;
       style: string;
       material: string;
+      apply: string;
     };
   };
   quickFiltersLabels: {
@@ -44,13 +47,21 @@ interface IProps {
 }
 
 export function ListingShell({
+  title,
   header,
   products,
   dict,
   quickFiltersLabels,
 }: IProps) {
   return (
-    <div className="mx-auto max-w-360 px-6 pb-6 pt-4">
+    <div className="mx-auto max-w-360 px-4 pb-6 pt-2 md:px-6 md:pt-4">
+      <ListingMobileHeader
+        title={title}
+        priceLabel={dict.toolbar.price}
+        applyLabel={dict.filter.apply}
+        dict={dict.filter}
+      />
+
       <div className={cn("hidden", "md:block")}>
         {header}
         <div className="mt-4">
@@ -61,7 +72,7 @@ export function ListingShell({
         </div>
       </div>
 
-      <div className="mt-6 flex gap-8">
+      <div className="md:mt-6 md:flex md:gap-8">
         <FilterSidebar
           dict={dict.filter}
           quickFiltersLabels={quickFiltersLabels}
@@ -81,7 +92,7 @@ export function ListingShell({
           />
           <ProductGrid
             products={products}
-            className="mt-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
+            className="mt-2 grid-cols-2 sm:grid-cols-3 md:mt-6 md:grid-cols-4"
           />
         </div>
       </div>

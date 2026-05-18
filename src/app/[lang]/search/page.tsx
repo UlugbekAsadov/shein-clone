@@ -27,6 +27,7 @@ export default async function SearchPage({
 
       <main className="flex-1">
         <ListingShell
+          title={query}
           header={
             <ListingPageHeader
               title={query}
