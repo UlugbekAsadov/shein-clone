@@ -112,6 +112,11 @@
     },
     "follow": "Follow",
     "following": "Following",
+    "message": "Message",
+    "sels": "Sels",
+    "followers": "Followers",
+    "seller": "Seller",
+    "response": "response",
     "coupons": {
       "label": "Coupon",
       "daysLeft": "days",

@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export function InfoCardIcon({ name }: IProps) {
-  const className = "size-7 text-foreground";
+  const className = "size-5 md:size-7 text-foreground";
   switch (name) {
     case "mapPin":
       return <MapPointWave className={className} weight="Bold" />;

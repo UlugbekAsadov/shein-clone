@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 interface IProps {
   icon: React.ReactNode;
   title: string;
@@ -6,8 +8,18 @@ interface IProps {
 
 export function FeatureItem({ icon, title, description }: IProps) {
   return (
-    <div className="flex items-center gap-3 p-3 rounded-md bg-background feature-item">
-      <span className="grid size-16 place-items-center rounded-sm bg-muted text-foreground">
+    <div
+      className={cn(
+        "flex items-center gap-3 p-3! rounded-md bg-secondary feature-item",
+        "md:bg-background",
+      )}
+    >
+      <span
+        className={cn(
+          "grid size-8 place-items-center rounded-[8px] bg-white text-foreground",
+          "md:size-16 md:bg-muted md:rounded-sm",
+        )}
+      >
         {icon}
       </span>
       <div>

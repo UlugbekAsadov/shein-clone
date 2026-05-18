@@ -19,17 +19,18 @@ export function CouponsStrip({
   minOrderLabel,
 }: IProps) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="flex gap-4 overflow-x-scroll scrollbar-hidden">
       {coupons.slice(0, 3).map((c) => (
-        <CouponCard
-          key={c.id}
-          coupon={c}
-          couponLabel={couponLabel}
-          daysLeftLabel={daysLeftLabel}
-          copyLabel={copyLabel}
-          copiedLabel={copiedLabel}
-          minOrderLabel={minOrderLabel}
-        />
+        <div key={c.id} className="min-w-76 flex-1">
+          <CouponCard
+            coupon={c}
+            couponLabel={couponLabel}
+            daysLeftLabel={daysLeftLabel}
+            copyLabel={copyLabel}
+            copiedLabel={copiedLabel}
+            minOrderLabel={minOrderLabel}
+          />
+        </div>
       ))}
     </div>
   );

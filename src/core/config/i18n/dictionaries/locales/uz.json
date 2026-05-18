@@ -112,6 +112,11 @@
     },
     "follow": "Kuzatish",
     "following": "Kuzatilmoqda",
+    "message": "Xabar",
+    "sels": "Sotuv",
+    "followers": "Obunachilar",
+    "seller": "Sotuvchi",
+    "response": "javob",
     "coupons": {
       "label": "Kupon",
       "daysLeft": "kun",

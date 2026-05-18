@@ -112,6 +112,11 @@
     },
     "follow": "Подписаться",
     "following": "Подписан",
+    "message": "Сообщение",
+    "sels": "Продаж",
+    "followers": "Подписчики",
+    "seller": "Продавец",
+    "response": "ответов",
     "coupons": {
       "label": "Купон",
       "daysLeft": "дн.",

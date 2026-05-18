@@ -7,6 +7,7 @@ import { BrandStrip } from "@/features/home/components/brand-strip/brand-strip";
 import { ShopBreadcrumb } from "./shop-breadcrumb";
 import { ShopProfile } from "./shop-profile/shop-profile";
 import { ShopContent } from "./shop-content";
+import { ShopMobilePage } from "./shop-mobile/shop-mobile-page";
 
 interface IProps {
   shop: IShopDetail;
@@ -18,28 +19,38 @@ interface IProps {
 
 export function ShopPage({ shop, products, coupons, about, dict }: IProps) {
   return (
-    <div className="space-y-6 py-6">
-      <div className="mx-auto max-w-360 px-6">
-        <ShopBreadcrumb />
-      </div>
-
-      <div className="mx-auto max-w-360 px-6">
-        <ShopProfile
-          shop={shop}
-          followLabel={dict.shop.follow}
-          followingLabel={dict.shop.following}
-        />
-      </div>
-
-      <BrandStrip />
-
-      <ShopContent
+    <>
+      <ShopMobilePage
         shop={shop}
         products={products}
         coupons={coupons}
         about={about}
         dict={dict}
       />
-    </div>
+
+      <div className="hidden space-y-6 py-6 md:block">
+        <div className="mx-auto max-w-360 px-6">
+          <ShopBreadcrumb />
+        </div>
+
+        <div className="mx-auto max-w-360 px-6">
+          <ShopProfile
+            shop={shop}
+            followLabel={dict.shop.follow}
+            followingLabel={dict.shop.following}
+          />
+        </div>
+
+        <BrandStrip />
+
+        <ShopContent
+          shop={shop}
+          products={products}
+          coupons={coupons}
+          about={about}
+          dict={dict}
+        />
+      </div>
+    </>
   );
 }
