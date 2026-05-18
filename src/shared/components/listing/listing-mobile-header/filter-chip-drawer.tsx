@@ -15,6 +15,7 @@ interface IProps {
   trigger: React.ReactNode;
   title: string;
   applyLabel: string;
+  onApply?: () => void;
   children: React.ReactNode;
 }
 
@@ -22,6 +23,7 @@ export function FilterChipDrawer({
   trigger,
   title,
   applyLabel,
+  onApply,
   children,
 }: IProps) {
   return (
@@ -47,6 +49,7 @@ export function FilterChipDrawer({
             <Button
               type="button"
               size="lg"
+              onClick={onApply}
               className="h-13 w-full rounded-[14px] text-base font-bold"
             >
               {applyLabel}

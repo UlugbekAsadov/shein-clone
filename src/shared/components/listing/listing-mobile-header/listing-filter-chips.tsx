@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { PriceFilter } from "../filter-sidebar/price-filter";
 import { FilterMobileSizeList } from "../filter-mobile/filter-mobile-size-list";
 import { FilterMobileColorList } from "../filter-mobile/filter-mobile-color-list";
@@ -22,39 +25,91 @@ export function ListingFilterChips({
   applyLabel,
   dict,
 }: IProps) {
+  const [priceApplied, setPriceApplied] = useState(false);
+  const [priceKey, setPriceKey] = useState(0);
+
+  const [sizeApplied, setSizeApplied] = useState(false);
+  const [sizeKey, setSizeKey] = useState(0);
+
+  const [colorApplied, setColorApplied] = useState(false);
+  const [colorKey, setColorKey] = useState(0);
+
+  const [brandsApplied, setBrandsApplied] = useState(false);
+  const [brandsKey, setBrandsKey] = useState(0);
+
   return (
     <div className="overflow-x-auto px-4 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div className="flex w-max items-center gap-2">
         <FilterChipDrawer
           title={priceLabel}
           applyLabel={applyLabel}
-          trigger={<ListingFilterChipTrigger label={priceLabel} />}
+          onApply={() => setPriceApplied(true)}
+          trigger={
+            <ListingFilterChipTrigger
+              label={priceLabel}
+              applied={priceApplied}
+              onClear={() => {
+                setPriceApplied(false);
+                setPriceKey((k) => k + 1);
+              }}
+            />
+          }
         >
-          <PriceFilter toLabel={dict.priceTo} />
+          <PriceFilter key={priceKey} toLabel={dict.priceTo} />
         </FilterChipDrawer>
 
         <FilterChipDrawer
           title={dict.size}
           applyLabel={applyLabel}
-          trigger={<ListingFilterChipTrigger label={dict.size} />}
+          onApply={() => setSizeApplied(true)}
+          trigger={
+            <ListingFilterChipTrigger
+              label={dict.size}
+              applied={sizeApplied}
+              onClear={() => {
+                setSizeApplied(false);
+                setSizeKey((k) => k + 1);
+              }}
+            />
+          }
         >
-          <FilterMobileSizeList />
+          <FilterMobileSizeList key={sizeKey} />
         </FilterChipDrawer>
 
         <FilterChipDrawer
           title={dict.color}
           applyLabel={applyLabel}
-          trigger={<ListingFilterChipTrigger label={dict.color} />}
+          onApply={() => setColorApplied(true)}
+          trigger={
+            <ListingFilterChipTrigger
+              label={dict.color}
+              applied={colorApplied}
+              onClear={() => {
+                setColorApplied(false);
+                setColorKey((k) => k + 1);
+              }}
+            />
+          }
         >
-          <FilterMobileColorList />
+          <FilterMobileColorList key={colorKey} />
         </FilterChipDrawer>
 
         <FilterChipDrawer
           title="Brand"
           applyLabel={applyLabel}
-          trigger={<ListingFilterChipTrigger label={dict.brands} />}
+          onApply={() => setBrandsApplied(true)}
+          trigger={
+            <ListingFilterChipTrigger
+              label={dict.brands}
+              applied={brandsApplied}
+              onClear={() => {
+                setBrandsApplied(false);
+                setBrandsKey((k) => k + 1);
+              }}
+            />
+          }
         >
-          <FilterMobileBrand />
+          <FilterMobileBrand key={brandsKey} />
         </FilterChipDrawer>
       </div>
     </div>
