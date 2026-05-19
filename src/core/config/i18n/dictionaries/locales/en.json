@@ -145,11 +145,29 @@
       }
     },
     "payments": {
-      "title": "Payments",
+      "title": "My cards",
       "current": "Saved payment methods",
+      "addCard": "Add Card",
+      "maskedNumber": "**** {last4}",
       "empty": {
-        "title": "No payment methods yet",
-        "description": "Save a card to check out faster. We don't store full card numbers on our servers."
+        "title": "No cards added yet",
+        "description": "Add a debit or credit card to make secure payments and faster checkouts"
+      },
+      "delete": {
+        "title": "Remove this card?",
+        "description": "You can add it back later from this page",
+        "confirm": "Remove",
+        "cancel": "Cancel"
+      },
+      "addCardPage": {
+        "title": "Add card",
+        "submit": "Add",
+        "cardNumber": "Card number",
+        "cardNumberPlaceholder": "0000 0000 0000 0000",
+        "expiryDate": "Expiry date",
+        "expiryDatePlaceholder": "DD/MM",
+        "cvv": "CVVV",
+        "cvvPlaceholder": "Enter the address"
       }
     },
     "promocode": {

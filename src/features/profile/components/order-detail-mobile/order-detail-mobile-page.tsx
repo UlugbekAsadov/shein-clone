@@ -13,7 +13,7 @@ export function OrderDetailMobilePage({ order, dict }: IProps) {
   const t = dict.profile.orders;
 
   return (
-    <div className="pb-6">
+    <div>
       <OrderDetailMobileHeader title={t.title} />
 
       <div className="flex flex-col gap-4 px-4 pt-1">

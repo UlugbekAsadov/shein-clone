@@ -145,11 +145,29 @@
       }
     },
     "payments": {
-      "title": "To'lovlar",
+      "title": "Mening kartalarim",
       "current": "Saqlangan to'lov usullari",
+      "addCard": "Karta qo'shish",
+      "maskedNumber": "**** {last4}",
       "empty": {
-        "title": "Hozircha to'lov usullari yo'q",
-        "description": "Tezroq buyurtma berish uchun kartani saqlang. Karta raqamlari to'liq saqlanmaydi."
+        "title": "Hozircha kartalar qo'shilmagan",
+        "description": "Xavfsiz to'lovlar va tezroq xarid uchun debit yoki kredit karta qo'shing"
+      },
+      "delete": {
+        "title": "Kartani o'chirasizmi?",
+        "description": "Keyinroq ushbu sahifadan qaytadan qo'shishingiz mumkin",
+        "confirm": "O'chirish",
+        "cancel": "Bekor qilish"
+      },
+      "addCardPage": {
+        "title": "Karta qo'shish",
+        "submit": "Qo'shish",
+        "cardNumber": "Karta raqami",
+        "cardNumberPlaceholder": "0000 0000 0000 0000",
+        "expiryDate": "Amal qilish muddati",
+        "expiryDatePlaceholder": "DD/MM",
+        "cvv": "CVVV",
+        "cvvPlaceholder": "CVV kiriting"
       }
     },
     "promocode": {
