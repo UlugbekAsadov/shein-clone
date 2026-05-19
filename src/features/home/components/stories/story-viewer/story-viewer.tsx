@@ -11,7 +11,6 @@ import {
   TRANSITION_MS,
 } from "@/features/home/constants/brand-story.constants";
 import { StoryCard } from "./story-card";
-import { cn } from "@/lib/utils";
 
 interface IProps {
   brands: IBrand[];
@@ -19,7 +18,7 @@ interface IProps {
   onClose: () => void;
 }
 
-export function BrandStoryViewer({ brands, initialIndex, onClose }: IProps) {
+export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
   const [brandIndex, setBrandIndex] = useState(initialIndex);
   const [stripIndex, setStripIndex] = useState(0);
 

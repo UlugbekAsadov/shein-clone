@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { brands } from "@/shared/mocks";
-import { BrandStoryButton } from "@/features/home/components/brand-strip/brand-story-button";
-import { BrandStoryViewer } from "@/features/home/components/brand-story-viewer/brand-story-viewer";
+import { StoryItem } from "@/features/home/components/stories/story-item/story-item";
+import { StoryViewer } from "@/features/home/components/stories/story-viewer/story-viewer";
 
 interface IProps {
   excludeSlug?: string;
@@ -20,7 +20,7 @@ export function ShopMobileBrands({ excludeSlug }: IProps) {
     <div className="overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div className="flex w-max items-start gap-4">
         {items.map((brand, i) => (
-          <BrandStoryButton
+          <StoryItem
             key={brand.id}
             brand={brand}
             onClick={() => setActiveIndex(i)}
@@ -29,7 +29,7 @@ export function ShopMobileBrands({ excludeSlug }: IProps) {
       </div>
 
       {activeIndex !== null && (
-        <BrandStoryViewer
+        <StoryViewer
           brands={items}
           initialIndex={activeIndex}
           onClose={() => setActiveIndex(null)}

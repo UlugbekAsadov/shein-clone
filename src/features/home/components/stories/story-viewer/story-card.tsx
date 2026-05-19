@@ -10,7 +10,7 @@ import {
   TRANSITION_MS,
 } from "@/features/home/constants/brand-story.constants";
 import { ProgressBar } from "./progress-bar";
-import { BrandStoryButton } from "../brand-strip/brand-story-button";
+import { StoryItem } from "../story-item/story-item";
 
 interface IProps {
   brand: IBrand;
@@ -98,7 +98,7 @@ export function StoryCard({
           transition: `opacity ${TRANSITION_MS}ms ${EASING}`,
         }}
       >
-        <BrandStoryButton
+        <StoryItem
           brand={brand}
           onClick={() => {}}
           brandClassName="text-sm font-semibold text-white drop-shadow-md"

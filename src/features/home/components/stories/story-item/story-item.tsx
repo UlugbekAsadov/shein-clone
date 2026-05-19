@@ -11,7 +11,7 @@ interface IProps {
   brandClassName?: string;
 }
 
-export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
+export function StoryItem({ brand, onClick, brandClassName }: IProps) {
   const total = brand.contents.length;
   const viewedCount = brand.viewedCount ?? 0;
 
@@ -27,7 +27,10 @@ export function BrandStoryButton({ brand, onClick, brandClassName }: IProps) {
       <span className={cn("relative block size-15", "md:size-24")}>
         <StoryRing total={total} viewedCount={viewedCount} />
         <span
-          className={cn("absolute inset-1 overflow-hidden rounded-full ring-2 ring-background", "md:inset-2")}
+          className={cn(
+            "absolute inset-1 overflow-hidden rounded-full ring-2 ring-background",
+            "md:inset-2",
+          )}
           style={{ backgroundColor: brand.brandBg ?? "#0f172a" }}
         >
           <Image

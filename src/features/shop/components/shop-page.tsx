@@ -3,11 +3,11 @@ import type { IProduct } from "@/types/product.interface";
 import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
 import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
 import type { IAboutContent } from "@/features/shop/interfaces/about-content.interface";
-import { BrandStrip } from "@/features/home/components/brand-strip/brand-strip";
 import { ShopBreadcrumb } from "./shop-breadcrumb";
 import { ShopProfile } from "./shop-profile/shop-profile";
 import { ShopContent } from "./shop-content";
 import { ShopMobilePage } from "./shop-mobile/shop-mobile-page";
+import { Stories } from "@/features/home/components/stories/stories";
 
 interface IProps {
   shop: IShopDetail;
@@ -41,7 +41,7 @@ export function ShopPage({ shop, products, coupons, about, dict }: IProps) {
           />
         </div>
 
-        <BrandStrip />
+        <Stories />
 
         <ShopContent
           shop={shop}

@@ -6,7 +6,6 @@ import { MobileHeader } from "@/shared/components/header/mobile-header";
 import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
 import { Footer } from "@/shared/components/footer/footer";
 import { PromoBanner } from "@/features/home/components/promo-banner";
-import { BrandStrip } from "@/features/home/components/brand-strip/brand-strip";
 import { HeroCarousel } from "@/features/home/components/hero-carousel";
 import { Categories } from "@/features/home/components/categories/categories";
 import { WomensFashion } from "@/features/home/components/womens-fashion";
@@ -19,6 +18,7 @@ import {
   ECommerceBagBlueBag,
   FlameSolid,
 } from "@/shared/components/icons/solid";
+import { Stories } from "@/features/home/components/stories/stories";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -39,7 +39,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
             cta={dict.promo.cta}
           />
         </div>
-        <BrandStrip />
+        <Stories />
         <MobileSearchBar
           lang={lang}
           placeholder={dict.header.searchPlaceholder}
