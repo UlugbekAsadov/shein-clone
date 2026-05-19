@@ -194,7 +194,18 @@
       "helpCentre": "Центр помощи"
     },
     "measurements": {
-      "title": "Мои мерки",
+      "title": "Мерки",
+      "apply": "Применить",
+      "fieldUnits": {
+        "height": "СМ",
+        "weight": "КГ",
+        "bust": "СМ",
+        "braSize": "СМ",
+        "waist": "СМ",
+        "hips": "СМ",
+        "preference": "СМ"
+      },
+      "desktopTitle": "Мои мерки",
       "sizeGuide": "Таблица размеров",
       "placeholder": "Выберите",
       "intro": "Мои мерки помогают подобрать идеальный размер. Заполните мерки, чтобы получить:",

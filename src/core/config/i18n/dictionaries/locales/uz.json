@@ -194,7 +194,18 @@
       "helpCentre": "Yordam markazi"
     },
     "measurements": {
-      "title": "Mening o'lchovlarim",
+      "title": "O'lchovlar",
+      "apply": "Qo'llash",
+      "fieldUnits": {
+        "height": "CM",
+        "weight": "KG",
+        "bust": "CM",
+        "braSize": "CM",
+        "waist": "CM",
+        "hips": "CM",
+        "preference": "CM"
+      },
+      "desktopTitle": "Mening o'lchovlarim",
       "sizeGuide": "O'lchov yo'riqnomasi",
       "placeholder": "Tanlang",
       "intro": "O'lchovlaringizni kiritish kerakli o'lchamni topishni osonlashtiradi. Quyidagi imkoniyatlarga ega bo'lasiz:",

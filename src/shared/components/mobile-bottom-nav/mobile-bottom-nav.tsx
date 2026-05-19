@@ -38,6 +38,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
 
   if (pathname.startsWith(`/${lang}/product/`)) return null;
   if (pathname.startsWith(`/${lang}/profile/payments`)) return null;
+  if (pathname.startsWith(`/${lang}/profile/measurements`)) return null;
   if (pathname.startsWith(`/${lang}/orders/`)) return null;
 
   const items: IItem[] = [

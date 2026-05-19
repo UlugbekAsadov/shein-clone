@@ -25,7 +25,7 @@ export function MeasurementsForm({ dict }: IProps) {
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
       <div className="space-y-6">
         <div>
-          <h1 className="text-xl font-bold">{t.title}</h1>
+          <h1 className="text-xl font-bold">{t.desktopTitle}</h1>
           <p className="mt-1 text-sm text-muted-foreground">{t.sizeGuide}</p>
         </div>
 
