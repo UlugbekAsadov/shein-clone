@@ -206,11 +206,33 @@
       "qty": "Кол-во",
       "location": "Адрес",
       "save": "Скидка",
+      "activeOrders": "Активные заказы",
+      "orderHistory": "История заказов",
+      "order": "Заказ",
+      "deliveryDate": "Дата доставки",
+      "totalPrice": "Итого",
+      "currency": "UZS",
+      "statusFilter": "Фильтр по статусу",
+      "apply": "Применить",
+      "empty": {
+        "title": "Ваша история пуста",
+        "description": "После оформления заказа он появится здесь в вашей истории"
+      },
+      "detail": {
+        "paymentMethod": "Способ оплаты",
+        "deliveryDetails": "Детали доставки",
+        "deliveryAddress": "Адрес доставки",
+        "deliveryTime": "Время доставки",
+        "recipientDetails": "Получатель",
+        "phoneNumber": "Номер телефона"
+      },
       "status": {
         "unpaid": "Не оплачен",
         "processing": "В обработке",
         "shipped": "Отправлен",
         "delivered": "Доставлен",
+        "arrived": "Прибыл",
+        "review": "Отзыв",
         "return": "Возврат"
       }
     },

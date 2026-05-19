@@ -198,7 +198,7 @@
       }
     },
     "orders": {
-      "title": "My Orders",
+      "title": "My orders",
       "current": "Current",
       "soldBy": "Sold by",
       "color": "Color",
@@ -206,11 +206,33 @@
       "qty": "Cty",
       "location": "Location",
       "save": "Save",
+      "activeOrders": "Active orders",
+      "orderHistory": "Order history",
+      "order": "Order",
+      "deliveryDate": "Delivery date",
+      "totalPrice": "Total price",
+      "currency": "UZS",
+      "statusFilter": "Status filter",
+      "apply": "Apply",
+      "empty": {
+        "title": "Your history is empty",
+        "description": "Once you complete an order, it will appear here for your records"
+      },
+      "detail": {
+        "paymentMethod": "Payment method",
+        "deliveryDetails": "Delivery details",
+        "deliveryAddress": "Delivery address",
+        "deliveryTime": "Delivery time",
+        "recipientDetails": "Recipient details",
+        "phoneNumber": "Phone number"
+      },
       "status": {
         "unpaid": "Unpaid",
         "processing": "Processing",
         "shipped": "Shipped",
         "delivered": "Delivered",
+        "arrived": "Arrived",
+        "review": "Review",
         "return": "Return"
       }
     },

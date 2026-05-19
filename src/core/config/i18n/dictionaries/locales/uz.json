@@ -206,11 +206,33 @@
       "qty": "Soni",
       "location": "Manzil",
       "save": "Tejash",
+      "activeOrders": "Faol buyurtmalar",
+      "orderHistory": "Buyurtmalar tarixi",
+      "order": "Buyurtma",
+      "deliveryDate": "Yetkazib berish sanasi",
+      "totalPrice": "Umumiy narx",
+      "currency": "UZS",
+      "statusFilter": "Status bo'yicha filtr",
+      "apply": "Qo'llash",
+      "empty": {
+        "title": "Tarixingiz bo'sh",
+        "description": "Buyurtmangizni yakunlaganingizdan so'ng u shu yerda ko'rinadi"
+      },
+      "detail": {
+        "paymentMethod": "To'lov usuli",
+        "deliveryDetails": "Yetkazib berish ma'lumotlari",
+        "deliveryAddress": "Yetkazib berish manzili",
+        "deliveryTime": "Yetkazib berish vaqti",
+        "recipientDetails": "Qabul qiluvchi",
+        "phoneNumber": "Telefon raqami"
+      },
       "status": {
         "unpaid": "To'lanmagan",
         "processing": "Qayta ishlanmoqda",
         "shipped": "Jo'natildi",
         "delivered": "Yetkazildi",
+        "arrived": "Yetib keldi",
+        "review": "Sharh",
         "return": "Qaytarish"
       }
     },
