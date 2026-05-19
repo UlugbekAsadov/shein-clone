@@ -4,12 +4,10 @@ import { profileUser } from "@/features/profile/mocks/profile-user.mocks";
 import {
   Bell,
   Card,
-  ChatRound,
-  MapPoint,
-  QuestionCircle,
+  Dialog,
+  MapPointWave,
   Ruler,
   Ticket,
-  Translation,
   User,
 } from "@solar-icons/react/ssr";
 import { ProfileMobileHeader } from "./profile-mobile-header";
@@ -18,6 +16,7 @@ import { ProfileMobileMenuCard } from "./profile-mobile-menu-card";
 import { ProfileMobileMenuRow } from "./profile-mobile-menu-row";
 import { ProfileMobileToggle } from "./profile-mobile-toggle";
 import { ProfileMobileLogout } from "./profile-mobile-logout";
+import { LanguageIcon, SupportIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -43,7 +42,7 @@ export function ProfileMobilePage({ lang, dict }: IProps) {
               href={`${profilePath}/account`}
             />
             <ProfileMobileMenuRow
-              icon={MapPoint}
+              icon={MapPointWave}
               label={nav.addresses}
               href={`${profilePath}/addresses`}
             />
@@ -63,12 +62,12 @@ export function ProfileMobilePage({ lang, dict }: IProps) {
               href={`${profilePath}/promocode`}
             />
             <ProfileMobileMenuRow
-              icon={ChatRound}
+              icon={Dialog}
               label={nav.chat}
               href={`${profilePath}/chat`}
             />
             <ProfileMobileMenuRow
-              icon={Translation}
+              icon={LanguageIcon}
               label={nav.language}
               href={`${profilePath}/language`}
             />
@@ -83,15 +82,12 @@ export function ProfileMobilePage({ lang, dict }: IProps) {
               trailing={<ProfileMobileToggle active={false} />}
             />
             <ProfileMobileMenuRow
-              icon={QuestionCircle}
+              icon={SupportIcon}
               label={nav.helpCentre}
               href={`${profilePath}/help-centre`}
             />
+            <ProfileMobileLogout label={dict.profile.logout} />
           </ProfileMobileMenuCard>
-        </div>
-
-        <div className="px-4">
-          <ProfileMobileLogout label={dict.profile.logout} />
         </div>
       </div>
     </div>

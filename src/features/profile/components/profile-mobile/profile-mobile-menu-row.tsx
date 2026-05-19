@@ -18,11 +18,11 @@ export function ProfileMobileMenuRow({
 }: IProps) {
   const content = (
     <>
-      <Icon weight="LineDuotone" className="size-6 text-foreground" />
-      <span className="flex-1 text-base font-medium text-foreground">
+      <Icon className="size-6 text-foreground fill-text-foreground" />
+      <span className="flex-1 text-sm font-medium text-foreground">
         {label}
       </span>
-      {trailing ?? <AltArrowRight className="size-5 text-muted-foreground" />}
+      {trailing ?? <AltArrowRight className="size-6 text-muted-foreground" />}
     </>
   );
 
@@ -37,7 +37,5 @@ export function ProfileMobileMenuRow({
     );
   }
 
-  return (
-    <div className="flex items-center gap-3 px-4 py-3.5">{content}</div>
-  );
+  return <div className="flex items-center gap-3 px-4 py-3.5">{content}</div>;
 }
