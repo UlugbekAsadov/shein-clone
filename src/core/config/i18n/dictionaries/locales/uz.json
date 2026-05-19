@@ -178,6 +178,14 @@
         "description": "Faol kuponlar va maxsus takliflar shu yerda paydo bo'ladi. Eksklyuziv chegirmalar uchun keyinroq tekshiring!"
       }
     },
+    "notificationsPage": {
+      "title": "Bildirishnomalar",
+      "markAllRead": "Hammasini o'qilgan deb belgilash",
+      "empty": {
+        "title": "Hozircha bildirishnomalar yo'q",
+        "description": "Buyurtmalaringiz yoki hisob xavfsizligi haqida muhim narsa yuz berganda sizga xabar beramiz"
+      }
+    },
     "title": "Profil",
     "logout": "Chiqish",
     "nav": {

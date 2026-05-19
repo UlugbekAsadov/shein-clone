@@ -33,8 +33,8 @@ export function MobileHeader({
           >
             <Heart className="size-6 text-foreground" />
           </Link>
-          <button
-            type="button"
+          <Link
+            href={`/${lang}/profile/notifications`}
             aria-label="Notifications"
             className="relative grid size-9 place-items-center rounded-full bg-secondary hover:bg-secondary/80"
           >
@@ -44,7 +44,7 @@ export function MobileHeader({
                 {notificationCount}
               </span>
             )}
-          </button>
+          </Link>
         </div>
       </div>
     </header>

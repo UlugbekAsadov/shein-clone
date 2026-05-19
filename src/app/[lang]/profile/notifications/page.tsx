@@ -5,6 +5,8 @@ import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+import { NotificationsMobilePage } from "@/features/profile/components/notifications-mobile/notifications-mobile-page";
+import { notificationMocks } from "@/features/profile/mocks/notification.mocks";
 
 export default async function NotificationsPage({
   params,
@@ -19,11 +21,18 @@ export default async function NotificationsPage({
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <PagePlaceholder
-          icon={Bell}
-          title={dict.profile.nav.notifications}
-          description={dict.profile.nav.notifications}
+        <NotificationsMobilePage
+          dict={dict}
+          initialNotifications={notificationMocks}
         />
+
+        <div className="hidden md:block">
+          <PagePlaceholder
+            icon={Bell}
+            title={dict.profile.nav.notifications}
+            description={dict.profile.nav.notifications}
+          />
+        </div>
       </main>
 
       <Footer dict={dict} />

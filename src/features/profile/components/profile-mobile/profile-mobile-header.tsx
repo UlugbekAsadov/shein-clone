@@ -1,11 +1,15 @@
+import Link from "next/link";
 import { Bell } from "@solar-icons/react/ssr";
+import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
+  lang: (typeof locales)[number];
   title: string;
   notificationCount?: number;
 }
 
 export function ProfileMobileHeader({
+  lang,
   title,
   notificationCount = 0,
 }: IProps) {
@@ -14,8 +18,8 @@ export function ProfileMobileHeader({
       <div className="flex items-center justify-between px-4 py-3">
         <h1 className="text-2xl font-bold text-foreground">{title}</h1>
 
-        <button
-          type="button"
+        <Link
+          href={`/${lang}/profile/notifications`}
           aria-label="Notifications"
           className="relative grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
@@ -25,7 +29,7 @@ export function ProfileMobileHeader({
               {notificationCount}
             </span>
           )}
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -29,7 +29,11 @@ export function ProfileMobilePage({ lang, dict }: IProps) {
 
   return (
     <div className="pb-6 md:hidden">
-      <ProfileMobileHeader title={dict.profile.title} notificationCount={2} />
+      <ProfileMobileHeader
+        lang={lang}
+        title={dict.profile.title}
+        notificationCount={2}
+      />
 
       <div className="mt-2 flex flex-col gap-4">
         <ProfileMobileUserCard user={profileUser} />

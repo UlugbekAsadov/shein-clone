@@ -178,6 +178,14 @@
         "description": "Your active coupons and special offers will appear here. Check back soon for exclusive discounts!"
       }
     },
+    "notificationsPage": {
+      "title": "Notifications",
+      "markAllRead": "Mark all as read",
+      "empty": {
+        "title": "No notifications yet",
+        "description": "We'll let you know when something important happens, like updates on your orders or account security alerts"
+      }
+    },
     "title": "Profile",
     "logout": "Logout",
     "nav": {
