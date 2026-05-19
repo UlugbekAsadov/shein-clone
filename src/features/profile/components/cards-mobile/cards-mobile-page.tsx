@@ -26,7 +26,7 @@ export function CardsMobilePage({ lang, dict, initialCards }: IProps) {
   const isEmpty = cards.length === 0;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <CardsMobileHeader title={t.title} />
 
       <div className="flex flex-1 flex-col pt-4">
@@ -36,11 +36,7 @@ export function CardsMobilePage({ lang, dict, initialCards }: IProps) {
             description={t.empty.description}
           />
         ) : (
-          <CardsMobileList
-            cards={cards}
-            dict={dict}
-            onDelete={handleDelete}
-          />
+          <CardsMobileList cards={cards} dict={dict} onDelete={handleDelete} />
         )}
       </div>
 

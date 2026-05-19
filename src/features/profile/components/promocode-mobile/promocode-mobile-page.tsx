@@ -14,7 +14,7 @@ export function PromocodeMobilePage({ dict, coupons }: IProps) {
   const isEmpty = coupons.length === 0;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <PromocodeMobileHeader title={t.title} />
 
       {isEmpty ? (

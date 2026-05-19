@@ -10,7 +10,7 @@ export function MeasurementsMobilePage({ dict }: IProps) {
   const t = dict.profile.measurements;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <MeasurementsMobileHeader title={t.title} />
       <div className="pt-2">
         <MeasurementsMobileList dict={dict} />

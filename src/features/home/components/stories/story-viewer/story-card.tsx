@@ -39,7 +39,7 @@ export function StoryCard({
       className={cn(
         "relative overflow-hidden bg-muted shadow-2xl sm:rounded-[20px]",
         isActive
-          ? "h-dvh w-screen opacity-100 sm:h-160 sm:w-90"
+          ? "h-screen w-screen opacity-100 sm:h-160 sm:w-90"
           : absDist === 1
             ? "h-0 w-0 opacity-0 sm:h-135 sm:w-80 sm:opacity-60"
             : absDist === 2

@@ -71,7 +71,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         <X className="size-6" />
       </button>
 
-      <div className="relative h-dvh w-full overflow-hidden sm:h-175">
+      <div className="relative h-screen w-full overflow-hidden sm:h-175">
         <div
           className="absolute left-1/2 top-1/2 flex items-center will-change-transform"
           style={{

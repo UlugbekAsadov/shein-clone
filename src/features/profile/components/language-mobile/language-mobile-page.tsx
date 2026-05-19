@@ -35,7 +35,7 @@ export function LanguageMobilePage({ lang, dict }: IProps) {
   };
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <LanguageMobileHeader
         title={t.title}
         backHref={`/${lang}/profile/account`}

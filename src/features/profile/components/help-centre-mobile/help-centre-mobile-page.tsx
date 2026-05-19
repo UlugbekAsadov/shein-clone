@@ -12,7 +12,7 @@ export function HelpCentreMobilePage({ dict }: IProps) {
   const t = dict.profile.helpCentrePage;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <HelpCentreMobileHeader title={t.title} />
 
       <div className="flex flex-col gap-3 px-4 pt-2">

@@ -12,7 +12,7 @@ export function AddCardMobilePage({ lang, dict }: IProps) {
   const t = dict.profile.payments.addCardPage;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <CardsMobileHeader title={t.title} />
       <AddCardForm lang={lang} dict={dict} />
     </div>

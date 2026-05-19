@@ -17,9 +17,8 @@ export function NotificationsMobilePage({
   initialNotifications,
 }: IProps) {
   const t = dict.profile.notificationsPage;
-  const [notifications, setNotifications] = useState<INotification[]>(
-    initialNotifications,
-  );
+  const [notifications, setNotifications] =
+    useState<INotification[]>(initialNotifications);
 
   const handleMarkAll = () => {
     setNotifications((prev) =>
@@ -30,7 +29,7 @@ export function NotificationsMobilePage({
   const isEmpty = notifications.length === 0;
 
   return (
-    <div className="flex min-h-dvh flex-col md:hidden">
+    <div className="flex min-h-screen flex-col md:hidden">
       <NotificationsMobileHeader
         title={t.title}
         markAllLabel={t.markAllRead}
