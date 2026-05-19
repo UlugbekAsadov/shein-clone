@@ -186,6 +186,22 @@
         "description": "We'll let you know when something important happens, like updates on your orders or account security alerts"
       }
     },
+    "helpCentrePage": {
+      "title": "Help centre",
+      "contact": {
+        "label": "Contact",
+        "value": "+998 (93) 123-45-67",
+        "tel": "+998931234567"
+      },
+      "telegram": {
+        "label": "Telegram bot",
+        "value": "@shein_support_bot",
+        "url": "https://t.me/shein_support_bot"
+      }
+    },
+    "languagePage": {
+      "title": "Language"
+    },
     "title": "Profile",
     "logout": "Logout",
     "nav": {

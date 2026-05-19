@@ -1,4 +1,4 @@
-import { AltArrowRight } from "@solar-icons/react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 
 interface IProps {
   label: string;

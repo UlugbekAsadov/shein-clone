@@ -186,6 +186,22 @@
         "description": "Buyurtmalaringiz yoki hisob xavfsizligi haqida muhim narsa yuz berganda sizga xabar beramiz"
       }
     },
+    "helpCentrePage": {
+      "title": "Yordam markazi",
+      "contact": {
+        "label": "Aloqa",
+        "value": "+998 (93) 123-45-67",
+        "tel": "+998931234567"
+      },
+      "telegram": {
+        "label": "Telegram bot",
+        "value": "@shein_support_bot",
+        "url": "https://t.me/shein_support_bot"
+      }
+    },
+    "languagePage": {
+      "title": "Til"
+    },
     "title": "Profil",
     "logout": "Chiqish",
     "nav": {

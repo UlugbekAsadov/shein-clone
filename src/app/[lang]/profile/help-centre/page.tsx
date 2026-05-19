@@ -5,6 +5,7 @@ import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+import { HelpCentreMobilePage } from "@/features/profile/components/help-centre-mobile/help-centre-mobile-page";
 
 export default async function HelpCentrePage({
   params,
@@ -19,11 +20,15 @@ export default async function HelpCentrePage({
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <PagePlaceholder
-          icon={QuestionCircle}
-          title={dict.profile.nav.helpCentre}
-          description={dict.profile.nav.helpCentre}
-        />
+        <HelpCentreMobilePage dict={dict} />
+
+        <div className="hidden md:block">
+          <PagePlaceholder
+            icon={QuestionCircle}
+            title={dict.profile.nav.helpCentre}
+            description={dict.profile.nav.helpCentre}
+          />
+        </div>
       </main>
 
       <Footer dict={dict} />

@@ -186,6 +186,22 @@
         "description": "Мы сообщим вам, когда произойдёт что-то важное — обновления заказов или оповещения о безопасности аккаунта"
       }
     },
+    "helpCentrePage": {
+      "title": "Центр помощи",
+      "contact": {
+        "label": "Связаться",
+        "value": "+998 (93) 123-45-67",
+        "tel": "+998931234567"
+      },
+      "telegram": {
+        "label": "Telegram-бот",
+        "value": "@shein_support_bot",
+        "url": "https://t.me/shein_support_bot"
+      }
+    },
+    "languagePage": {
+      "title": "Язык"
+    },
     "title": "Профиль",
     "logout": "Выйти",
     "nav": {

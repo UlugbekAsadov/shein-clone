@@ -5,6 +5,7 @@ import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+import { LanguageMobilePage } from "@/features/profile/components/language-mobile/language-mobile-page";
 
 export default async function LanguagePage({
   params,
@@ -19,11 +20,15 @@ export default async function LanguagePage({
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <PagePlaceholder
-          icon={Translation}
-          title={dict.profile.nav.language}
-          description={dict.profile.nav.language}
-        />
+        <LanguageMobilePage lang={lang} dict={dict} />
+
+        <div className="hidden md:block">
+          <PagePlaceholder
+            icon={Translation}
+            title={dict.profile.nav.language}
+            description={dict.profile.nav.language}
+          />
+        </div>
       </main>
 
       <Footer dict={dict} />
