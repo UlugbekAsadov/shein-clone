@@ -160,13 +160,20 @@
         "description": "Faol promokodlar va mavsumiy kuponlar shu yerda paydo bo'ladi."
       }
     },
+    "title": "Profil",
+    "logout": "Chiqish",
     "nav": {
       "account": "Hisobimni boshqarish",
       "orders": "Buyurtmalarim",
       "addresses": "Manzillarim",
       "payments": "To'lovlar",
+      "myCards": "Mening kartalarim",
       "measurements": "O'lchamlar",
-      "promocode": "Promokod"
+      "promocode": "Promokod",
+      "chat": "Chat",
+      "language": "Til",
+      "notifications": "Bildirishnomalar",
+      "helpCentre": "Yordam markazi"
     },
     "measurements": {
       "title": "Mening o'lchovlarim",

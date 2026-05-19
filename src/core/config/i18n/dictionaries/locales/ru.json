@@ -160,13 +160,20 @@
         "description": "Действующие промокоды и сезонные купоны появятся здесь, когда станут доступны."
       }
     },
+    "title": "Профиль",
+    "logout": "Выйти",
     "nav": {
       "account": "Управление аккаунтом",
       "orders": "Мои заказы",
       "addresses": "Мои адреса",
       "payments": "Платежи",
+      "myCards": "Мои карты",
       "measurements": "Мерки",
-      "promocode": "Промокод"
+      "promocode": "Промокод",
+      "chat": "Чат",
+      "language": "Язык",
+      "notifications": "Уведомления",
+      "helpCentre": "Центр помощи"
     },
     "measurements": {
       "title": "Мои мерки",

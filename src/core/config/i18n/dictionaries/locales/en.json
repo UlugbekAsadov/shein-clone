@@ -160,13 +160,20 @@
         "description": "Active promo codes and seasonal coupons will show up here when available."
       }
     },
+    "title": "Profile",
+    "logout": "Logout",
     "nav": {
       "account": "Manage my account",
       "orders": "My Orders",
       "addresses": "My-addresses",
       "payments": "Payments",
+      "myCards": "My cards",
       "measurements": "Measurements",
-      "promocode": "Promacode"
+      "promocode": "Promacode",
+      "chat": "Chat",
+      "language": "Language",
+      "notifications": "Notifications",
+      "helpCentre": "Help centre"
     },
     "measurements": {
       "title": "My Measurements",
