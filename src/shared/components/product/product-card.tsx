@@ -26,7 +26,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const href = `/${lang}/product/${product.slug ?? product.id}`;
 
   return (
-    <div>
+    <article>
       <Link
         href={href}
         className={cn(
@@ -37,7 +37,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             : "border-border md:bg-card text-card-foreground",
         )}
       >
-      <div
+        <div
           className={cn(
             "relative aspect-4/5 overflow-hidden bg-muted rounded-[10px]",
             "md:rounded-md",
@@ -90,7 +90,12 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           )}
         </div>
 
-        <div className={cn("flex flex-col gap-1 p-0 pt-1 pb-0.5", "md:p-2.5 md:pb-3.5")}>
+        <div
+          className={cn(
+            "flex flex-col gap-1 p-0 pt-1 pb-0.5",
+            "md:p-2.5 md:pb-3.5",
+          )}
+        >
           <h3 className={cn("text-sm font-bold leading-tight", "md:text-lg")}>
             {product.title}
           </h3>
@@ -181,6 +186,6 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         open={cartDrawerOpen}
         onOpenChange={setCartDrawerOpen}
       />
-    </div>
+    </article>
   );
 }
