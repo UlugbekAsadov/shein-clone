@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
-import { CategoryNav } from "@/shared/components/category/category-nav";
 import { Footer } from "@/shared/components/footer/footer";
 import { ListingShell } from "@/shared/components/listing/listing-shell";
 import { ListingPageHeader } from "@/shared/components/listing/listing-page-header";

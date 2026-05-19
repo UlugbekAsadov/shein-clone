@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
-import { CategoryNav } from "@/shared/components/category/category-nav";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProductBreadcrumb } from "@/features/product/components/product-breadcrumb";
 import { productBreadcrumbTrail } from "@/features/product/mocks/breadcrumb.mocks";
