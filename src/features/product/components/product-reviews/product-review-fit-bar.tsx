@@ -1,5 +1,6 @@
 import { Progress } from "@/shared/components/ui/progress";
 import type { IFitStat } from "@/features/product/interfaces/review.interface";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   stat: IFitStat;
@@ -9,7 +10,12 @@ export function ProductReviewFitBar({ stat }: IProps) {
   return (
     <div className="flex flex-col text-xs gap-1">
       <div className="flex items-center justify-between">
-        <span className="w-20 shrink-0 text-muted-foreground">
+        <span
+          className={cn(
+            "w-20 shrink-0 text-foreground",
+            "md:text-muted-foreground",
+          )}
+        >
           {stat.label}
         </span>
         <span className="w-10 shrink-0 text-right font-semibold">

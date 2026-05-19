@@ -33,8 +33,8 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           "group flex flex-col overflow-hidden rounded-[10px] ",
           "md:p-1.5 md:rounded-lg",
           isDark
-            ? "border-white/10 bg-secondary text-foreground"
-            : "border-border bg-card text-card-foreground",
+            ? "border-white/10 md:bg-secondary text-foreground"
+            : "border-border md:bg-card text-card-foreground",
         )}
       >
       <div

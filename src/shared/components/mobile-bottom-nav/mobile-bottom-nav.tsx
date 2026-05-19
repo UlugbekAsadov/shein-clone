@@ -36,6 +36,8 @@ export function MobileBottomNav({ lang, dict }: IProps) {
   const ordersPath = `/${lang}/orders`;
   const profilePath = `/${lang}/profile/account`;
 
+  if (pathname.startsWith(`/${lang}/product/`)) return null;
+
   const items: IItem[] = [
     {
       key: "home",
@@ -82,10 +84,12 @@ export function MobileBottomNav({ lang, dict }: IProps) {
   const after = items.slice(safeActiveIndex + 1);
 
   return (
-    <nav
-      aria-label="Primary"
-      className="pointer-events-none fixed inset-x-0 bottom-0 z-100 flex justify-center px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"
-    >
+    <>
+      <div aria-hidden className="h-20 shrink-0 md:hidden" />
+      <nav
+        aria-label="Primary"
+        className="pointer-events-none fixed inset-x-0 bottom-0 z-100 flex justify-center px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"
+      >
       <LayoutGroup>
         <div className="pointer-events-auto flex items-center gap-2">
           <AnimatePresence initial={false} mode="popLayout">
@@ -134,6 +138,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
           </AnimatePresence>
         </div>
       </LayoutGroup>
-    </nav>
+      </nav>
+    </>
   );
 }

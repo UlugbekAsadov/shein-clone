@@ -31,7 +31,7 @@ export function ProductSizeSelector({
   return (
     <div className={cn("mt-4", className)}>
       {showHeader && (
-        <div className="mb-2 flex items-center justify-between font-bold">
+        <div className="mb-2 text-sm flex items-center justify-between font-bold">
           <span>Size:</span>
           {headerAction}
         </div>
@@ -48,7 +48,7 @@ export function ProductSizeSelector({
                 disabled={!s.available}
                 onClick={() => onChange(s.id)}
                 className={cn(
-                  "relative flex h-13 min-w-12 flex-col items-center justify-center rounded-[10px] border bg-background px-2 transition cursor-pointer",
+                  "relative flex h-11 min-w-11 flex-col items-center justify-center rounded-[10px] border bg-background px-2 transition cursor-pointer",
                   selected
                     ? "border-foreground"
                     : "border-border hover:border-foreground/40",

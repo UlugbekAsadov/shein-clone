@@ -51,7 +51,7 @@ export default async function RootLayout({
       )}
     >
       <body
-        className="min-h-full flex flex-col pb-20 md:pb-0"
+        className="min-h-full flex flex-col"
         suppressHydrationWarning
       >
         <Providers>

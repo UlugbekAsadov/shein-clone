@@ -12,6 +12,7 @@ import { CommentsSummaryCard } from "@/features/product/components/comments/comm
 import { CommentsMediaGallery } from "@/features/product/components/comments/comments-media-gallery";
 import { CommentsReviewList } from "@/features/product/components/comments/comments-list/comments-review-list";
 import { CommentsStickyBar } from "@/features/product/components/comments/comments-sticky-bar";
+import { CommentsMobilePage } from "@/features/product/components/comments/comments-mobile/comments-mobile-page";
 import { ratingDistributionMock } from "@/features/product/mocks/rating-distribution.mocks";
 import { commentsReviewsMock } from "@/features/product/mocks/comments-reviews.mocks";
 import {
@@ -30,35 +31,42 @@ export default async function ProductCommentsPage({
 
   return (
     <>
-      <Header lang={lang} dict={dict} />
+      <CommentsMobilePage
+        reviews={commentsReviewsMock}
+        applyLabel={dict.listing.filter.apply}
+      />
 
-      <main className="flex-1 pb-24">
-        <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
-          <ProductBreadcrumb items={productBreadcrumbTrail} />
+      <div className="hidden md:contents">
+        <Header lang={lang} dict={dict} />
 
-          <div className="flex gap-8">
-            <CommentsFilterSidebar />
+        <main className="flex-1 pb-24">
+          <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
+            <ProductBreadcrumb items={productBreadcrumbTrail} />
 
-            <section className="flex flex-1 flex-col gap-4">
-              <CommentsHeader totalLabel="100+" />
-              <CommentsSummaryCard
-                rating={product.rating}
-                buckets={ratingDistributionMock}
-              />
-              <CommentsMediaGallery
-                lang={lang}
-                slug={slug}
-                images={commentsMediaMock}
-                videoIndex={commentsVideoIndex}
-              />
-              <CommentsReviewList reviews={commentsReviewsMock} />
-            </section>
+            <div className="flex gap-8">
+              <CommentsFilterSidebar />
+
+              <section className="flex flex-1 flex-col gap-4">
+                <CommentsHeader totalLabel="100+" />
+                <CommentsSummaryCard
+                  rating={product.rating}
+                  buckets={ratingDistributionMock}
+                />
+                <CommentsMediaGallery
+                  lang={lang}
+                  slug={slug}
+                  images={commentsMediaMock}
+                  videoIndex={commentsVideoIndex}
+                />
+                <CommentsReviewList reviews={commentsReviewsMock} />
+              </section>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
 
-      <CommentsStickyBar product={product} />
-      <Footer dict={dict} />
+        <CommentsStickyBar product={product} />
+        <Footer dict={dict} />
+      </div>
     </>
   );
 }

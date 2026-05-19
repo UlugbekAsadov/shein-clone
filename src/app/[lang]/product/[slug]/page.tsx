@@ -13,6 +13,7 @@ import { ProductSellerCard } from "@/features/product/components/product-info/pr
 import { ProductDescriptionSection } from "@/features/product/components/product-info/product-description-section";
 import { ProductReviewsSection } from "@/features/product/components/product-reviews/product-reviews-section";
 import { SimilarProducts } from "@/features/product/components/similar-products";
+import { ProductMobilePage } from "@/features/product/components/product-mobile/product-mobile-page";
 import { productBreadcrumbTrail } from "@/features/product/mocks/breadcrumb.mocks";
 import { productDetailMock } from "@/features/product/mocks/product-detail.mocks";
 import { sellerCardMock } from "@/features/product/mocks/seller-card.mocks";
@@ -34,43 +35,56 @@ export default async function ProductPage({
 
   return (
     <>
-      <ProductStickyBar product={product} />
-      <Header lang={lang} dict={dict} />
+      <ProductMobilePage
+        product={product}
+        fitStats={fitStatsMock}
+        reviewMedia={reviewMediaMock}
+        reviews={reviewsMock}
+        similar={similar.slice(0, 4)}
+        seller={sellerCardMock}
+        followLabel={dict.shop.follow}
+        followingLabel={dict.shop.following}
+      />
 
-      <main className="flex-1">
-        <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
-          <ProductBreadcrumb items={productBreadcrumbTrail} />
+      <div className="hidden md:contents">
+        <ProductStickyBar product={product} />
+        <Header lang={lang} dict={dict} />
 
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            <div className="flex flex-col gap-8">
-              <ProductPreviewGallery
-                images={product.gallery}
-                alt={product.title}
-              />
-              <ProductReviewsSection
-                lang={lang}
-                slug={slug}
-                totalLabel="100+"
-                rating={product.rating}
-                fitStats={fitStatsMock}
-                media={reviewMediaMock}
-                reviews={reviewsMock}
-              />
+        <main className="flex-1">
+          <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
+            <ProductBreadcrumb items={productBreadcrumbTrail} />
+
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+              <div className="flex flex-col gap-8">
+                <ProductPreviewGallery
+                  images={product.gallery}
+                  alt={product.title}
+                />
+                <ProductReviewsSection
+                  lang={lang}
+                  slug={slug}
+                  totalLabel="100+"
+                  rating={product.rating}
+                  fitStats={fitStatsMock}
+                  media={reviewMediaMock}
+                  reviews={reviewsMock}
+                />
+              </div>
+
+              <div className="flex flex-col gap-6">
+                <ProductInfoPanel product={product} />
+                <ProductShippingInfo />
+                <ProductSellerCard seller={sellerCardMock} />
+                <ProductDescriptionSection product={product} />
+              </div>
             </div>
 
-            <div className="flex flex-col gap-6">
-              <ProductInfoPanel product={product} />
-              <ProductShippingInfo />
-              <ProductSellerCard seller={sellerCardMock} />
-              <ProductDescriptionSection product={product} />
-            </div>
+            <SimilarProducts products={similar} countLabel="3300+ products" />
           </div>
+        </main>
 
-          <SimilarProducts products={similar} countLabel="3300+ products" />
-        </div>
-      </main>
-
-      <Footer dict={dict} />
+        <Footer dict={dict} />
+      </div>
     </>
   );
 }
