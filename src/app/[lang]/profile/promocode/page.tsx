@@ -6,6 +6,8 @@ import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
 import { ProfilePlaceholder } from "@/features/profile/components/profile-placeholder";
+import { PromocodeMobilePage } from "@/features/profile/components/promocode-mobile/promocode-mobile-page";
+import { shopCoupons } from "@/features/shop/mocks/coupon.mocks";
 
 export default async function PromocodePage({
   params,
@@ -21,17 +23,21 @@ export default async function PromocodePage({
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <ProfileShell lang={lang} dict={dict} activeId="promocode">
-          <header className="mb-6">
-            <h1 className="text-xl font-bold">{t.title}</h1>
-            <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
-          </header>
-          <ProfilePlaceholder
-            icon={Ticket}
-            title={t.empty.title}
-            description={t.empty.description}
-          />
-        </ProfileShell>
+        <PromocodeMobilePage dict={dict} coupons={shopCoupons} />
+
+        <div className="hidden md:block">
+          <ProfileShell lang={lang} dict={dict} activeId="promocode">
+            <header className="mb-6">
+              <h1 className="text-xl font-bold">{t.title}</h1>
+              <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
+            </header>
+            <ProfilePlaceholder
+              icon={Ticket}
+              title={t.empty.title}
+              description={t.empty.description}
+            />
+          </ProfileShell>
+        </div>
       </main>
 
       <Footer dict={dict} />

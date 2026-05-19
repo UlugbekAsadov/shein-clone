@@ -171,11 +171,11 @@
       }
     },
     "promocode": {
-      "title": "Promacode",
+      "title": "Promocode",
       "current": "Your codes",
       "empty": {
         "title": "No promo codes yet",
-        "description": "Active promo codes and seasonal coupons will show up here when available."
+        "description": "Your active coupons and special offers will appear here. Check back soon for exclusive discounts!"
       }
     },
     "title": "Profile",
@@ -187,7 +187,7 @@
       "payments": "Payments",
       "myCards": "My cards",
       "measurements": "Measurements",
-      "promocode": "Promacode",
+      "promocode": "Promocode",
       "chat": "Chat",
       "language": "Language",
       "notifications": "Notifications",
