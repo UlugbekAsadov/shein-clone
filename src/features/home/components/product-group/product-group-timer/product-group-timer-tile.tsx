@@ -4,7 +4,7 @@ interface IProps {
   value: string;
 }
 
-export function HotDealsTimerTile({ value }: IProps) {
+export function ProductGroupTimerTile({ value }: IProps) {
   return (
     <div
       className={cn(

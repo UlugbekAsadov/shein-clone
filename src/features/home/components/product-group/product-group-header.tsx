@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ProductGroupTimer } from "@/features/home/components/product-group/product-group-timer/product-group-timer";
 
 interface IProps {
   title: React.ReactNode;
@@ -11,9 +12,11 @@ interface IProps {
   rightAction?: React.ReactNode;
   className?: string;
   subTitleClassName?: string;
+  subTitleColor?: string;
+  timer?: Date;
 }
 
-export function SectionHeader({
+export function ProductGroupHeader({
   title,
   subtitle,
   viewAllHref,
@@ -22,6 +25,8 @@ export function SectionHeader({
   rightAction,
   className,
   subTitleClassName,
+  subTitleColor,
+  timer,
 }: IProps) {
   return (
     <div
@@ -31,21 +36,35 @@ export function SectionHeader({
         className,
       )}
     >
-      <div>
-        <h2 className="text-base md:text-xl font-semibold md:font-bold leading-tight">
-          {title}
-        </h2>
-        {subtitle && (
-          <p
+      <div
+        className={cn(
+          "flex items-center gap-4 justify-between w-full",
+          "md:justify-start md:w-fit",
+        )}
+      >
+        <div>
+          <h2
             className={cn(
-              "mt-1 text-xs text-muted-foreground",
-              subTitleClassName,
+              "text-base md:text-xl font-semibold md:font-bold leading-tight",
             )}
           >
-            {subtitle}
-          </p>
-        )}
+            {title}
+          </h2>
+          {subtitle && (
+            <p
+              className={cn(
+                "mt-1 text-xs text-muted-foreground",
+                subTitleClassName,
+              )}
+              style={{ color: subTitleColor }}
+            >
+              {subtitle}
+            </p>
+          )}
+        </div>
+        {timer && <ProductGroupTimer timer={timer} />}
       </div>
+
       {rightAction
         ? rightAction
         : viewAllHref &&
@@ -55,7 +74,9 @@ export function SectionHeader({
               className={cn(
                 "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground",
                 viewAllHiddenOnMobile && "hidden md:inline-flex",
+                className,
               )}
+              style={{ color: subTitleColor }}
             >
               {viewAllLabel}
               <ChevronRight className="size-5" />

@@ -8,13 +8,17 @@ import { Footer } from "@/shared/components/footer/footer";
 import { PromoBanner } from "@/features/home/components/promo-banner";
 import { BrandStrip } from "@/features/home/components/brand-strip/brand-strip";
 import { HeroCarousel } from "@/features/home/components/hero-carousel";
-import { ShopByCategory } from "@/features/home/components/shop-by-category/shop-by-category";
-import { TrendingNow } from "@/features/home/components/trending-now";
+import { Categories } from "@/features/home/components/categories/categories";
 import { WomensFashion } from "@/features/home/components/womens-fashion";
 import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
-import { MoreToExplore } from "@/features/home/components/more-to-explore";
-import { HotDeals } from "@/features/home/components/hot-deals/hot-deals";
 import { DiscountBanners } from "@/features/home/components/discount-banners/discount-banners";
+import { ProductGroup } from "@/features/home/components/product-group/product-group";
+import { moreToExplore, trendingProducts } from "@/shared/mocks";
+import { GraphUp } from "@solar-icons/react/ssr";
+import {
+  ECommerceBagBlueBag,
+  FlameSolid,
+} from "@/shared/components/icons/solid";
 
 export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -41,15 +45,19 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           placeholder={dict.header.searchPlaceholder}
         />
         <HeroCarousel />
-        <ShopByCategory
+        <Categories
           lang={lang}
           title={dict.sections.shopByCategory}
           viewAllLabel={dict.sections.viewAll}
         />
-        <TrendingNow
+        <ProductGroup
           title={dict.sections.trendingNow}
           subtitle={dict.sections.trendingSubtitle}
           viewAllLabel={dict.sections.viewAll}
+          bgColor="#FF3C0614"
+          products={trendingProducts}
+          viewAllHref="#"
+          Icon={GraphUp}
         />
         <WomensFashion
           title={dict.sections.womensFashion}
@@ -63,15 +71,27 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           followLabel={dict.sections.follow}
           followingLabel={dict.sections.following}
         />
-        <MoreToExplore
+        <ProductGroup
           title={dict.sections.moreToExplore}
           subtitle={dict.sections.moreSubtitle}
           viewAllLabel={dict.sections.viewAll}
+          bgColor="#FF3C0614"
+          products={moreToExplore}
+          viewAllHref="#"
+          Icon={ECommerceBagBlueBag}
         />
-        <HotDeals
-          title={dict.sections.hotDeals}
-          subtitle={dict.sections.hotSubtitle}
+
+        <ProductGroup
+          title={dict.sections.moreToExplore}
+          subtitle={dict.sections.moreSubtitle}
           viewAllLabel={dict.sections.viewAll}
+          products={moreToExplore}
+          viewAllHref="#"
+          Icon={FlameSolid}
+          bgImage="/images/hot-deals-background.webp"
+          textColor="#FFFFFF"
+          descriptionColor="#FFFFFF"
+          timer={new Date("2026-05-29T00:00:00Z")}
         />
         <DiscountBanners discountLabel={dict.sections.discount} />
       </main>

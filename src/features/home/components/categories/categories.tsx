@@ -1,7 +1,7 @@
 import { shopByCategory } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
-import { SectionHeader } from "../section-header";
 import { CategoryRail } from "./category-rail";
+import { CategoriesHeader } from "./categories-header";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -9,10 +9,10 @@ interface IProps {
   viewAllLabel: string;
 }
 
-export function ShopByCategory({ lang, title, viewAllLabel }: IProps) {
+export function Categories({ lang, title, viewAllLabel }: IProps) {
   return (
     <section className="mx-auto max-w-360 px-4 mt-4 md:px-6 md:py-3 md:pt-6">
-      <SectionHeader
+      <CategoriesHeader
         title={title}
         viewAllHref="#"
         viewAllLabel={viewAllLabel}

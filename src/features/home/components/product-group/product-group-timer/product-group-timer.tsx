@@ -1,24 +1,32 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { HotDealsTimerTile } from "./hot-deals-timer-tile";
 import { cn } from "@/lib/utils";
-
-const INITIAL_SECONDS = 24 * 3600 + 12 * 60 + 30;
+import { ProductGroupTimerTile } from "./product-group-timer-tile";
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");
 }
 
-export function HotDealsTimer() {
-  const [secondsLeft, setSecondsLeft] = useState(INITIAL_SECONDS);
+function getSecondsLeft(target: Date) {
+  const diff = Math.floor((target.getTime() - Date.now()) / 1000);
+  return diff > 0 ? diff : 0;
+}
+
+interface IProps {
+  timer: Date;
+}
+
+export function ProductGroupTimer({ timer }: IProps) {
+  const [secondsLeft, setSecondsLeft] = useState(() => getSecondsLeft(timer));
 
   useEffect(() => {
+    setSecondsLeft(getSecondsLeft(timer));
     const id = setInterval(() => {
-      setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
+      setSecondsLeft(getSecondsLeft(timer));
     }, 1000);
     return () => clearInterval(id);
-  }, []);
+  }, [timer]);
 
   const h = Math.floor(secondsLeft / 3600);
   const m = Math.floor((secondsLeft % 3600) / 60);
@@ -26,7 +34,7 @@ export function HotDealsTimer() {
 
   return (
     <div className="flex items-center gap-1">
-      <HotDealsTimerTile value={pad(h)} />
+      <ProductGroupTimerTile value={pad(h)} />
       <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
         <span
           className={cn(
@@ -41,7 +49,7 @@ export function HotDealsTimer() {
           )}
         />
       </div>
-      <HotDealsTimerTile value={pad(m)} />
+      <ProductGroupTimerTile value={pad(m)} />
       <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
         <span
           className={cn(
@@ -56,7 +64,7 @@ export function HotDealsTimer() {
           )}
         />
       </div>
-      <HotDealsTimerTile value={pad(s)} />
+      <ProductGroupTimerTile value={pad(s)} />
     </div>
   );
 }

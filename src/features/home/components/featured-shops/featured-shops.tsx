@@ -2,13 +2,13 @@ import Image from "next/image";
 import { BadgeCheck } from "lucide-react";
 import type { IShop } from "@/types/shop.interface";
 import { featuredShops } from "@/shared/mocks";
-import { SectionHeader } from "../section-header";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
 import { ShopSolid } from "@/shared/components/icons/solid";
 import { Button } from "@/shared/components/ui/button";
 import { Tag } from "@/shared/components/tag/tag";
 import { MedalRibbonStar, Star, Box } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
+import { FeaturedShopsHeader } from "./featured-shops-header";
 
 interface IProps {
   title: string;
@@ -35,7 +35,7 @@ export function FeaturedShops({
           "md:p-5 md:rounded-[28px] md:overflow-visible",
         )}
       >
-        <SectionHeader
+        <FeaturedShopsHeader
           title={
             <span className={cn("flex items-center gap-1", "md:gap-2")}>
               {title}

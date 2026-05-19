@@ -1,3 +1,5 @@
+import { Icon } from "@solar-icons/react/lib/types";
+
 type Props = React.SVGProps<SVGSVGElement>;
 
 export const LayoutGridSolid = (props: Props) => (
