@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -10,84 +13,108 @@ import {
   waistOptions,
   weightOptions,
 } from "@/features/profile/mocks/measurement.mocks";
+import type { IMeasurementOption } from "@/features/profile/interfaces/measurement.interface";
 import { MeasurementField } from "./measurement-field";
-import { MeasurementsConsent } from "./measurements-consent";
 
 interface IProps {
   dict: IDictionary;
 }
 
+type FieldKey =
+  | "height"
+  | "weight"
+  | "bust"
+  | "braSize"
+  | "waist"
+  | "hips"
+  | "preference"
+  | "footwear";
+
+interface IFieldConfig {
+  key: FieldKey;
+  options: IMeasurementOption[];
+}
+
+const FIELDS: IFieldConfig[] = [
+  { key: "height", options: heightOptions },
+  { key: "weight", options: weightOptions },
+  { key: "bust", options: bustOptions },
+  { key: "braSize", options: braSizeOptions },
+  { key: "waist", options: waistOptions },
+  { key: "hips", options: hipsOptions },
+  { key: "preference", options: preferenceOptions },
+  { key: "footwear", options: footwearOptions },
+];
+
+const initialValues: Record<FieldKey, string> = {
+  height: "",
+  weight: "",
+  bust: "",
+  braSize: "",
+  waist: "",
+  hips: "",
+  preference: "",
+  footwear: "",
+};
+
 export function MeasurementsForm({ dict }: IProps) {
   const t = dict.profile.measurements;
-  const placeholder = t.placeholder;
+
+  const [values, setValues] =
+    useState<Record<FieldKey, string>>(initialValues);
+
+  const isDirty = (Object.keys(values) as FieldKey[]).some(
+    (key) => values[key] !== initialValues[key],
+  );
+
+  const setValue = (key: FieldKey) => (value: string) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+  };
+
+  const handleCancel = () => setValues(initialValues);
+
+  const handleApply = () => {
+    // demo: nothing to persist yet
+  };
 
   return (
-    <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
-      <div className="space-y-6">
-        <div>
-          <h1 className="text-xl font-bold">{t.desktopTitle}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{t.sizeGuide}</p>
-        </div>
+    <div>
+      <h1 className="text-xl font-bold text-foreground">{t.title}</h1>
+      <div className="my-5 border-t border-border" />
 
-        <div className="space-y-4">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-5 lg:grid-cols-2">
+        {FIELDS.map((field) => (
           <MeasurementField
-            label={t.fields.height}
-            placeholder={placeholder}
-            options={heightOptions}
+            key={field.key}
+            label={t.fields[field.key]}
+            placeholder={t.placeholder}
+            options={field.options}
+            value={values[field.key]}
+            onChange={setValue(field.key)}
           />
-          <MeasurementField
-            label={t.fields.weight}
-            placeholder={placeholder}
-            options={weightOptions}
-          />
-          <MeasurementField
-            label={t.fields.bust}
-            placeholder={placeholder}
-            options={bustOptions}
-          />
-          <MeasurementField
-            label={t.fields.braSize}
-            placeholder={placeholder}
-            options={braSizeOptions}
-          />
-          <MeasurementField
-            label={t.fields.waist}
-            placeholder={placeholder}
-            options={waistOptions}
-          />
-          <MeasurementField
-            label={t.fields.hips}
-            placeholder={placeholder}
-            options={hipsOptions}
-          />
-          <MeasurementField
-            label={t.fields.preference}
-            placeholder={placeholder}
-            options={preferenceOptions}
-          />
-          <MeasurementField
-            label={t.fields.footwear}
-            placeholder={placeholder}
-            options={footwearOptions}
-          />
-        </div>
+        ))}
       </div>
 
-      <div className="flex flex-col gap-6">
-        <p className="text-sm font-medium leading-relaxed">{t.intro}</p>
-        <MeasurementsConsent
-          body={t.consent.body}
-          privacyPolicyLabel={t.consent.privacyPolicy}
-          privacyPolicyHref="#"
-        />
-        <div className="mt-auto flex items-center justify-end gap-3">
-          <Button variant="outline" size="lg" className="rounded-sm px-6">
+      <div className="mt-8 flex items-center justify-end gap-3">
+        {isDirty && (
+          <Button
+            type="button"
+            variant="secondary"
+            size="lg"
+            onClick={handleCancel}
+            className="rounded-sm px-6 h-12.5 text-lg"
+          >
             {t.cancel}
           </Button>
-          <Button size="lg" className="rounded-sm px-8">
-            {t.update}
-          </Button>
-        </div>
+        )}
+        <Button
+          type="button"
+          size="lg"
+          onClick={handleApply}
+          className="rounded-sm px-8 h-12.5 text-lg"
+        >
+          {t.apply}
+        </Button>
       </div>
     </div>
   );

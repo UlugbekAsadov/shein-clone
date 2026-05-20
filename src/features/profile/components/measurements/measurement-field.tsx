@@ -13,25 +13,33 @@ interface IProps {
   label: string;
   placeholder: string;
   options: IMeasurementOption[];
-  defaultValue?: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 
 export function MeasurementField({
   label,
   placeholder,
   options,
-  defaultValue,
+  value,
+  onChange,
 }: IProps) {
   return (
-    <div className="grid grid-cols-[160px_1fr] items-center gap-6">
-      <label className="text-lg font-medium text-secondary-foreground">{label}:</label>
-      <Select defaultValue={defaultValue}>
-        <SelectTrigger className="h-12! w-full rounded-[8px] px-4 text-lg">
+    <div className="grid grid-cols-[140px_1fr] items-center gap-4">
+      <label className="text-base font-medium text-foreground">
+        {label}:
+      </label>
+      <Select value={value || undefined} onValueChange={onChange}>
+        <SelectTrigger className="h-12! w-full rounded-sm bg-secondary px-4 font-semibold text-base data-placeholder:text-muted-foreground">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent position="popper">
+        <SelectContent position="popper" className="max-h-72">
           {options.map((option) => (
-            <SelectItem key={option.value} value={option.value}>
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              className="text-base"
+            >
               {option.label}
             </SelectItem>
           ))}

@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import { Ticket } from "lucide-react";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
-import { ProfilePlaceholder } from "@/features/profile/components/profile-placeholder";
 import { PromocodeMobilePage } from "@/features/profile/components/promocode-mobile/promocode-mobile-page";
+import { PromocodeDesktopPage } from "@/features/profile/components/promocode-desktop/promocode-desktop-page";
 import { shopCoupons } from "@/features/shop/mocks/coupon.mocks";
 
 export default async function PromocodePage({
@@ -16,7 +15,6 @@ export default async function PromocodePage({
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
-  const t = dict.profile.promocode;
 
   return (
     <>
@@ -27,15 +25,7 @@ export default async function PromocodePage({
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="promocode">
-            <header className="mb-6">
-              <h1 className="text-xl font-bold">{t.title}</h1>
-              <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
-            </header>
-            <ProfilePlaceholder
-              icon={Ticket}
-              title={t.empty.title}
-              description={t.empty.description}
-            />
+            <PromocodeDesktopPage dict={dict} coupons={shopCoupons} />
           </ProfileShell>
         </div>
       </main>

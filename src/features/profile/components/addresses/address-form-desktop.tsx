@@ -73,8 +73,10 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
   const router = useRouter();
   const params = useSearchParams();
 
-  const initialType = (params.get("type") ??
-    "home") as "home" | "work" | "other";
+  const initialType = (params.get("type") ?? "home") as
+    | "home"
+    | "work"
+    | "other";
 
   const [type, setType] = useState<"home" | "work" | "other">(initialType);
   const [name, setName] = useState(params.get("name") ?? "");
@@ -211,8 +213,8 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
 
           {addressFocused && suggestions.length > 0 && (
             <ul className="absolute top-full left-0 right-0 z-20 mt-2 max-h-80 overflow-y-auto rounded-lg bg-background shadow-[2px_2px_10px_0px_#0000001F]">
-              {suggestions.map((item) => (
-                <li key={item.value}>
+              {suggestions.map((item, idx) => (
+                <li key={item.value + idx}>
                   <button
                     type="button"
                     onMouseDown={(event) => event.preventDefault()}
