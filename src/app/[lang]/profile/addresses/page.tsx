@@ -4,7 +4,7 @@ import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
-import { AddressesList } from "@/features/profile/components/addresses/addresses-list";
+import { AddressesDesktopList } from "@/features/profile/components/addresses/addresses-desktop-list";
 import { AddressesMobilePage } from "@/features/profile/components/addresses-mobile/addresses-mobile-page";
 import { addressMocks } from "@/features/profile/mocks/address.mocks";
 
@@ -29,7 +29,11 @@ export default async function AddressesPage({
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="addresses">
-            <AddressesList addresses={addressMocks} dict={dict} lang={lang} />
+            <AddressesDesktopList
+              addresses={addressMocks}
+              dict={dict}
+              lang={lang}
+            />
           </ProfileShell>
         </div>
       </main>
