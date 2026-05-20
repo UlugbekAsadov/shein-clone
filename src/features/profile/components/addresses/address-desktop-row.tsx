@@ -12,9 +12,9 @@ export function AddressDesktopRow({ address, onClick }: IProps) {
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center gap-3 rounded-2xl bg-secondary p-4 text-left transition-colors hover:bg-secondary/80"
+      className="flex w-full items-center gap-3 text-left transition-colors cursor-pointer"
     >
-      <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-background text-foreground">
+      <span className="grid size-14.5 shrink-0 place-items-center rounded-md bg-secondary text-foreground">
         <AddressTypeIcon type={address.type} className="size-6" />
       </span>
 

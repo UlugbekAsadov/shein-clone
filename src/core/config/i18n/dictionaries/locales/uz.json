@@ -196,7 +196,7 @@
       },
       "delete": {
         "title": "Kartani o'chirasizmi?",
-        "description": "Keyinroq ushbu sahifadan qaytadan qo'shishingiz mumkin",
+        "description": "Ushbu kartani o'chirib tashlamoqchimisiz? Kelajakdagi to'lovlarda foydalanish uchun uni qayta qo'shishingiz kerak bo'ladi",
         "confirm": "O'chirish",
         "cancel": "Bekor qilish"
       },

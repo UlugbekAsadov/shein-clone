@@ -42,7 +42,7 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
     },
     {
       id: "payments",
-      label: dict.profile.nav.payments,
+      label: dict.profile.nav.myCards,
       href: `/${lang}/profile/payments`,
       icon: CreditCard,
     },

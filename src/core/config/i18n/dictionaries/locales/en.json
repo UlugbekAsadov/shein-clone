@@ -195,8 +195,8 @@
         "description": "Add a debit or credit card to make secure payments and faster checkouts"
       },
       "delete": {
-        "title": "Remove this card?",
-        "description": "You can add it back later from this page",
+        "title": "Remove card?",
+        "description": "Are you sure you want to remove this card? You'll need to add it again to use it for future payments",
         "confirm": "Remove",
         "cancel": "Cancel"
       },

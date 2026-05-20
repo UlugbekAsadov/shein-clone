@@ -1,12 +1,11 @@
 import { notFound } from "next/navigation";
-import { CreditCard } from "lucide-react";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
-import { ProfilePlaceholder } from "@/features/profile/components/profile-placeholder";
 import { CardsMobilePage } from "@/features/profile/components/cards-mobile/cards-mobile-page";
+import { CardsDesktopPage } from "@/features/profile/components/cards-desktop/cards-desktop-page";
 import { cardMocks } from "@/features/profile/mocks/card.mocks";
 
 export default async function PaymentsPage({
@@ -16,7 +15,6 @@ export default async function PaymentsPage({
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
-  const t = dict.profile.payments;
 
   return (
     <>
@@ -27,15 +25,7 @@ export default async function PaymentsPage({
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="payments">
-            <header className="mb-6">
-              <h1 className="text-xl font-bold">{t.title}</h1>
-              <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
-            </header>
-            <ProfilePlaceholder
-              icon={CreditCard}
-              title={t.empty.title}
-              description={t.empty.description}
-            />
+            <CardsDesktopPage dict={dict} initialCards={cardMocks} />
           </ProfileShell>
         </div>
       </main>
