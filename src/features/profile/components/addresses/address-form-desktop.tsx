@@ -32,6 +32,42 @@ const DEFAULT_CENTER: ICoords = { lng: 69.279, lat: 41.311 };
 
 const TYPES: Array<"home" | "other" | "work"> = ["home", "other", "work"];
 
+function highlightMatch(text: string, query: string) {
+  const trimmed = query.trim();
+  if (!trimmed) {
+    return <span className="text-muted-foreground">{text}</span>;
+  }
+  const lower = text.toLowerCase();
+  const needle = trimmed.toLowerCase();
+  const segments: Array<{ text: string; match: boolean }> = [];
+  let cursor = 0;
+  while (cursor < text.length) {
+    const found = lower.indexOf(needle, cursor);
+    if (found === -1) {
+      segments.push({ text: text.slice(cursor), match: false });
+      break;
+    }
+    if (found > cursor) {
+      segments.push({ text: text.slice(cursor, found), match: false });
+    }
+    segments.push({
+      text: text.slice(found, found + needle.length),
+      match: true,
+    });
+    cursor = found + needle.length;
+  }
+  return segments.map((segment, index) => (
+    <span
+      key={index}
+      className={
+        segment.match ? "font-bold text-foreground" : "text-muted-foreground"
+      }
+    >
+      {segment.text}
+    </span>
+  ));
+}
+
 export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
   const t = dict.profile.addresses;
   const router = useRouter();
@@ -181,10 +217,10 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
                     type="button"
                     onMouseDown={(event) => event.preventDefault()}
                     onClick={() => handleSelectSuggestion(item)}
-                    className="flex w-full items-start gap-2.5 border-b border-border px-4 py-3 text-left last:border-b-0 hover:bg-secondary"
+                    className="flex w-full items-start gap-2.5 border-b border-border px-4 py-3 text-left last:border-b-0 hover:bg-secondary cursor-pointer"
                   >
-                    <span className="flex-1 text-lg font-medium text-foreground">
-                      {item.displayName}
+                    <span className="flex-1 text-lg font-medium">
+                      {highlightMatch(item.displayName, address)}
                     </span>
                   </button>
                 </li>
