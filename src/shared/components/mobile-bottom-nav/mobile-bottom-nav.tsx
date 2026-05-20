@@ -34,9 +34,10 @@ export function MobileBottomNav({ lang, dict }: IProps) {
   const categoryPath = `/${lang}/category`;
   const cartPath = `/${lang}/cart`;
   const ordersPath = `/${lang}/orders`;
-  const profilePath = `/${lang}/profile/account`;
+  const profilePath = `/${lang}/profile`;
 
   if (pathname.startsWith(`/${lang}/product/`)) return null;
+  if (pathname.startsWith(`/${lang}/profile/account`)) return null;
   if (pathname.startsWith(`/${lang}/profile/payments`)) return null;
   if (pathname.startsWith(`/${lang}/profile/measurements`)) return null;
   if (pathname.startsWith(`/${lang}/profile/promocode`)) return null;

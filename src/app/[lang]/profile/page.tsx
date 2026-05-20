@@ -6,11 +6,11 @@ import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
 import { ProfilePlaceholder } from "@/features/profile/components/profile-placeholder";
-import { AccountMobilePage } from "@/features/profile/components/account-mobile/account-mobile-page";
+import { ProfileMobilePage } from "@/features/profile/components/profile-mobile/profile-mobile-page";
 
-export default async function AccountPage({
+export default async function ProfilePage({
   params,
-}: PageProps<"/[lang]/profile/account">) {
+}: PageProps<"/[lang]/profile">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
 
@@ -22,7 +22,7 @@ export default async function AccountPage({
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <AccountMobilePage dict={dict} />
+        <ProfileMobilePage lang={lang} dict={dict} />
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="account">

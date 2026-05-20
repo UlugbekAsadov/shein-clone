@@ -142,7 +142,48 @@
       "empty": {
         "title": "Hisob sozlamalari tez orada",
         "description": "Bu yerda ism, email, parol va bildirishnoma sozlamalarini o'zgartirishingiz mumkin bo'ladi."
-      }
+      },
+      "uploadPhoto": "Rasm yuklash",
+      "deletePhoto": "Rasmni o'chirish",
+      "save": "Saqlash",
+      "fields": {
+        "fullName": "To'liq ism",
+        "dateOfBirth": "Tug'ilgan sana",
+        "gender": "Jinsi"
+      },
+      "gender": {
+        "male": "Erkak",
+        "female": "Ayol"
+      },
+      "dobDrawer": {
+        "title": "Tug'ilgan sana"
+      },
+      "deleteProfile": {
+        "title": "Profilni o'chirasizmi?",
+        "description": "Hisobingiz va u bilan bog'liq barcha ma'lumotlar butunlay o'chiriladi",
+        "confirm": "O'chirish",
+        "cancel": "Bekor qilish"
+      },
+      "deletePhotoDrawer": {
+        "title": "Rasmni o'chirasizmi?",
+        "description": "Profil rasmingiz o'chiriladi",
+        "confirm": "O'chirish",
+        "cancel": "Bekor qilish"
+      },
+      "months": [
+        "Yanvar",
+        "Fevral",
+        "Mart",
+        "Aprel",
+        "May",
+        "Iyun",
+        "Iyul",
+        "Avgust",
+        "Sentabr",
+        "Oktabr",
+        "Noyabr",
+        "Dekabr"
+      ]
     },
     "payments": {
       "title": "Mening kartalarim",

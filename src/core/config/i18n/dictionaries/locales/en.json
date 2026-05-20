@@ -142,7 +142,48 @@
       "empty": {
         "title": "Account settings coming soon",
         "description": "This is where you'll update your name, email, password and notification preferences."
-      }
+      },
+      "uploadPhoto": "Upload Photo",
+      "deletePhoto": "Delete Photo",
+      "save": "Save",
+      "fields": {
+        "fullName": "Full name",
+        "dateOfBirth": "Date of birth",
+        "gender": "Gender"
+      },
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "dobDrawer": {
+        "title": "Date of birth"
+      },
+      "deleteProfile": {
+        "title": "Delete profile?",
+        "description": "Your account and all related data will be permanently removed",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      },
+      "deletePhotoDrawer": {
+        "title": "Delete photo?",
+        "description": "Your profile photo will be removed",
+        "confirm": "Delete",
+        "cancel": "Cancel"
+      },
+      "months": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ]
     },
     "payments": {
       "title": "My cards",
