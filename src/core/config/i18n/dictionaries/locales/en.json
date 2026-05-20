@@ -331,13 +331,41 @@
       }
     },
     "addresses": {
-      "title": "My-addresses",
+      "title": "My-addreses",
       "current": "Current",
-      "addAddress": "Add address",
+      "addAddress": "Add addreses",
       "placeholder": "Please select",
       "fields": {
         "country": "Country",
         "region": "Region"
+      },
+      "types": {
+        "home": "Home",
+        "work": "Work",
+        "other": "Other"
+      },
+      "empty": {
+        "title": "No saved addresses",
+        "description": "You haven't added any addresses yet. Add an address to make checkout faster."
+      },
+      "selectAddress": {
+        "title": "Select address",
+        "confirm": "Confirm"
+      },
+      "form": {
+        "title": "Add addreses",
+        "addressName": "Address name",
+        "addressNamePlaceholder": "Enter the address name",
+        "address": "Address",
+        "addressPlaceholder": "Enter the address",
+        "selectOnMap": "Select on the map",
+        "submit": "Add addreses"
+      },
+      "map": {
+        "title": "Add addreses",
+        "searchPlaceholder": "Address name",
+        "addressLabel": "Address",
+        "confirm": "Confirm"
       }
     }
   },

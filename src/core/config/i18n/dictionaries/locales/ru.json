@@ -338,6 +338,34 @@
       "fields": {
         "country": "Страна",
         "region": "Регион"
+      },
+      "types": {
+        "home": "Дом",
+        "work": "Работа",
+        "other": "Другое"
+      },
+      "empty": {
+        "title": "Нет сохранённых адресов",
+        "description": "Вы пока не добавили ни одного адреса. Добавьте адрес, чтобы ускорить оформление заказа."
+      },
+      "selectAddress": {
+        "title": "Выберите тип",
+        "confirm": "Подтвердить"
+      },
+      "form": {
+        "title": "Добавить адрес",
+        "addressName": "Название адреса",
+        "addressNamePlaceholder": "Введите название адреса",
+        "address": "Адрес",
+        "addressPlaceholder": "Введите адрес",
+        "selectOnMap": "Выбрать на карте",
+        "submit": "Добавить адрес"
+      },
+      "map": {
+        "title": "Добавить адрес",
+        "searchPlaceholder": "Название адреса",
+        "addressLabel": "Адрес",
+        "confirm": "Подтвердить"
       }
     }
   },

@@ -338,6 +338,34 @@
       "fields": {
         "country": "Davlat",
         "region": "Viloyat"
+      },
+      "types": {
+        "home": "Uy",
+        "work": "Ish",
+        "other": "Boshqa"
+      },
+      "empty": {
+        "title": "Saqlangan manzillar yo'q",
+        "description": "Hozircha hech qanday manzil qo'shmagansiz. To'lovni tezroq amalga oshirish uchun manzil qo'shing."
+      },
+      "selectAddress": {
+        "title": "Manzil turi",
+        "confirm": "Tasdiqlash"
+      },
+      "form": {
+        "title": "Manzil qo'shish",
+        "addressName": "Manzil nomi",
+        "addressNamePlaceholder": "Manzil nomini kiriting",
+        "address": "Manzil",
+        "addressPlaceholder": "Manzilni kiriting",
+        "selectOnMap": "Xaritadan tanlash",
+        "submit": "Manzil qo'shish"
+      },
+      "map": {
+        "title": "Manzil qo'shish",
+        "searchPlaceholder": "Manzil nomi",
+        "addressLabel": "Manzil",
+        "confirm": "Tasdiqlash"
       }
     }
   },

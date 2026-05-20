@@ -5,25 +5,22 @@ import type {
 
 export const addressMocks: IAddress[] = [
   {
-    id: "addr-1",
-    title: "Tashkent, Uzbekistan",
-    details: "Toshkent sh., Mirobod tumani, Talimarjon ko'chasi, 10 uy",
+    id: "addr-home",
+    type: "home",
+    title: "Home",
+    details: "Yangi hayot ko'chasi, 122/1-uy, 116-x...",
   },
   {
-    id: "addr-2",
-    title: "Xorazm, Uzbekistan",
-    details: "Urganch sh, Talimarjon ko'chasi, 10 uy",
-    isDefault: true,
+    id: "addr-work",
+    type: "work",
+    title: "Work",
+    details: "Yangi hayot ko'chasi, 122/1-uy, 116-x...",
   },
   {
-    id: "addr-3",
-    title: "Farg'ona, Uzbekistan",
-    details: "Beashriq tumani, Talimarjon ko'chasi, 10 uy",
-  },
-  {
-    id: "addr-4",
-    title: "Qashqadaryo, Uzbekistan",
-    details: "Kitob tumani, Talimarjon ko'chasi, 10 uy",
+    id: "addr-other",
+    type: "other",
+    title: "Other",
+    details: "Yangi hayot ko'chasi, 122/1-uy, 116-x...",
   },
 ];
 
