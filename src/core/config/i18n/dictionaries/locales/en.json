@@ -209,6 +209,13 @@
         "expiryDatePlaceholder": "DD/MM",
         "cvv": "CVVV",
         "cvvPlaceholder": "Enter the address"
+      },
+      "securityCode": {
+        "title": "Enter security code",
+        "description": "We've sent a verification code to your phone number ending in **** 1234",
+        "continue": "Continue",
+        "resend": "Resend code",
+        "invalid": "Invalid code"
       }
     },
     "promocode": {

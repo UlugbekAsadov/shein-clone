@@ -209,6 +209,13 @@
         "expiryDatePlaceholder": "ММ/ГГ",
         "cvv": "CVVV",
         "cvvPlaceholder": "Введите CVV"
+      },
+      "securityCode": {
+        "title": "Введите код безопасности",
+        "description": "Мы отправили код подтверждения на ваш номер телефона, оканчивающийся на **** 1234",
+        "continue": "Продолжить",
+        "resend": "Отправить заново",
+        "invalid": "Неверный код"
       }
     },
     "promocode": {

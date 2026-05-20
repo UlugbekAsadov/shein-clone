@@ -209,6 +209,13 @@
         "expiryDatePlaceholder": "DD/MM",
         "cvv": "CVVV",
         "cvvPlaceholder": "CVV kiriting"
+      },
+      "securityCode": {
+        "title": "Xavfsizlik kodini kiriting",
+        "description": "Telefon raqamingizning **** 1234 bilan tugaydigan oxiriga tasdiqlash kodini yubordik",
+        "continue": "Davom etish",
+        "resend": "Kodni qayta yuborish",
+        "invalid": "Noto'g'ri kod"
       }
     },
     "promocode": {
