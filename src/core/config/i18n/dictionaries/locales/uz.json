@@ -48,7 +48,8 @@
   "header": {
     "searchPlaceholder": "Ko'ylak, krossovka, sumka qidiring",
     "search": "Qidirish",
-    "helloSignIn": "Salom, kiring"
+    "helloSignIn": "Salom, kiring",
+    "signUp": "Ro'yxatdan o'tish"
   },
   "nav": {
     "categories": "Kategoriyalar",

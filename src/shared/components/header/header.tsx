@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
@@ -9,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
+import { HeaderUserAction } from "./header-user-action";
 import { CategoryNav } from "../category/category-nav";
 import { CartLarge2, Heart } from "@solar-icons/react/ssr";
 
@@ -81,24 +81,11 @@ export function Header({ lang, dict }: IProps) {
 
           <div className="h-8 w-px bg-border" aria-hidden />
 
-          <Link
-            href={`/${lang}/profile/account`}
-            className="flex items-center gap-2 rounded-full pl-1 pr-3"
-          >
-            <Image
-              src="/placeholders/avatar.svg"
-              alt="Profile"
-              width={40}
-              height={40}
-              className="size-10 rounded-full bg-muted"
-            />
-            <span className="hidden text-left leading-tight md:block">
-              <span className="block font-semibold">Arnold</span>
-              <span className="block text-xs text-secondary-foreground">
-                {dict.header.helloSignIn}
-              </span>
-            </span>
-          </Link>
+          <HeaderUserAction
+            lang={lang}
+            helloSignInLabel={dict.header.helloSignIn}
+            signUpLabel={dict.header.signUp}
+          />
         </div>
       </div>
 

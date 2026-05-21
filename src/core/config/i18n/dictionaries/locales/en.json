@@ -48,7 +48,8 @@
   "header": {
     "searchPlaceholder": "Search for dresses, snakers, bags men",
     "search": "Search",
-    "helloSignIn": "Hello, sign in"
+    "helloSignIn": "Hello, sign in",
+    "signUp": "Sign up"
   },
   "nav": {
     "categories": "Categories",

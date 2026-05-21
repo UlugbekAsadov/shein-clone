@@ -48,7 +48,8 @@
   "header": {
     "searchPlaceholder": "Поиск платьев, кроссовок, мужских сумок",
     "search": "Поиск",
-    "helloSignIn": "Здравствуйте, войдите"
+    "helloSignIn": "Здравствуйте, войдите",
+    "signUp": "Регистрация"
   },
   "nav": {
     "categories": "Категории",
