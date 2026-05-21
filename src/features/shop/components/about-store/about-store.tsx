@@ -23,7 +23,7 @@ export function AboutStore({ shop, about, dict }: IProps) {
           description={about.intro}
         />
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {about.cards.map((card) => (
             <InfoCard key={card.id} card={card} />
           ))}

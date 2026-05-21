@@ -14,10 +14,12 @@ import {
   sendCodeAction,
 } from "@/features/auth/services/auth.actions";
 import type { IGender } from "@/features/auth/interfaces/register.interface";
+import { LocaleSwitcher } from "@/shared/components/header/locale-switcher";
 import { LoginPhoneForm } from "./login-phone-form";
 import { LoginCodeForm } from "./login-code-form";
 import { LoginRegisterForm } from "./login-register-form";
 import { LoginPreview } from "./login-preview";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -116,8 +118,13 @@ export function LoginPage({ lang, dict }: IProps) {
   };
 
   return (
-    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
-      <div className="flex min-h-screen flex-col px-6 pt-10 pb-6 lg:min-h-0 lg:items-center lg:justify-center lg:px-16 lg:py-12">
+    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
+      <div className="relative flex min-h-screen flex-col px-6 pt-10 pb-6 md:min-h-0 md:items-center md:justify-center md:px-16 md:py-12">
+        <div
+          className={cn("hidden", "md:absolute md:block md:right-10 md:top-5")}
+        >
+          <LocaleSwitcher current={lang} />
+        </div>
         {step === "phone" && (
           <LoginPhoneForm
             labels={{

@@ -68,10 +68,10 @@ export function LoginCodeForm({
       className={cn(
         "flex h-full w-full flex-1 flex-col gap-5",
         "md:max-w-md",
-        "lg:h-auto lg:flex-none lg:gap-6",
+        "md:h-auto md:flex-none md:gap-6",
       )}
     >
-      <div className="flex flex-col gap-2 text-left lg:text-center">
+      <div className="flex flex-col gap-2 text-left md:text-center">
         <h1 className="text-3xl font-bold text-foreground">{labels.title}</h1>
         <p className="text-sm text-muted-foreground">{labels.subtitle}</p>
       </div>
@@ -91,7 +91,7 @@ export function LoginCodeForm({
         disabled={isResending}
       />
 
-      <div className="flex-1 lg:hidden" />
+      <div className="flex-1 md:hidden" />
 
       <Button
         type="button"

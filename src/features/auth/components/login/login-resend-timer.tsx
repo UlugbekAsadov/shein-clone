@@ -38,7 +38,7 @@ export function LoginResendTimer({
   }, [seconds]);
 
   return (
-    <div className="flex items-center justify-start gap-2 text-sm lg:justify-center">
+    <div className="flex items-center justify-start gap-2 text-sm md:justify-center">
       <span className="text-foreground">{resendLabel}</span>
       {seconds > 0 ? (
         <span className="rounded-md bg-secondary px-2 py-1 text-sm font-medium text-secondary-foreground">

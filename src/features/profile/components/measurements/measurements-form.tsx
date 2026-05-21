@@ -60,8 +60,7 @@ const initialValues: Record<FieldKey, string> = {
 export function MeasurementsForm({ dict }: IProps) {
   const t = dict.profile.measurements;
 
-  const [values, setValues] =
-    useState<Record<FieldKey, string>>(initialValues);
+  const [values, setValues] = useState<Record<FieldKey, string>>(initialValues);
 
   const isDirty = (Object.keys(values) as FieldKey[]).some(
     (key) => values[key] !== initialValues[key],
@@ -82,7 +81,7 @@ export function MeasurementsForm({ dict }: IProps) {
       <h1 className="text-xl font-bold text-foreground">{t.title}</h1>
       <div className="my-5 border-t border-border" />
 
-      <div className="grid grid-cols-1 gap-x-10 gap-y-5 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-10 gap-y-5 md:grid-cols-2">
         {FIELDS.map((field) => (
           <MeasurementField
             key={field.key}

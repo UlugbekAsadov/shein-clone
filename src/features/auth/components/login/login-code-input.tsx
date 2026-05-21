@@ -108,7 +108,7 @@ export function LoginCodeInput({
   const isLocked = success;
 
   return (
-    <div className="flex items-center justify-start gap-2 sm:gap-3 lg:justify-center">
+    <div className="flex items-center justify-start gap-2 sm:gap-3 md:justify-center">
       {digits.map((digit, index) => (
         <input
           key={index}

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function LoginPreview() {
   return (
-    <div className="relative hidden h-full w-full overflow-hidden bg-secondary lg:block">
+    <div className="relative hidden h-full w-full overflow-hidden bg-secondary md:block">
       <Image
         src="/images/login-page-image.webp"
         alt=""
