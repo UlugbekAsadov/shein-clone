@@ -24,6 +24,18 @@
         "continue": "Continue",
         "invalid": "The verification code you entered is incorrect",
         "success": "The verification code was entered correctly!"
+      },
+      "register": {
+        "title": "Tell us about yourself",
+        "subtitle": "Complete your profile",
+        "fullNameLabel": "Full name",
+        "fullNamePlaceholder": "Name",
+        "dobLabel": "Date of birth",
+        "dobPlaceholder": "DD.MM.YY",
+        "genderLabel": "Gender",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "continue": "Continue"
       }
     }
   },

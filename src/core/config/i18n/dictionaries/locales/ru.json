@@ -24,6 +24,18 @@
         "continue": "Продолжить",
         "invalid": "Введённый код подтверждения неверен",
         "success": "Код подтверждения введён правильно!"
+      },
+      "register": {
+        "title": "Расскажите о себе",
+        "subtitle": "Заполните профиль",
+        "fullNameLabel": "Полное имя",
+        "fullNamePlaceholder": "Имя",
+        "dobLabel": "Дата рождения",
+        "dobPlaceholder": "DD.MM.YY",
+        "genderLabel": "Пол",
+        "genderMale": "Мужской",
+        "genderFemale": "Женский",
+        "continue": "Продолжить"
       }
     }
   },

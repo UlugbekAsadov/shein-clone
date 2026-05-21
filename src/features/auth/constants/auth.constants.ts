@@ -1,0 +1,1 @@
+export const ACCOUNT_NOT_FOUND_CODE = "ACCOUNT_NOT_FOUND";

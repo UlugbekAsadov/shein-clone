@@ -23,6 +23,7 @@ interface IProps {
   phone: string;
   onPhoneChange: (value: string) => void;
   onSubmit: () => void;
+  isPending?: boolean;
 }
 
 export function LoginPhoneForm({
@@ -30,6 +31,7 @@ export function LoginPhoneForm({
   phone,
   onPhoneChange,
   onSubmit,
+  isPending = false,
 }: IProps) {
   const isComplete = phone.length === PHONE_DIGIT_COUNT;
 
@@ -60,7 +62,7 @@ export function LoginPhoneForm({
         type="button"
         size="lg"
         onClick={onSubmit}
-        disabled={!isComplete}
+        disabled={!isComplete || isPending}
         className="h-12.5 w-full rounded-sm text-base font-semibold disabled:bg-secondary disabled:text-muted-foreground disabled:opacity-100"
       >
         {labels.continue}

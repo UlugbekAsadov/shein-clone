@@ -8,6 +8,7 @@ interface IProps {
   resetSignal: number;
   resendLabel: string;
   onResend: () => void;
+  disabled?: boolean;
 }
 
 function formatSeconds(total: number): string {
@@ -22,6 +23,7 @@ export function LoginResendTimer({
   resetSignal,
   resendLabel,
   onResend,
+  disabled = false,
 }: IProps) {
   const [seconds, setSeconds] = useState(INITIAL_SECONDS);
 
@@ -46,8 +48,9 @@ export function LoginResendTimer({
         <button
           type="button"
           onClick={onResend}
+          disabled={disabled}
           aria-label={resendLabel}
-          className="grid h-7 w-9 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/80"
+          className="grid h-7 w-9 cursor-pointer place-items-center rounded-full bg-primary text-primary-foreground transition-colors hover:bg-primary/80 disabled:cursor-not-allowed disabled:opacity-60"
         >
           <Refresh className="size-5" />
         </button>

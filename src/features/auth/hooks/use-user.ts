@@ -1,0 +1,13 @@
+"use client";
+
+import { useContext } from "react";
+import { UserContext } from "@/features/auth/providers/user-provider";
+import type { IUserContextValue } from "@/features/auth/interfaces/user-context.interface";
+
+export function useUser(): IUserContextValue {
+  const ctx = useContext(UserContext);
+  if (ctx === undefined) {
+    throw new Error("useUser must be used inside <UserProvider>");
+  }
+  return ctx;
+}

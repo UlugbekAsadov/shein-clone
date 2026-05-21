@@ -24,6 +24,18 @@
         "continue": "Davom etish",
         "invalid": "Siz kiritgan tasdiqlash kodi noto'g'ri",
         "success": "Tasdiqlash kodi to'g'ri kiritildi!"
+      },
+      "register": {
+        "title": "O'zingiz haqingizda gapirib bering",
+        "subtitle": "Profilingizni to'ldiring",
+        "fullNameLabel": "To'liq ism",
+        "fullNamePlaceholder": "Ism",
+        "dobLabel": "Tug'ilgan sana",
+        "dobPlaceholder": "DD.MM.YY",
+        "genderLabel": "Jins",
+        "genderMale": "Erkak",
+        "genderFemale": "Ayol",
+        "continue": "Davom etish"
       }
     }
   },

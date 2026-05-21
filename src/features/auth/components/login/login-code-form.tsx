@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "@/shared/components/ui/button";
 import { CODE_LENGTH } from "@/features/auth/constants/login.constants";
 import { LoginCodeInput } from "./login-code-input";
@@ -15,19 +15,24 @@ interface IProps {
   };
   hasError: boolean;
   hasSuccess: boolean;
+  isPending?: boolean;
   onCodeChange: () => void;
   onSubmit: (code: string) => void;
+  onResend?: () => Promise<boolean> | boolean;
 }
 
 export function LoginCodeForm({
   labels,
   hasError,
   hasSuccess,
+  isPending = false,
   onCodeChange,
   onSubmit,
+  onResend,
 }: IProps) {
   const [code, setCode] = useState("");
   const [resendSignal, setResendSignal] = useState(0);
+  const [isResending, startResend] = useTransition();
 
   const isComplete = code.length === CODE_LENGTH;
 
@@ -37,9 +42,19 @@ export function LoginCodeForm({
   };
 
   const handleResend = () => {
-    setCode("");
-    setResendSignal((prev) => prev + 1);
-    onCodeChange();
+    if (!onResend) {
+      setCode("");
+      setResendSignal((prev) => prev + 1);
+      onCodeChange();
+      return;
+    }
+    startResend(async () => {
+      const ok = await onResend();
+      if (!ok) return;
+      setCode("");
+      setResendSignal((prev) => prev + 1);
+      onCodeChange();
+    });
   };
 
   const handleSubmit = () => {
@@ -66,6 +81,7 @@ export function LoginCodeForm({
         resetSignal={resendSignal}
         resendLabel={labels.resend}
         onResend={handleResend}
+        disabled={isResending}
       />
 
       <div className="flex-1 lg:hidden" />
@@ -74,7 +90,7 @@ export function LoginCodeForm({
         type="button"
         size="lg"
         onClick={handleSubmit}
-        disabled={!isComplete || hasSuccess}
+        disabled={!isComplete || hasSuccess || isPending}
         className="h-12.5 w-full rounded-sm text-base font-semibold disabled:bg-secondary disabled:text-muted-foreground disabled:opacity-100"
       >
         {labels.continue}
