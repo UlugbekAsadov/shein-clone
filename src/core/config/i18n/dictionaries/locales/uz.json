@@ -3,6 +3,30 @@
     "title": "Xush kelibsiz",
     "greeting": "Salom"
   },
+  "auth": {
+    "login": {
+      "title": "Telefon raqamingizni kiriting",
+      "subtitle": "Make sure it's the number you use with the Revolut account you lost access to",
+      "phoneLabel": "Telefon raqami",
+      "phonePlaceholder": "93 123-45-67",
+      "continue": "Davom etish",
+      "social": {
+        "google": "Google bilan davom etish",
+        "apple": "Apple bilan davom etish",
+        "mail": "Email bilan davom etish",
+        "facebook": "Facebook bilan davom etish",
+        "comingSoon": "Tez orada"
+      },
+      "code": {
+        "title": "Kodni kiriting",
+        "subtitle": "Telefoningizga 5 xonali kod yubordik. Xabarlarni tekshirib ko'ring.",
+        "resend": "Kodni qayta yuborish",
+        "continue": "Davom etish",
+        "invalid": "Siz kiritgan tasdiqlash kodi noto'g'ri",
+        "success": "Tasdiqlash kodi to'g'ri kiritildi!"
+      }
+    }
+  },
   "language": {
     "label": "Til",
     "uz": "O'zbekcha",

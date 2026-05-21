@@ -3,6 +3,30 @@
     "title": "Добро пожаловать",
     "greeting": "Здравствуйте"
   },
+  "auth": {
+    "login": {
+      "title": "Введите номер телефона",
+      "subtitle": "Make sure it's the number you use with the Revolut account you lost access to",
+      "phoneLabel": "Номер телефона",
+      "phonePlaceholder": "93 123-45-67",
+      "continue": "Продолжить",
+      "social": {
+        "google": "Продолжить с Google",
+        "apple": "Продолжить с Apple",
+        "mail": "Продолжить с почтой",
+        "facebook": "Продолжить с Facebook",
+        "comingSoon": "Скоро"
+      },
+      "code": {
+        "title": "Введите код",
+        "subtitle": "Мы отправили 5-значный код на ваш телефон. Проверьте сообщения.",
+        "resend": "Отправить код повторно",
+        "continue": "Продолжить",
+        "invalid": "Введённый код подтверждения неверен",
+        "success": "Код подтверждения введён правильно!"
+      }
+    }
+  },
   "language": {
     "label": "Язык",
     "uz": "Узбекский",

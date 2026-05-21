@@ -36,6 +36,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
   const ordersPath = `/${lang}/orders`;
   const profilePath = `/${lang}/profile`;
 
+  if (pathname.startsWith(`/${lang}/login`)) return null;
   if (pathname.startsWith(`/${lang}/product/`)) return null;
   if (pathname.startsWith(`/${lang}/profile/account`)) return null;
   if (pathname.startsWith(`/${lang}/profile/addresses`)) return null;

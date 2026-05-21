@@ -3,6 +3,30 @@
     "title": "Welcome",
     "greeting": "Hello"
   },
+  "auth": {
+    "login": {
+      "title": "Enter your phone number",
+      "subtitle": "Make sure it's the number you use with the Revolut account you lost access to",
+      "phoneLabel": "Phone number",
+      "phonePlaceholder": "93 123-45-67",
+      "continue": "Continue",
+      "social": {
+        "google": "Continue with Google",
+        "apple": "Continue with Apple",
+        "mail": "Continue with Mail",
+        "facebook": "Continue with Facebook",
+        "comingSoon": "Coming soon"
+      },
+      "code": {
+        "title": "Enter the code",
+        "subtitle": "We've sent a 5-digit code to your phone. Make sure to check your messages.",
+        "resend": "Resend code",
+        "continue": "Continue",
+        "invalid": "The verification code you entered is incorrect",
+        "success": "The verification code was entered correctly!"
+      }
+    }
+  },
   "language": {
     "label": "Language",
     "uz": "Uzbek",

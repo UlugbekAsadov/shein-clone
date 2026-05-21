@@ -10,11 +10,13 @@ export function Toaster() {
       toastOptions={{
         classNames: {
           toast:
-            "group flex w-full items-center gap-3 rounded-lg bg-destructive text-background shadow-lg px-4 py-3",
+            "group flex w-full items-center gap-3 rounded-lg text-background shadow-lg px-4 py-3",
           icon: "shrink-0",
           title: "flex-1 text-sm font-semibold",
           closeButton:
             "bg-transparent border-0 text-background opacity-80 hover:opacity-100",
+          error: "bg-destructive",
+          success: "bg-emerald-500",
         },
       }}
     />
