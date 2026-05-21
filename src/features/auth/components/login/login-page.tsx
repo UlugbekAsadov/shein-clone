@@ -121,7 +121,7 @@ export function LoginPage({ lang, dict }: IProps) {
     <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
       <div className="relative flex min-h-screen flex-col px-6 pt-10 pb-6 md:min-h-0 md:items-center md:justify-center md:px-16 md:py-12">
         <div
-          className={cn("hidden", "md:absolute md:block md:right-10 md:top-5")}
+          className={cn("hidden", "md:absolute md:block md:left-10 md:top-5")}
         >
           <LocaleSwitcher current={lang} />
         </div>
