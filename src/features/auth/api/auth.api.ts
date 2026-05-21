@@ -17,6 +17,13 @@ export const authApi = {
       skipAuth: true,
     });
   },
+  checkCode(payload: ILoginRequest) {
+    return apiClient.post<IApiResponse<null>>(
+      AUTH_ENDPOINTS.checkCode,
+      payload,
+      { skipAuth: true },
+    );
+  },
   login(payload: ILoginRequest) {
     return apiClient.post<IApiResponse<ILoginResponseData>>(
       AUTH_ENDPOINTS.login,

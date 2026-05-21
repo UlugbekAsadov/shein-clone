@@ -1,5 +1,6 @@
 "use client";
 
+import { InfoCircle, CheckCircle } from "@solar-icons/react";
 import { Toaster as SonnerToaster } from "sonner";
 
 export function Toaster() {
@@ -7,16 +8,30 @@ export function Toaster() {
     <SonnerToaster
       position="top-center"
       duration={4000}
+      icons={{
+        error: (
+          <div className="min-w-9! h-9! mr-3 flex items-center justify-center rounded-[8px] bg-[#040A141F]">
+            <InfoCircle weight="Linear" className="size-6 text-white" />
+          </div>
+        ),
+        success: (
+          <div className="min-w-9! h-9! mr-3 flex items-center justify-center rounded-[8px] bg-[#040A141F]">
+            <CheckCircle weight="Linear" className="size-6 text-white" />
+          </div>
+        ),
+      }}
+      closeButton={false}
       toastOptions={{
         classNames: {
           toast:
-            "group flex w-full items-center gap-3 rounded-lg text-background shadow-lg px-4 py-3",
-          icon: "shrink-0",
-          title: "flex-1 text-sm font-semibold",
+            "group !relative flex w-full items-start gap-3 !rounded-md shadow-lg !border-0 !p-4",
+          icon: "shrink-0 [&_svg]:size-6",
+          content: "flex-1",
+          title: "text-xs font-medium leading-snug !text-white ml-5",
           closeButton:
-            "bg-transparent border-0 text-background opacity-80 hover:opacity-100",
-          error: "bg-destructive",
-          success: "bg-emerald-500",
+            "!static !left-auto !top-auto !right-auto !transform-none !ml-auto !size-6 !bg-transparent !border-0 !text-background !opacity-90 hover:!opacity-100 !shadow-none [&_svg]:!size-4",
+          error: "!bg-destructive",
+          success: "!bg-emerald-500",
         },
       }}
     />

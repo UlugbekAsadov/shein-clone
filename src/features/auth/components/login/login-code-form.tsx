@@ -5,6 +5,7 @@ import { Button } from "@/shared/components/ui/button";
 import { CODE_LENGTH } from "@/features/auth/constants/login.constants";
 import { LoginCodeInput } from "./login-code-input";
 import { LoginResendTimer } from "./login-resend-timer";
+import { cn } from "@/lib/utils";
 
 interface IProps {
   labels: {
@@ -63,7 +64,13 @@ export function LoginCodeForm({
   };
 
   return (
-    <div className="flex h-full w-full max-w-md flex-1 flex-col gap-5 lg:h-auto lg:flex-none lg:gap-6">
+    <div
+      className={cn(
+        "flex h-full w-full flex-1 flex-col gap-5",
+        "md:max-w-md",
+        "lg:h-auto lg:flex-none lg:gap-6",
+      )}
+    >
       <div className="flex flex-col gap-2 text-left lg:text-center">
         <h1 className="text-3xl font-bold text-foreground">{labels.title}</h1>
         <p className="text-sm text-muted-foreground">{labels.subtitle}</p>

@@ -100,6 +100,22 @@ export async function sendCodeAction(phone: string): Promise<IActionResult> {
   }
 }
 
+export async function checkCodeAction(
+  phone: string,
+  code: string,
+): Promise<IActionResult> {
+  try {
+    const result = await authApi.checkCode({
+      contact: normalizePhone(phone),
+      type: "phone",
+      code,
+    });
+    return { ok: true, message: result.message };
+  } catch (error) {
+    return toActionError(error);
+  }
+}
+
 export async function loginAction(
   phone: string,
   code: string,

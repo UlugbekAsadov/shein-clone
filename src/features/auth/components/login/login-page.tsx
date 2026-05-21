@@ -8,6 +8,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { ACCOUNT_NOT_FOUND_CODE } from "@/features/auth/constants/auth.constants";
 import { PHONE_DIGIT_COUNT } from "@/features/auth/constants/login.constants";
 import {
+  checkCodeAction,
   loginAction,
   registerAction,
   sendCodeAction,
@@ -57,20 +58,28 @@ export function LoginPage({ lang, dict }: IProps) {
   const handleCodeSubmit = (nextCode: string) => {
     setCode(nextCode);
     startTransition(async () => {
-      const result = await loginAction(phone, nextCode);
-      if (result.ok) {
+      const loginResult = await loginAction(phone, nextCode);
+      if (loginResult.ok) {
         setCodeSuccess(true);
         toast.success(t.code.success);
         redirectHome();
         return;
       }
 
-      if (result.errorCode === ACCOUNT_NOT_FOUND_CODE) {
-        setStep("register");
+      if (loginResult.errorCode !== ACCOUNT_NOT_FOUND_CODE) {
+        setCodeError(true);
+        toast.error(loginResult.message ?? t.code.invalid);
         return;
       }
-      setCodeError(true);
-      toast.error(result.message ?? t.code.invalid);
+
+      const checkResult = await checkCodeAction(phone, nextCode);
+      if (!checkResult.ok) {
+        setCodeError(true);
+        toast.error(checkResult.message ?? t.code.invalid);
+        return;
+      }
+
+      setStep("register");
     });
   };
 
