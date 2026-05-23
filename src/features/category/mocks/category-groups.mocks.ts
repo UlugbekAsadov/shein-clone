@@ -1,4 +1,4 @@
-import type { IMobileCategoryGroup } from "@/features/category/interfaces/category-group.interface";
+import type { IMobileCategoryGroup } from "@/features/category/utils/category-group.interface";
 
 const CATEGORY_IMAGES = [
   "/mocks/images/categories/image%2015.png",

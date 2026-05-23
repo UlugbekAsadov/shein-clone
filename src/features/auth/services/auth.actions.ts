@@ -6,11 +6,11 @@ import { AUTH_COOKIES } from "@/core/api/api-config";
 import { ApiError } from "@/core/api/api-error";
 import { env } from "@/core/config/env";
 import { authApi, ME_CACHE_TAG } from "@/features/auth/api/auth.api";
-import type { ILoginResponseData } from "@/features/auth/interfaces/login.interface";
+import type { ILoginResponseData } from "@/features/auth/login/utils/login.interface";
 import type {
   IRegisterPayload,
   IRegisterRequest,
-} from "@/features/auth/interfaces/register.interface";
+} from "@/features/auth/login/utils/register.interface";
 import type { IActionResult } from "@/types/action-result.interface";
 
 const PHONE_COUNTRY_CODE = "998";

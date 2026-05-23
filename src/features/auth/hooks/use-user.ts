@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { UserContext } from "@/features/auth/providers/user-provider";
-import type { IUserContextValue } from "@/features/auth/interfaces/user-context.interface";
+import type { IUserContextValue } from "@/features/auth/utils/user-context.interface";
 
 export function useUser(): IUserContextValue {
   const ctx = useContext(UserContext);

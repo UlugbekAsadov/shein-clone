@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { STRIP_DURATION_MS } from "@/features/home/constants/brand-story.constants";
+import { STRIP_DURATION_MS } from "@/features/home/utils/brand-story.constants";
 
 interface IProps {
   status: "done" | "active" | "pending";

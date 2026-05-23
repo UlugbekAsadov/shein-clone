@@ -2,8 +2,8 @@
 
 import { createContext, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import type { IAuthUser } from "@/features/auth/interfaces/auth.interface";
-import type { IUserContextValue } from "@/features/auth/interfaces/user-context.interface";
+import type { IAuthUser } from "@/features/auth/utils/auth.interface";
+import type { IUserContextValue } from "@/features/auth/utils/user-context.interface";
 
 export const UserContext = createContext<IUserContextValue | undefined>(
   undefined,

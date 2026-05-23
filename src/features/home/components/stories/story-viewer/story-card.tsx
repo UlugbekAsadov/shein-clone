@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import {
   EASING,
   TRANSITION_MS,
-} from "@/features/home/constants/brand-story.constants";
+} from "@/features/home/utils/brand-story.constants";
 import { ProgressBar } from "./progress-bar";
 import { StoryItem } from "../story-item/story-item";
 

@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { AUTH_COOKIES } from "@/core/api/api-config";
 import { ApiError } from "@/core/api/api-error";
 import { authApi } from "@/features/auth/api/auth.api";
-import type { IAuthUser } from "@/features/auth/interfaces/auth.interface";
+import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 
 export const getCurrentUser = cache(async (): Promise<IAuthUser | null> => {
   const store = await cookies();

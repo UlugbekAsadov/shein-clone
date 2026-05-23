@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { AuthDialogContext } from "@/features/auth/providers/auth-dialog-provider";
-import type { IAuthDialogContextValue } from "@/features/auth/interfaces/auth-dialog-context.interface";
+import type { IAuthDialogContextValue } from "@/features/auth/utils/auth-dialog-context.interface";
 
 export function useAuthDialog(): IAuthDialogContextValue {
   const ctx = useContext(AuthDialogContext);

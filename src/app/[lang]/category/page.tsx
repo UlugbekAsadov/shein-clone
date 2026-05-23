@@ -3,7 +3,7 @@ import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
-import { CategoryPage } from "@/features/category/components/category-page/category-page";
+import { CategoryPage } from "@/features/category/pages/category.page";
 
 export default async function CategoryListPage({
   params,

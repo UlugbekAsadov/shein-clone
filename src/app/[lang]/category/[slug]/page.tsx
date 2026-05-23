@@ -5,7 +5,7 @@ import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ListingShell } from "@/shared/components/listing/listing-shell";
 import { trendingProducts, womensFashion } from "@/shared/mocks";
-import { CategoryBreadcrumb } from "@/features/category/components/category-breadcrumb";
+import { CategoryBreadcrumb } from "@/features/category/[slug]/components/category-breadcrumb";
 
 export default async function CategoryPage({
   params,

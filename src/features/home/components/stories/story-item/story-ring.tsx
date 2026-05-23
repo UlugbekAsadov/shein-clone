@@ -9,7 +9,7 @@ import {
   STORY_RING_STROKE,
   STORY_RING_VIEWBOX,
   STORY_RING_VIEWED_COLOR,
-} from "@/features/home/constants/story-ring.constants";
+} from "@/features/home/utils/story-ring.constants";
 
 interface IProps {
   total: number;

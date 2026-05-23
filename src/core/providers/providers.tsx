@@ -5,8 +5,8 @@ import { SolarProvider } from "@solar-icons/react";
 import { Toaster } from "@/shared/components/ui/sonner";
 import { UserProvider } from "@/features/auth/providers/user-provider";
 import { AuthDialogProvider } from "@/features/auth/providers/auth-dialog-provider";
-import { LoginDialog } from "@/features/auth/components/login/login-dialog";
-import type { IAuthUser } from "@/features/auth/interfaces/auth.interface";
+import { LoginDialog } from "@/features/auth/login/components/login-dialog";
+import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import Scroll from "@/shared/components/scroll";
 

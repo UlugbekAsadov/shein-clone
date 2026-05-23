@@ -9,7 +9,7 @@ import {
   SLOT_WIDTH,
   STRIP_DURATION_MS,
   TRANSITION_MS,
-} from "@/features/home/constants/brand-story.constants";
+} from "@/features/home/utils/brand-story.constants";
 import { StoryCard } from "./story-card";
 
 interface IProps {

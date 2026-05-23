@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useMemo, useState } from "react";
-import type { IAuthDialogContextValue } from "@/features/auth/interfaces/auth-dialog-context.interface";
+import type { IAuthDialogContextValue } from "@/features/auth/utils/auth-dialog-context.interface";
 
 export const AuthDialogContext = createContext<
   IAuthDialogContextValue | undefined

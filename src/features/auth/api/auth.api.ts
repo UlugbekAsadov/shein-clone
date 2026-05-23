@@ -1,13 +1,13 @@
 import { apiClient } from "@/core/api/api-client";
 import { AUTH_ENDPOINTS } from "./auth.endpoints";
 import type { IApiResponse } from "@/core/api/interfaces/api-response.interface";
-import type { IAuthUser } from "@/features/auth/interfaces/auth.interface";
+import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type {
   ILoginRequest,
   ILoginResponseData,
   ISendCodeRequest,
-} from "@/features/auth/interfaces/login.interface";
-import type { IRegisterRequest } from "@/features/auth/interfaces/register.interface";
+} from "@/features/auth/login/utils/login.interface";
+import type { IRegisterRequest } from "@/features/auth/login/utils/register.interface";
 
 const ME_CACHE_TAG = "auth-me";
 

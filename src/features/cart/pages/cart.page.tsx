@@ -1,0 +1,29 @@
+import { Cart3 } from "@solar-icons/react/ssr";
+import type { locales } from "@/core/config/i18n/i18n-config";
+import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import { Header } from "@/shared/components/header/header";
+import { Footer } from "@/shared/components/footer/footer";
+import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+
+interface IProps {
+  lang: (typeof locales)[number];
+  dict: IDictionary;
+}
+
+export function CartPage({ lang, dict }: IProps) {
+  return (
+    <>
+      <Header lang={lang} dict={dict} />
+
+      <main className="flex-1">
+        <PagePlaceholder
+          icon={Cart3}
+          title={dict.pagePlaceholder.cartTitle}
+          description={dict.pagePlaceholder.cartDescription}
+        />
+      </main>
+
+      <Footer dict={dict} />
+    </>
+  );
+}
