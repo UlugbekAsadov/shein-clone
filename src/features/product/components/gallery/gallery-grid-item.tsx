@@ -18,7 +18,7 @@ export function GalleryGridItem({ item, onClick }: IProps) {
         src={item.src}
         alt=""
         fill
-        quality={80}
+        quality={100}
         sizes="(min-width: 1280px) 280px, 25vw"
         className="object-cover"
       />

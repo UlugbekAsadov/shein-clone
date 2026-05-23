@@ -36,7 +36,7 @@ export function ProductMobileColor({ swatches, value, onChange }: IProps) {
                 src={c.image}
                 alt={c.name}
                 fill
-                quality={80}
+                quality={100}
                 sizes="64px"
                 className="object-cover"
               />

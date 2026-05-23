@@ -2,13 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    qualities: [75, 80, 90, 95, 100],
+    qualities: [90, 95, 100],
     formats: ["image/avif", "image/webp"],
   },
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
+  experimental: {
+    preloadEntriesOnStart: false,
+    optimizePackageImports: [
+      "@solar-icons/react",
+      "lucide-react",
+      "motion",
+      "radix-ui",
+    ],
   },
 };
 

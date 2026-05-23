@@ -43,7 +43,7 @@ export function ProductReviewCard({ review }: IProps) {
                   src={src}
                   alt=""
                   fill
-                  quality={80}
+                  quality={100}
                   sizes="56px"
                   className="object-cover"
                 />

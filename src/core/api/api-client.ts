@@ -64,10 +64,6 @@ async function request<TData>(
     signal.addEventListener("abort", () => controller.abort(), { once: true });
   }
 
-  if (process.env.NODE_ENV !== "production") {
-    console.log(`[api] → ${method} ${url}`, finalHeaders);
-  }
-
   let response: Response;
   try {
     response = await fetch(url, {

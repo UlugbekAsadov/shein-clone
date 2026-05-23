@@ -55,7 +55,7 @@ export function CommentsMobileReviewCard({ review }: IProps) {
                 src={src}
                 alt=""
                 fill
-                quality={80}
+                quality={100}
                 sizes="64px"
                 className="object-cover"
               />

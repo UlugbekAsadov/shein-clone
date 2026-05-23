@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export function ProductGroupTimer({ timer }: IProps) {
-  const [secondsLeft, setSecondsLeft] = useState(() => getSecondsLeft(timer));
+  const [secondsLeft, setSecondsLeft] = useState(0);
 
   useEffect(() => {
     setSecondsLeft(getSecondsLeft(timer));

@@ -32,7 +32,7 @@ export function ProductReviewMediaGallery({ lang, slug, images }: IProps) {
               src={src}
               alt=""
               fill
-              quality={80}
+              quality={100}
               sizes="80px"
               className="object-cover"
             />

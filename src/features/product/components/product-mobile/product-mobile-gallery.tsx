@@ -58,7 +58,7 @@ export function ProductMobileGallery({ images, alt }: IProps) {
               alt={alt}
               fill
               quality={95}
-              sizes="100vw"
+              sizes="950vw"
               priority={i === 0}
               className="object-cover"
             />

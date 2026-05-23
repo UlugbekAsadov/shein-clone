@@ -66,7 +66,7 @@ export function StoryCard({
                 src={strip}
                 alt=""
                 fill
-                quality={isActive ? 95 : 80}
+                quality={isActive ? 95 : 90}
                 sizes={isActive ? "360px" : "300px"}
                 className="object-cover"
                 priority={isActive && i === stripIndex}

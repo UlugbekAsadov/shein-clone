@@ -38,7 +38,7 @@ export function CommentsMediaGallery({
               src={src}
               alt=""
               fill
-              quality={80}
+              quality={100}
               sizes="60px"
               className="object-cover"
             />
