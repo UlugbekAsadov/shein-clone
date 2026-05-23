@@ -5,6 +5,8 @@ import {
   CreditCard,
   Ruler,
   Ticket,
+  MessageCircleMore,
+  LifeBuoy,
 } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -13,6 +15,7 @@ import type { IProfileUser } from "@/features/profile/utils/profile-user.interfa
 import { ProfileUserCard } from "@/features/profile/components/profile-user-card";
 import { ProfileSidebarItem } from "./profile-sidebar-item";
 import { ProfileSidebarLogout } from "./profile-sidebar-logout";
+import { SupportIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -58,6 +61,18 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
       label: dict.profile.nav.promocode,
       href: `/${lang}/profile/promocode`,
       icon: Ticket,
+    },
+    {
+      id: "chat",
+      label: dict.profile.nav.chat,
+      href: `/${lang}/profile/chat`,
+      icon: MessageCircleMore,
+    },
+    {
+      id: "helpCentre",
+      label: dict.profile.nav.helpCentre,
+      href: `/${lang}/profile/help-centre`,
+      icon: SupportIcon,
     },
   ];
 

@@ -4,6 +4,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+import { ProfileShell } from "@/features/profile/components/profile-shell";
 import { HelpCentreMobilePage } from "@/features/profile/pages/help-centre/components/help-centre-mobile/help-centre-mobile-page";
 
 interface IProps {
@@ -20,11 +21,13 @@ export function HelpCentrePage({ lang, dict }: IProps) {
         <HelpCentreMobilePage dict={dict} />
 
         <div className="hidden md:block">
-          <PagePlaceholder
-            icon={QuestionCircle}
-            title={dict.profile.nav.helpCentre}
-            description={dict.profile.nav.helpCentre}
-          />
+          <ProfileShell lang={lang} dict={dict} activeId="helpCentre">
+            <PagePlaceholder
+              icon={QuestionCircle}
+              title={dict.profile.nav.helpCentre}
+              description={dict.profile.nav.helpCentre}
+            />
+          </ProfileShell>
         </div>
       </main>
 

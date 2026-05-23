@@ -11,7 +11,9 @@ type SectionId =
   | "addresses"
   | "payments"
   | "measurements"
-  | "promocode";
+  | "promocode"
+  | "chat"
+  | "helpCentre";
 
 interface IProps {
   lang: (typeof locales)[number];

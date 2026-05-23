@@ -15,8 +15,8 @@ export function ProfileSidebarItem({ item, active }: IProps) {
       className={cn(
         "flex items-center gap-3 rounded-md px-4 py-3 text-sm font-medium transition-colors",
         active
-          ? "bg-foreground text-background"
-          : "text-secondary-foreground hover:bg-muted",
+          ? "bg-foreground text-background fill-background"
+          : "text-secondary-foreground hover:bg-muted fill-secondary-foreground",
       )}
     >
       <Icon className="size-5 shrink-0" />

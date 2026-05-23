@@ -4,6 +4,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
+import { ProfileShell } from "@/features/profile/components/profile-shell";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -16,11 +17,23 @@ export function ChatPage({ lang, dict }: IProps) {
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <PagePlaceholder
-          icon={ChatRound}
-          title={dict.profile.nav.chat}
-          description={dict.profile.nav.chat}
-        />
+        <div className="md:hidden">
+          <PagePlaceholder
+            icon={ChatRound}
+            title={dict.profile.nav.chat}
+            description={dict.profile.nav.chat}
+          />
+        </div>
+
+        <div className="hidden md:block">
+          <ProfileShell lang={lang} dict={dict} activeId="chat">
+            <PagePlaceholder
+              icon={ChatRound}
+              title={dict.profile.nav.chat}
+              description={dict.profile.nav.chat}
+            />
+          </ProfileShell>
+        </div>
       </main>
 
       <Footer dict={dict} />
