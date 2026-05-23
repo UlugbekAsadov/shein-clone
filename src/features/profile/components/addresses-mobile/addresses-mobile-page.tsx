@@ -50,7 +50,13 @@ export function AddressesMobilePage({
       ) : (
         <div className="flex flex-1 flex-col gap-3 px-4 pt-2 pb-32">
           {addresses.map((address) => (
-            <AddressMobileRow key={address.id} address={address} />
+            <AddressMobileRow
+              key={address.id}
+              address={address}
+              onClick={() =>
+                router.push(`/${lang}/profile/addresses/${address.id}/edit`)
+              }
+            />
           ))}
         </div>
       )}

@@ -106,7 +106,14 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
     search.set("type", type);
     if (addressTitle) search.set("name", addressTitle);
     if (addressText) search.set("address", addressText);
-    router.replace(`/${lang}/profile/addresses/new?${search.toString()}`);
+    search.set("lat", String(center.lat));
+    search.set("long", String(center.lng));
+    const editId = params.get("id");
+    if (editId) search.set("id", editId);
+    const target = editId
+      ? `/${lang}/profile/addresses/${editId}/edit`
+      : `/${lang}/profile/addresses/new`;
+    router.replace(`${target}?${search.toString()}`);
   };
 
   return (

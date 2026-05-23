@@ -38,7 +38,11 @@ export function AddressesDesktopList({ addresses, dict, lang }: IProps) {
         <ul className="flex flex-col gap-5">
           {addresses.map((address) => (
             <li key={address.id}>
-              <AddressDesktopRow address={address} />
+              <AddressDesktopRow
+                address={address}
+                dict={dict}
+                lang={lang}
+              />
             </li>
           ))}
         </ul>

@@ -383,6 +383,11 @@
       "current": "Joriy",
       "addAddress": "Manzil qo'shish",
       "placeholder": "Tanlang",
+      "delete": "O'chirish",
+      "setDefault": "Asosiy qilib belgilash",
+      "default": "Asosiy",
+      "editTitle": "Manzilni tahrirlash",
+      "updateSubmit": "O'zgarishlarni saqlash",
       "fields": {
         "country": "Davlat",
         "region": "Viloyat"

@@ -6,7 +6,7 @@ import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
 import { AddressesDesktopList } from "@/features/profile/components/addresses/addresses-desktop-list";
 import { AddressesMobilePage } from "@/features/profile/components/addresses-mobile/addresses-mobile-page";
-import { addressMocks } from "@/features/profile/mocks/address.mocks";
+import { getUserAddresses } from "@/features/profile/services/address.service";
 
 export default async function AddressesPage({
   params,
@@ -15,6 +15,7 @@ export default async function AddressesPage({
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
+  const addresses = await getUserAddresses();
 
   return (
     <>
@@ -24,13 +25,13 @@ export default async function AddressesPage({
         <AddressesMobilePage
           lang={lang}
           dict={dict}
-          initialAddresses={addressMocks}
+          initialAddresses={addresses}
         />
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="addresses">
             <AddressesDesktopList
-              addresses={addressMocks}
+              addresses={addresses}
               dict={dict}
               lang={lang}
             />

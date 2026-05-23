@@ -1,12 +1,44 @@
 export interface IAddress {
-  id: string;
+  id: number;
+  name: string;
   type: "home" | "work" | "other";
-  title: string;
-  details: string;
-  isDefault?: boolean;
+  address: string;
+  country: string;
+  region_id: number;
+  district_id: number;
+  lat: number;
+  long: number;
+  is_default: boolean;
 }
 
-export interface IAddressOption {
-  value: string;
-  label: string;
+export interface IAddressCreateRequest {
+  name: string;
+  type: "home" | "work" | "other";
+  address: string;
+  country: string;
+  region_id: number;
+  district_id: number;
+  lat: number;
+  long: number;
+  is_default: boolean;
+}
+
+export interface IAddressUpdateRequest {
+  name?: string;
+  type?: "home" | "work" | "other";
+  address?: string;
+  country?: string;
+  region_id?: number;
+  district_id?: number;
+  lat?: number;
+  long?: number;
+  is_default?: boolean;
+}
+
+export interface IAddressFormValues {
+  type: "home" | "work" | "other";
+  name: string;
+  address: string;
+  lat: number | null;
+  long: number | null;
 }

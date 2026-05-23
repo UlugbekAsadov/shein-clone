@@ -383,6 +383,11 @@
       "current": "Current",
       "addAddress": "Add addreses",
       "placeholder": "Please select",
+      "delete": "Delete",
+      "setDefault": "Set as default",
+      "default": "Default",
+      "editTitle": "Edit address",
+      "updateSubmit": "Save changes",
       "fields": {
         "country": "Country",
         "region": "Region"

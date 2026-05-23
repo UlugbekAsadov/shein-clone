@@ -20,10 +20,10 @@ export function AddressMobileRow({ address, onClick }: IProps) {
 
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-semibold text-foreground">
-          {address.title}
+          {address.name}
         </p>
         <p className="truncate text-xs font-medium text-muted-foreground">
-          {address.details}
+          {address.address}
         </p>
       </div>
 

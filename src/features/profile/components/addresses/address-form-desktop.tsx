@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowLeft } from "@solar-icons/react";
 import { MapArrowRight } from "@solar-icons/react/ssr";
 import { Plus, Minus } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import type { IAddress } from "@/features/profile/interfaces/address.interface";
 import { Button } from "@/shared/components/ui/button";
 import { MapPointSolid } from "@/shared/components/icons/solid";
 import {
@@ -20,12 +21,19 @@ import {
   suggest,
   type ISuggestion,
 } from "@/features/profile/components/address-map-mobile/yandex-map-loader";
+import {
+  createAddressAction,
+  deleteAddressAction,
+  updateAddressAction,
+} from "@/features/profile/services/address.actions";
+import { Trash2 } from "lucide-react";
 import { AddressTypeIconButton } from "./address-type-icon-button";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
   apiKey: string;
+  initialAddress?: IAddress;
 }
 
 const DEFAULT_CENTER: ICoords = { lng: 69.279, lat: 41.311 };
@@ -68,25 +76,39 @@ function highlightMatch(text: string, query: string) {
   ));
 }
 
-export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
+export function AddressFormDesktop({
+  lang,
+  dict,
+  apiKey,
+  initialAddress,
+}: IProps) {
   const t = dict.profile.addresses;
   const router = useRouter();
   const params = useSearchParams();
+  const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const initialType = (params.get("type") ?? "home") as
+  const initialType = (initialAddress?.type ?? params.get("type") ?? "home") as
     | "home"
     | "work"
     | "other";
 
   const [type, setType] = useState<"home" | "work" | "other">(initialType);
-  const [name, setName] = useState(params.get("name") ?? "");
-  const [address, setAddress] = useState(params.get("address") ?? "");
+  const [name, setName] = useState(
+    initialAddress?.name ?? params.get("name") ?? "",
+  );
+  const [address, setAddress] = useState(
+    initialAddress?.address ?? params.get("address") ?? "",
+  );
 
   const mapRef = useRef<IMapApi | null>(null);
-  const [center, setCenter] = useState<ICoords>(DEFAULT_CENTER);
+  const initialCenter: ICoords = initialAddress
+    ? { lng: initialAddress.long, lat: initialAddress.lat }
+    : DEFAULT_CENTER;
+  const [center, setCenter] = useState<ICoords>(initialCenter);
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
   const [addressFocused, setAddressFocused] = useState(false);
-  const skipNextSuggestRef = useRef(false);
+  const skipNextSuggestRef = useRef(Boolean(initialAddress));
 
   useEffect(() => {
     let cancelled = false;
@@ -134,11 +156,43 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
     setAddress(result.addressLine);
   };
 
-  const canSubmit = name.trim() !== "" && address.trim() !== "";
+  const canSubmit = name.trim() !== "" && address.trim() !== "" && !isPending;
 
   const handleConfirm = () => {
     if (!canSubmit) return;
-    router.push(`/${lang}/profile/addresses`);
+    setErrorMessage(null);
+    startTransition(async () => {
+      const payload = {
+        type,
+        name,
+        address,
+        lat: center.lat,
+        long: center.lng,
+      };
+      const result = initialAddress
+        ? await updateAddressAction(initialAddress.id, payload)
+        : await createAddressAction(payload);
+      if (!result.ok) {
+        setErrorMessage(result.message ?? "Failed to save address");
+        return;
+      }
+      router.push(`/${lang}/profile/addresses`);
+      router.refresh();
+    });
+  };
+
+  const handleDelete = () => {
+    if (!initialAddress) return;
+    setErrorMessage(null);
+    startTransition(async () => {
+      const result = await deleteAddressAction(initialAddress.id);
+      if (!result.ok) {
+        setErrorMessage(result.message ?? "Failed to delete address");
+        return;
+      }
+      router.push(`/${lang}/profile/addresses`);
+      router.refresh();
+    });
   };
 
   return (
@@ -153,7 +207,9 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
           >
             <ArrowLeft className="size-5" />
           </button>
-          <h1 className="text-xl font-bold text-foreground">{t.title}</h1>
+          <h1 className="text-xl font-bold text-foreground">
+            {initialAddress ? t.editTitle : t.title}
+          </h1>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -231,7 +287,24 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
           )}
         </div>
 
-        <div className="mt-auto pt-6">
+        {errorMessage ? (
+          <p className="text-sm text-destructive">{errorMessage}</p>
+        ) : null}
+
+        <div className="mt-auto flex flex-col gap-2 pt-6">
+          {initialAddress ? (
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={handleDelete}
+              disabled={isPending}
+              className="h-12 w-full rounded-sm text-base font-semibold"
+            >
+              <Trash2 className="size-4" />
+              {t.delete}
+            </Button>
+          ) : null}
           <Button
             type="button"
             size="lg"
@@ -239,7 +312,7 @@ export function AddressFormDesktop({ lang, dict, apiKey }: IProps) {
             disabled={!canSubmit}
             className="h-12 w-full rounded-sm text-base font-semibold"
           >
-            {t.map.confirm}
+            {initialAddress ? t.updateSubmit : t.map.confirm}
           </Button>
         </div>
       </div>

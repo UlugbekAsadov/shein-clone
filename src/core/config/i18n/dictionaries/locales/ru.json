@@ -383,6 +383,11 @@
       "current": "Текущий",
       "addAddress": "Добавить адрес",
       "placeholder": "Выберите",
+      "delete": "Удалить",
+      "setDefault": "Сделать основным",
+      "default": "Основной",
+      "editTitle": "Редактировать адрес",
+      "updateSubmit": "Сохранить изменения",
       "fields": {
         "country": "Страна",
         "region": "Регион"
