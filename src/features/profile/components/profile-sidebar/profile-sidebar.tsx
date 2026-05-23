@@ -12,6 +12,7 @@ import type { IProfileNavItem } from "@/features/profile/interfaces/profile-nav-
 import type { IProfileUser } from "@/features/profile/interfaces/profile-user.interface";
 import { ProfileUserCard } from "@/features/profile/components/profile-user-card";
 import { ProfileSidebarItem } from "./profile-sidebar-item";
+import { ProfileSidebarLogout } from "./profile-sidebar-logout";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -70,6 +71,9 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
               <ProfileSidebarItem item={item} active={item.id === activeId} />
             </li>
           ))}
+          <li>
+            <ProfileSidebarLogout lang={lang} label={dict.profile.logout} />
+          </li>
         </ul>
       </nav>
     </aside>
