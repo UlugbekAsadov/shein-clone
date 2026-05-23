@@ -15,9 +15,10 @@ import { CartLarge2, Heart } from "@solar-icons/react/ssr";
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
+  isSticky?: boolean;
 }
 
-export function Header({ lang, dict }: IProps) {
+export function Header({ lang, dict, isSticky = true }: IProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -33,8 +34,9 @@ export function Header({ lang, dict }: IProps) {
     <header
       suppressHydrationWarning
       className={cn(
-        "sticky top-0 z-40 hidden bg-background/95 md:block pt-10 space-y-7",
-        isScrolled && "header-shadow"
+        "top-0 z-40 hidden bg-background/95 md:block pt-10 space-y-7",
+        isScrolled && "header-shadow",
+        isSticky && "sticky",
       )}
     >
       <div

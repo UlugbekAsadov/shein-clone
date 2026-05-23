@@ -48,7 +48,7 @@ export default async function ProductPage({
 
       <div className="hidden md:contents">
         <ProductStickyBar product={product} />
-        <Header lang={lang} dict={dict} />
+        <Header lang={lang} dict={dict} isSticky={false} />
 
         <main className="flex-1">
           <div className="mx-auto flex max-w-360 flex-col gap-6 px-6 py-6">
