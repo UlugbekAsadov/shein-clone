@@ -1,4 +1,4 @@
-import type { IBrandChip } from "@/features/shop/interfaces/brand-chip.interface";
+import type { IBrandChip } from "@/features/shop/pages/[slug]/utils/brand-chip.interface";
 import { BrandChipItem } from "./brand-chip-item";
 import { cn } from "@/lib/utils";
 

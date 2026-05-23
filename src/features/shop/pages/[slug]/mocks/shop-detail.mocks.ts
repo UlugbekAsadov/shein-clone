@@ -1,4 +1,4 @@
-import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
+import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
 
 export const shopDetail: IShopDetail = {
   id: "shop-1",

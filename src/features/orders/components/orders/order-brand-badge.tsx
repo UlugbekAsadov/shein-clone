@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { IOrderBrand } from "@/features/profile/interfaces/order.interface";
+import type { IOrderBrand } from "@/features/orders/utils/order.interface";
 
 interface IProps {
   brand: IOrderBrand;

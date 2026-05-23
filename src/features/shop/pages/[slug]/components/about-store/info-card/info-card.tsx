@@ -1,4 +1,4 @@
-import type { IAboutInfoCard } from "@/features/shop/interfaces/about-info.interface";
+import type { IAboutInfoCard } from "@/features/shop/pages/[slug]/utils/about-info.interface";
 import { InfoCardItem } from "./info-card-item";
 import { cn } from "@/lib/utils";
 

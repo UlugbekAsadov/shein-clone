@@ -1,4 +1,4 @@
-import { shopBreadcrumbTrail } from "@/features/shop/mocks/shop-breadcrumb.mocks";
+import { shopBreadcrumbTrail } from "@/features/shop/pages/[slug]/mocks/shop-breadcrumb.mocks";
 
 export function ShopBreadcrumb() {
   return (

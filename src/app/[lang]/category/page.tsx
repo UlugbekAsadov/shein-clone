@@ -1,11 +1,9 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
-import { Header } from "@/shared/components/header/header";
-import { Footer } from "@/shared/components/footer/footer";
 import { CategoryPage } from "@/features/category/pages/category.page";
 
-export default async function CategoryListPage({
+export default async function Page({
   params,
   searchParams,
 }: PageProps<"/[lang]/category">) {
@@ -16,20 +14,5 @@ export default async function CategoryListPage({
   const groupSlug = typeof group === "string" ? group : null;
 
   const dict = await getDictionary(lang);
-
-  return (
-    <>
-      <Header lang={lang} dict={dict} />
-
-      <main className="flex-1">
-        <CategoryPage
-          lang={lang}
-          groupSlug={groupSlug}
-          searchPlaceholder={dict.header.searchPlaceholder}
-        />
-      </main>
-
-      <Footer dict={dict} />
-    </>
-  );
+  return <CategoryPage lang={lang} dict={dict} groupSlug={groupSlug} />;
 }

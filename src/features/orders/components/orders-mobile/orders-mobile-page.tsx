@@ -3,7 +3,7 @@
 import { useState } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderGroup } from "@/features/profile/interfaces/order-group.interface";
+import type { IOrderGroup } from "@/features/orders/utils/order-group.interface";
 import { OrdersMobileHeader } from "./orders-mobile-header";
 import { OrdersMobileTabs, type OrdersMobileTabId } from "./orders-mobile-tabs";
 import { OrdersMobileList } from "./orders-mobile-list";

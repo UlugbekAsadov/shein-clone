@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { VerifiedCheck } from "@solar-icons/react/ssr";
-import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
+import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
 
 interface IProps {
   shop: IShopDetail;

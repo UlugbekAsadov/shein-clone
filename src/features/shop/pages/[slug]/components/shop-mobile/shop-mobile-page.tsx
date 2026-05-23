@@ -3,10 +3,10 @@
 import { useState } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
-import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
-import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
-import type { IAboutContent } from "@/features/shop/interfaces/about-content.interface";
-import { SHOP_TAB_IDS } from "@/features/shop/constants/shop-tabs.constants";
+import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
+import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
+import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabs } from "../shop-tabs/shop-tabs";
 import { CouponsStrip } from "../coupons-strip/coupons-strip";
 import { ShopMobileHeader } from "./shop-mobile-header";

@@ -1,6 +1,6 @@
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderGroup } from "@/features/profile/interfaces/order-group.interface";
+import type { IOrderGroup } from "@/features/orders/utils/order-group.interface";
 import { OrderGroupCard } from "./order-group-card";
 
 interface IProps {

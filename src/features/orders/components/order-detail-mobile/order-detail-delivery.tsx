@@ -1,6 +1,6 @@
 import { ClockCircle, MapPointWave, Phone, User } from "@solar-icons/react/ssr";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderDetail } from "@/features/profile/interfaces/order-detail.interface";
+import type { IOrderDetail } from "@/features/orders/utils/order-detail.interface";
 import { OrderDetailDeliveryRow } from "./order-detail-delivery-row";
 
 interface IProps {

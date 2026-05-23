@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { OrderGroupStatus } from "@/features/profile/interfaces/order-group.interface";
+import type { OrderGroupStatus } from "@/features/orders/utils/order-group.interface";
 
 interface IProps {
   status: OrderGroupStatus;

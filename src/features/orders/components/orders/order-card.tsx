@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Store, ChevronRight, Trash2 } from "lucide-react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrder } from "@/features/profile/interfaces/order.interface";
+import type { IOrder } from "@/features/orders/utils/order.interface";
 import { OrderBrandBadge } from "./order-brand-badge";
 import { OrderProgress } from "./order-progress";
 import { OrderStatusBadge } from "./order-status-badge";

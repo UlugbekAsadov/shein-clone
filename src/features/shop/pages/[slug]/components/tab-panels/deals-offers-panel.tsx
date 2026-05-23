@@ -1,6 +1,6 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
-import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
+import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
 import { CouponsStrip } from "../coupons-strip/coupons-strip";
 import { ShopProductListing } from "../shop-product-listing";
 

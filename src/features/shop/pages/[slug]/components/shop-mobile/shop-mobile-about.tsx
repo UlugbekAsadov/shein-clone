@@ -1,5 +1,5 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IAboutContent } from "@/features/shop/interfaces/about-content.interface";
+import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
 import { Card, ShieldCheck } from "@solar-icons/react/ssr";
 import { TruckIconSolid } from "@/shared/components/icons/solid";
 import { RefreshSolid } from "@/shared/components/icons/outline";

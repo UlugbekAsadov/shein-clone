@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import type { IProfileNavItem } from "@/features/profile/interfaces/profile-nav-item.interface";
+import type { IProfileNavItem } from "@/features/profile/utils/profile-nav-item.interface";
 
 interface IProps {
   item: IProfileNavItem;

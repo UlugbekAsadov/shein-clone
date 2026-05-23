@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { IPaymentMethod } from "@/features/profile/interfaces/order-detail.interface";
+import type { IPaymentMethod } from "@/features/orders/utils/order-detail.interface";
 
 interface IProps {
   payment: IPaymentMethod;

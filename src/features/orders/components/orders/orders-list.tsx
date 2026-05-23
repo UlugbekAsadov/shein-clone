@@ -1,5 +1,5 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrder } from "@/features/profile/interfaces/order.interface";
+import type { IOrder } from "@/features/orders/utils/order.interface";
 import { OrderCard } from "./order-card";
 
 interface IProps {

@@ -1,4 +1,4 @@
-import type { IAuthUser } from "./auth.interface";
+import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 
 export type IContactType = "phone";
 

@@ -1,7 +1,7 @@
 import type {
   IOrderGroupItem,
   OrderGroupStatus,
-} from "@/features/profile/interfaces/order-group.interface";
+} from "@/features/orders/utils/order-group.interface";
 
 export type PaymentMethodKind = "visa" | "mastercard" | "uzcard" | "humo";
 

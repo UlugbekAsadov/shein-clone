@@ -1,4 +1,4 @@
-import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
+import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
 
 export const shopCoupons: ICoupon[] = [
   {

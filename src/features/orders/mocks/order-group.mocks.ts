@@ -1,4 +1,4 @@
-import type { IOrderGroup } from "@/features/profile/interfaces/order-group.interface";
+import type { IOrderGroup } from "@/features/orders/utils/order-group.interface";
 
 const sweatshirtItems = [
   {

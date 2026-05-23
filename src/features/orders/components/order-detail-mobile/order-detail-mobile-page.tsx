@@ -1,5 +1,5 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderDetail } from "@/features/profile/interfaces/order-detail.interface";
+import type { IOrderDetail } from "@/features/orders/utils/order-detail.interface";
 import { OrderDetailMobileHeader } from "./order-detail-mobile-header";
 import { OrderDetailCard } from "./order-detail-card";
 import { OrderDetailDelivery } from "./order-detail-delivery";

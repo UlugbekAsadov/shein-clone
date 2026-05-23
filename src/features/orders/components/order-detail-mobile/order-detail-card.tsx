@@ -1,7 +1,7 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderDetail } from "@/features/profile/interfaces/order-detail.interface";
-import { OrderGroupItem } from "@/features/profile/components/orders-mobile/order-group-item";
-import { OrderGroupStatusBadge } from "@/features/profile/components/orders-mobile/order-group-status-badge";
+import type { IOrderDetail } from "@/features/orders/utils/order-detail.interface";
+import { OrderGroupItem } from "@/features/orders/components/orders-mobile/order-group-item";
+import { OrderGroupStatusBadge } from "@/features/orders/components/orders-mobile/order-group-status-badge";
 import { OrderDetailPayment } from "./order-detail-payment";
 
 interface IProps {

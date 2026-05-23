@@ -1,6 +1,6 @@
 import { Package, Truck, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { IOrderProgressStep } from "@/features/profile/interfaces/order.interface";
+import type { IOrderProgressStep } from "@/features/orders/utils/order.interface";
 
 interface IProps {
   steps: IOrderProgressStep[];

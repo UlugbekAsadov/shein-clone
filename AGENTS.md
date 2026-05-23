@@ -10,50 +10,71 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ```
 src/
-├── app/                         # Next.js App Router (pages only)
-│   └── [lang]/...               # Locale segment; pages are thin shells importing from features/
+├── app/                                    # Next.js App Router (thin shells only)
+│   └── [lang]/...                          # Locale segment; each page.tsx validates lang/dict,
+│                                           # then renders <XxxPage /> from features/
 │
-├── features/                    # Vertical-slice feature modules (CORE)
-│   ├── home/
-│   ├── product/                 # incl. comments and gallery as nested component folders
-│   ├── category/
-│   └── <feature>/
-│       ├── components/
-│       ├── hooks/
-│       ├── services/
-│       ├── api/
-│       ├── store/
-│       ├── constants/
-│       ├── mocks/
-│       └── interfaces/          # *.interface.ts files, one per concern
+├── features/                               # Vertical-slice feature modules (CORE)
+│   ├── <feature>/
+│   │   ├── components/                     # Components scoped to the feature root page
+│   │   │                                   # (or shared across all its sub-pages)
+│   │   ├── api/                            # API client + endpoints
+│   │   ├── services/                       # Server actions, data-fetching wrappers
+│   │   ├── hooks/                          # React hooks
+│   │   ├── providers/                      # React context providers
+│   │   ├── mocks/                          # *.mocks.ts
+│   │   ├── utils/                          # *.interface.ts, *.constants.ts, *.enum.ts, *.validator.ts
+│   │   └── pages/                          # Routing-mirror folder (recursive)
+│   │       ├── <feature>.page.tsx          # Root page component (e.g. profile.page.tsx)
+│   │       └── <sub-route>/                # A sub-page is a folder. Can nest infinitely.
+│   │           ├── components/             # Sub-page-scoped components
+│   │           ├── mocks/  utils/  ...     # Sub-page-scoped (only when needed)
+│   │           └── pages/                  # Same recursive pattern
+│   │               ├── <sub-route>.page.tsx
+│   │               └── <deeper-sub-route>/...
 │
-├── shared/                      # Cross-feature reusable code
-│   ├── components/              # shadcn ui/, layout (header, footer), and shared domain components
-│   │   ├── ui/                  # shadcn primitives
-│   │   ├── header/
-│   │   ├── footer/
-│   │   ├── product/
-│   │   ├── category/
-│   │   └── listing/
+├── shared/                                 # Cross-feature reusable code
+│   ├── components/
+│   │   ├── ui/                             # shadcn primitives
+│   │   ├── header/  footer/                # Layout
+│   │   └── product/  category/  listing/   # Shared domain components
 │   ├── hooks/
 │   ├── constants/
 │   ├── mocks/
 │   └── utils/
 │
-├── core/                        # App-level wiring
-│   ├── providers/               # Providers, query client, etc.
-│   ├── config/                  # App config; i18n config + dictionaries
+├── core/                                   # App-level wiring
+│   ├── providers/                          # Providers, query client, etc.
+│   ├── config/                             # App config; i18n config + dictionaries
 │   ├── middleware/
 │   └── guards/
 │
-├── services/                    # Global services (rare)
-├── lib/                         # Low-level utilities (e.g. cn)
-├── types/                       # Global cross-app TypeScript types
+├── services/                               # Global services (rare)
+├── lib/                                    # Low-level utilities (e.g. cn)
+├── types/                                  # Global cross-app TypeScript types (*.interface.ts)
 ├── styles/
 └── tests/
 ```
 
-`core/middleware/`, `core/guards/`, `services/`, `styles/`, `tests/`, and the per-feature `hooks/`, `services/`, `api/`, `store/` subfolders are created on demand — only when they have real content. Do not pre-create empty placeholders.
+`core/middleware/`, `core/guards/`, `services/`, `styles/`, `tests/`, and the per-feature `hooks/`, `services/`, `api/`, `providers/`, `mocks/`, `utils/` subfolders are created on demand — only when they have real content. Do not pre-create empty placeholders.
+
+## How `pages/` works
+
+The `pages/` folder mirrors the URL structure. The rule is recursive and applies at every depth:
+
+- The page's entry component lives at `pages/<name>.page.tsx`.
+- A sub-page lives inside that same `pages/` folder, as its own folder containing its own `pages/`, `components/`, `utils/`, etc.
+- Dynamic route segments (`[slug]`, `[id]`) are folder names just like static segments.
+
+Example (from `/profile/addresses/[id]/edit/map`):
+
+```
+features/profile/pages/addresses/pages/[id]/pages/edit/pages/map/pages/edit-address-map.page.tsx
+```
+
+A feature without a route (used only as a supporting library — e.g. `auth/`) has no `pages/` folder.
+
+A feature with a root route (e.g. `/category`) has `pages/<feature>.page.tsx`. Sub-routes nest as folders inside that same `pages/`.
 
 # Project rules
 
@@ -65,28 +86,45 @@ src/
 
 4. **No big components.** Decompose large components into smaller subcomponents in their own files and import them. If a component is getting long, split it.
 
-5. **Vertical-slice features.** Each feature is self-contained — it owns its components, hooks, services, API calls, state, mocks, constants, and types. Think of features as mini-apps inside the app.
+5. **Vertical-slice features.** Each feature is self-contained — it owns its components, hooks, services, API calls, providers, mocks, and utils. Think of features as mini-apps inside the app.
 
 6. **Dependency direction inside a feature:** components → hooks → services → API. Never invert.
 
-7. **Group connected components into a single folder.** When components are tightly related (e.g. a parent and its subcomponents), put them together in a named folder. Example: `features/home/components/brand-story-viewer/brand-story-viewer.tsx`, `features/home/components/brand-story-viewer/story-card.tsx`.
+7. **Group connected components into a single folder.** When components are tightly related (e.g. a parent and its subcomponents), put them together in a named folder. Example: `features/home/components/stories/story-viewer/story-viewer.tsx`, `features/home/components/stories/story-viewer/story-card.tsx`.
 
-8. **Feature-scoped interfaces live in `features/<feature>/interfaces/`** with one `*.interface.ts` file per concern (e.g. `product-detail.interface.ts`, `review.interface.ts`). Never create a single `types.ts` at the feature root. Cross-app/global interfaces live in `src/types/` with the same `*.interface.ts` filename convention.
+8. **`app/` pages are thin shells.** Each `app/[lang]/.../page.tsx` only:
+   - Validates the locale (`hasLocale`),
+   - Awaits `params` / `searchParams`,
+   - Calls `getDictionary(lang)`,
+   - Renders the corresponding `<XxxPage />` imported from `features/.../pages/<name>.page.tsx`.
 
-9. **Feature-scoped mocks live in `features/<feature>/mocks/`** with `*.mocks.ts` filenames. Cross-feature mocks live in `src/shared/mocks/`.
+   Page composition, layout (Header/Footer), data wiring, and JSX all live in the feature page component, not the app shell.
 
-10. **Feature-scoped constants live in `features/<feature>/constants/`** with `*.constants.ts` filenames. Cross-feature constants live in `src/shared/constants/`.
+9. **Sub-pages live inside their parent's `pages/` folder.** Never put a sub-route folder at the feature root next to `components/`. The `pages/` folder is recursive and can nest to any depth (see "How `pages/` works" above).
 
-11. **`app/` pages are thin shells.** They import from `features/<x>/` (and `shared/`, `core/`). Page-scoped components do **not** live under `app/` — they live in the corresponding feature module.
+10. **Page-scoped components live next to the page.** Components used by exactly one page belong inside that page's own folder (`features/.../pages/<route>/components/`). Components shared across multiple sub-pages move up to the nearest common ancestor's `components/` folder.
 
-12. **Use `interface IProps` for component prop types.** Never `type Props = { … }`.
+11. **File naming conventions.**
+    - Page entry: `<name>.page.tsx` (lives inside `pages/`)
+    - Interfaces: `<concern>.interface.ts` (lives inside `utils/`)
+    - Constants: `<concern>.constants.ts` (lives inside `utils/`)
+    - Enums: `<concern>.enum.ts` (lives inside `utils/`)
+    - Validators: `<concern>.validator.ts` (lives inside `utils/`)
+    - Mocks: `<concern>.mocks.ts` (lives inside `mocks/`)
 
-13. **All interfaces start with the `I` prefix.** Examples: `IProps`, `IProduct`, `IBrand`, `ICategory`.
+12. **Feature-scoped interfaces/constants/enums/validators live in `features/<feature>/utils/`** (or in the appropriate sub-page's `utils/` if scoped tighter). Never create a single `types.ts` or grouped `constants.ts` at the feature root. Cross-app/global interfaces live in `src/types/` with the same `*.interface.ts` filename convention.
 
-14. **Do not write any `type` aliases.** Prefer `interface` declarations. For union/literal needs, inline them at the usage site instead of creating a `type` alias.
+13. **Feature-scoped mocks live in `features/<feature>/mocks/`** (or in the appropriate sub-page's `mocks/`) with `*.mocks.ts` filenames. Cross-feature mocks live in `src/shared/mocks/`.
+
+14. **Use `interface IProps` for component prop types.** Never `type Props = { … }`.
+
+15. **All interfaces start with the `I` prefix.** Examples: `IProps`, `IProduct`, `IBrand`, `ICategory`.
+
+16. **Do not write any `type` aliases.** Prefer `interface` declarations. For union/literal needs, inline them at the usage site instead of creating a `type` alias.
 
 # Import conventions
 
 - Use the `@/*` alias (mapped to `./src/*`) for absolute imports across `features/`, `shared/`, `core/`, `lib/`, and `types/`.
 - Relative imports (`./`, `../`) are only acceptable for sibling files within the same folder.
 - Never reach into another feature's internals via relative paths — go through the feature's public surface using `@/features/<other-feature>/...`.
+- Dynamic-segment folders keep their brackets in import paths: `@/features/product/pages/[slug]/pages/comments/pages/comments.page`.

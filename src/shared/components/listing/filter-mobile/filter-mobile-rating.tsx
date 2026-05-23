@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Star } from "@solar-icons/react";
-import { ratingFilterOptions } from "@/features/product/mocks/comments-filter.mocks";
+import { ratingFilterOptions } from "@/features/product/pages/[slug]/pages/comments/mocks/comments-filter.mocks";
 import { cn } from "@/lib/utils";
 
 interface IProps {

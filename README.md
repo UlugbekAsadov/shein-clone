@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## New here? Read the developer guide first
 
-Before writing any code, read [docs/CODE_RULES.md](./docs/CODE_RULES.md). It covers the project's folder layout, naming conventions, and the 11 rules every PR is expected to follow, with do/don't examples.
+Before writing any code, read [docs/CODE_RULES.md](./docs/CODE_RULES.md). It covers the project's folder layout, naming conventions, and the 16 rules every PR is expected to follow, with do/don't examples.
 
 The short machine-readable version of the same rules is in [AGENTS.md](./AGENTS.md).
 
@@ -22,7 +22,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The home page's JSX lives in [`src/features/home/pages/home.page.tsx`](./src/features/home/pages/home.page.tsx); the `src/app/[lang]/page.tsx` file is just a thin Next.js shell that validates the locale and renders it. To edit any route, find the matching `*.page.tsx` under `src/features/.../pages/`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

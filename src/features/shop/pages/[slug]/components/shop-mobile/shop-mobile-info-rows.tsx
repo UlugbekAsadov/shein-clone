@@ -1,4 +1,4 @@
-import type { IShopDetail } from "@/features/shop/interfaces/shop-detail.interface";
+import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
 import { UzbekistanFlagIcon } from "@/shared/components/icons/outline";
 import { TruckIconSolid } from "@/shared/components/icons/solid";
 import { ChatRoundLine } from "@solar-icons/react/ssr";

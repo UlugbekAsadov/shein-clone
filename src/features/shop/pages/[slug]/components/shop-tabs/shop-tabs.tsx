@@ -1,4 +1,4 @@
-import { SHOP_TAB_IDS } from "@/features/shop/constants/shop-tabs.constants";
+import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabItem } from "./shop-tab-item";
 
 interface IProps {

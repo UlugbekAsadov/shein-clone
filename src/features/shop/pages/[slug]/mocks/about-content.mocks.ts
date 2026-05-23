@@ -1,4 +1,4 @@
-import type { IAboutContent } from "@/features/shop/interfaces/about-content.interface";
+import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
 
 export const shopAboutContent: IAboutContent = {
   intro:

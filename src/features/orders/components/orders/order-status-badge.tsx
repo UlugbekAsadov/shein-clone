@@ -1,6 +1,6 @@
 import { AlertCircle, Undo2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { OrderStatus } from "@/features/profile/interfaces/order.interface";
+import type { OrderStatus } from "@/features/orders/utils/order.interface";
 
 interface IProps {
   status: OrderStatus;

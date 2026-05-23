@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle, Copy, Ticket } from "@solar-icons/react/ssr";
-import type { ICoupon } from "@/features/shop/interfaces/coupon.interface";
+import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
 import { cn } from "@/lib/utils";
 
 interface IProps {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IOrderGroupItem } from "@/features/profile/interfaces/order-group.interface";
+import type { IOrderGroupItem } from "@/features/orders/utils/order-group.interface";
 
 interface IProps {
   item: IOrderGroupItem;

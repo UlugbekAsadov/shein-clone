@@ -1,4 +1,4 @@
-import type { IAboutInfoItem } from "@/features/shop/interfaces/about-info.interface";
+import type { IAboutInfoItem } from "@/features/shop/pages/[slug]/utils/about-info.interface";
 import {
   ChatRoundLine,
   ClockCircle,

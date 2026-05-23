@@ -4,7 +4,7 @@ import {
   MedalRibbonStar,
   UsersGroupRounded,
 } from "@solar-icons/react/ssr";
-import type { IShopStat } from "@/features/shop/interfaces/shop-detail.interface";
+import type { IShopStat } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
 
 const ICON_MAP = {
   box: Box,

@@ -8,8 +8,8 @@ import {
 } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IProfileNavItem } from "@/features/profile/interfaces/profile-nav-item.interface";
-import type { IProfileUser } from "@/features/profile/interfaces/profile-user.interface";
+import type { IProfileNavItem } from "@/features/profile/utils/profile-nav-item.interface";
+import type { IProfileUser } from "@/features/profile/utils/profile-user.interface";
 import { ProfileUserCard } from "@/features/profile/components/profile-user-card";
 import { ProfileSidebarItem } from "./profile-sidebar-item";
 import { ProfileSidebarLogout } from "./profile-sidebar-logout";

@@ -1,5 +1,5 @@
-import type { IOrderDetail } from "@/features/profile/interfaces/order-detail.interface";
-import { orderGroupMocks } from "@/features/profile/mocks/order-group.mocks";
+import type { IOrderDetail } from "@/features/orders/utils/order-detail.interface";
+import { orderGroupMocks } from "@/features/orders/mocks/order-group.mocks";
 
 export const orderDetailMocks: IOrderDetail[] = orderGroupMocks.map((group) => ({
   id: group.id,

@@ -1,4 +1,4 @@
-import type { IOrder } from "@/features/profile/interfaces/order.interface";
+import type { IOrder } from "@/features/orders/utils/order.interface";
 
 export const orderMocks: IOrder[] = [
   {

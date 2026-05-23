@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { IBrandChip } from "@/features/shop/interfaces/brand-chip.interface";
+import type { IBrandChip } from "@/features/shop/pages/[slug]/utils/brand-chip.interface";
 
 interface IProps {
   brand: IBrandChip;

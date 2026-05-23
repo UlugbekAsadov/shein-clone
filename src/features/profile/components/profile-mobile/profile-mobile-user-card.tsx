@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { IProfileUser } from "@/features/profile/interfaces/profile-user.interface";
+import type { IProfileUser } from "@/features/profile/utils/profile-user.interface";
 
 interface IProps {
   user: IProfileUser;

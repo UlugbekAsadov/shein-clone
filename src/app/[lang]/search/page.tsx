@@ -1,13 +1,9 @@
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
-import { Header } from "@/shared/components/header/header";
-import { Footer } from "@/shared/components/footer/footer";
-import { ListingShell } from "@/shared/components/listing/listing-shell";
-import { ListingPageHeader } from "@/shared/components/listing/listing-page-header";
-import { trendingProducts, womensFashion } from "@/shared/mocks";
+import { SearchPage } from "@/features/search/pages/search.page";
 
-export default async function SearchPage({
+export default async function Page({
   params,
   searchParams,
 }: PageProps<"/[lang]/search">) {
@@ -18,33 +14,5 @@ export default async function SearchPage({
   const query = typeof q === "string" ? q : "";
 
   const dict = await getDictionary(lang);
-  const products = [...trendingProducts, ...womensFashion].slice(0, 16);
-
-  return (
-    <>
-      <Header lang={lang} dict={dict} />
-
-      <main className="flex-1">
-        <ListingShell
-          title={query}
-          header={
-            <ListingPageHeader
-              title={query}
-              subtitle={dict.listing.search.resultsFound}
-              productFoundLabel={dict.listing.toolbar.productFound}
-            />
-          }
-          products={products}
-          dict={{
-            tabs: dict.listing.tabs,
-            toolbar: dict.listing.toolbar,
-            filter: dict.listing.filter,
-          }}
-          quickFiltersLabels={dict.nav.filters}
-        />
-      </main>
-
-      <Footer dict={dict} />
-    </>
-  );
+  return <SearchPage lang={lang} dict={dict} query={query} />;
 }
