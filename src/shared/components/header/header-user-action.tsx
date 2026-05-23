@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@/features/auth/hooks/use-user";
+import { useAuthDialog } from "@/features/auth/hooks/use-auth-dialog";
 import { Button } from "@/shared/components/ui/button";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
@@ -18,11 +19,17 @@ export function HeaderUserAction({
   signUpLabel,
 }: IProps) {
   const { user, isAuthenticated } = useUser();
+  const { open } = useAuthDialog();
 
   if (!isAuthenticated || !user) {
     return (
-      <Button asChild size="lg" className="rounded-[18px] px-6 h-12.5">
-        <Link href={`/${lang}/login`}>{signUpLabel}</Link>
+      <Button
+        type="button"
+        size="lg"
+        onClick={open}
+        className="rounded-[18px] px-6 h-12.5"
+      >
+        {signUpLabel}
       </Button>
     );
   }

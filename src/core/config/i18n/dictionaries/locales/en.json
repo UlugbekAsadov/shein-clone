@@ -17,6 +17,10 @@
         "facebook": "Continue with Facebook",
         "comingSoon": "Coming soon"
       },
+      "terms": {
+        "label": "I agree to the rules for using the trading platforms and returning goods.",
+        "privacyPolicy": "Privacy policy"
+      },
       "code": {
         "title": "Enter the code",
         "subtitle": "We've sent a 5-digit code to your phone. Make sure to check your messages.",

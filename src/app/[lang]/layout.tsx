@@ -53,7 +53,7 @@ export default async function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <Providers user={user}>
+        <Providers user={user} dict={dict}>
           {children}
           <MobileBottomNav lang={lang} dict={dict} />
         </Providers>

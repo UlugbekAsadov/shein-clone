@@ -17,6 +17,10 @@
         "facebook": "Facebook bilan davom etish",
         "comingSoon": "Tez orada"
       },
+      "terms": {
+        "label": "Savdo platformalaridan foydalanish va tovarni qaytarish qoidalariga rozilik beraman.",
+        "privacyPolicy": "Maxfiylik siyosati"
+      },
       "code": {
         "title": "Kodni kiriting",
         "subtitle": "Telefoningizga 5 xonali kod yubordik. Xabarlarni tekshirib ko'ring.",

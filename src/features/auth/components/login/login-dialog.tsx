@@ -1,10 +1,14 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
 import { toast } from "sonner";
-import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/shared/components/ui/dialog";
 import { ACCOUNT_NOT_FOUND_CODE } from "@/features/auth/constants/auth.constants";
 import { PHONE_DIGIT_COUNT } from "@/features/auth/constants/login.constants";
 import {
@@ -14,25 +18,22 @@ import {
   sendCodeAction,
 } from "@/features/auth/services/auth.actions";
 import type { IGender } from "@/features/auth/interfaces/register.interface";
-import { LocaleSwitcher } from "@/shared/components/header/locale-switcher";
+import { useAuthDialog } from "@/features/auth/hooks/use-auth-dialog";
+import { useUser } from "@/features/auth/hooks/use-user";
 import { LoginPhoneForm } from "./login-phone-form";
 import { LoginCodeForm } from "./login-code-form";
 import { LoginRegisterForm } from "./login-register-form";
-import { LoginPreview } from "./login-preview";
-import { cn } from "@/lib/utils";
 
 interface IProps {
-  lang: (typeof locales)[number];
   dict: IDictionary;
 }
 
-const SUCCESS_REDIRECT_DELAY_MS = 1500;
-
 type IStep = "phone" | "code" | "register";
 
-export function LoginPage({ lang, dict }: IProps) {
+export function LoginDialog({ dict }: IProps) {
   const t = dict.auth.login;
-  const router = useRouter();
+  const { isOpen, close } = useAuthDialog();
+  const { refresh } = useUser();
   const [isPending, startTransition] = useTransition();
 
   const [step, setStep] = useState<IStep>("phone");
@@ -41,8 +42,18 @@ export function LoginPage({ lang, dict }: IProps) {
   const [codeError, setCodeError] = useState(false);
   const [codeSuccess, setCodeSuccess] = useState(false);
 
-  const redirectHome = () => {
-    setTimeout(() => router.push(`/${lang}`), SUCCESS_REDIRECT_DELAY_MS);
+  useEffect(() => {
+    if (isOpen) return;
+    setStep("phone");
+    setPhone("");
+    setCode("");
+    setCodeError(false);
+    setCodeSuccess(false);
+  }, [isOpen]);
+
+  const finishSuccess = () => {
+    close();
+    refresh();
   };
 
   const handlePhoneSubmit = () => {
@@ -64,7 +75,7 @@ export function LoginPage({ lang, dict }: IProps) {
       if (loginResult.ok) {
         setCodeSuccess(true);
         toast.success(t.code.success);
-        redirectHome();
+        finishSuccess();
         return;
       }
 
@@ -113,18 +124,21 @@ export function LoginPage({ lang, dict }: IProps) {
         return;
       }
       toast.success(t.code.success);
-      redirectHome();
+      finishSuccess();
     });
   };
 
   return (
-    <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
-      <div className="relative flex min-h-screen flex-col px-6 pt-10 pb-6 md:min-h-0 md:items-center md:justify-center md:px-16 md:py-12">
-        <div
-          className={cn("hidden", "md:absolute md:block md:left-10 md:top-5")}
-        >
-          <LocaleSwitcher current={lang} />
-        </div>
+    <Dialog
+      open={isOpen}
+      onOpenChange={(next) => {
+        if (!next) close();
+      }}
+    >
+      <DialogContent className="w-[min(92vw,448px)] max-h-[90vh] overflow-y-auto p-9 rounded-[30px]">
+        <DialogTitle className="sr-only">{t.title}</DialogTitle>
+        <DialogDescription className="sr-only">{t.subtitle}</DialogDescription>
+
         {step === "phone" && (
           <LoginPhoneForm
             labels={{
@@ -133,14 +147,17 @@ export function LoginPage({ lang, dict }: IProps) {
               phoneLabel: t.phoneLabel,
               phonePlaceholder: t.phonePlaceholder,
               continue: t.continue,
+              terms: t.terms,
               social: t.social,
             }}
             phone={phone}
             onPhoneChange={setPhone}
             onSubmit={handlePhoneSubmit}
+            onClose={close}
             isPending={isPending}
           />
         )}
+
         {step === "code" && (
           <LoginCodeForm
             labels={{
@@ -155,8 +172,10 @@ export function LoginPage({ lang, dict }: IProps) {
             onCodeChange={() => setCodeError(false)}
             onSubmit={handleCodeSubmit}
             onResend={handleResend}
+            onClose={close}
           />
         )}
+
         {step === "register" && (
           <LoginRegisterForm
             labels={{
@@ -175,9 +194,7 @@ export function LoginPage({ lang, dict }: IProps) {
             onSubmit={handleRegisterSubmit}
           />
         )}
-      </div>
-
-      <LoginPreview />
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

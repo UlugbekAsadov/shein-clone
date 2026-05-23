@@ -6,6 +6,7 @@ import { CODE_LENGTH } from "@/features/auth/constants/login.constants";
 import { LoginCodeInput } from "./login-code-input";
 import { LoginResendTimer } from "./login-resend-timer";
 import { cn } from "@/lib/utils";
+import { XIcon } from "lucide-react";
 
 interface IProps {
   labels: {
@@ -20,6 +21,7 @@ interface IProps {
   onCodeChange: () => void;
   onSubmit: (code: string) => void;
   onResend?: () => Promise<boolean> | boolean;
+  onClose?: () => void;
 }
 
 export function LoginCodeForm({
@@ -30,6 +32,7 @@ export function LoginCodeForm({
   onCodeChange,
   onSubmit,
   onResend,
+  onClose,
 }: IProps) {
   const [code, setCode] = useState("");
   const [resendSignal, setResendSignal] = useState(0);
@@ -71,9 +74,16 @@ export function LoginCodeForm({
         "md:h-auto md:flex-none md:gap-6",
       )}
     >
-      <div className="flex flex-col gap-2 text-left md:text-center">
-        <h1 className="text-3xl font-bold text-foreground">{labels.title}</h1>
-        <p className="text-sm text-muted-foreground">{labels.subtitle}</p>
+      <div className="flex gap-2 text-left items-center justify-between md:text-center">
+        <h1 className="text-2xl font-bold text-foreground">{labels.title}</h1>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="text-muted-foreground cursor-pointer"
+        >
+          <XIcon className="size-6" />
+        </button>
       </div>
 
       <LoginCodeInput
