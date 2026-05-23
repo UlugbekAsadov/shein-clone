@@ -61,13 +61,15 @@ export function LoginCodeForm({
     });
   };
 
-  const handleSubmit = () => {
-    if (!isComplete) return;
+  const handleSubmit = (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    if (!isComplete || hasSuccess || isPending) return;
     onSubmit(code);
   };
 
   return (
-    <div
+    <form
+      onSubmit={handleSubmit}
       className={cn(
         "flex h-full w-full flex-1 flex-col gap-5",
         "md:max-w-md",
@@ -104,14 +106,13 @@ export function LoginCodeForm({
       <div className="flex-1 md:hidden" />
 
       <Button
-        type="button"
+        type="submit"
         size="lg"
-        onClick={handleSubmit}
         disabled={!isComplete || hasSuccess || isPending}
         className="h-12.5 w-full rounded-sm text-base font-semibold disabled:bg-secondary disabled:text-muted-foreground disabled:opacity-100"
       >
         {labels.continue}
       </Button>
-    </div>
+    </form>
   );
 }
