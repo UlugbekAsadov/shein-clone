@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Pencil } from "lucide-react";
+import { Pen } from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -83,7 +83,7 @@ export function AddressDesktopRow({ address, dict, lang }: IProps) {
         onClick={goToEdit}
         className="size-10 rounded-sm border-border"
       >
-        <Pencil className="size-4" />
+        <Pen className="size-4" weight="Outline" />
       </Button>
     </div>
   );

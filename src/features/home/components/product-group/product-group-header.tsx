@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import { ProductGroupTimer } from "@/features/home/components/product-group/product-group-timer/product-group-timer";
 
@@ -79,7 +79,7 @@ export function ProductGroupHeader({
               style={{ color: subTitleColor }}
             >
               {viewAllLabel}
-              <ChevronRight className="size-5" />
+              <AltArrowRight className="size-5" weight="Outline" />
             </Link>
           )}
     </div>

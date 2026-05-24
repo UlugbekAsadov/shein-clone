@@ -1,5 +1,4 @@
-import { Shop } from "@solar-icons/react/ssr";
-import { Undo2 } from "lucide-react";
+import { Shop, UndoLeft } from "@solar-icons/react/ssr";
 import type { ISellerResponse } from "@/features/product/pages/[slug]/utils/review.interface";
 
 interface IProps {
@@ -12,7 +11,7 @@ export function CommentsMobileSellerResponse({ response }: IProps) {
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="grid size-8 shrink-0 place-items-center rounded-full bg-secondary text-foreground">
-            <Shop className="size-5" weight="Bold" />
+            <Shop className="size-5" weight="Outline" />
           </span>
           <div>
             <p className="text-sm font-bold text-foreground">
@@ -22,7 +21,7 @@ export function CommentsMobileSellerResponse({ response }: IProps) {
           </div>
         </div>
         <span className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Undo2 className="size-3.5" />
+          <UndoLeft className="size-3.5" weight="Outline" />
           Seller&apos;s Response
         </span>
       </div>

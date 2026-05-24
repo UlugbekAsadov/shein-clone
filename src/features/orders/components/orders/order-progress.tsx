@@ -1,4 +1,4 @@
-import { Package, Truck, CheckCircle2 } from "lucide-react";
+import { Box, Delivery, CheckCircle } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import type { IOrderProgressStep } from "@/features/orders/utils/order.interface";
 
@@ -7,9 +7,9 @@ interface IProps {
 }
 
 const iconMap = {
-  processing: Package,
-  shipped: Truck,
-  delivered: CheckCircle2,
+  processing: Box,
+  shipped: Delivery,
+  delivered: CheckCircle,
 } as const;
 
 const stateMap = {
@@ -44,7 +44,7 @@ export function OrderProgress({ steps }: IProps) {
                 palette,
               )}
             >
-              <Icon className="size-5" />
+              <Icon className="size-5" weight="Outline" />
               {step.label}
             </span>
             {idx < steps.length - 1 && (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { X } from "lucide-react";
+import { CloseCircle } from "@solar-icons/react";
 import {
   Drawer,
   DrawerClose,
@@ -105,7 +105,7 @@ export function AccountMobileDobDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full bg-secondary text-muted-foreground"
           >
-            <X className="size-4" />
+            <CloseCircle className="size-4" weight="Outline" />
           </DrawerClose>
         </div>
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { AddCircle } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 
 interface IProps {
@@ -20,7 +20,7 @@ export function AddressesMobileAddButton({ label, onClick, disabled }: IProps) {
         className="h-12.5 w-full rounded-sm text-base font-semibold"
       >
         <span className="text-lg font-medium">{label}</span>
-        <Plus className="size-6" />
+        <AddCircle className="size-6" weight="Outline" />
       </Button>
     </div>
   );

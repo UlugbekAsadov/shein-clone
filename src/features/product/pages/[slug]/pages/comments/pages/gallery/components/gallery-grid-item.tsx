@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { Play } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
 
 interface IProps {
@@ -24,7 +24,7 @@ export function GalleryGridItem({ item, onClick }: IProps) {
       />
       {item.type === "video" && (
         <div className="absolute inset-0 grid place-items-center bg-black/30">
-          <Play className="size-9 fill-white text-white" />
+          <Play className="size-9 fill-white text-white" weight="Outline" />
         </div>
       )}
     </button>

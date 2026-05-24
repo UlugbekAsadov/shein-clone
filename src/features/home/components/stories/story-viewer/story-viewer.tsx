@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { AltArrowLeft, AltArrowRight, CloseCircle } from "@solar-icons/react";
 import type { IBrand } from "@/types/brand.interface";
 import {
   ACTIVE_SLOT_WIDTH,
@@ -68,7 +68,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         aria-label="Close"
         className="absolute right-6 top-6 z-40 grid size-10 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
       >
-        <X className="size-6" />
+        <CloseCircle className="size-6" weight="Outline" />
       </button>
 
       <div className="relative h-screen w-full overflow-hidden sm:h-175">
@@ -108,7 +108,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         aria-label="Previous brand"
         className="absolute left-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        <ChevronLeft className="size-5" />
+        <AltArrowLeft className="size-5" weight="Outline" />
       </button>
 
       <button
@@ -118,7 +118,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         aria-label="Next brand"
         className="absolute right-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
-        <ChevronRight className="size-5" />
+        <AltArrowRight className="size-5" weight="Outline" />
       </button>
     </div>
   );

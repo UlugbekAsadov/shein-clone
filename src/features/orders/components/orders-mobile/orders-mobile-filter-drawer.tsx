@@ -1,6 +1,6 @@
 "use client";
 
-import { X } from "lucide-react";
+import { CloseCircle } from "@solar-icons/react";
 import type { ReactNode } from "react";
 import {
   Drawer,
@@ -43,7 +43,7 @@ export function OrdersMobileFilterDrawer({
             aria-label="Close filter"
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
-            <X className="size-4" />
+            <CloseCircle className="size-4" weight="Outline" />
           </DrawerClose>
         </div>
 

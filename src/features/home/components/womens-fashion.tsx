@@ -1,4 +1,4 @@
-import { SlidersHorizontal } from "lucide-react";
+import { Tuning2 } from "@solar-icons/react/ssr";
 import { womensFashion } from "@/shared/mocks";
 import { ProductGrid } from "@/shared/components/product/product-grid";
 import { ProductGroupHeader } from "./product-group/product-group-header";
@@ -20,7 +20,7 @@ export function WomensFashion({ title, subtitle, filtersLabel }: IProps) {
             type="button"
             className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium hover:bg-muted"
           >
-            <SlidersHorizontal className="size-3.5" />
+            <Tuning2 className="size-3.5" weight="Outline" />
             {filtersLabel}
           </button>
         }

@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star } from "@solar-icons/react/ssr";
 import { Progress } from "@/shared/components/ui/progress";
 import type { IRatingBucket } from "@/features/product/pages/[slug]/pages/comments/utils/rating-distribution.interface";
 
@@ -16,6 +16,7 @@ export function RatingHistogramRow({ bucket }: IProps) {
             <Star
               key={i}
               className="size-3 fill-foreground text-foreground"
+              weight="Outline"
             />
           ))}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { CloseCircle } from "@solar-icons/react";
 import {
   Drawer,
   DrawerClose,
@@ -52,7 +52,7 @@ export function AddressTypeDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full bg-secondary text-muted-foreground"
           >
-            <X className="size-5" />
+            <CloseCircle className="size-5" weight="Outline" />
           </DrawerClose>
         </div>
 

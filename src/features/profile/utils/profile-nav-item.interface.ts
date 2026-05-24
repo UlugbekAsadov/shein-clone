@@ -1,10 +1,9 @@
-import { IconProps } from "@solar-icons/react";
-import type { LucideIcon } from "lucide-react";
-import { JSX } from "react";
+import type { ComponentType } from "react";
+import type { IconProps } from "@solar-icons/react";
 
 export interface IProfileNavItem {
   id: string;
   label: string;
   href: string;
-  icon: LucideIcon | ((props: IconProps) => JSX.Element);
+  icon: ComponentType<IconProps>;
 }

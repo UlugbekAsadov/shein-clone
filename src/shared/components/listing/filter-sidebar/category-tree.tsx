@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronRight } from "lucide-react";
 import type { ICategoryNode } from "@/types/filter.interface";
 import { cn } from "@/lib/utils";
 import { AltArrowDown } from "@solar-icons/react";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, X } from "lucide-react";
+import { ArrowLeft, CloseCircle } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
 import { GalleryGridItem } from "./gallery-grid-item";
 
@@ -18,7 +18,7 @@ export function GalleryGrid({ items, backHref, onItemClick }: IProps) {
           className="flex items-center gap-3 text-base font-medium"
         >
           <span className="grid size-10 cursor-pointer place-items-center rounded-full bg-secondary hover:bg-muted">
-            <ArrowLeft className="size-5" />
+            <ArrowLeft className="size-5" weight="Outline" />
           </span>
           Back to product
         </Link>
@@ -27,7 +27,7 @@ export function GalleryGrid({ items, backHref, onItemClick }: IProps) {
           aria-label="Close"
           className="grid size-10 cursor-pointer place-items-center rounded-full bg-secondary hover:bg-muted"
         >
-          <X className="size-5" />
+          <CloseCircle className="size-5" weight="Outline" />
         </Link>
       </div>
 

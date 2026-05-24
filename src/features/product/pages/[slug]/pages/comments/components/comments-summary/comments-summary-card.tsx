@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star } from "@solar-icons/react/ssr";
 import type { IRatingBucket } from "@/features/product/pages/[slug]/pages/comments/utils/rating-distribution.interface";
 import { RatingHistogram } from "./rating-histogram";
 
@@ -21,9 +21,10 @@ export function CommentsSummaryCard({ rating, buckets }: IProps) {
               <Star
                 key={i}
                 className="size-5 fill-foreground text-foreground"
+                weight="Outline"
               />
             ))}
-            <Star className="size-5 fill-amber-400 text-amber-400" />
+            <Star className="size-5 fill-amber-400 text-amber-400" weight="Outline" />
           </div>
         </div>
       </div>

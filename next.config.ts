@@ -13,7 +13,6 @@ const nextConfig: NextConfig = {
     preloadEntriesOnStart: false,
     optimizePackageImports: [
       "@solar-icons/react",
-      "lucide-react",
       "motion",
       "radix-ui",
     ],

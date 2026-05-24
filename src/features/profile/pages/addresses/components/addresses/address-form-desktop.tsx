@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft } from "@solar-icons/react";
+import { ArrowLeft, AddCircle, MinusCircle, TrashBinMinimalistic } from "@solar-icons/react";
 import { MapArrowRight } from "@solar-icons/react/ssr";
-import { Plus, Minus } from "lucide-react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IAddress } from "@/features/profile/pages/addresses/utils/address.interface";
@@ -26,7 +25,6 @@ import {
   deleteAddressAction,
   updateAddressAction,
 } from "@/features/profile/pages/addresses/services/address.actions";
-import { Trash2 } from "lucide-react";
 import { AddressTypeIconButton } from "./address-type-icon-button";
 
 interface IProps {
@@ -206,7 +204,7 @@ export function AddressFormDesktop({
             aria-label="Back"
             className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground transition-colors hover:bg-secondary/80 cursor-pointer"
           >
-            <ArrowLeft className="size-5" />
+            <ArrowLeft className="size-5" weight="Outline" />
           </button>
           <h1 className="text-xl font-bold text-foreground">
             {initialAddress ? t.editTitle : t.title}
@@ -302,7 +300,7 @@ export function AddressFormDesktop({
               disabled={isPending}
               className="h-12 w-full rounded-sm text-base font-semibold"
             >
-              <Trash2 className="size-4" />
+              <TrashBinMinimalistic className="size-4" weight="Outline" />
               {t.delete}
             </Button>
           ) : null}
@@ -342,7 +340,7 @@ export function AddressFormDesktop({
               aria-label="Zoom in"
               className="grid size-11 place-items-center border-b border-border"
             >
-              <Plus className="size-5" />
+              <AddCircle className="size-5" weight="Outline" />
             </button>
             <button
               type="button"
@@ -350,7 +348,7 @@ export function AddressFormDesktop({
               aria-label="Zoom out"
               className="grid size-11 place-items-center"
             >
-              <Minus className="size-5" />
+              <MinusCircle className="size-5" weight="Outline" />
             </button>
           </div>
           <button

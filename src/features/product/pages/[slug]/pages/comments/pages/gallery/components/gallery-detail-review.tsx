@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { UserRound } from "lucide-react";
+import { User } from "@solar-icons/react/ssr";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/product/pages/[slug]/components/product-reviews/product-review-meta";
 import { SellerResponseCard } from "@/features/product/pages/[slug]/pages/comments/components/comments-list/seller-response-card";
@@ -14,7 +14,7 @@ export function GalleryDetailReview({ review }: IProps) {
     <div className="flex h-full flex-col gap-3 rounded-xl bg-secondary p-5">
       <div className="flex items-center gap-3">
         <div className="grid size-9 place-items-center rounded-full bg-[#DEDEE4]">
-          <UserRound className="size-7 stroke-[#A8A8AE]" />
+          <User className="size-7 stroke-[#A8A8AE]" weight="Outline" />
         </div>
         <div className="flex-1">
           <div className="text-sm font-bold">{review.user}</div>

@@ -1,5 +1,4 @@
-import { Check } from "lucide-react";
-import { CheckRead } from "@solar-icons/react/ssr";
+import { CheckCircle, CheckRead } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import type { INotification } from "@/features/profile/pages/notifications/utils/notification.interface";
 
@@ -27,7 +26,7 @@ export function NotificationCard({ notification }: IProps) {
           </span>
           <span>{time}</span>
         </span>
-        {read ? <CheckRead className="size-5" /> : <Check className="size-5" />}
+        {read ? <CheckRead className="size-5" weight="Outline" /> : <CheckCircle className="size-5" weight="Outline" />}
       </header>
 
       <div className="p-3">

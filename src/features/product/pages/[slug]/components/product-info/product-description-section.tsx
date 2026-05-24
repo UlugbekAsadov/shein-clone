@@ -1,8 +1,8 @@
-import { Truck } from "lucide-react";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
 import { ProductInfoAccordion } from "./product-info-accordion";
 import { ProductSpecTags } from "./product-spec-tags";
 import {
+  Delivery,
   InfoCircle,
   LayersMinimalistic,
   Ruler,
@@ -12,7 +12,7 @@ import {
 const accordionIcons = {
   "size-fit": Ruler,
   materials: Scissors,
-  delivery: Truck,
+  delivery: Delivery,
   "shop-info": InfoCircle,
 } as const;
 

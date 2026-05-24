@@ -1,6 +1,6 @@
 "use client";
 
-import { X } from "lucide-react";
+import { CloseCircle } from "@solar-icons/react";
 import {
   Drawer,
   DrawerClose,
@@ -38,7 +38,7 @@ export function FilterChipDrawer({
             aria-label={`Close ${title} filter`}
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
-            <X className="size-4" />
+            <CloseCircle className="size-4" weight="Outline" />
           </DrawerClose>
         </DrawerHeader>
         <div className="min-h-0 flex-1 overflow-y-auto px-4">

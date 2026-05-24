@@ -4,8 +4,7 @@ import * as React from "react";
 import { Select as SelectPrimitive } from "radix-ui";
 
 import { cn } from "@/lib/utils";
-import { ChevronUpIcon } from "lucide-react";
-import { AltArrowDown } from "@solar-icons/react";
+import { AltArrowDown, AltArrowUp } from "@solar-icons/react";
 
 function Select({
   ...props
@@ -154,7 +153,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <ChevronUpIcon />
+      <AltArrowUp weight="Outline" />
     </SelectPrimitive.ScrollUpButton>
   );
 }

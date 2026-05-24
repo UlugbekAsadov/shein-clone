@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart } from "@solar-icons/react/ssr";
 import { Button } from "@/shared/components/ui/button";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
 
@@ -55,7 +55,7 @@ export function CommentsStickyBar({ product }: IProps) {
             className="size-11 rounded-full"
             aria-label="Add to wishlist"
           >
-            <Heart className="size-5" />
+            <Heart className="size-5" weight="Outline" />
           </Button>
         </div>
       </div>

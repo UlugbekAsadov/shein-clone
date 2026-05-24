@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, X } from "lucide-react";
+import { AltArrowLeft, CloseCircle } from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -48,7 +48,7 @@ export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
                 onClick={() => setView("select")}
                 className="grid size-7 cursor-pointer place-items-center duration-200 animate-in fade-in slide-in-from-left-2"
               >
-                <ChevronLeft className="size-6" />
+                <AltArrowLeft className="size-6" weight="Outline" />
               </button>
             )}
             <DrawerTitle className="text-lg font-bold">
@@ -61,7 +61,7 @@ export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
               aria-label="Close"
               className="grid size-7 cursor-pointer place-items-center rounded-full bg-secondary text-foreground"
             >
-              <X className="size-4" />
+              <CloseCircle className="size-4" weight="Outline" />
             </button>
           </DrawerClose>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Minus, Plus } from "lucide-react";
+import { MinusCircle, AddCircle } from "@solar-icons/react";
 
 interface IProps {
   value: number;
@@ -18,7 +18,7 @@ export function ProductQtyStepper({ value, onChange }: IProps) {
           aria-label="Decrease quantity"
           className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
-          <Minus className="size-4" />
+          <MinusCircle className="size-4" weight="Outline" />
         </button>
         <div className="grid h-11 min-w-12 place-items-center px-3 text-base font-semibold">
           {value}
@@ -29,7 +29,7 @@ export function ProductQtyStepper({ value, onChange }: IProps) {
           aria-label="Increase quantity"
           className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
-          <Plus className="size-4" />
+          <AddCircle className="size-4" weight="Outline" />
         </button>
       </div>
     </div>

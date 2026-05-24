@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Store, ChevronRight, Trash2 } from "lucide-react";
+import { Shop, AltArrowRight, TrashBinMinimalistic } from "@solar-icons/react/ssr";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IOrder } from "@/features/orders/utils/order.interface";
 import { OrderBrandBadge } from "./order-brand-badge";
@@ -38,13 +38,13 @@ export function OrderCard({ order, dict }: IProps) {
             variant="destructive"
             className="rounded-[4px]"
           >
-            <Trash2 className="size-4" />
+            <TrashBinMinimalistic className="size-4" weight="Outline" />
           </Button>
         </div>
 
         <div className="flex flex-wrap items-center gap-2 text-xs text-secondary-foreground">
           <span className="inline-flex items-center gap-1 text-foreground">
-            <Store className="size-5" />
+            <Shop className="size-5" weight="Outline" />
             <Link href={order.sellerHref} className="underline text-sm">
               {t.soldBy} {order.sellerName}
             </Link>
@@ -53,7 +53,7 @@ export function OrderCard({ order, dict }: IProps) {
           <span>{order.soldCount}</span>
           <span aria-hidden>·</span>
           <span>{order.stockLeft}</span>
-          <ChevronRight className="size-5 text-foreground" />
+          <AltArrowRight className="size-5 text-foreground" weight="Outline" />
         </div>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-secondary-foreground">

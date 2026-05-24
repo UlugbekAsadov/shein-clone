@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { BadgeCheck } from "lucide-react";
 import type { IShop } from "@/types/shop.interface";
 import { featuredShops } from "@/shared/mocks";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
 import { ShopSolid } from "@/shared/components/icons/solid";
 import { Button } from "@/shared/components/ui/button";
 import { Tag } from "@/shared/components/tag/tag";
-import { MedalRibbonStar, Star, Box } from "@solar-icons/react/ssr";
+import { MedalRibbonStar, Star, Box, VerifiedCheck } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import { FeaturedShopsHeader } from "./featured-shops-header";
 
@@ -118,7 +117,7 @@ export function FeaturedShops({
                         {shop.name}
                       </span>
                       {shop.verified && (
-                        <BadgeCheck className="size-4 shrink-0 fill-sky-500 text-white" />
+                        <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
                       )}
                     </h3>
                     <p className="text-xs text-muted-foreground">

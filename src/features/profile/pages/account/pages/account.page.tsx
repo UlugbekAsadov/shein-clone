@@ -1,4 +1,4 @@
-import { CircleUserRound } from "lucide-react";
+import { UserCircle } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
@@ -29,7 +29,7 @@ export function AccountPage({ lang, dict }: IProps) {
               <p className="mt-1 text-sm text-muted-foreground">{t.current}</p>
             </header>
             <ProfilePlaceholder
-              icon={CircleUserRound}
+              icon={UserCircle}
               title={t.empty.title}
               description={t.empty.description}
             />

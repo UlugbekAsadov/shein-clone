@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 
 interface IProps {
@@ -50,7 +50,7 @@ export function CategoriesHeader({
         )}
       >
         {viewAllLabel}
-        <ChevronRight className="size-5" />
+        <AltArrowRight className="size-5" weight="Outline" />
       </Link>
     </div>
   );

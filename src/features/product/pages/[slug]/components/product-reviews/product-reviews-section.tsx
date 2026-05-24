@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type {
   IFitStat,
@@ -37,7 +37,7 @@ export function ProductReviewsSection({
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
           View all
-          <ChevronRight className="size-5" />
+          <AltArrowRight className="size-5" weight="Outline" />
         </Link>
       </div>
 

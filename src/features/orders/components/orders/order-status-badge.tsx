@@ -1,4 +1,4 @@
-import { AlertCircle, Undo2 } from "lucide-react";
+import { DangerCircle, UndoLeft } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import type { OrderStatus } from "@/features/orders/utils/order.interface";
 
@@ -16,7 +16,7 @@ export function OrderStatusBadge({ status, unpaidLabel, returnLabel }: IProps) {
           "inline-flex items-center gap-1.5 rounded-md border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-medium text-rose-600",
         )}
       >
-        <AlertCircle className="size-3.5" />
+        <DangerCircle className="size-3.5" weight="Outline" />
         {unpaidLabel}
       </span>
     );
@@ -29,7 +29,7 @@ export function OrderStatusBadge({ status, unpaidLabel, returnLabel }: IProps) {
           "inline-flex items-center gap-1.5 rounded-lg bg-violet-100 px-3 py-1.5 text-xs font-medium text-violet-700",
         )}
       >
-        <Undo2 className="size-3.5" />
+        <UndoLeft className="size-3.5" weight="Outline" />
         {returnLabel}
       </span>
     );

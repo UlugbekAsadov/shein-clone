@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { X } from "lucide-react";
+import { Camera, CloseCircle } from "@solar-icons/react";
 import {
   searchCategories,
   searchHistory as initialSearchHistory,
@@ -15,7 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import { Camera } from "@solar-icons/react";
 import { SearchIcon } from "../icons/outline";
 
 interface IProps {
@@ -122,7 +121,7 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
                   onClick={() => removeItem(item.id)}
                   className="grid size-6 place-items-center rounded-full text-muted-foreground cursor-pointer"
                 >
-                  <X className="size-6" />
+                  <CloseCircle className="size-6" weight="Outline" />
                 </button>
               </li>
             ))}

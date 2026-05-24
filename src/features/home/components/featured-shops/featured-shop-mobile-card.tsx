@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BadgeCheck, Star, X } from "lucide-react";
+import { VerifiedCheck, Star, CloseCircle } from "@solar-icons/react/ssr";
 import type { IShop } from "@/types/shop.interface";
 import { cn } from "@/lib/utils";
 
@@ -21,7 +21,7 @@ export function FeaturedShopMobileCard({
         aria-label="Dismiss"
         className="absolute right-2 top-2 grid size-7 place-items-center rounded-full text-foreground hover:bg-muted"
       >
-        <X className="size-5" />
+        <CloseCircle className="size-5" weight="Outline" />
       </button>
 
       <div className="grid size-22 place-items-center overflow-hidden rounded-full bg-foreground">
@@ -38,13 +38,13 @@ export function FeaturedShopMobileCard({
       <h3 className="mt-3 flex items-center gap-1 text-base font-bold">
         <span className="truncate">{shop.name}</span>
         {shop.verified && (
-          <BadgeCheck className="size-4 shrink-0 fill-sky-500 text-white" />
+          <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
         )}
       </h3>
       <p className="text-sm text-muted-foreground">{shop.category}</p>
 
       <div className="mt-1 flex items-center gap-1 text-sm">
-        <Star className="size-4 fill-amber-400 text-amber-400" />
+        <Star className="size-4 fill-amber-400 text-amber-400" weight="Outline" />
         <span className="font-semibold">{shop.rating.toFixed(1)}</span>
         <span className="text-muted-foreground">({shop.reviews})</span>
       </div>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Pause, Volume2 } from "lucide-react";
+import { Pause, VolumeLoud } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
 
 interface IProps {
@@ -25,12 +25,12 @@ export function GalleryDetailMedia({ item }: IProps) {
               aria-label="Pause"
               className="grid size-16 cursor-pointer place-items-center rounded-full bg-black/50 text-white"
             >
-              <Pause className="size-7 fill-white" />
+              <Pause className="size-7 fill-white" weight="Outline" />
             </button>
           </div>
           <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 px-5 pb-5 text-sm font-medium text-white">
             <span>0:20 / 1:00</span>
-            <Volume2 className="size-5" />
+            <VolumeLoud className="size-5" weight="Outline" />
             <div className="relative h-1 flex-1 rounded-full bg-white/40">
               <div className="absolute inset-y-0 left-0 w-1/3 rounded-full bg-white" />
             </div>

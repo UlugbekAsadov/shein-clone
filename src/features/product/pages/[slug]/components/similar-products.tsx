@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import { ProductGrid } from "@/shared/components/product/product-grid";
 import type { IProduct } from "@/types/product.interface";
 
@@ -20,7 +20,7 @@ export function SimilarProducts({ products, countLabel }: IProps) {
           className="flex cursor-pointer items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
         >
           View all
-          <ChevronRight className="size-4" />
+          <AltArrowRight className="size-4" weight="Outline" />
         </button>
       </div>
 

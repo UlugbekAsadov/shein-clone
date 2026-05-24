@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Plus, Star, Trash2 } from "lucide-react";
+import { AddCircle, Star, TrashBinMinimalistic } from "@solar-icons/react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IAddress } from "@/features/profile/pages/addresses/utils/address.interface";
@@ -178,7 +178,7 @@ export function NewAddressMobilePage({
             disabled={isPending}
             className="mb-2 h-12.5 w-full rounded-sm text-base font-semibold"
           >
-            <Star className="size-5" />
+            <Star className="size-5" weight="Outline" />
             <span>{t.setDefault}</span>
           </Button>
         ) : null}
@@ -191,7 +191,7 @@ export function NewAddressMobilePage({
             disabled={isPending}
             className="mb-2 h-12.5 w-full rounded-sm text-base font-semibold"
           >
-            <Trash2 className="size-5" />
+            <TrashBinMinimalistic className="size-5" weight="Outline" />
             <span>{t.delete}</span>
           </Button>
         ) : null}
@@ -203,7 +203,7 @@ export function NewAddressMobilePage({
           className="h-12.5 w-full rounded-sm text-lg font-semibold disabled:bg-[#ECECF2] disabled:text-[#A8A8AE]"
         >
           <span>{initialAddress ? t.updateSubmit : t.form.submit}</span>
-          {initialAddress ? null : <Plus className="size-6" />}
+          {initialAddress ? null : <AddCircle className="size-6" weight="Outline" />}
         </Button>
       </div>
     </div>

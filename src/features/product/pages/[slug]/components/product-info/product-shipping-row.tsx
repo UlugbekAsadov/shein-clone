@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import type { ReactNode } from "react";
 
 interface IProps {
@@ -22,7 +22,7 @@ export function ProductShippingRow({
       </div>
       <div className="flex-1 text-sm">{children}</div>
       {showChevron && (
-        <ChevronRight className="mt-1 size-4 text-muted-foreground" />
+        <AltArrowRight className="mt-1 size-4 text-muted-foreground" weight="Outline" />
       )}
     </div>
   );

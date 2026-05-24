@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ThumbsUp, UserRound } from "lucide-react";
+import { Like, User } from "@solar-icons/react/ssr";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/product/pages/[slug]/components/product-reviews/product-review-meta";
 import type { IReview } from "@/features/product/pages/[slug]/utils/review.interface";
@@ -15,7 +15,7 @@ export function CommentsReviewItem({ review }: IProps) {
       <article className="rounded-xl bg-secondary p-5">
         <div className="flex items-center gap-3">
           <div className="grid size-9 place-items-center rounded-full bg-[#DEDEE4] text-sm font-semibold">
-            <UserRound className="size-7 stroke-[#A8A8AE]" />
+            <User className="size-7 stroke-[#A8A8AE]" weight="Outline" />
           </div>
           <div className="flex-1">
             <div className="text-sm font-bold">{review.user}</div>
@@ -63,7 +63,7 @@ export function CommentsReviewItem({ review }: IProps) {
             className="flex cursor-pointer items-center gap-1.5 hover:text-foreground"
           >
             Helpful ({review.helpful})
-            <ThumbsUp className="size-3.5" />
+            <Like className="size-3.5" weight="Outline" />
           </button>
         </div>
 

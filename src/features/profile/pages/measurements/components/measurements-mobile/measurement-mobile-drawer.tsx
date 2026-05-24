@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
+import { CloseCircle } from "@solar-icons/react";
 import {
   Drawer,
   DrawerClose,
@@ -57,7 +57,7 @@ export function MeasurementMobileDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full text-muted-foreground"
           >
-            <X className="size-6" />
+            <CloseCircle className="size-6" weight="Outline" />
           </DrawerClose>
         </div>
 

@@ -1,8 +1,7 @@
 "use client";
 
 import { Fragment } from "react";
-import { X } from "lucide-react";
-import { AltArrowLeft } from "@solar-icons/react";
+import { AltArrowLeft, CloseCircle } from "@solar-icons/react";
 import {
   Drawer,
   DrawerClose,
@@ -45,7 +44,7 @@ export function ProductMobileSizeGuideDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
-            <X className="size-4" />
+            <CloseCircle className="size-4" weight="Outline" />
           </DrawerClose>
         </div>
 

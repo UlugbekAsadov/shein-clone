@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { AltArrowLeft, AltArrowRight, CloseCircle } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
 import { GalleryDetailMedia } from "./gallery-detail-media";
 import { GalleryDetailReview } from "./gallery-detail-review";
@@ -30,7 +30,7 @@ export function GalleryDetail({
           aria-label="Close"
           className="grid size-10 cursor-pointer place-items-center rounded-full bg-secondary hover:bg-muted"
         >
-          <X className="size-5" />
+          <CloseCircle className="size-5" weight="Outline" />
         </button>
       </div>
 
@@ -43,7 +43,7 @@ export function GalleryDetail({
             aria-label="Previous"
             className="absolute left-2 z-10 grid size-10 cursor-pointer place-items-center rounded-full bg-secondary shadow-md hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <ChevronLeft className="size-5" />
+            <AltArrowLeft className="size-5" weight="Outline" />
           </button>
 
           <div className="w-full max-w-[480px]">
@@ -57,7 +57,7 @@ export function GalleryDetail({
             aria-label="Next"
             className="absolute right-2 z-10 grid size-10 cursor-pointer place-items-center rounded-full bg-secondary shadow-md hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <ChevronRight className="size-5" />
+            <AltArrowRight className="size-5" weight="Outline" />
           </button>
         </div>
 

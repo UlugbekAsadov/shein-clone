@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Play } from "lucide-react";
+import { AltArrowRight, Play } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
@@ -25,7 +25,7 @@ export function CommentsMediaGallery({
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
           View all
-          <ChevronRight className="size-5" />
+          <AltArrowRight className="size-5" weight="Outline" />
         </Link>
       </div>
       <div className="grid grid-cols-[repeat(14,minmax(0,1fr))] gap-2">
@@ -44,7 +44,7 @@ export function CommentsMediaGallery({
             />
             {idx === videoIndex && (
               <div className="absolute inset-0 grid place-items-center bg-black/30">
-                <Play className="size-6 fill-white text-white" />
+                <Play className="size-6 fill-white text-white" weight="Outline" />
               </div>
             )}
           </div>

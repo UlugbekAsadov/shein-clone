@@ -1,13 +1,12 @@
 import {
-  CircleUserRound,
-  Package,
-  MapPin,
-  CreditCard,
+  UserCircle,
+  Box,
+  MapPoint,
+  Card,
   Ruler,
   Ticket,
-  MessageCircleMore,
-  LifeBuoy,
-} from "lucide-react";
+  ChatRoundDots,
+} from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProfileNavItem } from "@/features/profile/utils/profile-nav-item.interface";
@@ -30,25 +29,25 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
       id: "account",
       label: dict.profile.nav.account,
       href: `/${lang}/profile/account`,
-      icon: CircleUserRound,
+      icon: UserCircle,
     },
     {
       id: "orders",
       label: dict.profile.nav.orders,
       href: `/${lang}/profile/orders`,
-      icon: Package,
+      icon: Box,
     },
     {
       id: "addresses",
       label: dict.profile.nav.addresses,
       href: `/${lang}/profile/addresses`,
-      icon: MapPin,
+      icon: MapPoint,
     },
     {
       id: "payments",
       label: dict.profile.nav.myCards,
       href: `/${lang}/profile/payments`,
-      icon: CreditCard,
+      icon: Card,
     },
     {
       id: "measurements",
@@ -66,7 +65,7 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
       id: "chat",
       label: dict.profile.nav.chat,
       href: `/${lang}/profile/chat`,
-      icon: MessageCircleMore,
+      icon: ChatRoundDots,
     },
     {
       id: "helpCentre",

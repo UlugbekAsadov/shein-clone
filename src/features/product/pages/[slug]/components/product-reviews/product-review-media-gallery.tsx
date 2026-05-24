@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { AltArrowRight } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
@@ -19,7 +19,7 @@ export function ProductReviewMediaGallery({ lang, slug, images }: IProps) {
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
           View all
-          <ChevronRight className="size-5" />
+          <AltArrowRight className="size-5" weight="Outline" />
         </Link>
       </div>
       <div className="grid grid-cols-6 gap-2">
