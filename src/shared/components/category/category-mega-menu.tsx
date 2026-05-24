@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import {
-  sidebarCategories,
+  navCategories,
   picksForYou,
   featuredCategories,
 } from "@/shared/mocks";
@@ -24,6 +23,8 @@ interface IProps {
     original: string;
     new: string;
   };
+  activeId: string;
+  onActiveChange: (id: string) => void;
 }
 
 export function CategoryMegaMenu({
@@ -31,8 +32,9 @@ export function CategoryMegaMenu({
   picksTitle,
   featuredTitle,
   filters,
+  activeId,
+  onActiveChange,
 }: IProps) {
-  const [activeId, setActiveId] = useState("men-clothing");
 
   return (
     <div className="p-5">
@@ -61,12 +63,12 @@ export function CategoryMegaMenu({
 
       <div className="grid grid-cols-[260px_1fr_300px]">
         <ul className="flex flex-col border-r border-border pr-5">
-          {sidebarCategories.map((c) => (
+          {navCategories.map((c) => (
             <li key={c.id}>
               <Link
                 href={`/${lang}/category/${c.slug}`}
-                onMouseEnter={() => setActiveId(c.id)}
-                onFocus={() => setActiveId(c.id)}
+                onMouseEnter={() => onActiveChange(c.id)}
+                onFocus={() => onActiveChange(c.id)}
                 className={cn(
                   "flex w-full items-center justify-between rounded-sm px-4 py-3 text-left font-medium hover:bg-[#0201061A] cursor-pointer",
                   activeId === c.id && "bg-[#0201061A]",

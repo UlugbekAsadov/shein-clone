@@ -20,29 +20,16 @@ const catImg = (n: number) => CATEGORY_IMAGES[n % CATEGORY_IMAGES.length];
 export const navCategories: ICategory[] = [
   { id: "new-in", name: "New in", slug: "new-in" },
   { id: "sale", name: "Sale", slug: "sale" },
-  { id: "woman-clothing", name: "Woman Clothing", slug: "woman-clothing" },
-  { id: "beachwear", name: "Beachwear", slug: "beachwear" },
-  { id: "kids", name: "Kids", slug: "kids" },
-  { id: "curve", name: "Curve", slug: "curve" },
-  { id: "shoes", name: "Shoes", slug: "shoes" },
-  { id: "underwear-sleepwear", name: "Underwear & Sleepwear", slug: "underwear-sleepwear" },
-  { id: "men-clothing", name: "Men Clothing", slug: "men-clothing" },
-  { id: "home-living", name: "Home Living", slug: "home-living" },
-  { id: "electronics", name: "Electronics", slug: "electronics" },
-  { id: "toys", name: "Toys", slug: "toys" },
-];
-
-export const sidebarCategories: ICategory[] = [
-  { id: "new-in", name: "New in", slug: "new-in" },
-  { id: "sale", name: "Sale", slug: "sale" },
   { id: "women-clothing", name: "Women Clothing", slug: "women-clothing" },
   { id: "beachwear", name: "Beachwear", slug: "beachwear" },
   { id: "kids", name: "Kids", slug: "kids" },
   { id: "curve", name: "Curve", slug: "curve" },
-  { id: "men-clothing", name: "Men Clothing", slug: "men-clothing" },
   { id: "shoes", name: "Shoes", slug: "shoes" },
   { id: "underwear-sleepwear", name: "Underwear & Sleepwear", slug: "underwear-sleepwear" },
+  { id: "men-clothing", name: "Men Clothing", slug: "men-clothing" },
   { id: "home-living", name: "Home & Living", slug: "home-living" },
+  { id: "electronics", name: "Electronics", slug: "electronics" },
+  { id: "toys", name: "Toys", slug: "toys" },
 ];
 
 export const picksForYou: ICategory[] = [

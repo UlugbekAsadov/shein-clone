@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { navCategories } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
@@ -30,6 +30,16 @@ export function CategoryNav({
   filters,
 }: IProps) {
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState(
+    navCategories[0]?.id ?? "",
+  );
+  const scrollRef = useRef<HTMLElement>(null);
+
+  const scrollBy = (direction: 1 | -1) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
+  };
 
   return (
     <div
@@ -49,11 +59,22 @@ export function CategoryNav({
           <AltArrowDown className="size-6" />
         </button>
 
-        <nav className="flex flex-1 items-center gap-5.5 overflow-hidden">
+        <nav
+          ref={scrollRef}
+          className="flex flex-1 items-center gap-5.5 overflow-x-auto scroll-smooth scrollbar-hidden"
+        >
           {navCategories.map((c) => (
             <Link
               key={c.id}
               href={`/${lang}/category/${c.slug}`}
+              onMouseEnter={() => {
+                setOpen(true);
+                setActiveId(c.id);
+              }}
+              onFocus={() => {
+                setOpen(true);
+                setActiveId(c.id);
+              }}
               className={cn(
                 "whitespace-nowrap font-medium transition-colors text-muted-foreground hover:text-foreground",
               )}
@@ -67,6 +88,7 @@ export function CategoryNav({
           <button
             type="button"
             aria-label="Scroll left"
+            onClick={() => scrollBy(-1)}
             className="grid size-8 place-items-center cursor-pointer"
           >
             <AltArrowLeft className="size-6" />
@@ -74,6 +96,7 @@ export function CategoryNav({
           <button
             type="button"
             aria-label="Scroll right"
+            onClick={() => scrollBy(1)}
             className="grid size-8 place-items-center cursor-pointer"
           >
             <AltArrowRight className="size-6" />
@@ -104,6 +127,8 @@ export function CategoryNav({
             picksTitle={picksTitle}
             featuredTitle={featuredTitle}
             filters={filters}
+            activeId={activeId}
+            onActiveChange={setActiveId}
           />
         </div>
       </div>

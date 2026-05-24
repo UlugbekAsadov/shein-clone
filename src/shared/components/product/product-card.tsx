@@ -28,6 +28,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   return (
     <article>
       <Link
+        target="_blank"
         href={href}
         className={cn(
           "group flex flex-col overflow-hidden rounded-[10px] ",
