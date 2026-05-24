@@ -293,6 +293,12 @@
     },
     "title": "Profile",
     "logout": "Logout",
+    "guest": {
+      "title": "Login",
+      "subtitle": "Welcome to your profile",
+      "loginButton": "Login",
+      "desktopDescription": "Sign in to manage your account, orders, addresses and more."
+    },
     "nav": {
       "account": "Manage my account",
       "orders": "My Orders",

@@ -36,10 +36,8 @@ function matchLocalePrefix(pathname: string): string | null {
 }
 
 function isProtectedPath(pathname: string, locale: string): boolean {
-  return PROTECTED_SEGMENTS.some(
-    (segment) =>
-      pathname === `/${locale}/${segment}` ||
-      pathname.startsWith(`/${locale}/${segment}/`),
+  return PROTECTED_SEGMENTS.some((segment) =>
+    pathname.startsWith(`/${locale}/${segment}/`),
   );
 }
 

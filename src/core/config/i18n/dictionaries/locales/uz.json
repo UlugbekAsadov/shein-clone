@@ -293,6 +293,12 @@
     },
     "title": "Profil",
     "logout": "Chiqish",
+    "guest": {
+      "title": "Kirish",
+      "subtitle": "Profilingizga xush kelibsiz",
+      "loginButton": "Kirish",
+      "desktopDescription": "Hisob, buyurtmalar, manzillar va boshqalarni boshqarish uchun tizimga kiring."
+    },
     "nav": {
       "account": "Hisobimni boshqarish",
       "orders": "Buyurtmalarim",
