@@ -11,20 +11,22 @@ import {
 } from "@/shared/components/icons/solid";
 import { moreToExplore, trendingProducts } from "@/shared/mocks";
 import { PromoBanner } from "@/features/home/components/promo-banner";
-import { HeroCarousel } from "@/features/home/components/hero-carousel";
+import { HeroCarousel } from "@/features/home/components/hero-carousel/hero-carousel";
 import { Categories } from "@/features/home/components/categories/categories";
 import { WomensFashion } from "@/features/home/components/womens-fashion";
 import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
 import { DiscountBanners } from "@/features/home/components/discount-banners/discount-banners";
 import { ProductGroup } from "@/features/home/components/product-group/product-group";
 import { Stories } from "@/features/home/components/stories/stories";
+import type { IBanner } from "@/features/home/utils/banner.interface";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
+  banners: IBanner[];
 }
 
-export function HomePage({ lang, dict }: IProps) {
+export function HomePage({ lang, dict, banners }: IProps) {
   return (
     <>
       <MobileHeader lang={lang} />
@@ -43,7 +45,7 @@ export function HomePage({ lang, dict }: IProps) {
           lang={lang}
           placeholder={dict.header.searchPlaceholder}
         />
-        <HeroCarousel />
+        <HeroCarousel lang={lang} banners={banners} />
         <Categories
           lang={lang}
           title={dict.sections.shopByCategory}

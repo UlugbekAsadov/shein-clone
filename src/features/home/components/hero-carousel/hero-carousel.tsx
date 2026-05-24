@@ -1,14 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { heroSlides } from "@/shared/mocks";
-import { cn } from "@/lib/utils";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
+import { cn } from "@/lib/utils";
+import type { locales } from "@/core/config/i18n/i18n-config";
+import type { IBanner } from "@/features/home/utils/banner.interface";
+import { BannerSlide } from "./banner-slide";
 
-export function HeroCarousel() {
+interface IProps {
+  lang: (typeof locales)[number];
+  banners: IBanner[];
+}
+
+export function HeroCarousel({ lang, banners }: IProps) {
   const autoplay = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
@@ -32,31 +38,22 @@ export function HeroCarousel() {
 
   const goPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const goNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-  const goTo = useCallback(
-    (i: number) => emblaApi?.scrollTo(i),
-    [emblaApi],
-  );
+  const goTo = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
+
+  if (banners.length === 0) return null;
 
   return (
     <div className="mx-auto max-w-360 px-4 md:px-6">
       <div className="relative overflow-hidden rounded-[14px] bg-muted md:rounded-3xl">
         <div ref={emblaRef} className="overflow-hidden">
           <div className="flex gap-3">
-            {heroSlides.map((s) => (
-              <div
-                key={s.id}
-                className="relative aspect-351/100 w-full shrink-0 grow-0 basis-full overflow-hidden rounded-[14px] md:aspect-1600/500"
-              >
-                <Image
-                  src={s.image}
-                  alt={s.title}
-                  fill
-                  quality={95}
-                  className="object-cover"
-                  sizes="(max-width: 1440px) 100vw, 1440px"
-                  priority
-                />
-              </div>
+            {banners.map((banner, i) => (
+              <BannerSlide
+                key={`${banner.id}-${i}`}
+                banner={banner}
+                lang={lang}
+                priority={i === 0}
+              />
             ))}
           </div>
         </div>
@@ -79,9 +76,9 @@ export function HeroCarousel() {
         </button>
 
         <div className="absolute bottom-2 md:bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-1.5">
-          {heroSlides.map((s, i) => (
+          {banners.map((banner, i) => (
             <button
-              key={s.id}
+              key={`${banner.id}-${i}`}
               type="button"
               onClick={() => goTo(i)}
               aria-label={`Go to slide ${i + 1}`}

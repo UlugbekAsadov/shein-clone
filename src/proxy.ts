@@ -1,5 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { defaultLocale, locales } from "@/core/config/i18n/i18n-config";
+import { AUTH_COOKIES } from "@/core/api/api-config";
+
+const PROTECTED_SEGMENTS = ["profile"] as const;
 
 function pickLocale(request: NextRequest): string {
   const accept = request.headers.get("accept-language");
@@ -23,19 +26,43 @@ function pickLocale(request: NextRequest): string {
   return defaultLocale;
 }
 
+function matchLocalePrefix(pathname: string): string | null {
+  for (const locale of locales) {
+    if (pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)) {
+      return locale;
+    }
+  }
+  return null;
+}
+
+function isProtectedPath(pathname: string, locale: string): boolean {
+  return PROTECTED_SEGMENTS.some(
+    (segment) =>
+      pathname === `/${locale}/${segment}` ||
+      pathname.startsWith(`/${locale}/${segment}/`),
+  );
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const locale = matchLocalePrefix(pathname);
 
-  const hasLocale = locales.some(
-    (locale) =>
-      pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
-  );
-  if (hasLocale) return;
+  if (locale === null) {
+    const picked = pickLocale(request);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${picked}${pathname === "/" ? "" : pathname}`;
+    return NextResponse.redirect(url);
+  }
 
-  const locale = pickLocale(request);
-  const url = request.nextUrl.clone();
-  url.pathname = `/${locale}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  if (
+    isProtectedPath(pathname, locale) &&
+    !request.cookies.get(AUTH_COOKIES.accessToken)?.value
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}`;
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
 }
 
 export const config = {
