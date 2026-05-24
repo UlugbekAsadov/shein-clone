@@ -3,9 +3,9 @@ export interface IAddress {
   name: string;
   type: "home" | "work" | "other";
   address: string;
-  country: string;
-  region_id: number;
-  district_id: number;
+  country?: string;
+  region_id?: number;
+  district_id?: number;
   lat: number;
   long: number;
   is_default: boolean;
@@ -15,9 +15,7 @@ export interface IAddressCreateRequest {
   name: string;
   type: "home" | "work" | "other";
   address: string;
-  country: string;
-  region_id: number;
-  district_id: number;
+  country?: string;
   lat: number;
   long: number;
   is_default: boolean;
@@ -28,8 +26,6 @@ export interface IAddressUpdateRequest {
   type?: "home" | "work" | "other";
   address?: string;
   country?: string;
-  region_id?: number;
-  district_id?: number;
   lat?: number;
   long?: number;
   is_default?: boolean;

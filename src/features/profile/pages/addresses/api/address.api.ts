@@ -19,7 +19,6 @@ export const addressApi = {
     });
   },
   create(payload: IAddressCreateRequest) {
-    console.log({payload: payload})
     return apiClient.post<IApiResponse<IAddress>>(
       ADDRESS_ENDPOINTS.store,
       payload,

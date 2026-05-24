@@ -2,17 +2,14 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { Trash2 } from "lucide-react";
-import { AltArrowRight, Star } from "@solar-icons/react/ssr";
+import { Pencil } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IAddress } from "@/features/profile/pages/addresses/utils/address.interface";
 import { Button } from "@/shared/components/ui/button";
 import { AddressTypeIcon } from "@/features/profile/pages/addresses/components/addresses-mobile/address-type-icon";
-import {
-  deleteAddressAction,
-  setDefaultAddressAction,
-} from "@/features/profile/pages/addresses/services/address.actions";
+import { setDefaultAddressAction } from "@/features/profile/pages/addresses/services/address.actions";
 
 interface IProps {
   address: IAddress;
@@ -25,91 +22,66 @@ export function AddressDesktopRow({ address, dict, lang }: IProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  const goToEdit = () => {
-    router.push(`/${lang}/profile/addresses/${address.id}/edit`);
-  };
-
-  const handleSetDefault = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    if (address.is_default) return;
+  const handleSelectDefault = () => {
+    if (address.is_default || isPending) return;
     startTransition(async () => {
       const result = await setDefaultAddressAction(address.id);
       if (result.ok) router.refresh();
     });
   };
 
-  const handleDelete = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    startTransition(async () => {
-      const result = await deleteAddressAction(address.id);
-      if (result.ok) router.refresh();
-    });
+  const goToEdit = () => {
+    router.push(`/${lang}/profile/addresses/${address.id}/edit`);
   };
 
   return (
-    <div className="flex w-full items-center gap-3">
+    <div className="flex w-full items-center gap-4">
       <button
         type="button"
-        onClick={goToEdit}
-        className="flex flex-1 items-center gap-3 text-left transition-colors cursor-pointer"
+        role="radio"
+        aria-checked={address.is_default}
+        aria-label={t.setDefault}
+        onClick={handleSelectDefault}
+        disabled={isPending}
+        className="flex flex-1 items-center gap-4 text-left cursor-pointer disabled:cursor-default"
       >
+        <span
+          className={cn(
+            "relative grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors",
+            address.is_default
+              ? "border-foreground"
+              : "border-muted-foreground/40",
+          )}
+        >
+          {address.is_default ? (
+            <span className="size-2.5 rounded-full bg-foreground" aria-hidden />
+          ) : null}
+        </span>
+
         <span className="grid size-14.5 shrink-0 place-items-center rounded-md bg-secondary text-foreground">
           <AddressTypeIcon type={address.type} className="size-6" />
         </span>
 
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
-            <p className="truncate text-base font-bold text-foreground">
-              {address.name}
-            </p>
-            {address.is_default ? (
-              <span className="rounded-full bg-foreground px-2 py-0.5 text-[10px] font-semibold uppercase text-background">
-                {t.default}
-              </span>
-            ) : null}
-          </div>
-          <p className="truncate text-sm text-muted-foreground">
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-base font-bold text-foreground">
+            {address.name}
+          </span>
+          <span className="block truncate text-sm text-muted-foreground">
             {address.address}
-          </p>
-        </div>
+          </span>
+        </span>
       </button>
-
-      {address.is_default ? null : (
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          aria-label={t.setDefault}
-          title={t.setDefault}
-          disabled={isPending}
-          onClick={handleSetDefault}
-          className="size-10 rounded-sm"
-        >
-          <Star className="size-5" />
-        </Button>
-      )}
 
       <Button
         type="button"
-        variant="ghost"
         size="icon"
-        aria-label={t.delete}
-        title={t.delete}
-        disabled={isPending}
-        onClick={handleDelete}
-        className="size-10 rounded-sm text-destructive hover:text-destructive"
-      >
-        <Trash2 className="size-5" />
-      </Button>
-
-      <button
-        type="button"
-        onClick={goToEdit}
+        variant="outline"
         aria-label={t.editTitle}
-        className="grid size-10 place-items-center rounded-sm text-foreground"
+        onClick={goToEdit}
+        className="size-10 rounded-sm border-border"
       >
-        <AltArrowRight className="size-6" />
-      </button>
+        <Pencil className="size-4" />
+      </Button>
     </div>
   );
 }

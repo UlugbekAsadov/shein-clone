@@ -106,6 +106,7 @@ export function AddressFormDesktop({
     ? { lng: initialAddress.long, lat: initialAddress.lat }
     : DEFAULT_CENTER;
   const [center, setCenter] = useState<ICoords>(initialCenter);
+
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
   const [addressFocused, setAddressFocused] = useState(false);
   const skipNextSuggestRef = useRef(Boolean(initialAddress));
@@ -321,7 +322,7 @@ export function AddressFormDesktop({
         <YandexMap
           ref={mapRef}
           apiKey={apiKey}
-          initialCenter={DEFAULT_CENTER}
+          initialCenter={initialCenter}
           initialZoom={15}
           onCenterChange={setCenter}
         />
