@@ -21,6 +21,12 @@ const baseProduct = (
   price: 33.49,
   originalPrice: 63.49,
   image: productImg(index),
+  images: [
+    productImg(index),
+    productImg(index + 1),
+    productImg(index + 2),
+    productImg(index + 3),
+  ],
   rating: 4.5,
   reviews: 324,
   badge,

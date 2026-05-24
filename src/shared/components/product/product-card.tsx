@@ -22,8 +22,13 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
   const [previewOpen, setPreviewOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const { lang } = useParams<{ lang: string }>();
   const href = `/${lang}/product/${product.slug ?? product.id}`;
+  const images =
+    product.images && product.images.length > 0
+      ? product.images
+      : [product.image];
 
   return (
     <article>
@@ -44,17 +49,51 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             "md:rounded-md",
           )}
         >
-          <Image
-            src={product.image}
-            alt={product.title}
-            fill
-            quality={95}
-            sizes="(max-width: 1440px) 25vw, 360px"
-            className={cn(
-              "object-cover transition-transform duration-300",
-              "group-hover:scale-105",
-            )}
-          />
+          {images.map((src, idx) => (
+            <Image
+              key={`${src}-${idx}`}
+              src={src}
+              alt={product.title}
+              fill
+              quality={95}
+              sizes="(max-width: 1440px) 25vw, 360px"
+              className={cn(
+                "object-cover transition-opacity duration-300",
+                "group-hover:scale-105",
+                idx === activeIndex ? "opacity-100" : "opacity-0",
+              )}
+            />
+          ))}
+          {images.length > 1 && (
+            <div
+              className="absolute inset-0 z-10 grid"
+              style={{
+                gridTemplateColumns: `repeat(${images.length}, minmax(0, 1fr))`,
+              }}
+              onMouseLeave={() => setActiveIndex(0)}
+            >
+              {images.map((_, idx) => (
+                <div
+                  key={idx}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  className="h-full w-full"
+                />
+              ))}
+            </div>
+          )}
+          {images.length > 1 && (
+            <div className="pointer-events-none absolute inset-x-2 bottom-1 z-20 flex items-center gap-0.5 opacity-0 transition-opacity duration-200 group-hover:opacity-100 md:inset-x-3 md:bottom-1">
+              {images.map((_, idx) => (
+                <span
+                  key={idx}
+                  className={cn(
+                    "h-1 flex-1 rounded-full transition-colors duration-200",
+                    idx === activeIndex ? "bg-foreground" : "bg-white/70",
+                  )}
+                />
+              ))}
+            </div>
+          )}
           <button
             type="button"
             aria-label="Add to wishlist"
@@ -63,7 +102,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               e.stopPropagation();
             }}
             className={cn(
-              "absolute left-2 top-2 grid size-6 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors",
+              "absolute left-2 top-2 z-20 grid size-6 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors",
               "md:left-3 md:top-3 md:size-7.5",
               "hover:bg-white/90",
             )}
@@ -75,7 +114,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           {product.discountLabel && (
             <span
               className={cn(
-                "absolute right-2 top-2 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
+                "absolute right-2 top-2 z-20 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
                 "md:right-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
               )}
             >
@@ -86,7 +125,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             <Tag
               label={product.badge}
               variant="success"
-              className="absolute bottom-3 left-3"
+              className="absolute bottom-3 left-3 z-20"
             />
           )}
         </div>
