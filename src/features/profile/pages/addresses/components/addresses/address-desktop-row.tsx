@@ -47,14 +47,17 @@ export function AddressDesktopRow({ address, dict, lang }: IProps) {
       >
         <span
           className={cn(
-            "relative grid size-5 shrink-0 place-items-center rounded-full border-2 transition-colors",
+            "relative grid size-5 shrink-0 place-items-center rounded-full transition-colors",
             address.is_default
-              ? "border-foreground"
-              : "border-muted-foreground/40",
+              ? "bg-foreground"
+              : "border-2 border-muted-foreground/40",
           )}
         >
           {address.is_default ? (
-            <span className="size-2.5 rounded-full bg-foreground" aria-hidden />
+            <span
+              className="size-2 rounded-full border-2 bg-white"
+              aria-hidden
+            />
           ) : null}
         </span>
 

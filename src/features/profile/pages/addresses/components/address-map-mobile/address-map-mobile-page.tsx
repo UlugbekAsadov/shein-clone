@@ -27,6 +27,12 @@ interface IProps {
 
 const DEFAULT_CENTER: ICoords = { lng: 69.279, lat: 41.311 };
 
+function parseCoord(value: string | null): number | null {
+  if (!value) return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
   const t = dict.profile.addresses;
   const router = useRouter();
@@ -35,9 +41,15 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
   const type = (params.get("type") ?? "other") as "home" | "work" | "other";
   const initialName = params.get("name") ?? "";
   const initialAddress = params.get("address") ?? "";
+  const initialLat = parseCoord(params.get("lat"));
+  const initialLng = parseCoord(params.get("long"));
+  const initialCenter: ICoords =
+    initialLat !== null && initialLng !== null
+      ? { lng: initialLng, lat: initialLat }
+      : DEFAULT_CENTER;
 
   const mapRef = useRef<IMapApi | null>(null);
-  const [center, setCenter] = useState<ICoords>(DEFAULT_CENTER);
+  const [center, setCenter] = useState<ICoords>(initialCenter);
   const [addressTitle, setAddressTitle] = useState(
     initialName || t.types[type],
   );
@@ -45,8 +57,15 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<ISuggestion[]>([]);
   const [searchFocused, setSearchFocused] = useState(false);
+  const skipNextReverseGeocodeRef = useRef(
+    initialName.length > 0 && initialAddress.length > 0,
+  );
 
   useEffect(() => {
+    if (skipNextReverseGeocodeRef.current) {
+      skipNextReverseGeocodeRef.current = false;
+      return;
+    }
     let cancelled = false;
     reverseGeocode(center.lng, center.lat).then((result) => {
       if (cancelled || !result) return;
@@ -120,14 +139,18 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
     <div className="relative flex min-h-screen flex-col md:hidden">
       <AddressesMobileHeader
         title={t.map.title}
-        fallbackHref={`/${lang}/profile/addresses/new?type=${type}`}
+        fallbackHref={
+          params.get("id")
+            ? `/${lang}/profile/addresses/${params.get("id")}/edit`
+            : `/${lang}/profile/addresses/new?type=${type}`
+        }
       />
 
       <div className="relative flex-1">
         <YandexMap
           ref={mapRef}
           apiKey={apiKey}
-          initialCenter={DEFAULT_CENTER}
+          initialCenter={initialCenter}
           initialZoom={15}
           onCenterChange={setCenter}
         />

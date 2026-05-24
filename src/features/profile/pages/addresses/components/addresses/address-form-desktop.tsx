@@ -204,7 +204,7 @@ export function AddressFormDesktop({
             type="button"
             onClick={() => router.push(`/${lang}/profile/addresses`)}
             aria-label="Back"
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground transition-colors hover:bg-secondary/80"
+            className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground transition-colors hover:bg-secondary/80 cursor-pointer"
           >
             <ArrowLeft className="size-5" />
           </button>
