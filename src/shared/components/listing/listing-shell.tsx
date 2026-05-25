@@ -1,7 +1,7 @@
 import type { IProduct } from "@/types/product.interface";
-import { ProductGrid } from "@/shared/components/product/product-grid";
 import { FilterSidebar } from "./filter-sidebar/filter-sidebar";
 import { ListingMobileHeader } from "./listing-mobile-header/listing-mobile-header";
+import { ListingProductGrid } from "./listing-product-grid";
 import { ListingTabs } from "./listing-tabs";
 import { ListingToolbar } from "./listing-toolbar";
 import { cn } from "@/lib/utils";
@@ -90,10 +90,7 @@ export function ListingShell({
               rating: dict.toolbar.sortRating,
             }}
           />
-          <ProductGrid
-            products={products}
-            className="mt-2 grid-cols-2 sm:grid-cols-3 md:mt-6 md:grid-cols-4"
-          />
+          <ListingProductGrid products={products} />
         </div>
       </div>
     </div>

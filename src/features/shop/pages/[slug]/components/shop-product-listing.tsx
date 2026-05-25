@@ -1,8 +1,8 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
 import { FilterSidebar } from "@/shared/components/listing/filter-sidebar/filter-sidebar";
+import { ListingProductGrid } from "@/shared/components/listing/listing-product-grid";
 import { ListingToolbar } from "@/shared/components/listing/listing-toolbar";
-import { ProductGrid } from "@/shared/components/product/product-grid";
 
 interface IProps {
   products: IProduct[];
@@ -29,10 +29,7 @@ export function ShopProductListing({ products, dict }: IProps) {
             rating: dict.listing.toolbar.sortRating,
           }}
         />
-        <ProductGrid
-          products={products}
-          className="mt-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4"
-        />
+        <ListingProductGrid products={products} />
       </div>
     </div>
   );

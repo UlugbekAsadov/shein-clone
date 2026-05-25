@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -14,6 +13,7 @@ import {
 } from "@/shared/constants/listing.constants";
 import { cn } from "@/lib/utils";
 import { Box } from "@solar-icons/react";
+import { useListingView } from "./hooks/use-listing-view";
 
 interface IProps {
   productFoundLabel: string;
@@ -33,8 +33,7 @@ export function ListingToolbar({
   priceLabel,
   sortLabels,
 }: IProps) {
-  const [view, setView] =
-    useState<(typeof viewModes)[number]["id"]>("comfortable");
+  const { view, setView } = useListingView();
 
   return (
     <div className={cn("flex-wrap items-center gap-4 hidden", "md:flex")}>
