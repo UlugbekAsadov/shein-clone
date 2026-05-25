@@ -1,7 +1,7 @@
 export interface IAddress {
   id: number;
   name: string;
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   address: string;
   country?: string;
   region_id?: number;
@@ -13,7 +13,7 @@ export interface IAddress {
 
 export interface IAddressCreateRequest {
   name: string;
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   address: string;
   country?: string;
   lat: number;
@@ -23,7 +23,7 @@ export interface IAddressCreateRequest {
 
 export interface IAddressUpdateRequest {
   name?: string;
-  type?: "home" | "work" | "other";
+  icon_type?: "home" | "work" | "other";
   address?: string;
   country?: string;
   lat?: number;
@@ -32,7 +32,7 @@ export interface IAddressUpdateRequest {
 }
 
 export interface IAddressFormValues {
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   name: string;
   address: string;
   lat: number | null;

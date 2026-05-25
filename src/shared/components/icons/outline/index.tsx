@@ -1,5 +1,23 @@
 export type IconProps = React.SVGProps<SVGSVGElement> | undefined;
 
+export const PlusIcon = (props: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M5 12h14" />
+    <path d="M12 5v14" />
+  </svg>
+);
+
 export const SupportIcon = (props: IconProps) => (
   <svg
     width="24"
@@ -482,10 +500,7 @@ export const MaleIcon = (props: IconProps) => (
       d="M4 21C4 16.5817 7.58172 14 12 14C16.4183 14 20 16.5817 20 21H4Z"
       fill="currentColor"
     />
-    <path
-      d="M11 14L12 17L13 14L12.7 21H11.3L11 14Z"
-      fill="#FAFAFA"
-    />
+    <path d="M11 14L12 17L13 14L12.7 21H11.3L11 14Z" fill="#FAFAFA" />
   </svg>
 );
 

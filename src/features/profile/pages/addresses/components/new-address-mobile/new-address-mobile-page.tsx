@@ -40,11 +40,10 @@ export function NewAddressMobilePage({
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const type = (initialAddress?.type ?? params.get("type") ?? "other") as
-    | "home"
-    | "work"
-    | "other";
-  const typeLabel = t.types[type];
+  const icon_type = (initialAddress?.icon_type ??
+    params.get("icon_type") ??
+    "other") as "home" | "work" | "other";
+  const typeLabel = t.types[icon_type];
 
   const [name, setName] = useState(
     initialAddress?.name ?? params.get("name") ?? "",
@@ -76,7 +75,7 @@ export function NewAddressMobilePage({
 
   const handleOpenMap = () => {
     const search = new URLSearchParams();
-    search.set("type", type);
+    search.set("icon_type", icon_type);
     if (name) search.set("name", name);
     if (address) search.set("address", address);
     if (lat !== null) search.set("lat", String(lat));
@@ -98,7 +97,7 @@ export function NewAddressMobilePage({
   const handleSubmit = () => {
     if (!canSubmit || lat === null || long === null) return;
     setErrorMessage(null);
-    const payload = { type, name, address, lat, long };
+    const payload = { icon_type, name, address, lat, long };
     startTransition(async () => {
       const result = initialAddress
         ? await updateAddressAction(initialAddress.id, payload)

@@ -37,7 +37,10 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
   const router = useRouter();
   const params = useSearchParams();
 
-  const type = (params.get("type") ?? "other") as "home" | "work" | "other";
+  const icon_type = (params.get("icon_type") ?? "other") as
+    | "home"
+    | "work"
+    | "other";
   const initialName = params.get("name") ?? "";
   const initialAddress = params.get("address") ?? "";
   const initialLat = parseCoord(params.get("lat"));
@@ -50,7 +53,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
   const mapRef = useRef<IMapApi | null>(null);
   const [center, setCenter] = useState<ICoords>(initialCenter);
   const [addressTitle, setAddressTitle] = useState(
-    initialName || t.types[type],
+    initialName || t.types[icon_type],
   );
   const [addressText, setAddressText] = useState(initialAddress);
   const [searchQuery, setSearchQuery] = useState("");
@@ -121,7 +124,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
 
   const handleConfirm = () => {
     const search = new URLSearchParams();
-    search.set("type", type);
+    search.set("icon_type", icon_type);
     if (addressTitle) search.set("name", addressTitle);
     if (addressText) search.set("address", addressText);
     search.set("lat", String(center.lat));
@@ -141,7 +144,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
         fallbackHref={
           params.get("id")
             ? `/${lang}/profile/addresses/${params.get("id")}/edit`
-            : `/${lang}/profile/addresses/new?type=${type}`
+            : `/${lang}/profile/addresses/new?icon_type=${icon_type}`
         }
       />
 
@@ -242,7 +245,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
           </h2>
           <div className="mt-3 flex items-center gap-3">
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground">
-              <AddressTypeIcon type={type} className="size-5" />
+              <AddressTypeIcon icon_type={icon_type} className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-bold text-foreground">

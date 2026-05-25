@@ -1,12 +1,12 @@
 import { HomeAngle, Suitcase, MapPointWave} from "@solar-icons/react/ssr";
 
 interface IProps {
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   className?: string;
 }
 
-export function AddressTypeIcon({ type, className }: IProps) {
-  if (type === "home") return <HomeAngle className={className} />;
-  if (type === "work") return <Suitcase className={className} />;
+export function AddressTypeIcon({ icon_type, className }: IProps) {
+  if (icon_type === "home") return <HomeAngle className={className} />;
+  if (icon_type === "work") return <Suitcase className={className} />;
   return <MapPointWave className={className} />;
 }

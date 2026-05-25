@@ -17,7 +17,7 @@ interface IProps {
   title: string;
   confirmLabel: string;
   typeLabels: { home: string; work: string; other: string };
-  onConfirm: (type: "home" | "work" | "other") => void;
+  onConfirm: (icon_type: "home" | "work" | "other") => void;
 }
 
 const TYPES: Array<"home" | "work" | "other"> = ["home", "work", "other"];
@@ -59,20 +59,20 @@ export function AddressTypeDrawer({
         <div className="border-t border-border" />
 
         <div className="flex flex-col px-4 py-2">
-          {TYPES.map((type) => {
-            const isSelected = selected === type;
+          {TYPES.map((icon_type) => {
+            const isSelected = selected === icon_type;
             return (
               <button
-                key={type}
+                key={icon_type}
                 type="button"
-                onClick={() => setSelected(type)}
+                onClick={() => setSelected(icon_type)}
                 className="flex items-center gap-3 py-3"
               >
                 <span className="grid size-8 shrink-0 place-items-center rounded-[8px] bg-secondary ">
-                  <AddressTypeIcon type={type} className="size-5" />
+                  <AddressTypeIcon icon_type={icon_type} className="size-5" />
                 </span>
                 <span className="flex-1 text-left text-base font-bold text-foreground">
-                  {typeLabels[type]}
+                  {typeLabels[icon_type]}
                 </span>
                 <span
                   className={

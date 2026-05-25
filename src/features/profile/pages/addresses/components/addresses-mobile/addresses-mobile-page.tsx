@@ -31,8 +31,8 @@ export function AddressesMobilePage({
 
   const handleAddClick = () => setDrawerOpen(true);
 
-  const handleConfirmType = (type: "home" | "work" | "other") => {
-    router.push(`/${lang}/profile/addresses/new?type=${type}`);
+  const handleConfirmType = (icon_type: "home" | "work" | "other") => {
+    router.push(`/${lang}/profile/addresses/new?icon_type=${icon_type}`);
   };
 
   return (

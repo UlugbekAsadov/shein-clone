@@ -15,7 +15,7 @@ export function AddressMobileRow({ address, onClick }: IProps) {
       className="flex w-full items-center gap-3 rounded-[18px] bg-secondary p-3 text-left active:bg-secondary/80"
     >
       <span className="grid size-10 shrink-0 place-items-center rounded-[8px] bg-background text-foreground">
-        <AddressTypeIcon type={address.type} className="size-5" />
+        <AddressTypeIcon icon_type={address.icon_type} className="size-5" />
       </span>
 
       <div className="min-w-0 flex-1">

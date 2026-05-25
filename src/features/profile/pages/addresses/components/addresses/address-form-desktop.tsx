@@ -86,12 +86,13 @@ export function AddressFormDesktop({
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const initialType = (initialAddress?.type ?? params.get("type") ?? "home") as
-    | "home"
-    | "work"
-    | "other";
+  const initialIconType = (initialAddress?.icon_type ??
+    params.get("icon_type") ??
+    "home") as "home" | "work" | "other";
 
-  const [type, setType] = useState<"home" | "work" | "other">(initialType);
+  const [icon_type, setIconType] = useState<"home" | "work" | "other">(
+    initialIconType,
+  );
   const [name, setName] = useState(
     initialAddress?.name ?? params.get("name") ?? "",
   );
@@ -162,7 +163,7 @@ export function AddressFormDesktop({
     setErrorMessage(null);
     startTransition(async () => {
       const payload = {
-        type,
+        icon_type,
         name,
         address,
         lat: center.lat,
@@ -219,9 +220,9 @@ export function AddressFormDesktop({
             {TYPES.map((option) => (
               <AddressTypeIconButton
                 key={option}
-                type={option}
-                selected={option === type}
-                onClick={() => setType(option)}
+                icon_type={option}
+                selected={option === icon_type}
+                onClick={() => setIconType(option)}
                 ariaLabel={t.types[option]}
               />
             ))}

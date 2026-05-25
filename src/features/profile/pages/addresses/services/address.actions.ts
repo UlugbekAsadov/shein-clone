@@ -13,7 +13,7 @@ import type { IActionResult } from "@/types/action-result.interface";
 const DEFAULT_COUNTRY = "Uzbekistan";
 
 export interface IAddressActionPayload {
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   name: string;
   address: string;
   lat: number;
@@ -25,7 +25,7 @@ export interface IAddressActionPayload {
 function toCreateRequest(payload: IAddressActionPayload): IAddressCreateRequest {
   return {
     name: payload.name.trim(),
-    type: payload.type,
+    icon_type: payload.icon_type,
     address: payload.address.trim(),
     country: payload.country ?? DEFAULT_COUNTRY,
     lat: payload.lat,
@@ -39,7 +39,7 @@ function toUpdateRequest(
 ): IAddressUpdateRequest {
   const request: IAddressUpdateRequest = {};
   if (payload.name !== undefined) request.name = payload.name.trim();
-  if (payload.type !== undefined) request.type = payload.type;
+  if (payload.icon_type !== undefined) request.icon_type = payload.icon_type;
   if (payload.address !== undefined) request.address = payload.address.trim();
   if (payload.country !== undefined) request.country = payload.country;
   if (payload.lat !== undefined) request.lat = payload.lat;

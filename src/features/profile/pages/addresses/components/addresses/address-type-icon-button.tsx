@@ -3,14 +3,14 @@
 import { AddressTypeIcon } from "@/features/profile/pages/addresses/components/addresses-mobile/address-type-icon";
 
 interface IProps {
-  type: "home" | "work" | "other";
+  icon_type: "home" | "work" | "other";
   selected: boolean;
   onClick: () => void;
   ariaLabel: string;
 }
 
 export function AddressTypeIconButton({
-  type,
+  icon_type,
   selected,
   onClick,
   ariaLabel,
@@ -27,7 +27,7 @@ export function AddressTypeIconButton({
           : "grid size-14.5 place-items-center rounded-md border-2 border-transparent bg-secondary text-muted-foreground cursor-pointer transition-colors hover:text-foreground"
       }
     >
-      <AddressTypeIcon type={type} className="size-6" />
+      <AddressTypeIcon icon_type={icon_type} className="size-6" />
     </button>
   );
 }
