@@ -1,6 +1,7 @@
 "use client";
 
-import { MinusCircle, AddCircle } from "@solar-icons/react";
+import { MinusCircle } from "@solar-icons/react";
+import { PlusIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   value: number;
@@ -29,7 +30,7 @@ export function ProductQtyStepper({ value, onChange }: IProps) {
           aria-label="Increase quantity"
           className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
-          <AddCircle className="size-4" weight="Outline" />
+          <PlusIcon className="size-4" />
         </button>
       </div>
     </div>

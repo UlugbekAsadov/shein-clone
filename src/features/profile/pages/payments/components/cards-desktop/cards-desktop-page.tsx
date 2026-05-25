@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AddCircle } from "@solar-icons/react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import { PlusIcon } from "@/shared/components/icons/outline";
 import type { ICard } from "@/features/profile/pages/payments/utils/card.interface";
 import { Button } from "@/shared/components/ui/button";
 import { CardDesktopRow } from "./card-desktop-row";
@@ -54,7 +54,7 @@ export function CardsDesktopPage({ dict, initialCards }: IProps) {
           className="rounded-sm px-5 text-base h-10.5"
         >
           {t.addCard}
-          <AddCircle className="size-5" weight="Outline" />
+          <PlusIcon className="size-5" />
         </Button>
       </div>
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AddCircle } from "@solar-icons/react/ssr";
+import { PlusIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   href: string;
@@ -14,7 +14,7 @@ export function CardsMobileAddButton({ href, label }: IProps) {
         className="flex h-12.5 w-full items-center justify-center gap-2 rounded-sm bg-foreground text-lg font-medium text-background active:bg-foreground/90"
       >
         {label}
-        <AddCircle className="size-5" weight="Outline" />
+        <PlusIcon className="size-5" />
       </Link>
     </div>
   );

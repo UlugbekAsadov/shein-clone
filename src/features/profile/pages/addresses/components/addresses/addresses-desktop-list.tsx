@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { AddCircle } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
+import { PlusIcon } from "@/shared/components/icons/outline";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IAddress } from "@/features/profile/pages/addresses/utils/address.interface";
 import { Button } from "@/shared/components/ui/button";
@@ -24,7 +24,7 @@ export function AddressesDesktopList({ addresses, dict, lang }: IProps) {
         <Button asChild size="lg" className="rounded-sm px-5">
           <Link href={`/${lang}/profile/addresses/new`} className="text-base!">
             {t.addAddress}
-            <AddCircle className="size-5" weight="Outline" />
+            <PlusIcon className="size-5" />
           </Link>
         </Button>
       </div>

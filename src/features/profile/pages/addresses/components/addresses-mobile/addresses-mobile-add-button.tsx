@@ -1,7 +1,7 @@
 "use client";
 
-import { AddCircle } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
+import { PlusIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   label: string;
@@ -20,7 +20,7 @@ export function AddressesMobileAddButton({ label, onClick, disabled }: IProps) {
         className="h-12.5 w-full rounded-sm text-base font-semibold"
       >
         <span className="text-lg font-medium">{label}</span>
-        <AddCircle className="size-6" weight="Outline" />
+        <PlusIcon className="size-6" />
       </Button>
     </div>
   );

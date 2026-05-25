@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft, AddCircle, MinusCircle, TrashBinMinimalistic } from "@solar-icons/react";
+import { ArrowLeft, MinusCircle, TrashBinMinimalistic } from "@solar-icons/react";
+import { PlusIcon } from "@/shared/components/icons/outline";
 import { MapArrowRight } from "@solar-icons/react/ssr";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -341,7 +342,7 @@ export function AddressFormDesktop({
               aria-label="Zoom in"
               className="grid size-11 place-items-center border-b border-border"
             >
-              <AddCircle className="size-5" weight="Outline" />
+              <PlusIcon className="size-5" />
             </button>
             <button
               type="button"

@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Magnifer, AddCircle, MinusCircle } from "@solar-icons/react";
+import { Magnifer, MinusCircle } from "@solar-icons/react";
+import { PlusIcon } from "@/shared/components/icons/outline";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Button } from "@/shared/components/ui/button";
@@ -212,7 +213,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
               aria-label="Zoom in"
               className="pointer-events-auto grid size-11 place-items-center border-b border-border"
             >
-              <AddCircle className="size-6" weight="Outline" />
+              <PlusIcon className="size-6" />
             </button>
             <button
               type="button"
