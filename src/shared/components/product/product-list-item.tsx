@@ -25,7 +25,7 @@ export function ProductListItem({ product }: IProps) {
       <Link
         target="_blank"
         href={href}
-        className="group flex gap-4 rounded-[12px] bg-secondary p-2 transition-colors"
+        className="group flex gap-4 rounded-[19px] bg-secondary p-3 transition-colors"
       >
         <div className="relative aspect-3/4 w-[165px] shrink-0 overflow-hidden rounded-[10px] bg-muted">
           <Image
