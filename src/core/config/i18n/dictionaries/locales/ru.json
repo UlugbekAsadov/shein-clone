@@ -55,6 +55,15 @@
     "helloSignIn": "Здравствуйте, войдите",
     "signUp": "Регистрация"
   },
+  "visualSearch": {
+    "tooltip": "Поиск по изображению",
+    "title": "Найти товары по изображению",
+    "upload": "Загрузить изображение",
+    "formats": "Поддерживаемые форматы: JPG, JPEG, PNG, WEBP, BMP, GIF",
+    "cropTitle": "Выберите область для поиска",
+    "findProduct": "Найти товар",
+    "analyzing": "Анализ изображения..."
+  },
   "nav": {
     "categories": "Категории",
     "filters": {

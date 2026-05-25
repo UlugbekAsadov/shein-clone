@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { AltArrowLeft, CloseCircle } from "@solar-icons/react";
+import { AltArrowLeft } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -61,7 +62,7 @@ export function ProductCardCartDrawer({ open, onOpenChange }: IProps) {
               aria-label="Close"
               className="grid size-7 cursor-pointer place-items-center rounded-full bg-secondary text-foreground"
             >
-              <CloseCircle className="size-4" weight="Outline" />
+              <XIcon className="size-4" />
             </button>
           </DrawerClose>
         </div>

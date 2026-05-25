@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CloseCircle } from "@solar-icons/react";
 import type { IProduct } from "@/types/product.interface";
+import { XIcon } from "@/shared/components/icons/outline";
 import { galleryPool } from "@/shared/mocks/product-preview.mocks";
 import { TRANSITION_MS } from "@/shared/constants/product-preview.constants";
 import { cn } from "@/lib/utils";
@@ -77,7 +77,7 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
           aria-label="Close"
           className="z-20 grid cursor-pointer place-items-center rounded-full text-foreground ml-auto"
         >
-          <CloseCircle className="size-6" weight="Outline" />
+          <XIcon className="size-6" />
         </button>
 
         <div className="grid max-h-[80vh] grid-cols-1 gap-10 md:grid-cols-2 mt-5">

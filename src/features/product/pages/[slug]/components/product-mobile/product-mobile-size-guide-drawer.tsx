@@ -1,7 +1,8 @@
 "use client";
 
 import { Fragment } from "react";
-import { AltArrowLeft, CloseCircle } from "@solar-icons/react";
+import { AltArrowLeft } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import {
   Drawer,
   DrawerClose,
@@ -44,7 +45,7 @@ export function ProductMobileSizeGuideDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
-            <CloseCircle className="size-4" weight="Outline" />
+            <XIcon className="size-4" />
           </DrawerClose>
         </div>
 

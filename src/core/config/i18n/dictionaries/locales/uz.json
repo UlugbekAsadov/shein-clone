@@ -55,6 +55,15 @@
     "helloSignIn": "Salom, kiring",
     "signUp": "Ro'yxatdan o'tish"
   },
+  "visualSearch": {
+    "tooltip": "Rasm bilan qidirish",
+    "title": "Mahsulotni rasm orqali toping",
+    "upload": "Rasmni yuklash",
+    "formats": "Qo'llab-quvvatlanadigan formatlar: JPG, JPEG, PNG, WEBP, BMP, GIF",
+    "cropTitle": "Qidirish maydonini tanlang",
+    "findProduct": "Mahsulotni topish",
+    "analyzing": "Rasm tahlil qilinmoqda..."
+  },
   "nav": {
     "categories": "Kategoriyalar",
     "filters": {

@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { VerifiedCheck, Star, CloseCircle } from "@solar-icons/react/ssr";
+import { VerifiedCheck, Star } from "@solar-icons/react/ssr";
 import type { IShop } from "@/types/shop.interface";
+import { XIcon } from "@/shared/components/icons/outline";
 import { cn } from "@/lib/utils";
 
 interface IProps {
@@ -21,7 +22,7 @@ export function FeaturedShopMobileCard({
         aria-label="Dismiss"
         className="absolute right-2 top-2 grid size-7 place-items-center rounded-full text-foreground hover:bg-muted"
       >
-        <CloseCircle className="size-5" weight="Outline" />
+        <XIcon className="size-5" />
       </button>
 
       <div className="grid size-22 place-items-center overflow-hidden rounded-full bg-foreground">

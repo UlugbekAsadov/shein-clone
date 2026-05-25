@@ -55,6 +55,15 @@
     "helloSignIn": "Hello, sign in",
     "signUp": "Sign up"
   },
+  "visualSearch": {
+    "tooltip": "Search by image",
+    "title": "Find products by image",
+    "upload": "Upload Image",
+    "formats": "Supported image formats: JPG, JPEG, PNG, WEBP, BMP, GIF",
+    "cropTitle": "Select the area to search",
+    "findProduct": "Find product",
+    "analyzing": "Analyzing image..."
+  },
   "nav": {
     "categories": "Categories",
     "filters": {

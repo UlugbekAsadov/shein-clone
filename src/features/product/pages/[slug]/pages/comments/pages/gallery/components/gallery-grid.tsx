@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ArrowLeft, CloseCircle } from "@solar-icons/react/ssr";
+import { ArrowLeft } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
+import { XIcon } from "@/shared/components/icons/outline";
 import { GalleryGridItem } from "./gallery-grid-item";
 
 interface IProps {
@@ -27,7 +28,7 @@ export function GalleryGrid({ items, backHref, onItemClick }: IProps) {
           aria-label="Close"
           className="grid size-10 cursor-pointer place-items-center rounded-full bg-secondary hover:bg-muted"
         >
-          <CloseCircle className="size-5" weight="Outline" />
+          <XIcon className="size-5" />
         </Link>
       </div>
 

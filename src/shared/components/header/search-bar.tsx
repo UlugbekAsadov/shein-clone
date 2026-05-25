@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Camera, CloseCircle } from "@solar-icons/react";
 import {
   searchCategories,
   searchHistory as initialSearchHistory,
@@ -15,15 +14,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import { SearchIcon } from "../icons/outline";
+import { SearchIcon, XIcon } from "../icons/outline";
+import {
+  VisualSearch,
+  type IVisualSearchDict,
+} from "./visual-search/visual-search";
 
 interface IProps {
   lang: (typeof locales)[number];
   placeholder: string;
   searchLabel: string;
+  visualSearchDict: IVisualSearchDict;
 }
 
-export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
+export function SearchBar({
+  lang,
+  placeholder,
+  searchLabel,
+  visualSearchDict,
+}: IProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState(initialSearchHistory);
@@ -83,13 +92,7 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
             onFocus={() => setOpen(true)}
             className="flex-1 bg-transparent pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
           />
-          <button
-            type="button"
-            aria-label="Visual search"
-            className="rounded-full p-2 text-muted-foreground hover:bg-muted"
-          >
-            <Camera className="size-6" />
-          </button>
+          <VisualSearch lang={lang} dict={visualSearchDict} />
         </div>
 
         <button
@@ -121,7 +124,7 @@ export function SearchBar({ lang, placeholder, searchLabel }: IProps) {
                   onClick={() => removeItem(item.id)}
                   className="grid size-6 place-items-center rounded-full text-muted-foreground cursor-pointer"
                 >
-                  <CloseCircle className="size-6" weight="Outline" />
+                  <XIcon className="size-6" />
                 </button>
               </li>
             ))}

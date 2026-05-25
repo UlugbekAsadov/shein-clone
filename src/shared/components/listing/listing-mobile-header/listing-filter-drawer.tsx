@@ -1,6 +1,6 @@
 "use client";
 
-import { CloseCircle } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import {
   Drawer,
   DrawerClose,
@@ -35,7 +35,7 @@ export function ListingFilterDrawer({ trigger, dict }: IProps) {
             aria-label="Close filter"
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
-            <CloseCircle className="size-4" weight="Outline" />
+            <XIcon className="size-4" />
           </DrawerClose>
         </DrawerHeader>
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-6">

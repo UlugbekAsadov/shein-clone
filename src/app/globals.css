@@ -167,6 +167,18 @@
     }
   }
 
+  @keyframes visual-scan {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
   .dialog-overlay-enter {
     animation: dialog-overlay-in 200ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
   }

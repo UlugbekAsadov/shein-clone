@@ -44,6 +44,7 @@ export function HomePage({ lang, dict, banners }: IProps) {
         <MobileSearchBar
           lang={lang}
           placeholder={dict.header.searchPlaceholder}
+          visualSearchDict={dict.visualSearch}
         />
         <HeroCarousel lang={lang} banners={banners} />
         <Categories

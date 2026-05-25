@@ -3,14 +3,22 @@
 import { useRouter } from "next/navigation";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { SearchIcon } from "../icons/outline";
-import { Camera } from "@solar-icons/react/ssr";
+import {
+  VisualSearch,
+  type IVisualSearchDict,
+} from "./visual-search/visual-search";
 
 interface IProps {
   lang: (typeof locales)[number];
   placeholder: string;
+  visualSearchDict: IVisualSearchDict;
 }
 
-export function MobileSearchBar({ lang, placeholder }: IProps) {
+export function MobileSearchBar({
+  lang,
+  placeholder,
+  visualSearchDict,
+}: IProps) {
   const router = useRouter();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -31,13 +39,11 @@ export function MobileSearchBar({ lang, placeholder }: IProps) {
           placeholder={placeholder}
           className="flex-1 bg-transparent text-sm placeholder:text-muted-foreground focus:outline-none"
         />
-        <button
-          type="button"
-          aria-label="Visual search"
-          className="grid size-8 place-items-center rounded-full text-muted-foreground"
-        >
-          <Camera className="size-6" />
-        </button>
+        <VisualSearch
+          lang={lang}
+          dict={visualSearchDict}
+          variant="mobile"
+        />
       </div>
     </form>
   );

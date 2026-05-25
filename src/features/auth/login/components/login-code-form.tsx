@@ -6,7 +6,7 @@ import { CODE_LENGTH } from "@/features/auth/login/utils/login.constants";
 import { LoginCodeInput } from "./login-code-input";
 import { LoginResendTimer } from "./login-resend-timer";
 import { cn } from "@/lib/utils";
-import { CloseCircle } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   labels: {
@@ -84,7 +84,7 @@ export function LoginCodeForm({
           aria-label="Close"
           className="text-muted-foreground cursor-pointer"
         >
-          <CloseCircle className="size-6" weight="Outline" />
+          <XIcon className="size-6" />
         </button>
       </div>
 

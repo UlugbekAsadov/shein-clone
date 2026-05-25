@@ -1,7 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
-import { AltArrowDown, CloseCircle } from "@solar-icons/react";
+import { AltArrowDown } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import { cn } from "@/lib/utils";
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -47,7 +48,7 @@ export const ListingFilterChipTrigger = forwardRef<HTMLButtonElement, IProps>(
             }}
             className="ml-1 grid cursor-pointer place-items-center"
           >
-            <CloseCircle className="size-4" weight="Outline" />
+            <XIcon className="size-4" />
           </span>
         ) : (
           <AltArrowDown className="size-5" />

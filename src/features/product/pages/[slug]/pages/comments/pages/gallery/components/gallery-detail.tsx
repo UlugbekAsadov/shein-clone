@@ -1,5 +1,6 @@
-import { AltArrowLeft, AltArrowRight, CloseCircle } from "@solar-icons/react/ssr";
+import { AltArrowLeft, AltArrowRight } from "@solar-icons/react/ssr";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
+import { XIcon } from "@/shared/components/icons/outline";
 import { GalleryDetailMedia } from "./gallery-detail-media";
 import { GalleryDetailReview } from "./gallery-detail-review";
 
@@ -30,7 +31,7 @@ export function GalleryDetail({
           aria-label="Close"
           className="grid size-10 cursor-pointer place-items-center rounded-full bg-secondary hover:bg-muted"
         >
-          <CloseCircle className="size-5" weight="Outline" />
+          <XIcon className="size-5" />
         </button>
       </div>
 

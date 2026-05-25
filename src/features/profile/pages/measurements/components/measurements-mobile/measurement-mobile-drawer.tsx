@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CloseCircle } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import {
   Drawer,
   DrawerClose,
@@ -57,7 +57,7 @@ export function MeasurementMobileDrawer({
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full text-muted-foreground"
           >
-            <CloseCircle className="size-6" weight="Outline" />
+            <XIcon className="size-6" />
           </DrawerClose>
         </div>
 

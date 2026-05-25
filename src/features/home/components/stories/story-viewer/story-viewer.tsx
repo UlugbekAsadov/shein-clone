@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AltArrowLeft, AltArrowRight, CloseCircle } from "@solar-icons/react";
+import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 import type { IBrand } from "@/types/brand.interface";
+import { XIcon } from "@/shared/components/icons/outline";
 import {
   ACTIVE_SLOT_WIDTH,
   EASING,
@@ -68,7 +69,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         aria-label="Close"
         className="absolute right-6 top-6 z-40 grid size-10 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
       >
-        <CloseCircle className="size-6" weight="Outline" />
+        <XIcon className="size-6" />
       </button>
 
       <div className="relative h-screen w-full overflow-hidden sm:h-175">

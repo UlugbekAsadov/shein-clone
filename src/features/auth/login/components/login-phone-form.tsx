@@ -7,7 +7,7 @@ import { PHONE_DIGIT_COUNT } from "@/features/auth/login/utils/login.constants";
 import { LoginPhoneInput } from "./login-phone-input";
 import { LoginSocialButtons } from "./login-social-buttons";
 import { cn } from "@/lib/utils";
-import { CloseCircle } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   labels: {
@@ -66,7 +66,7 @@ export function LoginPhoneForm({
           aria-label="Close"
           className="text-muted-foreground cursor-pointer"
         >
-          <CloseCircle className="size-6" weight="Outline" />
+          <XIcon className="size-6" />
         </button>
       </div>
 

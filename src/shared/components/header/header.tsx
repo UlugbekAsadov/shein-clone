@@ -55,6 +55,7 @@ export function Header({ lang, dict, isSticky = true }: IProps) {
           lang={lang}
           placeholder={dict.header.searchPlaceholder}
           searchLabel={dict.header.search}
+          visualSearchDict={dict.visualSearch}
         />
 
         <div suppressHydrationWarning className="flex items-center gap-4">

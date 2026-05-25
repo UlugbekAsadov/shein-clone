@@ -29,6 +29,7 @@ export function CategoryPage({ lang, dict, groupSlug }: IProps) {
             <MobileSearchBar
               lang={lang}
               placeholder={dict.header.searchPlaceholder}
+              visualSearchDict={dict.visualSearch}
             />
             {activeGroup && (
               <CategoryDrillHeader lang={lang} title={activeGroup.name} />

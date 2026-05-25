@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CloseCircle } from "@solar-icons/react";
 import { toast } from "sonner";
+import { XIcon } from "@/shared/components/icons/outline";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import {
   Dialog,
@@ -84,7 +84,7 @@ export function CardAddDialog({ open, onOpenChange, dict, onSubmit }: IProps) {
             aria-label="Close"
             className="grid size-8 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
           >
-            <CloseCircle className="size-6" weight="Outline" />
+            <XIcon className="size-6" />
           </DialogClose>
         </div>
 

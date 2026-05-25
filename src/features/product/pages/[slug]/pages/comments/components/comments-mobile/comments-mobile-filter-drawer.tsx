@@ -1,6 +1,6 @@
 "use client";
 
-import { CloseCircle } from "@solar-icons/react";
+import { XIcon } from "@/shared/components/icons/outline";
 import {
   Drawer,
   DrawerClose,
@@ -29,7 +29,7 @@ export function CommentsMobileFilterDrawer({ trigger, applyLabel }: IProps) {
             aria-label="Close filter"
             className="grid size-8 place-items-center rounded-full text-foreground"
           >
-            <CloseCircle className="size-5" weight="Outline" />
+            <XIcon className="size-5" />
           </DrawerClose>
         </div>
 
