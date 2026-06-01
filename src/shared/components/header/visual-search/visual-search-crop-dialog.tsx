@@ -1,6 +1,10 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/shared/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/shared/components/ui/dialog";
 import { XIcon } from "@/shared/components/icons/outline";
 import { CornerFrame } from "./corner-frame";
 
@@ -25,7 +29,7 @@ export function VisualSearchCropDialog({
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="w-[min(92vw,560px)] gap-5 rounded-[20px] p-5">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-foreground">{title}</h3>
+          <DialogTitle className="text-xl font-semibold">{title}</DialogTitle>
           <button
             type="button"
             aria-label="Close"
