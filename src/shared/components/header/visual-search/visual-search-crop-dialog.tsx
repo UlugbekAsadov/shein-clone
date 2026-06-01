@@ -54,7 +54,7 @@ export function VisualSearchCropDialog({
           <button
             type="button"
             onClick={onConfirm}
-            className="rounded-[10px] bg-foreground px-5 h-12 text-sm font-semibold text-background hover:bg-foreground/90 cursor-pointer"
+            className="rounded-[10px] bg-foreground px-5 h-12 text-sm font-semibold text-background hover:bg-foreground/90 cursor-pointer w-full md:w-fit"
           >
             {findLabel}
           </button>

@@ -25,13 +25,16 @@ interface IProps {
   variant?: "desktop" | "mobile";
 }
 
+const ACCEPT = "image/jpeg,image/png,image/webp,image/bmp,image/gif";
+
 export function VisualSearch({ lang, dict, variant = "desktop" }: IProps) {
   const router = useRouter();
-  const [step, setStep] = useState<
-    "idle" | "upload" | "crop" | "analyzing"
-  >("idle");
+  const [step, setStep] = useState<"idle" | "upload" | "crop" | "analyzing">(
+    "idle",
+  );
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const anchorRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     return () => {
@@ -57,6 +60,21 @@ export function VisualSearch({ lang, dict, variant = "desktop" }: IProps) {
     setStep("crop");
   };
 
+  const handleCameraClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (variant === "mobile") {
+      fileInputRef.current?.click();
+      return;
+    }
+    setStep(step === "upload" ? "idle" : "upload");
+  };
+
+  const onPick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) handleFile(file);
+    e.target.value = "";
+  };
+
   const handleFindProduct = () => {
     setStep("analyzing");
     window.setTimeout(() => {
@@ -70,10 +88,7 @@ export function VisualSearch({ lang, dict, variant = "desktop" }: IProps) {
       <button
         type="button"
         aria-label={dict.tooltip}
-        onClick={(e) => {
-          e.stopPropagation();
-          setStep(step === "upload" ? "idle" : "upload");
-        }}
+        onClick={handleCameraClick}
         className={cn(
           "group/cam relative rounded-full text-muted-foreground hover:bg-muted cursor-pointer",
           variant === "desktop"
@@ -89,7 +104,17 @@ export function VisualSearch({ lang, dict, variant = "desktop" }: IProps) {
         )}
       </button>
 
-      {step === "upload" && (
+      {variant === "mobile" && (
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept={ACCEPT}
+          onChange={onPick}
+          className="hidden"
+        />
+      )}
+
+      {step === "upload" && variant === "desktop" && (
         <VisualSearchUploadPopover
           anchorRef={anchorRef}
           dict={dict}
