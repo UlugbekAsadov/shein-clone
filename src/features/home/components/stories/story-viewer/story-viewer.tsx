@@ -62,7 +62,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-110 flex items-center justify-center bg-black/80 backdrop-blur-sm">
       <button
         type="button"
         onClick={onClose}
@@ -72,7 +72,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         <XIcon className="size-6" />
       </button>
 
-      <div className="relative h-screen w-full overflow-hidden sm:h-175">
+      <div className="relative h-dvh w-full overflow-hidden sm:h-175">
         <div
           className="absolute left-1/2 top-1/2 flex items-center will-change-transform"
           style={{
