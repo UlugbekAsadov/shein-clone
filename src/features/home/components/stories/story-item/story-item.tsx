@@ -22,7 +22,7 @@ export function StoryItem({ brand, onClick, brandClassName }: IProps) {
       className={cn(
         "group flex shrink-0 cursor-pointer flex-col items-center gap-1",
         "md:gap-2",
-      )}
+      )} 
     >
       <span className={cn("relative block size-15", "md:size-24")}>
         <StoryRing total={total} viewedCount={viewedCount} />

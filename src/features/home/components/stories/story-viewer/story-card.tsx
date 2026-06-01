@@ -77,11 +77,11 @@ export function StoryCard({
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-16 bg-gradient-to-b from-black/60 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 z-0 h-16 bg-linear-to-b from-black/60 to-transparent"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-gradient-to-t from-black/70 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-32 bg-linear-to-t from-black/70 to-transparent"
       />
 
       <button
