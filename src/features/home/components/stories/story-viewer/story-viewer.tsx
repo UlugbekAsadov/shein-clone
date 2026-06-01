@@ -67,7 +67,7 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-6 top-6 z-40 grid size-10 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
+        className="absolute right-3 top-7 z-40 grid size-10 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10 sm:right-6 sm:top-6"
       >
         <XIcon className="size-6" />
       </button>
