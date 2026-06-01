@@ -16,7 +16,6 @@ export const colorSwatches = [
   { id: "dark-khaki", name: "Dark Khaki", image: galleryPool[1] },
   { id: "beige", name: "Beige", image: galleryPool[2] },
   { id: "tan", name: "Tan", image: galleryPool[3] },
-  { id: "stone", name: "Stone", image: galleryPool[4] },
 ];
 
 export const sizes = [

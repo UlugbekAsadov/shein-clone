@@ -10,9 +10,8 @@ interface IProps {
 
 export function ProductReviewCard({ review }: IProps) {
   return (
-    <>
-      <article className="py-4 bg-secondary p-5 rounded-[26px]">
-        <div className="flex items-center gap-3">
+    <article className="flex h-full flex-col bg-secondary p-5 rounded-[26px]">
+      <div className="flex items-center gap-3">
           <div className="grid size-9 place-items-center rounded-full bg-[#DEDEE4] text-sm font-semibold">
             <User className="stroke-[#A8A8AE] size-7" weight="Outline" />
           </div>
@@ -52,7 +51,7 @@ export function ProductReviewCard({ review }: IProps) {
           </div>
         )}
 
-        <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+        <div className="mt-auto pt-4 flex items-center justify-between text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5 bg-background px-3 py-1 rounded-[4px]">
             <span aria-hidden>{review.countryFlag}</span>
             {review.countryLabel}
@@ -65,8 +64,6 @@ export function ProductReviewCard({ review }: IProps) {
             <Like className="size-3.5" weight="Outline" />
           </button>
         </div>
-      </article>
-      <div className="border-t-2 border-dashed border-border my-6 last:border-0" />
-    </>
+    </article>
   );
 }

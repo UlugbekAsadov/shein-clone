@@ -9,7 +9,6 @@ import { ProductStickyBar } from "@/features/product/pages/[slug]/components/pro
 import { ProductInfoPanel } from "@/features/product/pages/[slug]/components/product-info/product-info-panel";
 import { ProductShippingInfo } from "@/features/product/pages/[slug]/components/product-info/product-shipping-info";
 import { ProductSellerCard } from "@/features/product/pages/[slug]/components/product-info/product-seller-card";
-import { ProductDescriptionSection } from "@/features/product/pages/[slug]/components/product-info/product-description-section";
 import { ProductReviewsSection } from "@/features/product/pages/[slug]/components/product-reviews/product-reviews-section";
 import { SimilarProducts } from "@/features/product/pages/[slug]/components/similar-products";
 import { ProductMobilePage } from "@/features/product/pages/[slug]/components/product-mobile/product-mobile-page";
@@ -21,6 +20,7 @@ import {
   reviewMediaMock,
   reviewsMock,
 } from "@/features/product/pages/[slug]/mocks/review.mocks";
+import { ProductReviews } from "../components/product-reviews/product-reviews";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -74,7 +74,10 @@ export function ProductPage({ lang, dict, slug }: IProps) {
                 <ProductInfoPanel product={product} />
                 <ProductShippingInfo />
                 <ProductSellerCard seller={sellerCardMock} />
-                <ProductDescriptionSection product={product} />
+              </div>
+
+              <div className="md:col-span-2">
+                <ProductReviews reviews={reviewsMock} />
               </div>
             </div>
 

@@ -10,7 +10,7 @@ interface IProps {
 
 export function ProductQtyStepper({ value, onChange }: IProps) {
   return (
-    <div className="mt-7.5">
+    <div className="">
       <div className="mb-2 font-bold">Qty:</div>
       <div className="flex items-center gap-2 border w-fit rounded-md">
         <button

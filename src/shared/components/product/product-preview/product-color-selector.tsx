@@ -14,7 +14,7 @@ export function ProductColorSelector({ swatches, value, onChange }: IProps) {
   const selected = swatches.find((s) => s.id === value);
 
   return (
-    <div className="mt-4.5">
+    <div className="">
       <div className="mb-2">
         <span className="font-bold">Color:</span>{" "}
         <span className="text-muted-foreground text-xs">{selected?.name}</span>
