@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
@@ -18,7 +18,11 @@ interface IProps {
 export function ProductListItem({ product }: IProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const { lang } = useParams<{ lang: string }>();
-  const href = `/${lang}/product/${product.slug ?? product.id}`;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams.toString();
+  const callbackUrl = query ? `${pathname}?${query}` : pathname;
+  const href = `/${lang}/product/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
 
   return (
     <article className="relative">

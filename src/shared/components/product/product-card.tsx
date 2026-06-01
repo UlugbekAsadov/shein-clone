@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { cn } from "@/lib/utils";
@@ -24,7 +24,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const { lang } = useParams<{ lang: string }>();
-  const href = `/${lang}/product/${product.slug ?? product.id}`;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const query = searchParams.toString();
+  const callbackUrl = query ? `${pathname}?${query}` : pathname;
+  const href = `/${lang}/product/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
   const images =
     product.images && product.images.length > 0
       ? product.images

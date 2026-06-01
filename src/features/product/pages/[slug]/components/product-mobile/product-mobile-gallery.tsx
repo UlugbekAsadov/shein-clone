@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, Heart } from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 
@@ -13,27 +14,41 @@ interface IProps {
 
 export function ProductMobileGallery({ images, alt }: IProps) {
   const router = useRouter();
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start" });
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    const i = Math.round(track.scrollLeft / track.clientWidth);
-    if (i !== activeIndex) setActiveIndex(i);
-  };
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setSelectedIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
 
   return (
     <div className="relative">
-      <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-4 pt-3">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          aria-label="Go back"
-          className="grid size-10 place-items-center rounded-full bg-background/90 text-foreground shadow-sm"
-        >
-          <ArrowLeft className="size-5" />
-        </button>
+      <div
+        className={cn(
+          "absolute inset-x-0 top-0 z-10 flex items-center px-4 pt-3",
+          callbackUrl ? "justify-between" : "justify-end",
+        )}
+      >
+        {callbackUrl && (
+          <button
+            type="button"
+            onClick={() => router.push(callbackUrl)}
+            aria-label="Go back"
+            className="grid size-10 place-items-center rounded-full bg-background/90 text-foreground shadow-sm"
+          >
+            <ArrowLeft className="size-5" />
+          </button>
+        )}
         <button
           type="button"
           aria-label="Add to wishlist"
@@ -43,32 +58,30 @@ export function ProductMobileGallery({ images, alt }: IProps) {
         </button>
       </div>
 
-      <div
-        ref={trackRef}
-        onScroll={handleScroll}
-        className="flex aspect-5/6 snap-x snap-mandatory overflow-x-auto [&::-webkit-scrollbar]:hidden"
-      >
-        {images.map((src, i) => (
-          <div
-            key={`${src}-${i}`}
-            className="relative h-full w-full shrink-0 snap-center bg-muted"
-          >
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              quality={95}
-              sizes="950vw"
-              priority={i === 0}
-              className="object-cover"
-            />
-          </div>
-        ))}
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex aspect-5/6 touch-pan-y">
+          {images.map((src, i) => (
+            <div
+              key={`${src}-${i}`}
+              className="relative h-full w-full shrink-0 basis-full bg-muted"
+            >
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                quality={95}
+                sizes="100vw"
+                priority={i === 0}
+                className="object-cover"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="absolute inset-x-0 bottom-10 z-10 flex items-center justify-center gap-1.5">
         {images.map((_, i) => {
-          const active = i === activeIndex;
+          const active = i === selectedIndex;
           return (
             <span
               key={i}
