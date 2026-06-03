@@ -15,3 +15,4 @@ export * from "./support-icon";
 export * from "./uzbekistan-flag-icon";
 export * from "./view-list-solid";
 export * from "./x-icon";
+export * from "./check-icon"
