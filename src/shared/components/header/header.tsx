@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -43,13 +44,18 @@ export function Header({ lang, dict, isSticky = true }: IProps) {
         suppressHydrationWarning
         className="mx-auto flex max-w-360 items-center gap-10 px-6"
       >
-        <Link href={`/${lang}`} className="mr-25" aria-label="Home">
-          <div className="text-2xl font-black tracking-tight">
-            {dict.site?.title ?? "LOGO"}
-          </div>
-          <div className="text-xs text-muted-foreground">
-            {dict.site?.slogan ?? ""}
-          </div>
+        <Link
+          href={`/${lang}`}
+          className="mr-25 flex-shrink-0"
+          aria-label="Home"
+        >
+          <Image
+            src="/logo.svg"
+            alt="2020Mall logo"
+            width={120}
+            height={60}
+            priority
+          />
         </Link>
 
         <SearchBar

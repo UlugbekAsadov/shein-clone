@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { MapPointWave, Heart, Bell } from "@solar-icons/react/ssr";
 
