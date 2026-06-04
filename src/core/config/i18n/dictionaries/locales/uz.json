@@ -1,7 +1,14 @@
 {
+  "site": {
+    "title": "2020Mall — Hammasi bir joyda.",
+    "metaDescription": "Moda, elektronika, uy-ro‘zg‘or buyumlari, go‘zallik mahsulotlari va minglab boshqa mahsulotlarni 2020Mall’da kashf eting. Ishonchli sotuvchilar va qulay xarid tajribasi bir joyda.",
+    "slogan": "Hammasi bir joyda."
+  },
   "home": {
     "title": "Xush kelibsiz",
-    "greeting": "Salom"
+    "greeting": "Salom",
+    "heroHeadline": "Hammasi bir joyda.",
+    "heroSubheadline": "Millionlab mahsulotlar, ishonchli sotuvchilar va har bir kategoriya bo‘yicha qulay takliflar."
   },
   "auth": {
     "login": {

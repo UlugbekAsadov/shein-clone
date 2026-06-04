@@ -1,7 +1,14 @@
 {
+  "site": {
+    "title": "2020Mall — Everything in One Place.",
+    "metaDescription": "Discover millions of products across fashion, electronics, home, beauty, and more. Shop from trusted sellers and enjoy a seamless shopping experience on 2020Mall.",
+    "slogan": "Everything in One Place."
+  },
   "home": {
     "title": "Welcome",
-    "greeting": "Hello"
+    "greeting": "Hello",
+    "heroHeadline": "Everything in One Place.",
+    "heroSubheadline": "Millions of products, trusted sellers, and great deals across every category."
   },
   "auth": {
     "login": {

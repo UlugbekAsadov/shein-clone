@@ -21,10 +21,18 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Shein",
-  description: "Shein client",
-};
+export async function generateMetadata({
+  params,
+}: PageProps<"/[lang]/demo">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang))
+    return { title: "2020mall", description: "2020mall client" };
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.site?.title ?? "2020mall",
+    description: dict.site?.metaDescription ?? "2020mall client",
+  };
+}
 
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));

@@ -43,12 +43,13 @@ export function Header({ lang, dict, isSticky = true }: IProps) {
         suppressHydrationWarning
         className="mx-auto flex max-w-360 items-center gap-10 px-6"
       >
-        <Link
-          href={`/${lang}`}
-          className="text-2xl font-black tracking-tight mr-25"
-          aria-label="Home"
-        >
-          LOGO
+        <Link href={`/${lang}`} className="mr-25" aria-label="Home">
+          <div className="text-2xl font-black tracking-tight">
+            {dict.site?.title ?? "LOGO"}
+          </div>
+          <div className="text-xs text-muted-foreground">
+            {dict.site?.slogan ?? ""}
+          </div>
         </Link>
 
         <SearchBar
