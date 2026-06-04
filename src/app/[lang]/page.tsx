@@ -11,7 +11,7 @@ export default async function Page({ params }: PageProps<"/[lang]/demo">) {
   return (
     <div className="min-h-screen min-w-screen w-full bg-white flex items-center justify-center px-4">
       <h1 className="text-4xl md:text-6xl font-bold text-black text-center">
-        {dict.site?.comingSoon}...
+        {dict.site?.comingSoon}
       </h1>
     </div>
   );
