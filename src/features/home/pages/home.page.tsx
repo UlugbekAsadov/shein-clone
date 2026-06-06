@@ -47,13 +47,6 @@ export function HomePage({ lang, dict, banners }: IProps) {
           visualSearchDict={dict.visualSearch}
         />
 
-        <section className="mx-auto max-w-360 px-4 md:px-6 py-8 text-center">
-          <h1 className="text-3xl font-extrabold">{dict.home?.heroHeadline}</h1>
-          <p className="mt-2 text-base text-muted-foreground">
-            {dict.home?.heroSubheadline}
-          </p>
-        </section>
-
         <HeroCarousel lang={lang} banners={banners} />
         <Categories
           lang={lang}
