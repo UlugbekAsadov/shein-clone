@@ -350,6 +350,7 @@
         "privacyPolicy": "Privacy Policy"
       },
       "cancel": "Cancel",
+      "reset": "Reset",
       "update": "Update",
       "fields": {
         "height": "Height",

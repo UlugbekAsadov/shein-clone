@@ -350,6 +350,7 @@
         "privacyPolicy": "Maxfiylik siyosatida"
       },
       "cancel": "Bekor qilish",
+      "reset": "Qayta o'rnatish",
       "update": "Saqlash",
       "fields": {
         "height": "Bo'y",

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -82,6 +83,7 @@ export function MeasurementsForm({ dict, measurements }: IProps) {
 
   const initialValues = toFormValues(measurements);
   const [values, setValues] = useState<Record<FieldKey, string>>(initialValues);
+  const [isPending, startTransition] = useTransition();
 
   const isDirty = (Object.keys(values) as FieldKey[]).some(
     (key) => values[key] !== initialValues[key],
@@ -91,10 +93,17 @@ export function MeasurementsForm({ dict, measurements }: IProps) {
     setValues((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleCancel = () => setValues(initialValues);
+  const handleReset = () => setValues(initialValues);
 
-  const handleApply = async () => {
-    await saveMeasurementsAction(toApiPayload(values));
+  const handleApply = () => {
+    startTransition(async () => {
+      const result = await saveMeasurementsAction(toApiPayload(values));
+      if (result.ok) {
+        toast.success(result.message);
+      } else {
+        toast.error(result.message);
+      }
+    });
   };
 
   return (
@@ -121,17 +130,19 @@ export function MeasurementsForm({ dict, measurements }: IProps) {
             type="button"
             variant="secondary"
             size="lg"
-            onClick={handleCancel}
+            disabled={isPending}
+            onClick={handleReset}
             className="rounded-sm px-6 h-12.5 text-lg"
           >
-            {t.cancel}
+            {t.reset}
           </Button>
         )}
         <Button
           type="button"
           size="lg"
+          disabled={isPending}
           onClick={handleApply}
-          className="rounded-sm px-8 h-12.5 text-lg"
+          className={`rounded-sm px-8 h-12.5 text-lg transition-opacity ${isPending ? "opacity-50" : ""}`}
         >
           {t.apply}
         </Button>
