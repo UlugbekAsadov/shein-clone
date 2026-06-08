@@ -20,25 +20,21 @@ export function CardsDesktopPage({ dict, initialCards }: IProps) {
   const t = dict.profile.payments;
   const [cards, setCards] = useState<ICard[]>(initialCards);
   const [addOpen, setAddOpen] = useState(false);
-  const [removeId, setRemoveId] = useState<string | null>(null);
+  const [removeId, setRemoveId] = useState<number | null>(null);
 
-  const handleRemove = () => {
-    if (!removeId) return;
-    setCards((prev) => prev.filter((card) => card.id !== removeId));
+  const handleRemove = (id: number) => {
+    setCards((prev) => prev.filter((card) => card.id !== id));
     setRemoveId(null);
   };
 
-  const handleAdd = () => {
-    const id = `card-new-${Date.now()}`;
-    setCards((prev) => [
-      ...prev,
-      {
-        id,
-        kind: "visa",
-        label: "Visa",
-        lastFour: "1012",
-      },
-    ]);
+  const handleAdd = (card: ICard) => {
+    setCards((prev) => [...prev, card]);
+  };
+
+  const handleSetDefault = (id: number) => {
+    setCards((prev) =>
+      prev.map((card) => ({ ...card, is_default: card.id === id })),
+    );
   };
 
   const isEmpty = cards.length === 0;
@@ -71,8 +67,9 @@ export function CardsDesktopPage({ dict, initialCards }: IProps) {
             <li key={card.id}>
               <CardDesktopRow
                 card={card}
-                maskedNumber={t.maskedNumber.replace("{last4}", card.lastFour)}
+                maskedNumber={t.maskedNumber.replace("{last4}", card.last_four)}
                 onDeleteClick={() => setRemoveId(card.id)}
+                onSetDefault={handleSetDefault}
               />
             </li>
           ))}
@@ -83,7 +80,7 @@ export function CardsDesktopPage({ dict, initialCards }: IProps) {
         open={addOpen}
         onOpenChange={setAddOpen}
         dict={dict}
-        onSubmit={handleAdd}
+        onAdd={handleAdd}
       />
 
       <CardRemoveDialog
@@ -91,11 +88,12 @@ export function CardsDesktopPage({ dict, initialCards }: IProps) {
         onOpenChange={(open) => {
           if (!open) setRemoveId(null);
         }}
+        cardId={removeId}
         title={t.delete.title}
         description={t.delete.description}
         confirmLabel={t.delete.confirm}
         cancelLabel={t.delete.cancel}
-        onConfirm={handleRemove}
+        onRemove={handleRemove}
       />
     </div>
   );

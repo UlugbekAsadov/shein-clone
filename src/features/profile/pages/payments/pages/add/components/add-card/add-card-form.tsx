@@ -1,15 +1,16 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import type { FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Button } from "@/shared/components/ui/button";
+import { createCardAction } from "@/features/profile/pages/payments/services/card.actions";
 import { AddCardField } from "./add-card-field";
 import { AddCardNumberInput } from "./add-card-number-input";
 import { AddCardExpiryInput } from "./add-card-expiry-input";
-import { AddCardCvvInput } from "./add-card-cvv-input";
 import { detectCardKind } from "./detect-card-kind";
 
 interface IProps {
@@ -23,23 +24,33 @@ export function AddCardForm({ lang, dict }: IProps) {
 
   const [cardNumber, setCardNumber] = useState("");
   const [expiry, setExpiry] = useState("");
-  const [cvv, setCvv] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   const detectedKind = useMemo(() => detectCardKind(cardNumber), [cardNumber]);
 
-  const cardNumberDigits = cardNumber.replace(/\D/g, "");
+  const cardDigits = cardNumber.replace(/\D/g, "");
   const expiryDigits = expiry.replace(/\D/g, "");
-  const cvvDigits = cvv.replace(/\D/g, "");
 
-  const isValid =
-    cardNumberDigits.length === 16 &&
-    expiryDigits.length === 4 &&
-    cvvDigits.length === 3;
+  const isValid = cardDigits.length === 16 && expiryDigits.length === 4;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!isValid) return;
-    router.push(`/${lang}/profile/payments`);
+    if (!isValid || isPending) return;
+
+    startTransition(async () => {
+      const result = await createCardAction({
+        card_number: cardDigits,
+        expire_date: expiryDigits,
+      });
+
+      if (!result.ok) {
+        toast.error(result.message);
+        return;
+      }
+
+      router.push(`/${lang}/profile/payments`);
+      router.refresh();
+    });
   };
 
   return (
@@ -54,29 +65,20 @@ export function AddCardForm({ lang, dict }: IProps) {
           />
         </AddCardField>
 
-        <div className="grid grid-cols-2 gap-3">
-          <AddCardField label={t.expiryDate}>
-            <AddCardExpiryInput
-              value={expiry}
-              onChange={setExpiry}
-              placeholder={t.expiryDatePlaceholder}
-            />
-          </AddCardField>
-          <AddCardField label={t.cvv}>
-            <AddCardCvvInput
-              value={cvv}
-              onChange={setCvv}
-              placeholder={t.cvvPlaceholder}
-            />
-          </AddCardField>
-        </div>
+        <AddCardField label={t.expiryDate}>
+          <AddCardExpiryInput
+            value={expiry}
+            onChange={setExpiry}
+            placeholder={t.expiryDatePlaceholder}
+          />
+        </AddCardField>
       </div>
 
       <div className="mt-auto pt-6 pb-[max(env(safe-area-inset-bottom),1rem)]">
         <Button
           type="submit"
           size="lg"
-          disabled={!isValid}
+          disabled={!isValid || isPending}
           className="h-12.5 text-lg w-full rounded-sm font-medium disabled:bg-secondary disabled:text-muted-foreground disabled:opacity-100"
         >
           {t.submit}

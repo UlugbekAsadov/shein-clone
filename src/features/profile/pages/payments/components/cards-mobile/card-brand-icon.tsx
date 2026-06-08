@@ -15,7 +15,7 @@ const iconSrcMap: Record<CardKind, string> = {
 
 export function CardBrandIcon({ kind, label }: IProps) {
   return (
-    <div className="grid size-14.5 shrink-0  place-items-center rounded-sm bg-secondary">
+    <div className="grid size-10 md:size-14.5 shrink-0 place-items-center rounded-sm bg-secondary">
       <Image
         src={iconSrcMap[kind]}
         alt={label}

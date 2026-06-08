@@ -5,10 +5,11 @@ import { CardRow } from "./card-row";
 interface IProps {
   cards: ICard[];
   dict: IDictionary;
-  onDelete: (id: string) => void;
+  onDelete: (id: number) => void;
+  onSetDefault: (id: number) => void;
 }
 
-export function CardsMobileList({ cards, dict, onDelete }: IProps) {
+export function CardsMobileList({ cards, dict, onDelete, onSetDefault }: IProps) {
   const t = dict.profile.payments;
 
   return (
@@ -17,7 +18,7 @@ export function CardsMobileList({ cards, dict, onDelete }: IProps) {
         <CardRow
           key={card.id}
           card={card}
-          maskedNumber={t.maskedNumber.replace("{last4}", card.lastFour)}
+          maskedNumber={t.maskedNumber.replace("{last4}", card.last_four)}
           deleteLabels={{
             title: t.delete.title,
             description: t.delete.description,
@@ -25,6 +26,7 @@ export function CardsMobileList({ cards, dict, onDelete }: IProps) {
             cancel: t.delete.cancel,
           }}
           onDelete={onDelete}
+          onSetDefault={onSetDefault}
         />
       ))}
     </div>

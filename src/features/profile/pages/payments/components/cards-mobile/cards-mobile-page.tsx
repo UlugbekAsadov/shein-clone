@@ -19,8 +19,14 @@ export function CardsMobilePage({ lang, dict, initialCards }: IProps) {
   const t = dict.profile.payments;
   const [cards, setCards] = useState<ICard[]>(initialCards);
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: number) => {
     setCards((prev) => prev.filter((card) => card.id !== id));
+  };
+
+  const handleSetDefault = (id: number) => {
+    setCards((prev) =>
+      prev.map((card) => ({ ...card, is_default: card.id === id })),
+    );
   };
 
   const isEmpty = cards.length === 0;
@@ -36,7 +42,12 @@ export function CardsMobilePage({ lang, dict, initialCards }: IProps) {
             description={t.empty.description}
           />
         ) : (
-          <CardsMobileList cards={cards} dict={dict} onDelete={handleDelete} />
+          <CardsMobileList
+            cards={cards}
+            dict={dict}
+            onDelete={handleDelete}
+            onSetDefault={handleSetDefault}
+          />
         )}
       </div>
 

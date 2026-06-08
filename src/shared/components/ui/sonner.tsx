@@ -8,6 +8,7 @@ export function Toaster() {
     <SonnerToaster
       position="top-center"
       duration={4000}
+      visibleToasts={1}
       icons={{
         error: (
           <div className="min-w-9! h-9! mr-3 flex items-center justify-center rounded-[8px] bg-[#040A141F]">

@@ -2,27 +2,27 @@ import type { ICard } from "@/features/profile/pages/payments/utils/card.interfa
 
 export const cardMocks: ICard[] = [
   {
-    id: "card-uzcard",
-    kind: "uzcard",
-    label: "Uzcard",
-    lastFour: "1256",
+    id: 1,
+    card_type: "uzcard",
+    last_four: "1256",
+    is_default: true,
   },
   {
-    id: "card-visa",
-    kind: "visa",
-    label: "Visa",
-    lastFour: "9234",
+    id: 2,
+    card_type: "visa",
+    last_four: "9234",
+    is_default: false,
   },
   {
-    id: "card-mastercard",
-    kind: "mastercard",
-    label: "Mastercard",
-    lastFour: "3539",
+    id: 3,
+    card_type: "mastercard",
+    last_four: "3539",
+    is_default: false,
   },
   {
-    id: "card-humo",
-    kind: "humo",
-    label: "Humo",
-    lastFour: "9834",
+    id: 4,
+    card_type: "humo",
+    last_four: "9834",
+    is_default: false,
   },
 ];

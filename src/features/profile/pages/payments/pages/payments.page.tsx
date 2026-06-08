@@ -5,24 +5,26 @@ import { Footer } from "@/shared/components/footer/footer";
 import { ProfileShell } from "@/features/profile/components/profile-shell";
 import { CardsMobilePage } from "@/features/profile/pages/payments/components/cards-mobile/cards-mobile-page";
 import { CardsDesktopPage } from "@/features/profile/pages/payments/components/cards-desktop/cards-desktop-page";
-import { cardMocks } from "@/features/profile/pages/payments/mocks/card.mocks";
+import { getUserCards } from "@/features/profile/pages/payments/services/card.service";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
 }
 
-export function PaymentsPage({ lang, dict }: IProps) {
+export async function PaymentsPage({ lang, dict }: IProps) {
+  const cards = await getUserCards();
+
   return (
     <>
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <CardsMobilePage lang={lang} dict={dict} initialCards={cardMocks} />
+        <CardsMobilePage lang={lang} dict={dict} initialCards={cards} />
 
         <div className="hidden md:block">
           <ProfileShell lang={lang} dict={dict} activeId="payments">
-            <CardsDesktopPage dict={dict} initialCards={cardMocks} />
+            <CardsDesktopPage dict={dict} initialCards={cards} />
           </ProfileShell>
         </div>
       </main>
