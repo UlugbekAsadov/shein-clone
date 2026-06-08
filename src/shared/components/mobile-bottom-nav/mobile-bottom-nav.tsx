@@ -30,22 +30,20 @@ interface IItem {
 
 export function MobileBottomNav({ lang, dict }: IProps) {
   const pathname = usePathname();
-  const homePath = `/${lang}`;
-  const categoryPath = `/${lang}/category`;
-  const cartPath = `/${lang}/cart`;
-  const ordersPath = `/${lang}/orders`;
-  const profilePath = `/${lang}/profile`;
+  const homePath = `/${lang}/demo`;
+  const categoryPath = `/${lang}/demo/category`;
+  const cartPath = `/${lang}/demo/cart`;
+  const ordersPath = `/${lang}/demo/orders`;
+  const profilePath = `/${lang}/demo/profile`;
 
-  if (pathname.startsWith(`/${lang}/product/`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/account`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/addresses`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/payments`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/measurements`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/promocode`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/notifications`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/help-centre`)) return null;
-  if (pathname.startsWith(`/${lang}/profile/language`)) return null;
-  if (pathname.startsWith(`/${lang}/orders/`)) return null;
+  const allowedPaths = [
+    homePath,
+    categoryPath,
+    cartPath,
+    ordersPath,
+    profilePath,
+  ];
+  if (!allowedPaths.includes(pathname)) return null;
 
   const items: IItem[] = [
     {
@@ -82,7 +80,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
 
   const isItemActive = (item: IItem) => {
     if (item.key === "home") return pathname === homePath;
-    if (item.key === "profile") return pathname.startsWith(`/${lang}/profile`);
+    if (item.key === "profile") return pathname.startsWith(`/${lang}/demo/profile`);
     return pathname.startsWith(item.href);
   };
 
@@ -99,54 +97,54 @@ export function MobileBottomNav({ lang, dict }: IProps) {
         aria-label="Primary"
         className="pointer-events-none fixed inset-x-0 bottom-0 z-100 flex justify-center px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"
       >
-      <LayoutGroup>
-        <div className="pointer-events-auto flex items-center gap-2">
-          <AnimatePresence initial={false} mode="popLayout">
-            <MobileBottomNavPill
-              key="before"
-              className={before.length === 0 ? "invisible" : ""}
-            >
-              {before.map((item) => (
-                <MobileBottomNavItem
-                  key={item.key}
-                  itemKey={item.key}
-                  href={item.href}
-                  label={item.label}
-                  icon={item.icon}
-                  active={false}
-                />
-              ))}
+        <LayoutGroup>
+          <div className="pointer-events-auto flex items-center gap-2">
+            <AnimatePresence initial={false} mode="popLayout">
+              <MobileBottomNavPill
+                key="before"
+                className={before.length === 0 ? "invisible" : ""}
+              >
+                {before.map((item) => (
+                  <MobileBottomNavItem
+                    key={item.key}
+                    itemKey={item.key}
+                    href={item.href}
+                    label={item.label}
+                    icon={item.icon}
+                    active={false}
+                  />
+                ))}
+              </MobileBottomNavPill>
+            </AnimatePresence>
+            <MobileBottomNavPill key="active" animateInitial={false}>
+              <MobileBottomNavItem
+                key={activeItem.key}
+                itemKey={activeItem.key}
+                href={activeItem.href}
+                label={activeItem.label}
+                icon={activeItem.icon}
+                active={true}
+              />
             </MobileBottomNavPill>
-          </AnimatePresence>
-          <MobileBottomNavPill key="active" animateInitial={false}>
-            <MobileBottomNavItem
-              key={activeItem.key}
-              itemKey={activeItem.key}
-              href={activeItem.href}
-              label={activeItem.label}
-              icon={activeItem.icon}
-              active={true}
-            />
-          </MobileBottomNavPill>
-          <AnimatePresence initial={false} mode="popLayout">
-            <MobileBottomNavPill
-              key="after"
-              className={after.length === 0 ? "invisible" : ""}
-            >
-              {after.map((item) => (
-                <MobileBottomNavItem
-                  key={item.key}
-                  itemKey={item.key}
-                  href={item.href}
-                  label={item.label}
-                  icon={item.icon}
-                  active={false}
-                />
-              ))}
-            </MobileBottomNavPill>
-          </AnimatePresence>
-        </div>
-      </LayoutGroup>
+            <AnimatePresence initial={false} mode="popLayout">
+              <MobileBottomNavPill
+                key="after"
+                className={after.length === 0 ? "invisible" : ""}
+              >
+                {after.map((item) => (
+                  <MobileBottomNavItem
+                    key={item.key}
+                    itemKey={item.key}
+                    href={item.href}
+                    label={item.label}
+                    icon={item.icon}
+                    active={false}
+                  />
+                ))}
+              </MobileBottomNavPill>
+            </AnimatePresence>
+          </div>
+        </LayoutGroup>
       </nav>
     </>
   );
