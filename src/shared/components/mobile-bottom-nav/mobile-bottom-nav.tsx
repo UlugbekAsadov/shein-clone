@@ -94,7 +94,7 @@ export function MobileBottomNav({ lang, dict }: IProps) {
 
   return (
     <>
-      <div aria-hidden className="h-20 shrink-0 md:hidden" />
+      <div aria-hidden className="md:h-20 shrink-0 md:hidden" />
       <nav
         aria-label="Primary"
         className="pointer-events-none fixed inset-x-0 bottom-0 z-100 flex justify-center px-3 pb-[max(env(safe-area-inset-bottom),0.75rem)] md:hidden"

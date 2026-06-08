@@ -13,11 +13,16 @@ import {
   waistOptions,
   weightOptions,
 } from "@/features/profile/pages/measurements/mocks/measurement.mocks";
-import type { IMeasurementOption } from "@/features/profile/pages/measurements/utils/measurement.interface";
+import type {
+  IMeasurementOption,
+  IMeasurements,
+} from "@/features/profile/pages/measurements/utils/measurement.interface";
+import { saveMeasurementsAction } from "@/features/profile/pages/measurements/services/measurement.actions";
 import { MeasurementField } from "./measurement-field";
 
 interface IProps {
   dict: IDictionary;
+  measurements: IMeasurements | null;
 }
 
 type FieldKey =
@@ -46,20 +51,36 @@ const FIELDS: IFieldConfig[] = [
   { key: "footwear", options: footwearOptions },
 ];
 
-const initialValues: Record<FieldKey, string> = {
-  height: "",
-  weight: "",
-  bust: "",
-  braSize: "",
-  waist: "",
-  hips: "",
-  preference: "",
-  footwear: "",
-};
+function toFormValues(measurements: IMeasurements | null): Record<FieldKey, string> {
+  return {
+    height: measurements?.height ?? "",
+    weight: measurements?.weight ?? "",
+    bust: measurements?.chest ?? "",
+    braSize: measurements?.bra_size ?? "",
+    waist: measurements?.waist ?? "",
+    hips: measurements?.hips ?? "",
+    preference: measurements?.preferred_fit ?? "",
+    footwear: measurements?.shoe_size ?? "",
+  };
+}
 
-export function MeasurementsForm({ dict }: IProps) {
+function toApiPayload(values: Record<FieldKey, string>): IMeasurements {
+  return {
+    height: values.height,
+    weight: values.weight,
+    chest: values.bust,
+    bra_size: values.braSize,
+    waist: values.waist,
+    hips: values.hips,
+    preferred_fit: values.preference,
+    shoe_size: values.footwear,
+  };
+}
+
+export function MeasurementsForm({ dict, measurements }: IProps) {
   const t = dict.profile.measurements;
 
+  const initialValues = toFormValues(measurements);
   const [values, setValues] = useState<Record<FieldKey, string>>(initialValues);
 
   const isDirty = (Object.keys(values) as FieldKey[]).some(
@@ -72,8 +93,8 @@ export function MeasurementsForm({ dict }: IProps) {
 
   const handleCancel = () => setValues(initialValues);
 
-  const handleApply = () => {
-    // demo: nothing to persist yet
+  const handleApply = async () => {
+    await saveMeasurementsAction(toApiPayload(values));
   };
 
   return (

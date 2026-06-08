@@ -11,34 +11,55 @@ import {
   waistOptions,
   weightOptions,
 } from "@/features/profile/pages/measurements/mocks/measurement.mocks";
-import type { IMeasurementOption } from "@/features/profile/pages/measurements/utils/measurement.interface";
+import type {
+  IMeasurementOption,
+  IMeasurements,
+} from "@/features/profile/pages/measurements/utils/measurement.interface";
+import { saveMeasurementsAction } from "@/features/profile/pages/measurements/services/measurement.actions";
 import { MeasurementMobileRow } from "./measurement-mobile-row";
 import { MeasurementMobileDrawer } from "./measurement-mobile-drawer";
 
 interface IField {
   id: keyof IDictionary["profile"]["measurements"]["fields"] &
     keyof IDictionary["profile"]["measurements"]["fieldUnits"];
+  apiKey: keyof IMeasurements;
   options: IMeasurementOption[];
 }
 
 const fields: IField[] = [
-  { id: "height", options: heightOptions },
-  { id: "weight", options: weightOptions },
-  { id: "bust", options: bustOptions },
-  { id: "braSize", options: braSizeOptions },
-  { id: "waist", options: waistOptions },
-  { id: "hips", options: hipsOptions },
-  { id: "preference", options: preferenceOptions },
+  { id: "height", apiKey: "height", options: heightOptions },
+  { id: "weight", apiKey: "weight", options: weightOptions },
+  { id: "bust", apiKey: "chest", options: bustOptions },
+  { id: "braSize", apiKey: "bra_size", options: braSizeOptions },
+  { id: "waist", apiKey: "waist", options: waistOptions },
+  { id: "hips", apiKey: "hips", options: hipsOptions },
+  { id: "preference", apiKey: "preferred_fit", options: preferenceOptions },
 ];
+
+function toInitialValues(measurements: IMeasurements | null): Record<string, string | null> {
+  if (!measurements) return {};
+  return {
+    height: measurements.height || null,
+    weight: measurements.weight || null,
+    bust: measurements.chest || null,
+    braSize: measurements.bra_size || null,
+    waist: measurements.waist || null,
+    hips: measurements.hips || null,
+    preference: measurements.preferred_fit || null,
+  };
+}
 
 interface IProps {
   dict: IDictionary;
+  measurements: IMeasurements | null;
 }
 
-export function MeasurementsMobileList({ dict }: IProps) {
+export function MeasurementsMobileList({ dict, measurements }: IProps) {
   const t = dict.profile.measurements;
 
-  const [values, setValues] = useState<Record<string, string | null>>({});
+  const [values, setValues] = useState<Record<string, string | null>>(
+    () => toInitialValues(measurements),
+  );
   const [activeId, setActiveId] = useState<IField["id"] | null>(null);
 
   const activeField = useMemo(
@@ -51,6 +72,27 @@ export function MeasurementsMobileList({ dict }: IProps) {
     ? (activeOptions.find((option) => option.value === values[activeField.id])
         ?.label ?? null)
     : null;
+
+  const handleApply = async (fieldId: IField["id"], value: string) => {
+    const updated = { ...values, [fieldId]: value };
+    setValues(updated);
+
+    const field = fields.find((f) => f.id === fieldId);
+    if (!field) return;
+
+    const payload: IMeasurements = {
+      height: updated.height ?? measurements?.height ?? "",
+      weight: updated.weight ?? measurements?.weight ?? "",
+      chest: updated.bust ?? measurements?.chest ?? "",
+      bra_size: updated.braSize ?? measurements?.bra_size ?? "",
+      waist: updated.waist ?? measurements?.waist ?? "",
+      hips: updated.hips ?? measurements?.hips ?? "",
+      preferred_fit: updated.preference ?? measurements?.preferred_fit ?? "",
+      shoe_size: measurements?.shoe_size ?? "",
+    };
+
+    await saveMeasurementsAction(payload);
+  };
 
   return (
     <>
@@ -90,7 +132,7 @@ export function MeasurementsMobileList({ dict }: IProps) {
         }
         onApply={(value) => {
           if (activeField) {
-            setValues((prev) => ({ ...prev, [activeField.id]: value }));
+            handleApply(activeField.id, value);
           }
         }}
         applyLabel={t.apply}
