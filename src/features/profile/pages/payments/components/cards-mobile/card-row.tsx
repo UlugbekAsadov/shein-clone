@@ -5,9 +5,14 @@ import { TrashBinTrash } from "@solar-icons/react";
 import { toast } from "sonner";
 import type { ICard } from "@/features/profile/pages/payments/utils/card.interface";
 import { CARD_KIND_LABELS } from "@/features/profile/pages/payments/utils/card.interface";
-import { deleteCardAction, setDefaultCardAction } from "@/features/profile/pages/payments/services/card.actions";
+import {
+  deleteCardAction,
+  setDefaultCardAction,
+} from "@/features/profile/pages/payments/services/card.actions";
 import { CardBrandIcon } from "./card-brand-icon";
 import { CardDeleteDrawer } from "./card-delete-drawer";
+import { cn } from "@/lib/utils";
+import { CheckIcon } from "@/shared/components/icons/outline";
 
 interface IProps {
   card: ICard;
@@ -62,8 +67,17 @@ export function CardRow({
 
   return (
     <div
-      className={`flex items-center gap-3 rounded-[18px] bg-secondary p-3 transition-opacity ${isPending ? "opacity-50" : ""}`}
+      className={cn(
+        "flex items-center gap-3 rounded-[18px] bg-secondary p-3 transition-opacity border border-transparent relative",
+        isPending && "opacity-50 ",
+        card.is_default && "border-foreground",
+      )}
     >
+      {card.is_default && (
+        <span className="absolute -top-2 -left-2 size-5 rounded-full bg-foreground grid place-items-center">
+          <CheckIcon className="size-3 text-background" />
+        </span>
+      )}
       <button
         type="button"
         role="radio"
@@ -73,16 +87,6 @@ export function CardRow({
         disabled={isPending}
         className="flex flex-1 items-center gap-3 text-left cursor-pointer disabled:cursor-default"
       >
-        <span
-          className={`relative grid size-5 shrink-0 place-items-center rounded-full transition-colors ${
-            card.is_default ? "bg-foreground" : "border-2 border-muted-foreground/40"
-          }`}
-        >
-          {card.is_default && (
-            <span className="size-2 rounded-full border-2 bg-white" aria-hidden />
-          )}
-        </span>
-
         <CardBrandIcon kind={card.card_type} label={label} />
 
         <div className="min-w-0 flex-1">

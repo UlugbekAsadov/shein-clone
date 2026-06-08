@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { defaultLocale, locales } from "@/core/config/i18n/i18n-config";
 import { AUTH_COOKIES } from "@/core/api/api-config";
 
-const PROTECTED_SEGMENTS = ["profile"] as const;
+const PROTECTED_SEGMENTS: string[] = [];
 
 function pickLocale(request: NextRequest): string {
   const accept = request.headers.get("accept-language");
