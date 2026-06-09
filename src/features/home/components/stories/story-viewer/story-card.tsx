@@ -10,7 +10,6 @@ import {
   TRANSITION_MS,
 } from "@/features/home/utils/brand-story.constants";
 import { ProgressBar } from "./progress-bar";
-import { StoryItem } from "../story-item/story-item";
 
 interface IProps {
   brand: IBrand;
@@ -98,11 +97,24 @@ export function StoryCard({
           transition: `opacity ${TRANSITION_MS}ms ${EASING}`,
         }}
       >
-        <StoryItem
-          brand={brand}
-          onClick={() => {}}
-          brandClassName="text-sm font-semibold text-white drop-shadow-md"
-        />
+        <span className="relative block size-15 md:size-24">
+          <span
+            className="absolute inset-1 overflow-hidden rounded-full ring-2 ring-background"
+            style={{ backgroundColor: brand.brandBg ?? "#0f172a" }}
+          >
+            <Image
+              src={brand.image}
+              alt={brand.name}
+              fill
+              quality={90}
+              sizes="80px"
+              className="object-cover"
+            />
+          </span>
+        </span>
+        <span className="text-sm font-semibold text-white drop-shadow-md">
+          {brand.name}
+        </span>
       </div>
 
       <div

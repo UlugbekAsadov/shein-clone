@@ -49,6 +49,18 @@ function isProtectedPath(pathname: string, locale: string): boolean {
   );
 }
 
+function withSessionId(request: NextRequest, response: NextResponse): NextResponse {
+  if (!request.cookies.get("session_id")?.value) {
+    response.cookies.set("session_id", crypto.randomUUID(), {
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "lax",
+      path: "/",
+      httpOnly: false,
+    });
+  }
+  return response;
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -61,12 +73,12 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/${picked}${pathname === "/" ? "" : pathname}`;
 
-    return NextResponse.redirect(url);
+    return withSessionId(request, NextResponse.redirect(url));
   }
 
   // "/uz" => Coming Soon sahifasi
   if (pathname === `/${locale}`) {
-    return NextResponse.next();
+    return withSessionId(request, NextResponse.next());
   }
 
   // "/uz/demo/*" => o'z holicha qoldir
@@ -75,7 +87,7 @@ export function proxy(request: NextRequest) {
 
     url.pathname = pathname.replace(`/${locale}`, `/${locale}/demo`);
 
-    return NextResponse.redirect(url);
+    return withSessionId(request, NextResponse.redirect(url));
   }
 
   // Auth tekshiruvi
@@ -88,10 +100,10 @@ export function proxy(request: NextRequest) {
     url.pathname = `/${locale}`;
     url.search = "";
 
-    return NextResponse.redirect(url);
+    return withSessionId(request, NextResponse.redirect(url));
   }
 
-  return NextResponse.next();
+  return withSessionId(request, NextResponse.next());
 }
 
 export const config = {

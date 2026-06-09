@@ -1,20 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IBrand } from "@/types/brand.interface";
 import { StoryRing } from "./story-ring";
 import { cn } from "@/lib/utils";
 
 interface IProps {
-  shop: IShop;
+  brand: IBrand;
   onClick: () => void;
-  nameClassName?: string;
+  brandClassName?: string;
 }
 
-export function StoryItem({ shop, onClick, nameClassName }: IProps) {
-  const isFullyViewed = shop.story_ring_state !== "unviewed";
-  const safeTotal = Math.max(1, shop.active_stories_count);
-  const viewedCount = isFullyViewed ? safeTotal : shop.viewed_stories_count;
+export function BrandStoryItem({ brand, onClick, brandClassName }: IProps) {
+  const total = brand.contents.length;
+  const viewedCount = brand.viewedCount ?? 0;
 
   return (
     <button
@@ -26,16 +25,17 @@ export function StoryItem({ shop, onClick, nameClassName }: IProps) {
       )}
     >
       <span className={cn("relative block size-15", "md:size-24")}>
-        <StoryRing total={safeTotal} viewedCount={viewedCount} />
+        <StoryRing total={total} viewedCount={viewedCount} />
         <span
           className={cn(
             "absolute inset-1 overflow-hidden rounded-full ring-2 ring-background",
             "md:inset-2",
           )}
+          style={{ backgroundColor: brand.brandBg ?? "#0f172a" }}
         >
           <Image
-            src={shop.avatar_url}
-            alt={shop.display_name}
+            src={brand.image}
+            alt={brand.name}
             fill
             quality={95}
             sizes="80px"
@@ -47,10 +47,10 @@ export function StoryItem({ shop, onClick, nameClassName }: IProps) {
         className={cn(
           "text-xs font-medium text-foreground",
           "md:text-sm md:font-semibold",
-          nameClassName,
+          brandClassName,
         )}
       >
-        {shop.display_name}
+        {brand.name}
       </span>
     </button>
   );

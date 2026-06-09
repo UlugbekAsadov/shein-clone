@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { brands } from "@/shared/mocks";
-import { StoryItem } from "@/features/home/components/stories/story-item/story-item";
+import { BrandStoryItem } from "@/features/home/components/stories/story-item/brand-story-item";
 import { StoryViewer } from "@/features/home/components/stories/story-viewer/story-viewer";
 
 interface IProps {
@@ -20,7 +20,7 @@ export function ShopMobileBrands({ excludeSlug }: IProps) {
     <div className="overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div className="flex w-max items-start gap-4">
         {items.map((brand, i) => (
-          <StoryItem
+          <BrandStoryItem
             key={brand.id}
             brand={brand}
             onClick={() => setActiveIndex(i)}

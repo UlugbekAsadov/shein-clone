@@ -69,7 +69,7 @@ export function StoryRing({ total, viewedCount, className }: IProps) {
         Array.from({ length: safeTotal }, (_, i) => {
           const start = i * (360 / safeTotal) + STORY_RING_GAP_DEG / 2;
           const end = (i + 1) * (360 / safeTotal) - STORY_RING_GAP_DEG / 2;
-          const viewed = i < viewedCount;
+          const viewed = i >= safeTotal - viewedCount;
           return (
             <path
               key={i}

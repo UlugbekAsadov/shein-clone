@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "api.monera.uz" },
       { protocol: "https", hostname: "api.shein.uz" },
+      { protocol: "https", hostname: "cdn.2020mall.com" },
     ],
   },
   turbopack: {
