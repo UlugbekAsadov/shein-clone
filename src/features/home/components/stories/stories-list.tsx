@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { brands } from "@/shared/mocks";
 import { useScrollEdges } from "@/features/home/hooks/use-scroll-edges";
 import type { IShop } from "@/features/home/utils/shop-story.interface";
 import { StoryViewer } from "./story-viewer/story-viewer";
@@ -13,8 +13,14 @@ interface IProps {
 }
 
 export function StoriesList({ shops }: IProps) {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const { ref, atStart, atEnd } = useScrollEdges<HTMLDivElement>();
+
+  const handleClose = () => {
+    setActiveIndex(null);
+    router.refresh();
+  };
 
   return (
     <div className="relative mx-auto mb-3 md:mb-8 max-w-360 pt-3 md:pt-0">
@@ -41,9 +47,9 @@ export function StoriesList({ shops }: IProps) {
 
       {activeIndex !== null && (
         <StoryViewer
-          brands={brands}
-          initialIndex={activeIndex % brands.length}
-          onClose={() => setActiveIndex(null)}
+          shops={shops}
+          initialShopIndex={activeIndex}
+          onClose={handleClose}
         />
       )}
     </div>

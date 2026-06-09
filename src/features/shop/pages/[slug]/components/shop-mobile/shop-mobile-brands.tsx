@@ -1,40 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { brands } from "@/shared/mocks";
 import { BrandStoryItem } from "@/features/home/components/stories/story-item/brand-story-item";
-import { StoryViewer } from "@/features/home/components/stories/story-viewer/story-viewer";
 
 interface IProps {
   excludeSlug?: string;
 }
 
 export function ShopMobileBrands({ excludeSlug }: IProps) {
-  const items = excludeSlug
-    ? brands.filter((b) => b.slug !== excludeSlug)
-    : brands;
-
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const { lang } = useParams<{ lang: string }>();
+  const items = excludeSlug ? brands.filter((b) => b.slug !== excludeSlug) : brands;
 
   return (
     <div className="overflow-x-auto px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <div className="flex w-max items-start gap-4">
-        {items.map((brand, i) => (
-          <BrandStoryItem
-            key={brand.id}
-            brand={brand}
-            onClick={() => setActiveIndex(i)}
-          />
+        {items.map((brand) => (
+          <Link key={brand.id} href={`/${lang}/shop/${brand.slug}`}>
+            <BrandStoryItem brand={brand} onClick={() => {}} />
+          </Link>
         ))}
       </div>
-
-      {activeIndex !== null && (
-        <StoryViewer
-          brands={items}
-          initialIndex={activeIndex}
-          onClose={() => setActiveIndex(null)}
-        />
-      )}
     </div>
   );
 }

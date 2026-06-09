@@ -1,101 +1,199 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
-import type { IBrand } from "@/types/brand.interface";
-import { XIcon } from "@/shared/components/icons/outline";
-import {
-  ACTIVE_SLOT_WIDTH,
-  EASING,
-  SLOT_WIDTH,
-  STRIP_DURATION_MS,
-  TRANSITION_MS,
-} from "@/features/home/utils/brand-story.constants";
+import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IStory } from "@/features/home/utils/story.interface";
+import { ACTIVE_SLOT_WIDTH, EASING, SLOT_WIDTH, TRANSITION_MS } from "@/features/home/utils/brand-story.constants";
+import { storyApi } from "@/features/home/api/story.api";
+import { getClientSessionId } from "@/lib/session-id";
 import { StoryCard } from "./story-card";
 
 interface IProps {
-  brands: IBrand[];
-  initialIndex: number;
+  shops: IShop[];
+  initialShopIndex: number;
   onClose: () => void;
 }
 
-export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
-  const [brandIndex, setBrandIndex] = useState(initialIndex);
-  const [stripIndex, setStripIndex] = useState(0);
+function firstUnviewedIdx(stories: IStory[]): number {
+  const idx = stories.findIndex((s) => !s.is_viewed);
+  return idx === -1 ? 0 : idx;
+}
 
-  const isFirst = brandIndex === 0;
-  const isLast = brandIndex === brands.length - 1;
+export function StoryViewer({ shops, initialShopIndex, onClose }: IProps) {
+  const sessionId = useMemo(() => getClientSessionId(), []);
+
+  const [shopIndex, setShopIndex] = useState(initialShopIndex);
+  const [storyIndex, setStoryIndex] = useState(0);
+  const [storyCache, setStoryCache] = useState<Record<number, IStory[]>>({});
+  const [loadingShopIds, setLoadingShopIds] = useState<Set<number>>(new Set());
+  const [isMuted, setIsMuted] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const currentShop = shops[shopIndex];
+  const currentStories = storyCache[currentShop?.id] ?? [];
+  const isLoading = !!currentShop && loadingShopIds.has(currentShop.id);
+  const currentStory = currentStories[storyIndex];
+  const isVideo = currentStory?.media_type === "video";
+
+  const storyCacheRef = useRef(storyCache);
+  storyCacheRef.current = storyCache;
+  const loadingRef = useRef(loadingShopIds);
+  loadingRef.current = loadingShopIds;
+
+  const storyStartTimeRef = useRef<number>(0);
+  const totalPausedRef = useRef<number>(0);
+  const pauseStartRef = useRef<number | null>(null);
+  const viewedRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
-    setStripIndex(0);
-  }, [brandIndex]);
+    const shopId = currentShop?.id;
+    if (!shopId) return;
+    if (storyCacheRef.current[shopId] !== undefined) return;
+    if (loadingRef.current.has(shopId)) return;
 
-  const advance = useCallback(() => {
-    const maxStrip = (brands[brandIndex]?.contents.length ?? 1) - 1;
-    if (stripIndex < maxStrip) {
-      setStripIndex(stripIndex + 1);
-    } else if (brandIndex < brands.length - 1) {
-      setBrandIndex(brandIndex + 1);
+    setLoadingShopIds((prev) => new Set(prev).add(shopId));
+    storyApi
+      .getByShop(shopId, sessionId)
+      .then((res) => {
+        const stories = res.data?.stories ?? [];
+        setStoryCache((prev) => ({ ...prev, [shopId]: stories }));
+        setStoryIndex(firstUnviewedIdx(stories));
+      })
+      .catch(() => setStoryCache((prev) => ({ ...prev, [shopId]: [] })))
+      .finally(() =>
+        setLoadingShopIds((prev) => {
+          const next = new Set(prev);
+          next.delete(shopId);
+          return next;
+        }),
+      );
+  }, [shopIndex, sessionId]);
+
+  useEffect(() => {
+    if (isLoading) return;
+    storyStartTimeRef.current = Date.now();
+    totalPausedRef.current = 0;
+    pauseStartRef.current = null;
+  }, [storyIndex, shopIndex, isLoading]);
+
+  useEffect(() => {
+    if (isPaused) {
+      pauseStartRef.current = Date.now();
+    } else if (pauseStartRef.current !== null) {
+      totalPausedRef.current += Date.now() - pauseStartRef.current;
+      pauseStartRef.current = null;
     }
-  }, [brandIndex, stripIndex, brands]);
+  }, [isPaused]);
 
   useEffect(() => {
-    const t = setTimeout(advance, STRIP_DURATION_MS);
+    const shopId = currentShop?.id;
+    const story = (storyCacheRef.current[shopId] ?? [])[storyIndex];
+    if (!story || !shopId) return;
+    const key = `${shopId}-${story.id}`;
+    if (viewedRef.current.has(key)) return;
+    viewedRef.current.add(key);
+    storyApi.markViewed(shopId, story.id, sessionId).catch(() => {});
+  }, [shopIndex, storyIndex, storyCache, sessionId]);
+
+  const advanceFn = useCallback(() => {
+    const shopId = currentShop?.id;
+    const stories = storyCacheRef.current[shopId] ?? [];
+    setIsPaused(false);
+    if (storyIndex < stories.length - 1) {
+      setStoryIndex((s) => s + 1);
+    } else if (shopIndex < shops.length - 1) {
+      const nextShopId = shops[shopIndex + 1]?.id;
+      const nextStories = storyCacheRef.current[nextShopId] ?? [];
+      setShopIndex((s) => s + 1);
+      setStoryIndex(firstUnviewedIdx(nextStories));
+    } else {
+      onClose();
+    }
+  }, [shopIndex, storyIndex, shops, onClose, currentShop]);
+
+  const goBackFn = useCallback(() => {
+    setIsPaused(false);
+    if (storyIndex > 0) {
+      setStoryIndex((s) => s - 1);
+    } else if (shopIndex > 0) {
+      const prevShopId = shops[shopIndex - 1]?.id;
+      const prevStories = storyCacheRef.current[prevShopId] ?? [];
+      setShopIndex((s) => s - 1);
+      setStoryIndex(Math.max(0, prevStories.length - 1));
+    }
+  }, [shopIndex, storyIndex, shops]);
+
+  const advanceRef = useRef(advanceFn);
+  advanceRef.current = advanceFn;
+
+  useEffect(() => {
+    if (isPaused || isLoading || !currentStory) return;
+    const elapsed = Date.now() - storyStartTimeRef.current - totalPausedRef.current;
+    const remaining = Math.max(500, currentStory.duration * 1000 - elapsed);
+    const t = setTimeout(() => advanceRef.current(), remaining);
     return () => clearTimeout(t);
-  }, [stripIndex, brandIndex, advance]);
+  }, [storyIndex, shopIndex, isPaused, isLoading, currentStory?.id]);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft" && !isFirst) setBrandIndex((b) => b - 1);
-      if (e.key === "ArrowRight" && !isLast) setBrandIndex((b) => b + 1);
+      if (e.key === "ArrowLeft" && shopIndex > 0) {
+        const prevShopId = shops[shopIndex - 1]?.id;
+        setShopIndex((s) => s - 1);
+        setStoryIndex(firstUnviewedIdx(storyCacheRef.current[prevShopId] ?? []));
+      }
+      if (e.key === "ArrowRight" && shopIndex < shops.length - 1) {
+        const nextShopId = shops[shopIndex + 1]?.id;
+        setShopIndex((s) => s + 1);
+        setStoryIndex(firstUnviewedIdx(storyCacheRef.current[nextShopId] ?? []));
+      }
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [onClose, isFirst, isLast]);
+  }, [onClose, shopIndex, shops.length]);
 
-  const goPrev = () => {
-    if (!isFirst) setBrandIndex((b) => b - 1);
-  };
-  const goNext = () => {
-    if (!isLast) setBrandIndex((b) => b + 1);
-  };
+  const isFirst = shopIndex === 0;
+  const isLast = shopIndex === shops.length - 1;
 
   return (
     <div className="fixed inset-0 z-110 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Close"
-        className="absolute right-3 top-7 z-40 grid size-10 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10 sm:right-6 sm:top-6"
-      >
-        <XIcon className="size-6" />
-      </button>
-
       <div className="relative h-dvh w-full overflow-hidden sm:h-175">
         <div
           className="absolute left-1/2 top-1/2 flex items-center will-change-transform"
           style={{
-            transform: `translate3d(${-brandIndex * SLOT_WIDTH - ACTIVE_SLOT_WIDTH / 2}px, -50%, 0)`,
+            transform: `translate3d(${-shopIndex * SLOT_WIDTH - ACTIVE_SLOT_WIDTH / 2}px, -50%, 0)`,
             transition: `transform ${TRANSITION_MS}ms ${EASING}`,
           }}
         >
-          {brands.map((b, i) => (
+          {shops.map((shop, i) => (
             <div
-              key={b.id}
+              key={shop.id}
               className="flex shrink-0 items-center justify-center"
               style={{
-                width: i === brandIndex ? ACTIVE_SLOT_WIDTH : SLOT_WIDTH,
+                width: i === shopIndex ? ACTIVE_SLOT_WIDTH : SLOT_WIDTH,
                 transition: `width ${TRANSITION_MS}ms ${EASING}`,
               }}
             >
               <StoryCard
-                brand={b}
-                isActive={i === brandIndex}
-                distance={i - brandIndex}
-                stripIndex={i === brandIndex ? stripIndex : 0}
-                onAdvance={advance}
-                onSelect={() => setBrandIndex(i)}
+                shop={shop}
+                stories={storyCache[shop.id] ?? []}
+                isLoading={loadingShopIds.has(shop.id)}
+                isActive={i === shopIndex}
+                distance={i - shopIndex}
+                storyIndex={i === shopIndex ? storyIndex : 0}
+                isPaused={isPaused}
+                isMuted={isMuted}
+                onAdvance={advanceFn}
+                onGoBack={goBackFn}
+                onSelect={() => {
+                  const shopId = shops[i]?.id;
+                  setShopIndex(i);
+                  setStoryIndex(firstUnviewedIdx(storyCacheRef.current[shopId] ?? []));
+                }}
+                onTogglePause={() => setIsPaused((p) => !p)}
+                onToggleMute={() => setIsMuted((m) => !m)}
+                onClose={onClose}
               />
             </div>
           ))}
@@ -104,9 +202,13 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
 
       <button
         type="button"
-        onClick={goPrev}
+        onClick={() => {
+          const prevShopId = shops[shopIndex - 1]?.id;
+          setShopIndex((s) => s - 1);
+          setStoryIndex(firstUnviewedIdx(storyCacheRef.current[prevShopId] ?? []));
+        }}
         disabled={isFirst}
-        aria-label="Previous brand"
+        aria-label="Previous shop"
         className="absolute left-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowLeft className="size-5" weight="Outline" />
@@ -114,9 +216,13 @@ export function StoryViewer({ brands, initialIndex, onClose }: IProps) {
 
       <button
         type="button"
-        onClick={goNext}
+        onClick={() => {
+          const nextShopId = shops[shopIndex + 1]?.id;
+          setShopIndex((s) => s + 1);
+          setStoryIndex(firstUnviewedIdx(storyCacheRef.current[nextShopId] ?? []));
+        }}
         disabled={isLast}
-        aria-label="Next brand"
+        aria-label="Next shop"
         className="absolute right-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowRight className="size-5" weight="Outline" />

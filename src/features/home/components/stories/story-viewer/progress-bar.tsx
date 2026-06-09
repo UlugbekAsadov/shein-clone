@@ -1,40 +1,50 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { STRIP_DURATION_MS } from "@/features/home/utils/brand-story.constants";
 
 interface IProps {
   status: "done" | "active" | "pending";
   active: boolean;
   resetKey: string;
+  durationMs: number;
+  isPaused: boolean;
 }
 
-export function ProgressBar({ status, active, resetKey }: IProps) {
-  const [filled, setFilled] = useState(status === "done");
+export function ProgressBar({ status, active, resetKey, durationMs, isPaused }: IProps) {
+  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
-    if (!active) {
-      setFilled(false);
+    if (!active || status !== "active") {
+      setAnimating(false);
       return;
     }
-    if (status === "active") {
-      setFilled(false);
-      const id = requestAnimationFrame(() => setFilled(true));
-      return () => cancelAnimationFrame(id);
-    }
-    setFilled(status === "done");
+    setAnimating(false);
+    const id = requestAnimationFrame(() => setAnimating(true));
+    return () => cancelAnimationFrame(id);
   }, [status, active, resetKey]);
+
+  if (status === "done") {
+    return (
+      <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/30">
+        <div className="h-full w-full bg-white" />
+      </div>
+    );
+  }
+
+  if (status === "pending" || !animating) {
+    return <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/30" />;
+  }
 
   return (
     <div className="h-1 flex-1 overflow-hidden rounded-full bg-white/30">
       <div
         className="h-full origin-left bg-white"
         style={{
-          transform: `scaleX(${filled ? 1 : 0})`,
-          transition:
-            status === "active" && active
-              ? `transform ${STRIP_DURATION_MS}ms linear`
-              : "none",
+          animationName: "progress-fill",
+          animationDuration: `${durationMs}ms`,
+          animationTimingFunction: "linear",
+          animationFillMode: "forwards",
+          animationPlayState: isPaused ? "paused" : "running",
         }}
       />
     </div>
