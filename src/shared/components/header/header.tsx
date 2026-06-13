@@ -27,7 +27,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
         className="mx-auto flex max-w-360 items-center gap-10 px-6"
       >
         <Link
-          href={`/${lang}`}
+          href={`/${lang}/demo`}
           className="mr-25 shrink-0"
           aria-label="Home"
         >
