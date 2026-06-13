@@ -19,27 +19,27 @@ import { DiscountBanners } from "@/features/home/components/discount-banners/dis
 import { ProductGroup } from "@/features/home/components/product-group/product-group";
 import { Stories } from "@/features/home/components/stories/stories";
 import type { IBanner } from "@/features/home/utils/banner.interface";
+import type { IMarketingBadge } from "@/features/home/utils/marketing-badge.interface";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
   banners: IBanner[];
+  marketingBadge: IMarketingBadge | null;
 }
 
-export function HomePage({ lang, dict, banners }: IProps) {
+export function HomePage({ lang, dict, banners, marketingBadge }: IProps) {
   return (
     <>
       <MobileHeader lang={lang} />
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <div className="hidden md:block">
-          <PromoBanner
-            label={dict.promo.label}
-            text={dict.promo.text}
-            cta={dict.promo.cta}
-          />
-        </div>
+        {marketingBadge && (
+          <div className="hidden md:block">
+            <PromoBanner badge={marketingBadge} />
+          </div>
+        )}
         <Stories />
         <MobileSearchBar
           lang={lang}
