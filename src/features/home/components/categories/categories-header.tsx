@@ -5,16 +5,9 @@ import { cn } from "@/lib/utils";
 interface IProps {
   title: React.ReactNode;
   subtitle?: string;
-  viewAllHref: string;
-  viewAllLabel: string;
 }
 
-export function CategoriesHeader({
-  title,
-  subtitle,
-  viewAllHref,
-  viewAllLabel,
-}: IProps) {
+export function CategoriesHeader({ title, subtitle }: IProps) {
   return (
     <div
       className={cn(
@@ -43,15 +36,6 @@ export function CategoriesHeader({
           )}
         </div>
       </div>
-      <Link
-        href={viewAllHref}
-        className={cn(
-          "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground whitespace-nowrap",
-        )}
-      >
-        {viewAllLabel}
-        <AltArrowRight className="size-5" weight="Outline" />
-      </Link>
     </div>
   );
 }

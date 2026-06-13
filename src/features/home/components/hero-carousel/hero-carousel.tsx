@@ -62,7 +62,7 @@ export function HeroCarousel({ lang, banners }: IProps) {
           type="button"
           onClick={goPrev}
           aria-label="Previous slide"
-          className="absolute left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
+          className="absolute cursor-pointer left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
           <AltArrowLeft className="size-6" />
         </button>
@@ -70,7 +70,7 @@ export function HeroCarousel({ lang, banners }: IProps) {
           type="button"
           onClick={goNext}
           aria-label="Next slide"
-          className="absolute right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
+          className="absolute cursor-pointer right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
           <AltArrowRight className="size-6" />
         </button>
