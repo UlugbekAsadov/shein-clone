@@ -9,6 +9,8 @@ import {
   DESCRIPTION,
   RECOMMENDED_SIZE,
 } from "@/shared/constants/product-preview.constants";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 
 interface IProps {
   product: IProduct;
@@ -19,6 +21,7 @@ export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
   const [colorId, setColorId] = useState(colorSwatches[0].id);
   const [sizeId, setSizeId] = useState("XS");
   const [qty, setQty] = useState(1);
+  const { currency } = useCurrency();
   const soldCount = product.reviews * 5 + 123;
 
   return (
@@ -40,15 +43,20 @@ export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
       </div>
 
       <div className="flex items-baseline gap-3 mt-3">
-        <span className="text-4xl font-bold">{product.price.toFixed(1)}$</span>
-        {product.originalPrice && (
+        <span className="text-4xl font-bold">
+          {formatPrice(product.prices[currency], currency)}
+        </span>
+        {product.originalPrices && (
           <span className="text-lg text-secondary-foreground line-through">
-            {product.originalPrice.toFixed(1)}$
+            {formatPrice(product.originalPrices[currency], currency)}
           </span>
         )}
-        {product.saveLabel && (
+        {product.originalPrices && (
           <span className="rounded-md bg-emerald-100 px-2.5 py-1 text-sm font-semibold text-emerald-700">
-            {product.saveLabel}
+            {formatPrice(
+              product.originalPrices[currency] - product.prices[currency],
+              currency,
+            )}
           </span>
         )}
       </div>

@@ -107,9 +107,8 @@ export function ProductMobilePage({
 
         <ProductMobileCta
           label="Add to cart"
-          price={product.price}
-          originalPrice={product.originalPrice}
-          saveLabel={product.saveLabel}
+          prices={product.prices}
+          originalPrices={product.originalPrices}
         />
       </div>
     </div>

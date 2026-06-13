@@ -6,6 +6,8 @@ import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 
 interface IProps {
   product: IProductDetail;
@@ -13,6 +15,7 @@ interface IProps {
 
 export function ProductStickyBar({ product }: IProps) {
   const [visible, setVisible] = useState(false);
+  const { currency } = useCurrency();
 
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 600);
@@ -50,16 +53,19 @@ export function ProductStickyBar({ product }: IProps) {
 
             <div className="flex items-center gap-3">
               <span className="text-3xl font-bold leading-none">
-                {product.price.toFixed(1)}$
+                {formatPrice(product.prices[currency], currency)}
               </span>
-              {product.originalPrice && (
+              {product.originalPrices && (
                 <span className="text-muted-foreground line-through">
-                  {product.originalPrice.toFixed(2)}$
+                  {formatPrice(product.originalPrices[currency], currency)}
                 </span>
               )}
-              {product.saveLabel && (
+              {product.originalPrices && (
                 <span className="rounded-[8px] bg-emerald-100 px-2 py-1.5 text-xs font-semibold text-emerald-700">
-                  {product.saveLabel}
+                  {formatPrice(
+                    product.originalPrices[currency] - product.prices[currency],
+                    currency,
+                  )}
                 </span>
               )}
             </div>

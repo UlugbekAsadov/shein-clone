@@ -1,16 +1,17 @@
+import type { ICurrencyPrices } from "@/types/currency-prices.interface";
+
 export interface IProduct {
   id: string;
   slug?: string;
   title: string;
   subtitle: string;
-  price: number;
-  originalPrice?: number;
+  prices: ICurrencyPrices;
+  originalPrices?: ICurrencyPrices;
   image: string;
   images?: string[];
   rating: number;
   reviews: number;
   badge?: "Original" | "New" | "Sale";
-  saveLabel?: string;
   discountLabel?: string;
   delivery?: string;
 }

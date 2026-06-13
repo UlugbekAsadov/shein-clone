@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { Tag } from "@/shared/components/tag/tag";
@@ -17,6 +19,7 @@ interface IProps {
 
 export function ProductListItem({ product }: IProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
+  const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -71,18 +74,21 @@ export function ProductListItem({ product }: IProps) {
           </div>
 
           <div className="flex flex-col flex-1 justify-end">
-            {product.originalPrice && (
+            {product.originalPrices && (
               <span className="text-sm font-medium text-muted-foreground line-through">
-                ${product.originalPrice.toFixed(2)}
+                {formatPrice(product.originalPrices[currency], currency)}
               </span>
             )}
             <div className="flex items-center gap-2">
               <span className="text-xl font-extrabold">
-                ${product.price.toFixed(2)}
+                {formatPrice(product.prices[currency], currency)}
               </span>
-              {product.saveLabel && (
+              {product.originalPrices && (
                 <span className="text-sm font-bold text-[#21BE65]">
-                  {product.saveLabel}
+                  {formatPrice(
+                    product.originalPrices[currency] - product.prices[currency],
+                    currency,
+                  )}
                 </span>
               )}
             </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Select,
   SelectContent,
@@ -15,6 +14,7 @@ import {
   UzbekistanFlagIcon,
 } from "../icons/outline";
 import { DollarMinimalistic } from "@solar-icons/react";
+import { useCurrency } from "@/shared/hooks/use-currency";
 
 function getFlagIcon(locale: (typeof currencies)[number]) {
   switch (locale) {
@@ -28,14 +28,12 @@ function getFlagIcon(locale: (typeof currencies)[number]) {
 }
 
 export function CurrencySwitcher() {
-  const [value, setValue] = useState<(typeof currencies)[number]>(
-    currencies[0],
-  );
+  const { currency, setCurrency } = useCurrency();
 
   return (
     <Select
-      value={value}
-      onValueChange={(v) => setValue(v as (typeof currencies)[number])}
+      value={currency}
+      onValueChange={(v) => setCurrency(v as (typeof currencies)[number])}
     >
       <SelectTrigger
         className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0 cursor-pointer"
@@ -43,7 +41,7 @@ export function CurrencySwitcher() {
       >
         <DollarMinimalistic className="size-5.25 text-secondary-foreground" />
         <SelectValue className="text-secondary-foreground font-medium uppercase">
-          {value}
+          {currency}
         </SelectValue>
       </SelectTrigger>
       <SelectContent align="start" position="popper" className="rounded-md">

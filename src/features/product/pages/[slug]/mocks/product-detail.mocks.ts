@@ -14,9 +14,8 @@ export const productDetailMock: IProductDetail = {
   rating: 4.5,
   reviews: 311,
   sold: 1847,
-  price: 18.4,
-  originalPrice: 30.05,
-  saveLabel: "Save $30",
+  prices: { USD: 18.4, UZS: 23_500_000, RUB: 1_710 },
+  originalPrices: { USD: 30.05, UZS: 38_500_000, RUB: 2_800 },
   gallery: galleryPool,
   colors: colorSwatches,
   sizes: [

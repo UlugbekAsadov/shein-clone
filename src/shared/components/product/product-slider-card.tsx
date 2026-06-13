@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import type { IProduct } from "@/types/product.interface";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 import { cn } from "@/lib/utils";
 import { Heart } from "@solar-icons/react";
 
@@ -14,6 +16,7 @@ interface IProps {
 
 export function ProductSliderCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
+  const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const href = `/${lang}/product/${product.slug ?? product.id}`;
 
@@ -54,10 +57,12 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
           {product.title}
         </h3>
         <div className="flex items-baseline gap-2">
-          <span className="text-lg font-bold">${product.price.toFixed(2)}</span>
-          {product.originalPrice && (
+          <span className="text-lg font-bold">
+            {formatPrice(product.prices[currency], currency)}
+          </span>
+          {product.originalPrices && (
             <span className="text-sm text-muted-foreground line-through">
-              ${product.originalPrice.toFixed(2)}
+              {formatPrice(product.originalPrices[currency], currency)}
             </span>
           )}
         </div>

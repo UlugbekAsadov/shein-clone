@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
@@ -23,6 +25,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -148,26 +151,29 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           </p>
           <div className="flex items-center gap-2">
             <span className={cn("text-base font-extrabold", "md:text-lg")}>
-              ${product.price.toFixed(2)}
+              {formatPrice(product.prices[currency], currency)}
             </span>
-            {product.originalPrice && (
+            {product.originalPrices && (
               <span
                 className={cn(
                   "text-[11px] text-muted-foreground line-through font-medium",
                   "md:text-xs",
                 )}
               >
-                ${product.originalPrice.toFixed(2)}
+                {formatPrice(product.originalPrices[currency], currency)}
               </span>
             )}
-            {product.saveLabel && (
+            {product.originalPrices && (
               <span
                 className={cn(
                   "ml-auto hidden text-xs font-bold text-[#21BE65]",
                   "md:block",
                 )}
               >
-                {product.saveLabel}
+                {formatPrice(
+                  product.originalPrices[currency] - product.prices[currency],
+                  currency,
+                )}
               </span>
             )}
           </div>

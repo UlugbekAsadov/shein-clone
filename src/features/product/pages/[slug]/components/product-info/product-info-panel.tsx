@@ -7,6 +7,8 @@ import { ProductSizeSelector } from "@/shared/components/product/product-preview
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { Button } from "@/shared/components/ui/button";
+import { useCurrency } from "@/shared/hooks/use-currency";
+import { formatPrice } from "@/shared/utils/format-price";
 
 interface IProps {
   product: IProductDetail;
@@ -16,6 +18,7 @@ export function ProductInfoPanel({ product }: IProps) {
   const [colorId, setColorId] = useState(product.colors[0].id);
   const [sizeId, setSizeId] = useState(product.recommendedSize);
   const [qty, setQty] = useState(1);
+  const { currency } = useCurrency();
 
   return (
     <div className="flex flex-col gap-5">
@@ -34,15 +37,20 @@ export function ProductInfoPanel({ product }: IProps) {
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="text-4xl font-bold">{product.price.toFixed(1)}$</span>
-        {product.originalPrice && (
+        <span className="text-4xl font-bold">
+          {formatPrice(product.prices[currency], currency)}
+        </span>
+        {product.originalPrices && (
           <span className="text-lg text-muted-foreground line-through">
-            {product.originalPrice.toFixed(2)}$
+            {formatPrice(product.originalPrices[currency], currency)}
           </span>
         )}
-        {product.saveLabel && (
+        {product.originalPrices && (
           <span className="rounded-sm bg-emerald-100 px-2.5 py-1.5 text-sm font-semibold text-emerald-700">
-            {product.saveLabel}
+            {formatPrice(
+              product.originalPrices[currency] - product.prices[currency],
+              currency,
+            )}
           </span>
         )}
       </div>
