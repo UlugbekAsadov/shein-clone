@@ -3,7 +3,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
-import { mobileCategoryGroups } from "@/features/category/mocks/category-groups.mocks";
+import { getCategories } from "@/features/category/services/category.service";
 import { CategoryDrillHeader } from "@/features/category/components/category-drill-header";
 import { CategoryGroupsList } from "@/features/category/components/category-groups-list";
 import { CategorySubcategoriesView } from "@/features/category/components/category-subcategories-view";
@@ -14,9 +14,11 @@ interface IProps {
   groupSlug: string | null;
 }
 
-export function CategoryPage({ lang, dict, groupSlug }: IProps) {
+export async function CategoryPage({ lang, dict, groupSlug }: IProps) {
+  const categories = await getCategories();
+
   const activeGroup = groupSlug
-    ? mobileCategoryGroups.find((g) => g.slug === groupSlug)
+    ? categories.find((g) => g.slug === groupSlug)
     : null;
 
   return (
@@ -32,7 +34,7 @@ export function CategoryPage({ lang, dict, groupSlug }: IProps) {
               visualSearchDict={dict.visualSearch}
             />
             {activeGroup && (
-              <CategoryDrillHeader lang={lang} title={activeGroup.name} />
+              <CategoryDrillHeader lang={lang} title={activeGroup.title} />
             )}
           </div>
 
@@ -40,7 +42,7 @@ export function CategoryPage({ lang, dict, groupSlug }: IProps) {
             {activeGroup ? (
               <CategorySubcategoriesView lang={lang} group={activeGroup} />
             ) : (
-              <CategoryGroupsList lang={lang} />
+              <CategoryGroupsList lang={lang} categories={categories} />
             )}
           </div>
         </div>

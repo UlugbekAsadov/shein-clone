@@ -26,13 +26,13 @@ export function CategoryRail({ lang, items }: IProps) {
       </div>
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-background to-transparent transition-opacity duration-200",
+          "pointer-events-none absolute inset-y-0 left-0 w-12 bg-linear-to-r from-background to-transparent transition-opacity duration-200",
           atStart && "opacity-0",
         )}
       />
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-background to-transparent transition-opacity duration-200",
+          "pointer-events-none absolute inset-y-0 right-0 w-12 bg-linear-to-l from-background to-transparent transition-opacity duration-200",
           atEnd && "opacity-0",
         )}
       />

@@ -46,7 +46,7 @@ export function CategoriesHeader({
       <Link
         href={viewAllHref}
         className={cn(
-          "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground",
+          "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground whitespace-nowrap",
         )}
       >
         {viewAllLabel}

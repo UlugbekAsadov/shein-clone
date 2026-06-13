@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { navCategories } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
+import type { ICategory } from "@/features/category/utils/category-group.interface";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
 import { LayoutGridSolid } from "../icons/solid";
@@ -20,6 +20,7 @@ interface IProps {
     original: string;
     new: string;
   };
+  categories: ICategory[];
 }
 
 export function CategoryNav({
@@ -28,11 +29,10 @@ export function CategoryNav({
   picksTitle,
   featuredTitle,
   filters,
+  categories,
 }: IProps) {
   const [open, setOpen] = useState(false);
-  const [activeId, setActiveId] = useState(
-    navCategories[0]?.id ?? "",
-  );
+  const [activeSlug, setActiveSlug] = useState(categories[0]?.slug ?? "");
   const scrollRef = useRef<HTMLElement>(null);
 
   const scrollBy = (direction: 1 | -1) => {
@@ -43,7 +43,7 @@ export function CategoryNav({
 
   return (
     <div
-      className="relative hidden md:block "
+      className="relative hidden md:block"
       onMouseLeave={() => setOpen(false)}
     >
       <div className="mx-auto flex max-w-360 items-center gap-6 px-6 pb-5">
@@ -63,23 +63,21 @@ export function CategoryNav({
           ref={scrollRef}
           className="flex flex-1 items-center gap-5.5 overflow-x-auto scroll-smooth scrollbar-hidden"
         >
-          {navCategories.map((c) => (
+          {categories.map((c) => (
             <Link
-              key={c.id}
+              key={c.slug}
               href={`/${lang}/category/${c.slug}`}
               onMouseEnter={() => {
                 setOpen(true);
-                setActiveId(c.id);
+                setActiveSlug(c.slug);
               }}
               onFocus={() => {
                 setOpen(true);
-                setActiveId(c.id);
+                setActiveSlug(c.slug);
               }}
-              className={cn(
-                "whitespace-nowrap font-medium transition-colors text-muted-foreground hover:text-foreground",
-              )}
+              className="whitespace-nowrap font-medium transition-colors text-muted-foreground hover:text-foreground"
             >
-              {c.name}
+              {c.title}
             </Link>
           ))}
         </nav>
@@ -127,8 +125,9 @@ export function CategoryNav({
             picksTitle={picksTitle}
             featuredTitle={featuredTitle}
             filters={filters}
-            activeId={activeId}
-            onActiveChange={setActiveId}
+            activeSlug={activeSlug}
+            onActiveChange={setActiveSlug}
+            categories={categories}
           />
         </div>
       </div>

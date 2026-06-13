@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "api.monera.uz" },
+      { protocol: "http", hostname: "api.monera.uz" },
       { protocol: "https", hostname: "api.shein.uz" },
       { protocol: "https", hostname: "cdn.2020mall.com" },
     ],

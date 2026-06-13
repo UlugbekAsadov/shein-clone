@@ -1,15 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import { cn } from "@/lib/utils";
+import { getCategories } from "@/features/category/services/category.service";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
 import { HeaderUserAction } from "./header-user-action";
+import { HeaderScrollWrapper } from "./header-scroll-wrapper";
 import { CategoryNav } from "../category/category-nav";
 import { CartLarge2, Heart } from "@solar-icons/react/ssr";
 
@@ -19,34 +17,18 @@ interface IProps {
   isSticky?: boolean;
 }
 
-export function Header({ lang, dict, isSticky = true }: IProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 0);
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+export async function Header({ lang, dict, isSticky = true }: IProps) {
+  const categories = await getCategories();
 
   return (
-    <header
-      suppressHydrationWarning
-      className={cn(
-        "top-0 z-40 hidden bg-background/95 md:block pt-10 space-y-7",
-        isScrolled && "header-shadow",
-        isSticky && "sticky",
-      )}
-    >
+    <HeaderScrollWrapper isSticky={isSticky}>
       <div
         suppressHydrationWarning
         className="mx-auto flex max-w-360 items-center gap-10 px-6"
       >
         <Link
           href={`/${lang}`}
-          className="mr-25 flex-shrink-0"
+          className="mr-25 shrink-0"
           aria-label="Home"
         >
           <Image
@@ -105,7 +87,8 @@ export function Header({ lang, dict, isSticky = true }: IProps) {
         picksTitle={dict.categoryMenu.picksForYou}
         featuredTitle={dict.categoryMenu.featured}
         filters={dict.nav.filters}
+        categories={categories}
       />
-    </header>
+    </HeaderScrollWrapper>
   );
 }

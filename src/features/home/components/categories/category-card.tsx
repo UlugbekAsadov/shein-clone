@@ -13,7 +13,7 @@ export function CategoryCard({ lang, category }: IProps) {
   return (
     <Link
       href={`/${lang}/category/${category.slug}`}
-      className="group relative flex shrink-0 cursor-pointer flex-col items-center gap-2.5 text-center"
+      className="group relative flex w-15 shrink-0 cursor-pointer flex-col items-center gap-2.5 text-center md:w-30"
     >
       <span
         className={cn(
@@ -26,7 +26,7 @@ export function CategoryCard({ lang, category }: IProps) {
           fill
           quality={95}
           sizes="120px"
-          className="object-contain p-2 pb-0 transition-transform group-hover:scale-110"
+          className="object-cover transition-transform group-hover:scale-110"
         />
       </span>
       {category.badge && (

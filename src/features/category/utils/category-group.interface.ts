@@ -1,14 +1,7 @@
-export interface IMobileCategorySubgroup {
-  id: string;
-  name: string;
+export interface ICategory {
+  title: string;
   slug: string;
-  count: number;
-}
-
-export interface IMobileCategoryGroup {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  children?: IMobileCategorySubgroup[];
+  image_url: string;
+  mobile_image_url: string;
+  children: ICategory[];
 }
