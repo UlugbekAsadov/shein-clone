@@ -28,10 +28,10 @@ function getFlagIcon(locale: (typeof currencies)[number]) {
 }
 
 export function CurrencySwitcher() {
-  const { currency, setCurrency } = useCurrency();
+  const { currency } = useCurrency();
 
   function handleChange(v: string) {
-    setCurrency(v as (typeof currencies)[number]);
+    document.cookie = `currency=${v}; path=/; SameSite=Lax; max-age=31536000`;
     window.location.reload();
   }
 
