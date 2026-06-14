@@ -30,10 +30,15 @@ function getFlagIcon(locale: (typeof currencies)[number]) {
 export function CurrencySwitcher() {
   const { currency, setCurrency } = useCurrency();
 
+  function handleChange(v: string) {
+    setCurrency(v as (typeof currencies)[number]);
+    window.location.reload();
+  }
+
   return (
     <Select
       value={currency}
-      onValueChange={(v) => setCurrency(v as (typeof currencies)[number])}
+      onValueChange={handleChange}
     >
       <SelectTrigger
         className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0 cursor-pointer"

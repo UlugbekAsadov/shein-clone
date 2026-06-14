@@ -10,6 +10,8 @@ interface IProps {
   title: string;
   header: React.ReactNode;
   products: IProduct[];
+  filterSidebarSlot?: React.ReactNode;
+  productCount?: number;
   dict: {
     tabs: { similar: string; deals: string };
     toolbar: {
@@ -50,6 +52,8 @@ export function ListingShell({
   title,
   header,
   products,
+  filterSidebarSlot,
+  productCount,
   dict,
   quickFiltersLabels,
 }: IProps) {
@@ -64,19 +68,21 @@ export function ListingShell({
 
       <div className={cn("hidden", "md:block")}>
         {header}
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <ListingTabs
             similarLabel={dict.tabs.similar}
             dealsLabel={dict.tabs.deals}
           />
-        </div>
+        </div> */}
       </div>
 
       <div className="md:mt-6 md:flex md:gap-8">
-        <FilterSidebar
-          dict={dict.filter}
-          quickFiltersLabels={quickFiltersLabels}
-        />
+        {filterSidebarSlot ?? (
+          <FilterSidebar
+            dict={dict.filter}
+            quickFiltersLabels={quickFiltersLabels}
+          />
+        )}
 
         <div className="flex-1">
           <ListingToolbar
@@ -89,6 +95,7 @@ export function ListingShell({
               priceHigh: dict.toolbar.sortPriceHigh,
               rating: dict.toolbar.sortRating,
             }}
+            productCount={productCount}
           />
           <ListingProductGrid products={products} />
         </div>

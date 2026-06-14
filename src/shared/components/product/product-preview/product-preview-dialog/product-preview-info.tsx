@@ -9,8 +9,8 @@ import {
   DESCRIPTION,
   RECOMMENDED_SIZE,
 } from "@/shared/constants/product-preview.constants";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 
 interface IProps {
   product: IProduct;
@@ -18,10 +18,10 @@ interface IProps {
 }
 
 export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
+  const { currency } = useCurrency();
   const [colorId, setColorId] = useState(colorSwatches[0].id);
   const [sizeId, setSizeId] = useState("XS");
   const [qty, setQty] = useState(1);
-  const { currency } = useCurrency();
   const soldCount = product.reviews * 5 + 123;
 
   return (
@@ -44,19 +44,16 @@ export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
 
       <div className="flex items-baseline gap-3 mt-3">
         <span className="text-4xl font-bold">
-          {formatPrice(product.prices[currency], currency)}
+          {formatPrice(product.price, currency)}
         </span>
-        {product.originalPrices && (
+        {product.originalPrice && (
           <span className="text-lg text-secondary-foreground line-through">
-            {formatPrice(product.originalPrices[currency], currency)}
+            {formatPrice(product.originalPrice, currency)}
           </span>
         )}
-        {product.originalPrices && (
+        {product.originalPrice && (
           <span className="rounded-md bg-emerald-100 px-2.5 py-1 text-sm font-semibold text-emerald-700">
-            {formatPrice(
-              product.originalPrices[currency] - product.prices[currency],
-              currency,
-            )}
+            {formatPrice(product.originalPrice - product.price, currency)}
           </span>
         )}
       </div>

@@ -14,7 +14,13 @@ function buildUrl(
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (value === undefined || value === null) continue;
-      url.searchParams.set(key, String(value));
+      if (Array.isArray(value)) {
+        for (const v of value) {
+          if (v !== undefined && v !== null) url.searchParams.append(key, String(v));
+        }
+      } else {
+        url.searchParams.set(key, String(value));
+      }
     }
   }
   return url.toString();
@@ -35,10 +41,11 @@ async function buildDynamicHeaders(
   const result: Record<string, string> = {};
 
   if (isServer) {
-    const { cookies } = await import("next/headers");
+    const { cookies, headers } = await import("next/headers");
     const store = await cookies();
+    const headerStore = await headers();
 
-    const locale = store.get("locale")?.value ?? "uz";
+    const locale = headerStore.get("x-locale") ?? store.get("locale")?.value ?? "uz";
     const currency = store.get("currency")?.value ?? "USD";
     result["Accept-language"] = locale.toUpperCase();
     result["Accept-currency"] = mapCurrency(currency);
@@ -101,6 +108,7 @@ async function request<TData>(
       headers: finalHeaders,
       body: body === undefined ? undefined : JSON.stringify(body),
       signal: controller.signal,
+      cache: "no-store",
       next,
     });
   } finally {

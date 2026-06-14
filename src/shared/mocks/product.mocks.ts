@@ -1,5 +1,4 @@
 import type { IProduct } from "@/types/product.interface";
-import type { ICurrencyPrices } from "@/types/currency-prices.interface";
 
 const PRODUCT_IMAGES = [
   "/mocks/images/products/image%2027.png",
@@ -12,37 +11,17 @@ const PRODUCT_IMAGES = [
 const productImg = (n: number) => PRODUCT_IMAGES[n % PRODUCT_IMAGES.length];
 
 interface IPriceVariant {
-  prices: ICurrencyPrices;
-  originalPrices: ICurrencyPrices;
+  price: number;
+  originalPrice: number;
   discountLabel: string;
 }
 
 const PRICE_VARIANTS: IPriceVariant[] = [
-  {
-    prices: { USD: 33.49, UZS: 42_900_000, RUB: 3_110 },
-    originalPrices: { USD: 63.49, UZS: 81_300_000, RUB: 5_900 },
-    discountLabel: "47%",
-  },
-  {
-    prices: { USD: 24.99, UZS: 32_000_000, RUB: 2_320 },
-    originalPrices: { USD: 39.99, UZS: 51_200_000, RUB: 3_720 },
-    discountLabel: "38%",
-  },
-  {
-    prices: { USD: 45.0, UZS: 57_600_000, RUB: 4_185 },
-    originalPrices: { USD: 75.0, UZS: 96_000_000, RUB: 6_970 },
-    discountLabel: "40%",
-  },
-  {
-    prices: { USD: 18.99, UZS: 24_300_000, RUB: 1_770 },
-    originalPrices: { USD: 29.99, UZS: 38_400_000, RUB: 2_790 },
-    discountLabel: "37%",
-  },
-  {
-    prices: { USD: 59.99, UZS: 76_800_000, RUB: 5_580 },
-    originalPrices: { USD: 99.99, UZS: 128_000_000, RUB: 9_300 },
-    discountLabel: "40%",
-  },
+  { price: 33.49, originalPrice: 63.49, discountLabel: "47%" },
+  { price: 24.99, originalPrice: 39.99, discountLabel: "38%" },
+  { price: 45.0, originalPrice: 75.0, discountLabel: "40%" },
+  { price: 18.99, originalPrice: 29.99, discountLabel: "37%" },
+  { price: 59.99, originalPrice: 99.99, discountLabel: "40%" },
 ];
 
 const baseProduct = (
@@ -55,8 +34,8 @@ const baseProduct = (
     id,
     title: "Sweatshirt",
     subtitle: "Women's Casual Pullover Sweats...",
-    prices: variant.prices,
-    originalPrices: variant.originalPrices,
+    price: variant.price,
+    originalPrice: variant.originalPrice,
     image: productImg(index),
     images: [
       productImg(index),

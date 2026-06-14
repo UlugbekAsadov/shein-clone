@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { Tag } from "@/shared/components/tag/tag";
@@ -74,19 +74,19 @@ export function ProductListItem({ product }: IProps) {
           </div>
 
           <div className="flex flex-col flex-1 justify-end">
-            {product.originalPrices && (
+            {product.originalPrice && (
               <span className="text-sm font-medium text-muted-foreground line-through">
-                {formatPrice(product.originalPrices[currency], currency)}
+                {formatPrice(product.originalPrice, currency)}
               </span>
             )}
             <div className="flex items-center gap-2">
               <span className="text-xl font-extrabold">
-                {formatPrice(product.prices[currency], currency)}
+                {formatPrice(product.price, currency)}
               </span>
-              {product.originalPrices && (
+              {product.originalPrice && (
                 <span className="text-sm font-bold text-[#21BE65]">
                   {formatPrice(
-                    product.originalPrices[currency] - product.prices[currency],
+                    product.originalPrice - product.price,
                     currency,
                   )}
                 </span>

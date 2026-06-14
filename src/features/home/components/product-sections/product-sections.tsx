@@ -26,11 +26,8 @@ function mapApiProduct(apiProduct: IApiSectionProduct): IProduct {
     slug: apiProduct.slug,
     title: apiProduct.title,
     subtitle: "",
-    prices: { USD: 0, UZS: apiProduct.price, RUB: 0 },
-    originalPrices:
-      apiProduct.old_price > 0
-        ? { USD: 0, UZS: apiProduct.old_price, RUB: 0 }
-        : undefined,
+    price: apiProduct.price,
+    originalPrice: apiProduct.old_price > 0 ? apiProduct.old_price : undefined,
     image: apiProduct.image_url,
     rating: apiProduct.rating,
     reviews: 0,

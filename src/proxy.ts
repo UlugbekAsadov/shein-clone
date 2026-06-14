@@ -49,11 +49,11 @@ function isProtectedPath(pathname: string, locale: string): boolean {
   );
 }
 
-function withCookies(
+function setCookies(
   request: NextRequest,
   response: NextResponse,
   locale: string,
-): NextResponse {
+): void {
   if (!request.cookies.get("session_id")?.value) {
     response.cookies.set("session_id", crypto.randomUUID(), {
       maxAge: 60 * 60 * 24 * 365,
@@ -67,6 +67,24 @@ function withCookies(
     sameSite: "lax",
     path: "/",
   });
+}
+
+function nextWithLocale(request: NextRequest, locale: string): NextResponse {
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-locale", locale);
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+  setCookies(request, response, locale);
+  return response;
+}
+
+function redirectWithLocale(
+  request: NextRequest,
+  url: URL,
+  locale: string,
+): NextResponse {
+  const response = NextResponse.redirect(url);
+  setCookies(request, response, locale);
   return response;
 }
 
@@ -82,12 +100,12 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/${picked}${pathname === "/" ? "" : pathname}`;
 
-    return withCookies(request, NextResponse.redirect(url), picked);
+    return redirectWithLocale(request, url, picked);
   }
 
   // "/uz" => Coming Soon sahifasi
   if (pathname === `/${locale}`) {
-    return withCookies(request, NextResponse.next(), locale);
+    return nextWithLocale(request, locale);
   }
 
   // "/uz/demo/*" => o'z holicha qoldir
@@ -96,7 +114,7 @@ export function proxy(request: NextRequest) {
 
     url.pathname = pathname.replace(`/${locale}`, `/${locale}/demo`);
 
-    return withCookies(request, NextResponse.redirect(url), locale);
+    return redirectWithLocale(request, url, locale);
   }
 
   // Auth tekshiruvi
@@ -109,10 +127,10 @@ export function proxy(request: NextRequest) {
     url.pathname = `/${locale}`;
     url.search = "";
 
-    return withCookies(request, NextResponse.redirect(url), locale);
+    return redirectWithLocale(request, url, locale);
   }
 
-  return withCookies(request, NextResponse.next(), locale);
+  return nextWithLocale(request, locale);
 }
 
 export const config = {

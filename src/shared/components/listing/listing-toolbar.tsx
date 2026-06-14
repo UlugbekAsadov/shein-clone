@@ -7,10 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/components/ui/select";
-import {
-  viewModes,
-  productCountMock,
-} from "@/shared/constants/listing.constants";
+import { viewModes } from "@/shared/constants/listing.constants";
 import { cn } from "@/lib/utils";
 import { Box } from "@solar-icons/react";
 import { useListingView } from "./hooks/use-listing-view";
@@ -25,6 +22,7 @@ interface IProps {
     priceHigh: string;
     rating: string;
   };
+  productCount?: number;
 }
 
 export function ListingToolbar({
@@ -32,6 +30,7 @@ export function ListingToolbar({
   mostPopularLabel,
   priceLabel,
   sortLabels,
+  productCount,
 }: IProps) {
   const { view, setView } = useListingView();
 
@@ -41,7 +40,7 @@ export function ListingToolbar({
         <Box weight="Bold" className="size-4.5" />
         <span className="text-muted-foreground">{productFoundLabel}:</span>{" "}
         <span className="font-semibold text-foreground">
-          {productCountMock}
+          {productCount ?? 0}
         </span>
       </p>
 

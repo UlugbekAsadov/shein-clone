@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 
 interface IProps {
   product: IProductDetail;
@@ -13,7 +13,6 @@ interface IProps {
 
 export function CommentsStickyBar({ product }: IProps) {
   const { currency } = useCurrency();
-
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex max-w-360 items-center gap-4 px-6 py-3">
@@ -31,19 +30,16 @@ export function CommentsStickyBar({ product }: IProps) {
 
           <div className="flex items-center gap-3">
             <span className="text-3xl font-bold leading-none">
-              {formatPrice(product.prices[currency], currency)}
+              {formatPrice(product.price, currency)}
             </span>
-            {product.originalPrices && (
+            {product.originalPrice && (
               <span className="text-muted-foreground line-through">
-                {formatPrice(product.originalPrices[currency], currency)}
+                {formatPrice(product.originalPrice, currency)}
               </span>
             )}
-            {product.originalPrices && (
+            {product.originalPrice && (
               <span className="rounded-[8px] bg-emerald-100 px-2 py-1.5 text-xs font-semibold text-emerald-700">
-                {formatPrice(
-                  product.originalPrices[currency] - product.prices[currency],
-                  currency,
-                )}
+                {formatPrice(product.originalPrice - product.price, currency)}
               </span>
             )}
           </div>

@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
@@ -14,11 +14,7 @@ import { Tag } from "@/shared/components/tag/tag";
 import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";
 import { Button } from "../ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/shared/components/ui/tooltip";
+
 
 interface IProps {
   product: IProduct;
@@ -161,19 +157,19 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           </p>
           <div className="flex items-center gap-2">
             <span className={cn("text-base font-extrabold", "md:text-lg")}>
-              {formatPrice(product.prices[currency], currency)}
+              {formatPrice(product.price, currency)}
             </span>
-            {product.originalPrices && (
+            {product.originalPrice && (
               <span
                 className={cn(
                   "text-[11px] text-muted-foreground line-through font-medium",
                   "md:text-xs",
                 )}
               >
-                {formatPrice(product.originalPrices[currency], currency)}
+                {formatPrice(product.originalPrice, currency)}
               </span>
             )}
-            {product.originalPrices && (
+            {product.originalPrice && (
               <span
                 className={cn(
                   "ml-auto hidden text-xs font-bold text-[#21BE65]",
@@ -181,7 +177,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
                 )}
               >
                 {formatPrice(
-                  product.originalPrices[currency] - product.prices[currency],
+                  product.originalPrice - product.price,
                   currency,
                 )}
               </span>

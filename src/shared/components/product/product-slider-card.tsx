@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import type { IProduct } from "@/types/product.interface";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { Heart } from "@solar-icons/react";
 
@@ -58,11 +58,11 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
         </h3>
         <div className="flex items-baseline gap-2">
           <span className="text-lg font-bold">
-            {formatPrice(product.prices[currency], currency)}
+            {formatPrice(product.price, currency)}
           </span>
-          {product.originalPrices && (
+          {product.originalPrice && (
             <span className="text-sm text-muted-foreground line-through">
-              {formatPrice(product.originalPrices[currency], currency)}
+              {formatPrice(product.originalPrice, currency)}
             </span>
           )}
         </div>

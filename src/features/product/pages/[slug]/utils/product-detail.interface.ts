@@ -1,6 +1,5 @@
 import type { ISwatch } from "@/types/swatch.interface";
 import type { ISize } from "@/types/size.interface";
-import type { ICurrencyPrices } from "@/types/currency-prices.interface";
 
 export interface IProductSpec {
   id: string;
@@ -22,8 +21,8 @@ export interface IProductDetail {
   rating: number;
   reviews: number;
   sold: number;
-  prices: ICurrencyPrices;
-  originalPrices?: ICurrencyPrices;
+  price: number;
+  originalPrice?: number;
   gallery: string[];
   colors: ISwatch[];
   sizes: ISize[];

@@ -7,19 +7,18 @@ import { ProductSizeSelector } from "@/shared/components/product/product-preview
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { Button } from "@/shared/components/ui/button";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { formatPrice } from "@/shared/utils/format-price";
+import { useCurrency } from "@/shared/hooks/use-currency";
 
 interface IProps {
   product: IProductDetail;
 }
 
 export function ProductInfoPanel({ product }: IProps) {
+  const { currency } = useCurrency();
   const [colorId, setColorId] = useState(product.colors[0].id);
   const [sizeId, setSizeId] = useState(product.recommendedSize);
   const [qty, setQty] = useState(1);
-  const { currency } = useCurrency();
-
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -38,19 +37,16 @@ export function ProductInfoPanel({ product }: IProps) {
 
       <div className="flex items-center gap-3">
         <span className="text-4xl font-bold">
-          {formatPrice(product.prices[currency], currency)}
+          {formatPrice(product.price, currency)}
         </span>
-        {product.originalPrices && (
+        {product.originalPrice && (
           <span className="text-lg text-muted-foreground line-through">
-            {formatPrice(product.originalPrices[currency], currency)}
+            {formatPrice(product.originalPrice, currency)}
           </span>
         )}
-        {product.originalPrices && (
+        {product.originalPrice && (
           <span className="rounded-sm bg-emerald-100 px-2.5 py-1.5 text-sm font-semibold text-emerald-700">
-            {formatPrice(
-              product.originalPrices[currency] - product.prices[currency],
-              currency,
-            )}
+            {formatPrice(product.originalPrice - product.price, currency)}
           </span>
         )}
       </div>
