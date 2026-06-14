@@ -13,7 +13,8 @@ interface IProps {
   className?: string;
   subTitleClassName?: string;
   subTitleColor?: string;
-  timer?: Date;
+  timer?: number;
+  timerColor?: string;
 }
 
 export function ProductGroupHeader({
@@ -27,6 +28,7 @@ export function ProductGroupHeader({
   subTitleClassName,
   subTitleColor,
   timer,
+  timerColor,
 }: IProps) {
   return (
     <div
@@ -62,7 +64,7 @@ export function ProductGroupHeader({
             </p>
           )}
         </div>
-        {timer && <ProductGroupTimer timer={timer} />}
+        {timer && <ProductGroupTimer timer={timer} color={timerColor} />}
       </div>
 
       {rightAction

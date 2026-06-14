@@ -1,8 +1,8 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
 import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
+import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
-import { featuredShops } from "@/shared/mocks";
 import { AboutStoreIntro } from "./about-store-intro";
 import { InfoCard } from "./info-card/info-card";
 import { BrandsCarried } from "./brands-carried/brands-carried";
@@ -13,6 +13,8 @@ interface IProps {
   about: IAboutContent;
   dict: IDictionary;
 }
+
+const EMPTY_SHOPS: IApiFeaturedShop[] = [];
 
 export function AboutStore({ shop, about, dict }: IProps) {
   return (
@@ -43,7 +45,7 @@ export function AboutStore({ shop, about, dict }: IProps) {
         viewAllLabel={dict.sections.viewAll}
         followLabel={dict.shop.follow}
         followingLabel={dict.shop.following}
-        shops={featuredShops}
+        shops={EMPTY_SHOPS}
       />
     </>
   );

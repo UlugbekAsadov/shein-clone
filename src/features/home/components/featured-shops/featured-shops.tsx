@@ -1,10 +1,9 @@
 import Image from "next/image";
-import type { IShop } from "@/types/shop.interface";
-import { featuredShops } from "@/shared/mocks";
+import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
+import { ShopBadge } from "./shop-badge";
 import { ShopSolid } from "@/shared/components/icons/solid";
 import { Button } from "@/shared/components/ui/button";
-import { Tag } from "@/shared/components/tag/tag";
 import { MedalRibbonStar, Star, Box, VerifiedCheck } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import { FeaturedShopsHeader } from "./featured-shops-header";
@@ -15,7 +14,7 @@ interface IProps {
   viewAllLabel: string;
   followLabel: string;
   followingLabel: string;
-  shops?: IShop[];
+  shops: IApiFeaturedShop[];
 }
 
 export function FeaturedShops({
@@ -24,8 +23,10 @@ export function FeaturedShops({
   viewAllLabel,
   followLabel,
   followingLabel,
-  shops = featuredShops,
+  shops,
 }: IProps) {
+  if (shops.length === 0) return null;
+
   return (
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
       <div
@@ -78,30 +79,25 @@ export function FeaturedShops({
               <div className="relative">
                 <div className="relative aspect-246/85 overflow-hidden rounded-[12px] bg-muted">
                   <Image
-                    src={shop.banner}
-                    alt={shop.name}
+                    src={shop.banner_url}
+                    alt={shop.display_name}
                     fill
                     quality={95}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                     className="object-cover"
                   />
-                  {shop.tag && (
-                    <Tag
-                      label={shop.tag.label}
-                      variant={
-                        shop.tag.variant === "shipping"
-                          ? "success"
-                          : "destructive"
-                      }
-                      className="absolute right-3 top-2"
-                      size="sm"
-                    />
+                  {shop.badges.length > 0 && (
+                    <div className="absolute right-0 top-2 flex flex-col items-end gap-1">
+                      {shop.badges.map((badge) => (
+                        <ShopBadge key={badge.id} badge={badge} />
+                      ))}
+                    </div>
                   )}
                 </div>
                 <div className="absolute -bottom-5 left-3 size-12 overflow-hidden rounded-full border-2 border-card bg-background">
                   <Image
-                    src={shop.avatar}
-                    alt={shop.name}
+                    src={shop.avatar_url}
+                    alt={shop.display_name}
                     width={48}
                     height={48}
                     className="size-full object-cover"
@@ -114,22 +110,22 @@ export function FeaturedShops({
                   <div className="min-w-0">
                     <h3 className="flex items-center gap-1 text-base">
                       <span className="truncate text-sm font-bold">
-                        {shop.name}
+                        {shop.display_name}
                       </span>
-                      {shop.verified && (
+                      {shop.is_verified && (
                         <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
                       )}
                     </h3>
                     <p className="text-xs text-muted-foreground">
-                      {shop.category}
+                      {shop.seller_type}
                     </p>
                   </div>
 
                   <Button
-                    variant={shop.isFollowing ? "outline" : "default"}
+                    variant={shop.is_followed ? "outline" : "default"}
                     className="h-8 px-5 text-xs font-bold rounded-[10px]"
                   >
-                    {shop.isFollowing ? followingLabel : followLabel}
+                    {shop.is_followed ? followingLabel : followLabel}
                   </Button>
                 </div>
 
@@ -138,7 +134,7 @@ export function FeaturedShops({
                   <span className="text-xs font-bold">
                     {shop.rating.toFixed(1)}
                     <span className="text-secondary-foreground text-[10px] font-normal ml-0.5">
-                      ({shop.reviews})
+                      ({shop.sales_count})
                     </span>
                   </span>
                 </div>
@@ -146,11 +142,11 @@ export function FeaturedShops({
                 <div className="mt-3 flex items-center gap-5 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1 text-xs font-medium">
                     <Box className="size-5" weight="Bold" />
-                    {shop.itemsSoldCount}
+                    {shop.sales_count}
                   </span>
                   <span className="flex items-center gap-1 text-xs font-medium">
                     <MedalRibbonStar className="size-5" weight="Bold" />
-                    {shop.yearsSelling}
+                    {shop.seller_years}
                   </span>
                 </div>
               </div>

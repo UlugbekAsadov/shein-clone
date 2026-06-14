@@ -20,11 +20,42 @@ function buildUrl(
   return url.toString();
 }
 
-async function getServerAccessToken(): Promise<string | undefined> {
-  if (!isServer) return undefined;
-  const { cookies } = await import("next/headers");
-  const cookieStore = await cookies();
-  return cookieStore.get(AUTH_COOKIES.accessToken)?.value;
+function mapCurrency(raw: string): string {
+  return raw === "RUB" ? "RUBLE" : raw;
+}
+
+function getCookie(name: string, cookieHeader: string): string | undefined {
+  const match = cookieHeader.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+async function buildDynamicHeaders(
+  skipAuth: boolean,
+): Promise<Record<string, string>> {
+  const result: Record<string, string> = {};
+
+  if (isServer) {
+    const { cookies } = await import("next/headers");
+    const store = await cookies();
+
+    const locale = store.get("locale")?.value ?? "uz";
+    const currency = store.get("currency")?.value ?? "USD";
+    result["Accept-language"] = locale.toUpperCase();
+    result["Accept-currency"] = mapCurrency(currency);
+
+    if (!skipAuth) {
+      const token = store.get(AUTH_COOKIES.accessToken)?.value;
+      if (token) result.Authorization = `Bearer ${token}`;
+    }
+  } else {
+    const raw = document.cookie;
+    const locale = getCookie("locale", raw) ?? "uz";
+    const currency = getCookie("currency", raw) ?? "USD";
+    result["Accept-language"] = locale.toUpperCase();
+    result["Accept-currency"] = mapCurrency(currency);
+  }
+
+  return result;
 }
 
 async function parseBody(response: Response): Promise<unknown> {
@@ -45,15 +76,13 @@ async function request<TData>(
   const { searchParams, headers, next, skipAuth, signal, ...rest } = options;
   const url = buildUrl(endpoint, searchParams);
 
+  const dynamicHeaders = await buildDynamicHeaders(skipAuth ?? false);
+
   const finalHeaders: Record<string, string> = {
     ...API_CONFIG.defaultHeaders,
+    ...dynamicHeaders,
     ...(headers as Record<string, string> | undefined),
   };
-
-  if (!skipAuth) {
-    const token = await getServerAccessToken();
-    if (token) finalHeaders.Authorization = `Bearer ${token}`;
-  }
 
   const controller = new AbortController();
   const timeoutId = setTimeout(

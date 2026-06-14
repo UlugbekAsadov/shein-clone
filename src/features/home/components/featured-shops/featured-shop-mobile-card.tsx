@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { VerifiedCheck, Star } from "@solar-icons/react/ssr";
-import type { IShop } from "@/types/shop.interface";
+import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { XIcon } from "@/shared/components/icons/outline";
 import { cn } from "@/lib/utils";
 
 interface IProps {
-  shop: IShop;
+  shop: IApiFeaturedShop;
   followLabel: string;
   followingLabel: string;
 }
@@ -27,8 +27,8 @@ export function FeaturedShopMobileCard({
 
       <div className="grid size-22 place-items-center overflow-hidden rounded-full bg-foreground">
         <Image
-          src={shop.avatar}
-          alt={shop.name}
+          src={shop.avatar_url}
+          alt={shop.display_name}
           width={96}
           height={96}
           quality={95}
@@ -37,29 +37,29 @@ export function FeaturedShopMobileCard({
       </div>
 
       <h3 className="mt-3 flex items-center gap-1 text-base font-bold">
-        <span className="truncate">{shop.name}</span>
-        {shop.verified && (
+        <span className="truncate">{shop.display_name}</span>
+        {shop.is_verified && (
           <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
         )}
       </h3>
-      <p className="text-sm text-muted-foreground">{shop.category}</p>
+      <p className="text-sm text-muted-foreground">{shop.seller_type}</p>
 
       <div className="mt-1 flex items-center gap-1 text-sm">
         <Star className="size-4 fill-amber-400 text-amber-400" weight="Outline" />
         <span className="font-semibold">{shop.rating.toFixed(1)}</span>
-        <span className="text-muted-foreground">({shop.reviews})</span>
+        <span className="text-muted-foreground">({shop.sales_count})</span>
       </div>
 
       <button
         type="button"
         className={cn(
           "mt-3 h-10 w-full rounded-[10px] text-sm font-semibold transition",
-          shop.isFollowing
+          shop.is_followed
             ? "border border-foreground bg-card text-foreground hover:bg-muted"
             : "bg-foreground text-background hover:bg-foreground/90",
         )}
       >
-        {shop.isFollowing ? followingLabel : followLabel}
+        {shop.is_followed ? followingLabel : followLabel}
       </button>
     </article>
   );

@@ -8,16 +8,17 @@ function pad(n: number) {
   return n.toString().padStart(2, "0");
 }
 
-function getSecondsLeft(target: Date) {
-  const diff = Math.floor((target.getTime() - Date.now()) / 1000);
+function getSecondsLeft(targetMs: number) {
+  const diff = Math.floor((targetMs - Date.now()) / 1000);
   return diff > 0 ? diff : 0;
 }
 
 interface IProps {
-  timer: Date;
+  timer: number;
+  color?: string;
 }
 
-export function ProductGroupTimer({ timer }: IProps) {
+export function ProductGroupTimer({ timer, color }: IProps) {
   const [secondsLeft, setSecondsLeft] = useState(0);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function ProductGroupTimer({ timer }: IProps) {
 
   return (
     <div className="flex items-center gap-1">
-      <ProductGroupTimerTile value={pad(h)} />
+      <ProductGroupTimerTile value={pad(h)} color={color} />
       <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
         <span
           className={cn(
@@ -49,7 +50,7 @@ export function ProductGroupTimer({ timer }: IProps) {
           )}
         />
       </div>
-      <ProductGroupTimerTile value={pad(m)} />
+      <ProductGroupTimerTile value={pad(m)} color={color} />
       <div className={cn("flex flex-col gap-1", "md:gap-1.5")}>
         <span
           className={cn(
@@ -64,7 +65,7 @@ export function ProductGroupTimer({ timer }: IProps) {
           )}
         />
       </div>
-      <ProductGroupTimerTile value={pad(s)} />
+      <ProductGroupTimerTile value={pad(s)} color={color} />
     </div>
   );
 }

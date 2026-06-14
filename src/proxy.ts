@@ -49,7 +49,11 @@ function isProtectedPath(pathname: string, locale: string): boolean {
   );
 }
 
-function withSessionId(request: NextRequest, response: NextResponse): NextResponse {
+function withCookies(
+  request: NextRequest,
+  response: NextResponse,
+  locale: string,
+): NextResponse {
   if (!request.cookies.get("session_id")?.value) {
     response.cookies.set("session_id", crypto.randomUUID(), {
       maxAge: 60 * 60 * 24 * 365,
@@ -58,6 +62,11 @@ function withSessionId(request: NextRequest, response: NextResponse): NextRespon
       httpOnly: false,
     });
   }
+  response.cookies.set("locale", locale, {
+    maxAge: 60 * 60 * 24 * 365,
+    sameSite: "lax",
+    path: "/",
+  });
   return response;
 }
 
@@ -73,12 +82,12 @@ export function proxy(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/${picked}${pathname === "/" ? "" : pathname}`;
 
-    return withSessionId(request, NextResponse.redirect(url));
+    return withCookies(request, NextResponse.redirect(url), picked);
   }
 
   // "/uz" => Coming Soon sahifasi
   if (pathname === `/${locale}`) {
-    return withSessionId(request, NextResponse.next());
+    return withCookies(request, NextResponse.next(), locale);
   }
 
   // "/uz/demo/*" => o'z holicha qoldir
@@ -87,7 +96,7 @@ export function proxy(request: NextRequest) {
 
     url.pathname = pathname.replace(`/${locale}`, `/${locale}/demo`);
 
-    return withSessionId(request, NextResponse.redirect(url));
+    return withCookies(request, NextResponse.redirect(url), locale);
   }
 
   // Auth tekshiruvi
@@ -100,10 +109,10 @@ export function proxy(request: NextRequest) {
     url.pathname = `/${locale}`;
     url.search = "";
 
-    return withSessionId(request, NextResponse.redirect(url));
+    return withCookies(request, NextResponse.redirect(url), locale);
   }
 
-  return withSessionId(request, NextResponse.next());
+  return withCookies(request, NextResponse.next(), locale);
 }
 
 export const config = {
