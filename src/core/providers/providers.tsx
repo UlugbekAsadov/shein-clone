@@ -10,6 +10,7 @@ import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import Scroll from "@/shared/components/scroll";
 import { CurrencyProvider } from "@/shared/providers/currency-provider";
+import { TooltipProvider } from "@/shared/components/ui/tooltip";
 
 interface IProps {
   user: IAuthUser | null;
@@ -23,14 +24,16 @@ export function Providers({ user, dict, children }: IProps) {
       <Scroll />
       <NextTopLoader color="var(--primary)" showSpinner={false} />
       <SolarProvider>
-        <CurrencyProvider>
-          <UserProvider user={user}>
-            <AuthDialogProvider>
-              {children}
-              <LoginDialog dict={dict} />
-            </AuthDialogProvider>
-          </UserProvider>
-        </CurrencyProvider>
+        <TooltipProvider>
+          <CurrencyProvider>
+            <UserProvider user={user}>
+              <AuthDialogProvider>
+                {children}
+                <LoginDialog dict={dict} />
+              </AuthDialogProvider>
+            </UserProvider>
+          </CurrencyProvider>
+        </TooltipProvider>
       </SolarProvider>
       <Toaster />
     </>

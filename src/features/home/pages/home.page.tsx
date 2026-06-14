@@ -57,6 +57,7 @@ export function HomePage({
           viewAllLabel={dict.sections.viewAll}
         />
         <ProductSections
+          lang={lang}
           sections={productSections}
           featuredShops={featuredShops}
           viewAllLabel={dict.sections.viewAll}

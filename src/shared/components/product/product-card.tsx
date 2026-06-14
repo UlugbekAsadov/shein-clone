@@ -14,6 +14,11 @@ import { Tag } from "@/shared/components/tag/tag";
 import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";
 import { Button } from "../ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/shared/components/ui/tooltip";
 
 interface IProps {
   product: IProduct;
@@ -143,7 +148,12 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             "md:p-2.5 md:pb-3.5",
           )}
         >
-          <h3 className={cn("text-sm font-bold leading-tight", "md:text-lg")}>
+          <h3
+            className={cn(
+              "line-clamp-2 text-sm font-bold leading-tight",
+              "md:text-lg",
+            )}
+          >
             {product.title}
           </h3>
           <p className={cn("line-clamp-1 text-sm text-muted-foreground")}>

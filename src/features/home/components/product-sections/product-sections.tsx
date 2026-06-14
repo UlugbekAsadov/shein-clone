@@ -7,8 +7,10 @@ import type {
 } from "@/features/home/utils/product-section.interface";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import type { IProduct } from "@/types/product.interface";
+import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
+  lang: (typeof locales)[number];
   sections: IProductSection[];
   featuredShops: IApiFeaturedShop[];
   viewAllLabel: string;
@@ -42,6 +44,7 @@ function mapApiProduct(apiProduct: IApiSectionProduct): IProduct {
 }
 
 export function ProductSections({
+  lang,
   sections,
   featuredShops,
   viewAllLabel,
@@ -80,7 +83,7 @@ export function ProductSections({
               subtitle={section.description}
               viewAllLabel={viewAllLabel}
               products={mappedProducts}
-              viewAllHref={`/category/${section.slug}`}
+              viewAllHref={`/${lang}/demo/category/${section.slug}`}
               bgColor={section.bg_color}
               Icon={SectionIcon}
               timer={timer}
