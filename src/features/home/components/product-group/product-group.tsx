@@ -50,9 +50,7 @@ export function ProductGroup({
     textColor ?? (bgColor ? getContrastColor(bgColor) : undefined);
   const resolvedDescriptionColor =
     descriptionColor ??
-    (resolvedTextColor && bgColor
-      ? `${resolvedTextColor}b3`
-      : undefined);
+    (resolvedTextColor && bgColor ? `${resolvedTextColor}b3` : undefined);
 
   return (
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
@@ -60,7 +58,7 @@ export function ProductGroup({
         className={cn(`rounded-md md:rounded-xl`, "md:p-5")}
         style={{
           backgroundImage: bgImage ? `url(${bgImage})` : "unset",
-          backgroundColor: bgColor,
+          backgroundColor: type === "card" && bgColor ? bgColor : undefined,
         }}
       >
         <ProductGroupHeader
