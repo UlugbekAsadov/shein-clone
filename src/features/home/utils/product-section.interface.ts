@@ -4,6 +4,22 @@ interface IApiSectionName {
   uz: string;
 }
 
+export interface IAutoFilter {
+  limit?: number;
+  sort_by?: string;
+  sort_direction?: string;
+  shop_ids?: number[];
+  badge_ids?: number[];
+  brand_ids?: number[];
+  season_ids?: number[];
+  hashtag_ids?: number[];
+  category_ids?: number[];
+  max_price?: number | null;
+  min_price?: number | null;
+  min_sold_count?: number;
+  min_view_count?: number;
+}
+
 interface IApiSection {
   id: number;
   name: string;
@@ -16,6 +32,7 @@ interface IApiSection {
   timer: { end_at: string; remaining_seconds: number } | null;
   sort_order: number;
   type: "list" | "card";
+  auto_filter?: IAutoFilter;
 }
 
 export interface IApiSectionProduct {

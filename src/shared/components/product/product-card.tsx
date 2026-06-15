@@ -15,7 +15,6 @@ import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
 import { TruckIconSolid } from "../icons/solid";
 import { Button } from "../ui/button";
 
-
 interface IProps {
   product: IProduct;
   variant?: "default" | "dark";
@@ -176,10 +175,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
                   "md:block",
                 )}
               >
-                {formatPrice(
-                  product.originalPrice - product.price,
-                  currency,
-                )}
+                {formatPrice(product.originalPrice - product.price, currency)}
               </span>
             )}
           </div>

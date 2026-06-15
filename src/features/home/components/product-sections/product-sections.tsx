@@ -5,6 +5,7 @@ import type {
   IProductSection,
   IApiSectionProduct,
 } from "@/features/home/utils/product-section.interface";
+import { buildAutoFilterQuery } from "@/features/home/utils/auto-filter.utils";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import type { IProduct } from "@/types/product.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
@@ -80,7 +81,7 @@ export function ProductSections({
               subtitle={section.description}
               viewAllLabel={viewAllLabel}
               products={mappedProducts}
-              viewAllHref={`/${lang}/demo/category/${section.slug}`}
+              viewAllHref={`/${lang}/demo/products${section.auto_filter ? buildAutoFilterQuery(section.auto_filter) : ""}`}
               bgColor={section.bg_color}
               Icon={SectionIcon}
               timer={timer}
