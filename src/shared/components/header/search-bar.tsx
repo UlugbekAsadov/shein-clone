@@ -2,18 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  searchCategories,
-  searchHistory as initialSearchHistory,
-} from "@/shared/mocks";
+import { searchHistory as initialSearchHistory } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/components/ui/select";
+
 import { SearchIcon, XIcon } from "../icons/outline";
 import {
   VisualSearch,
@@ -37,6 +28,7 @@ export function SearchBar({
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState(initialSearchHistory);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if (!open) return;
@@ -64,7 +56,7 @@ export function SearchBar({
   return (
     <div ref={containerRef} className="relative flex flex-1">
       <div className="relative flex h-12.5 w-full items-stretch rounded-md bg-muted/60 ring-1 ring-border">
-        <Select defaultValue={searchCategories[0].id}>
+        {/* <Select defaultValue={searchCategories[0].id}>
           <SelectTrigger
             className="h-full! rounded-l-full border-0 bg-transparent pl-4 pr-2.25 text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0 border-r"
             aria-label="Category"
@@ -82,25 +74,29 @@ export function SearchBar({
               </SelectItem>
             ))}
           </SelectContent>
-        </Select>
+        </Select> */}
 
-        <div className="flex flex-1 items-center pl-2">
+        <div className="flex flex-1 items-center px-2">
           <SearchIcon className="size-6 text-muted-foreground" />
           <input
             type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder={placeholder}
             onFocus={() => setOpen(true)}
             className="flex-1 bg-transparent pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
           />
-          <VisualSearch lang={lang} dict={visualSearchDict} />
+          {searchValue.length ? (
+            <button
+              type="button"
+              className="rounded-sm cursor-pointer bg-foreground px-3 h-9.5 text-sm font-semibold text-background hover:bg-foreground/90"
+            >
+              {searchLabel}
+            </button>
+          ) : (
+            <VisualSearch lang={lang} dict={visualSearchDict} />
+          )}
         </div>
-
-        <button
-          type="button"
-          className="rounded-r-md bg-foreground px-4 text-sm font-semibold text-background hover:bg-foreground/90"
-        >
-          {searchLabel}
-        </button>
       </div>
 
       {open && history.length > 0 && (

@@ -109,8 +109,8 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               e.stopPropagation();
             }}
             className={cn(
-              "absolute left-2 top-2 z-20 grid size-6 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors",
-              "md:left-3 md:top-3 md:size-7.5",
+              "absolute right-2 top-2 z-20 grid size-6 place-items-center rounded-full bg-white text-foreground shadow-sm transition-colors",
+              "md:right-3 md:top-3 md:size-7.5",
               "hover:bg-white/90",
             )}
           >
@@ -121,8 +121,8 @@ export function ProductCard({ product, variant = "default" }: IProps) {
           {product.discountLabel && (
             <span
               className={cn(
-                "absolute right-2 top-2 z-20 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
-                "md:right-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
+                "absolute left-2 top-2 z-20 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
+                "md:left-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
               )}
             >
               {product.discountLabel}
@@ -143,39 +143,16 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             "md:p-2.5 md:pb-3.5",
           )}
         >
-          <h3
-            className={cn(
-              "line-clamp-2 text-sm font-bold leading-tight",
-              "md:text-lg",
-            )}
-          >
+          <h3 className="line-clamp-1 text-sm font-medium leading-tight">
             {product.title}
           </h3>
-          <p className={cn("line-clamp-1 text-sm text-muted-foreground")}>
-            {product.subtitle}
-          </p>
-          <div className="flex items-center gap-2">
-            <span className={cn("text-base font-extrabold", "md:text-lg")}>
+          <div className="flex items-baseline gap-2">
+            <span className="text-base font-extrabold">
               {formatPrice(product.price, currency)}
             </span>
             {product.originalPrice && (
-              <span
-                className={cn(
-                  "text-[11px] text-muted-foreground line-through font-medium",
-                  "md:text-xs",
-                )}
-              >
+              <span className="text-xs text-muted-foreground line-through font-medium">
                 {formatPrice(product.originalPrice, currency)}
-              </span>
-            )}
-            {product.originalPrice && (
-              <span
-                className={cn(
-                  "ml-auto hidden text-xs font-bold text-[#21BE65]",
-                  "md:block",
-                )}
-              >
-                {formatPrice(product.originalPrice - product.price, currency)}
               </span>
             )}
           </div>

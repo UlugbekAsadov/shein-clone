@@ -46,7 +46,7 @@ export function CategoryNav({
       className="relative hidden md:block"
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="mx-auto flex max-w-360 items-center gap-6 px-6 pb-5">
+      <div className="mx-auto flex max-w-360 items-center gap-6 px-6 pb-3">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
@@ -106,7 +106,7 @@ export function CategoryNav({
         aria-hidden={!open}
         onClick={() => setOpen(false)}
         className={cn(
-          "fixed inset-x-0 bottom-0 top-42.5 z-30 bg-black/50 transition-opacity duration-300 ease-out",
+          "fixed inset-x-0 bottom-0 top-32.5 z-30 bg-black/50 transition-opacity duration-300 ease-out",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />

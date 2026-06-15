@@ -2,6 +2,7 @@ import type { IProduct } from "@/types/product.interface";
 import { FilterSidebar } from "./filter-sidebar/filter-sidebar";
 import { ListingMobileHeader } from "./listing-mobile-header/listing-mobile-header";
 import { ListingProductGrid } from "./listing-product-grid";
+import { ListingProductGridSkeleton } from "./listing-product-grid-skeleton";
 import { ListingTabs } from "./listing-tabs";
 import { ListingToolbar } from "./listing-toolbar";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,7 @@ interface IProps {
   products: IProduct[];
   filterSidebarSlot?: React.ReactNode;
   productCount?: number;
+  isLoading?: boolean;
   dict: {
     tabs: { similar: string; deals: string };
     toolbar: {
@@ -54,6 +56,7 @@ export function ListingShell({
   products,
   filterSidebarSlot,
   productCount,
+  isLoading,
   dict,
   quickFiltersLabels,
 }: IProps) {
@@ -97,7 +100,11 @@ export function ListingShell({
             }}
             productCount={productCount}
           />
-          <ListingProductGrid products={products} />
+          {isLoading ? (
+            <ListingProductGridSkeleton />
+          ) : (
+            <ListingProductGrid products={products} />
+          )}
         </div>
       </div>
     </div>

@@ -68,7 +68,7 @@ export function CategoryFilterSidebar({
     pending.maxPrice ?? filterOptions.price_range.max,
   ];
 
-  const availableQuickFilterKeys = filterOptions.quick_filters.map((f) => f.key);
+  const availableQuickFilterKeys = filterOptions.quick_filters?.map((f) => f.key) ?? [];
 
   return (
     <aside className={cn("w-60 shrink-0 hidden", "md:block")}>

@@ -183,11 +183,27 @@ export function ProductsInfinite({
   const pathname = usePathname();
   const rawSearchParams = useSearchParams();
 
-  const [baseParams] = useState<Record<string, string>>(() => {
+  const [baseParams, setBaseParams] = useState<Record<string, string>>(() => {
     const result = { ...initialParams };
     FILTER_PARAM_KEYS.forEach((key) => delete result[key]);
     return result;
   });
+
+  const sortSignature = `${rawSearchParams?.get("sort_by") ?? ""}:${rawSearchParams?.get("sort_direction") ?? ""}`;
+  const prevSortSignatureRef = useRef(sortSignature);
+
+  useEffect(() => {
+    if (sortSignature === prevSortSignatureRef.current) return;
+    prevSortSignatureRef.current = sortSignature;
+    setBaseParams((prev) => {
+      const next = { ...prev };
+      const sb = rawSearchParams?.get("sort_by");
+      const sd = rawSearchParams?.get("sort_direction");
+      if (sb) next.sort_by = sb; else delete next.sort_by;
+      if (sd) next.sort_direction = sd; else delete next.sort_direction;
+      return next;
+    });
+  }, [sortSignature, rawSearchParams]);
 
   const [initialFilters] = useState<IActiveFilters>(() =>
     parseFiltersFromUrl(new URLSearchParams(rawSearchParams?.toString() ?? "")),
@@ -205,7 +221,8 @@ export function ProductsInfinite({
       ? { ...initialMeta, current_page: 0, last_page: 0 }
       : initialMeta,
   );
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
 
   const sentinelRef = useRef<HTMLDivElement>(null);
   const loadingRef = useRef(false);
@@ -235,7 +252,8 @@ export function ProductsInfinite({
 
       if (loadingRef.current) return;
       loadingRef.current = true;
-      setLoading(true);
+      if (page === 1) setIsLoading(true);
+      else setIsFetchingNextPage(true);
       try {
         const res = await productsApi.getProducts(mergedParams, page);
         if (!res.data) return;
@@ -245,7 +263,8 @@ export function ProductsInfinite({
         setMeta(res.data.meta);
       } finally {
         loadingRef.current = false;
-        setLoading(false);
+        if (page === 1) setIsLoading(false);
+        else setIsFetchingNextPage(false);
       }
     },
     [baseParams],
@@ -311,11 +330,12 @@ export function ProductsInfinite({
         products={products}
         filterSidebarSlot={filterSidebarSlot}
         productCount={meta.total}
+        isLoading={isLoading}
         dict={dict}
         quickFiltersLabels={quickFiltersLabels}
       />
-      {hasMore && <div ref={sentinelRef} className="h-10" />}
-      {loading && (
+      {!isLoading && hasMore && <div ref={sentinelRef} className="h-10" />}
+      {isFetchingNextPage && (
         <div className="flex justify-center py-6">
           <div className="size-8 animate-spin rounded-full border-4 border-muted border-t-primary" />
         </div>
