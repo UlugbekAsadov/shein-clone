@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import {
+  getVariantColorSwatches,
+  getVariantSizeDetail,
+  getVariantSizes,
+} from "@/features/product/pages/[slug]/utils/variant.mapper";
+import { getOriginalPrice } from "@/features/product/pages/[slug]/utils/price.mapper";
 import { ProductColorSelector } from "@/shared/components/product/product-preview/product-color-selector";
 import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";
@@ -16,9 +22,36 @@ interface IProps {
 
 export function ProductInfoPanel({ product }: IProps) {
   const { currency } = useCurrency();
-  const [colorId, setColorId] = useState(product.colors[0].id);
-  const [sizeId, setSizeId] = useState(product.recommendedSize);
+  const colors = getVariantColorSwatches(product.variant_clothes);
+  const [colorId, setColorId] = useState(colors[0]?.id ?? "");
+  const sizes = getVariantSizes(product.variant_clothes, colorId);
+  const [sizeId, setSizeId] = useState(
+    sizes.find((s) => s.id === product.size_recommendation)?.id ??
+      sizes[0]?.id ??
+      "",
+  );
   const [qty, setQty] = useState(1);
+
+  const sizeDetail = getVariantSizeDetail(
+    product.variant_clothes,
+    colorId,
+    sizeId,
+  );
+  const price = sizeDetail?.price ?? product.price;
+  const discount = sizeDetail?.discount ?? product.discount;
+  const discountType = sizeDetail?.discount_type ?? product.discount_type;
+  const originalPrice = getOriginalPrice(price, discount, discountType);
+
+  function handleColorChange(nextColor: string) {
+    setColorId(nextColor);
+    const nextSizes = getVariantSizes(product.variant_clothes, nextColor);
+    setSizeId(
+      nextSizes.find((s) => s.id === product.size_recommendation)?.id ??
+        nextSizes[0]?.id ??
+        "",
+    );
+  }
+
   return (
     <div className="flex flex-col gap-5">
       <div>
@@ -27,42 +60,47 @@ export function ProductInfoPanel({ product }: IProps) {
           <ProductRatingStars />
           <span className="text-muted-foreground">|</span>
           <span className="text-muted-foreground">
-            {product.reviews} reviews
+            {product.reviews_count} reviews
           </span>
           <span className="text-muted-foreground">|</span>
-          <span className="text-muted-foreground">{product.sold} sold</span>
+          <span className="text-muted-foreground">
+            {product.sold_count} sold
+          </span>
         </div>
-        <p className="mt-3 text-sm text-muted-foreground">{product.subtitle}</p>
       </div>
-
+      <div className="text-sm text-secondary-foreground" dangerouslySetInnerHTML={{ __html: product.description }} />
       <div className="flex items-center gap-3">
         <span className="text-4xl font-bold">
-          {formatPrice(product.price, currency)}
+          {formatPrice(price, currency)}
         </span>
-        {product.originalPrice && (
+        {originalPrice && (
           <span className="text-lg text-muted-foreground line-through">
-            {formatPrice(product.originalPrice, currency)}
+            {formatPrice(originalPrice, currency)}
           </span>
         )}
-        {product.originalPrice && (
+        {originalPrice && (
           <span className="rounded-sm bg-emerald-100 px-2.5 py-1.5 text-sm font-semibold text-emerald-700">
-            {formatPrice(product.originalPrice - product.price, currency)}
+            {formatPrice(originalPrice - price, currency)}
           </span>
         )}
       </div>
 
-      <ProductColorSelector
-        swatches={product.colors}
-        value={colorId}
-        onChange={setColorId}
-      />
+      {colors.length > 0 && (
+        <ProductColorSelector
+          swatches={colors}
+          value={colorId}
+          onChange={handleColorChange}
+        />
+      )}
 
-      <ProductSizeSelector
-        sizes={product.sizes}
-        value={sizeId}
-        recommended={product.recommendedSize}
-        onChange={setSizeId}
-      />
+      {sizes.length > 0 && (
+        <ProductSizeSelector
+          sizes={sizes}
+          value={sizeId}
+          recommended={product.size_recommendation}
+          onChange={setSizeId}
+        />
+      )}
 
       <ProductQtyStepper value={qty} onChange={setQty} />
 

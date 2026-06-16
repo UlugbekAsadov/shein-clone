@@ -4,26 +4,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Button } from "@/shared/components/ui/button";
-import type { ISellerCard } from "@/features/product/pages/[slug]/utils/seller-card.interface";
+import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
 import { ProductSellerStat } from "./product-seller-stat";
 import { Tag } from "@/shared/components/tag/tag";
 import { VerifiedCheck, Star } from "@solar-icons/react";
 
 interface IProps {
-  seller: ISellerCard;
+  shop: IApiShop;
 }
 
-export function ProductSellerCard({ seller }: IProps) {
+export function ProductSellerCard({ shop }: IProps) {
   const { lang } = useParams<{ lang: string }>();
-  const shopHref = `/${lang}/shop/${seller.slug}`;
+  const shopHref = `/${lang}/shop/${shop.username}`;
+
+  const stats = [
+    { id: "sold", label: "sold", value: String(shop.sales_count) },
+    { id: "followers", label: "followers", value: String(shop.followers_count) },
+    { id: "response", label: "response rate", value: shop.response_rate },
+  ];
 
   return (
     <div className="overflow-hidden p-2 rounded-lg border border-border bg-card">
       <Link href={shopHref} className="block">
         <div className="relative h-32 rounded-[12px] overflow-hidden">
           <Image
-            src={seller.banner}
-            alt={seller.name}
+            src={shop.banner_url}
+            alt={shop.display_name}
             fill
             quality={90}
             sizes="(max-width: 768px) 100vw, 500px"
@@ -41,8 +47,8 @@ export function ProductSellerCard({ seller }: IProps) {
           className="-mt-10 size-14 shrink-0 overflow-hidden rounded-full ring-4 ring-background z-10"
         >
           <Image
-            src={seller.avatar}
-            alt={seller.name}
+            src={shop.logo_url}
+            alt={shop.display_name}
             width={56}
             height={56}
             quality={90}
@@ -56,21 +62,20 @@ export function ProductSellerCard({ seller }: IProps) {
               href={shopHref}
               className="inline-flex items-center gap-1 hover:underline"
             >
-              <span className="font-semibold font-sm">{seller.name}</span>
-              <VerifiedCheck className="size-4 fill-blue-500 text-white" />
+              <span className="font-semibold font-sm">{shop.display_name}</span>
+              {shop.is_verified && (
+                <VerifiedCheck className="size-4 fill-blue-500 text-white" />
+              )}
             </Link>
-            <p className="text-xs text-muted-foreground">{seller.tag}</p>
+            <p className="text-xs text-muted-foreground">{shop.location}</p>
             <span className="flex items-center gap-1 text-xs mt-3">
               <Star className="size-4 fill-amber-400 text-amber-400" />
               <span className="font-semibold text-xs">
-                {seller.rating.toFixed(1)}{" "}
-                <span className="text-muted-foreground text-[10px] font-normal">
-                  (324)
-                </span>
+                {shop.rating.toFixed(1)}
               </span>
             </span>
             <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
-              {seller.stats.map((stat) => (
+              {stats.map((stat) => (
                 <ProductSellerStat key={stat.id} stat={stat} />
               ))}
             </div>

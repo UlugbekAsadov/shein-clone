@@ -42,8 +42,9 @@ export function ProductReviewsSection({
       </div>
 
       <ProductReviewSummary rating={rating} fitStats={fitStats} />
-      <ProductReviewMediaGallery lang={lang} slug={slug} images={media} />
-
+      {media.length > 0 && (
+        <ProductReviewMediaGallery lang={lang} slug={slug} images={media} />
+      )}
     </section>
   );
 }

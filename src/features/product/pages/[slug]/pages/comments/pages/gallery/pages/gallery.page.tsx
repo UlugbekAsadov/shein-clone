@@ -1,5 +1,5 @@
 import type { locales } from "@/core/config/i18n/i18n-config";
-import { productDetailMock } from "@/features/product/pages/[slug]/mocks/product-detail.mocks";
+import { productDetailMock } from "@/features/product/pages/[slug]/pages/comments/mocks/product-detail.mocks";
 import { GalleryPageContent } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/components/gallery-page-content";
 import { galleryItemsMock } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/mocks/gallery-items.mocks";
 

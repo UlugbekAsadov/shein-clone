@@ -5,27 +5,31 @@ import {
   DollarMinimalistic,
   ShieldCheck,
   Shop,
-  Unread,
 } from "@solar-icons/react/ssr";
 import { TruckIconSolid } from "@/shared/components/icons/solid";
-import { cn } from "@/lib/utils";
+import type { IProductHighlight } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+
+interface IProps {
+  highlights: IProductHighlight[];
+}
+
+const HIGHLIGHT_ICONS: Array<ComponentType<IconProps> | (() => React.ReactElement)> = [
+  () => <TruckIconSolid className="size-6 fill-emerald-600" />,
+  DollarMinimalistic,
+  ShieldCheck,
+  Shop,
+];
 
 interface IRowProps {
   icon: ComponentType<IconProps> | (() => React.ReactElement);
-  iconClassName?: string;
-  title: React.ReactNode;
-  subtitle?: React.ReactNode;
+  title: string;
+  subtitle?: string;
 }
 
-function InfoRow({ icon: Icon, iconClassName, title, subtitle }: IRowProps) {
+function InfoRow({ icon: Icon, title, subtitle }: IRowProps) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
-      <span
-        className={cn(
-          "grid size-9 shrink-0 place-items-center text-foreground",
-          iconClassName,
-        )}
-      >
+      <span className="grid size-9 shrink-0 place-items-center text-foreground">
         <Icon className="size-6" />
       </span>
       <div className="min-w-0 flex-1">
@@ -39,43 +43,17 @@ function InfoRow({ icon: Icon, iconClassName, title, subtitle }: IRowProps) {
   );
 }
 
-export function ProductMobileInfoRows() {
+export function ProductMobileInfoRows({ highlights }: IProps) {
   return (
     <div className="mt-5 flex flex-col bg-secondary rounded-[18px]">
-      <InfoRow
-        icon={() => <TruckIconSolid className="size-6 fill-emerald-600" />}
-        title={
-          <span className="text-emerald-600">
-            Free Shipping (Orders $20.00)
-          </span>
-        }
-        subtitle="Free Shipping (Orders $20.00)"
-      />
-
-      <InfoRow icon={DollarMinimalistic} title="30-Day Free Returns" />
-
-      <InfoRow
-        icon={ShieldCheck}
-        title="Shopping Security"
-        subtitle={
-          <span className="mt-1 flex flex-wrap items-center gap-3 text-foreground">
-            <span className="flex items-center gap-1">
-              <Unread className="size-3.5" />
-              Safe Payments
-            </span>
-            <span className="flex items-center gap-1">
-              <Unread className="size-3.5" />
-              Privacy Protection
-            </span>
-          </span>
-        }
-      />
-
-      <InfoRow
-        icon={Shop}
-        title="Sold by TY DIRECT Marketplace"
-        subtitle="Ships from TY DIRECT Marketplace"
-      />
+      {highlights.map((highlight, i) => (
+        <InfoRow
+          key={highlight.title}
+          icon={HIGHLIGHT_ICONS[i] ?? HIGHLIGHT_ICONS[HIGHLIGHT_ICONS.length - 1]}
+          title={highlight.title}
+          subtitle={highlight.description}
+        />
+      ))}
     </div>
   );
 }

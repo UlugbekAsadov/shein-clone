@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { cn } from "@/lib/utils";
 import { AltArrowLeft, AltArrowRight, Heart } from "@solar-icons/react";
 
@@ -11,24 +12,51 @@ interface IProps {
 }
 
 export function ProductPreviewGallery({ images, alt }: IProps) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [imageIndex, setImageIndex] = useState(0);
   const [zooming, setZooming] = useState(false);
   const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+  const mainImageRef = useRef<HTMLDivElement>(null);
+  const [railHeight, setRailHeight] = useState<number>();
 
-  const goPrev = () =>
-    setImageIndex((i) => (i - 1 + images.length) % images.length);
-  const goNext = () => setImageIndex((i) => (i + 1) % images.length);
+  useEffect(() => {
+    const el = mainImageRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry) setRailHeight(entry.contentRect.height);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setImageIndex(emblaApi.selectedScrollSnap());
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  const goPrev = () => emblaApi?.scrollPrev();
+  const goNext = () => emblaApi?.scrollNext();
 
   return (
-    <div className="flex gap-3">
-      <div className="flex w-20 flex-col gap-2">
+    <div className="flex items-start gap-3">
+      <div
+        className="flex  flex-col gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden p-1"
+        style={{ maxHeight: railHeight }}
+      >
         {images.map((src, i) => (
           <button
             type="button"
             key={src}
-            onClick={() => setImageIndex(i)}
+            onClick={() => emblaApi?.scrollTo(i)}
             className={cn(
-              "relative aspect-3/4 cursor-pointer overflow-hidden rounded-[16px] ring-2 transition",
+              "relative aspect-3/4 cursor-pointer overflow-hidden rounded-[16px] min-w-[88px] min-h-[117px] ring-2 transition",
               i === imageIndex
                 ? "ring-foreground"
                 : "ring-transparent hover:ring-muted-foreground/40",
@@ -48,7 +76,8 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
       </div>
 
       <div
-        className="group relative aspect-4/5 flex-1 cursor-zoom-in overflow-hidden rounded-2xl bg-muted"
+        ref={mainImageRef}
+        className="group relative aspect-3/4 flex-1 cursor-zoom-in overflow-hidden rounded-2xl bg-muted"
         onMouseEnter={() => setZooming(true)}
         onMouseLeave={() => setZooming(false)}
         onMouseMove={(e) => {
@@ -58,35 +87,29 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
           setZoomOrigin({ x, y });
         }}
       >
-        <div
-          className="absolute inset-y-0 left-0 flex h-full"
-          style={{
-            width: `${images.length * 100}%`,
-            transform: `translate3d(-${(imageIndex * 100) / images.length}%, 0, 0)`,
-            transition: "transform 500ms cubic-bezier(0.32, 0.72, 0, 1)",
-          }}
-        >
-          {images.map((src, i) => (
-            <div
-              key={src}
-              className="relative h-full shrink-0 overflow-hidden"
-              style={{ width: `${100 / images.length}%` }}
-            >
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                quality={95}
-                sizes="(min-width: 768px) 40vw, 90vw"
-                priority={i === 0}
-                className="object-cover transition-transform duration-300 ease-out will-change-transform"
-                style={{
-                  transform: zooming ? "scale(1.8)" : "scale(1)",
-                  transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
-                }}
-              />
-            </div>
-          ))}
+        <div ref={emblaRef} className="h-full w-full overflow-hidden">
+          <div className="flex h-full">
+            {images.map((src, i) => (
+              <div
+                key={src}
+                className="relative h-full w-full shrink-0 grow-0 basis-full overflow-hidden"
+              >
+                <Image
+                  src={src}
+                  alt={alt}
+                  fill
+                  quality={95}
+                  sizes="(min-width: 768px) 40vw, 90vw"
+                  priority={i === 0}
+                  className="object-cover transition-transform duration-300 ease-out will-change-transform"
+                  style={{
+                    transform: zooming ? "scale(1.8)" : "scale(1)",
+                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
         </div>
 
         <button

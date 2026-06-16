@@ -3,7 +3,7 @@ import {
   galleryPool,
   sizes,
 } from "@/shared/mocks/product-preview.mocks";
-import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import type { IProductDetail } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
 
 export const productDetailMock: IProductDetail = {
   id: "p-1",

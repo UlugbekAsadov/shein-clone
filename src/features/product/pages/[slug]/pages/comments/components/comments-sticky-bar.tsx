@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
-import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import type { IProductDetail } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 

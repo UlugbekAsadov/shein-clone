@@ -4,7 +4,7 @@ import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { ProductBreadcrumb } from "@/features/product/pages/[slug]/components/product-breadcrumb";
 import { productBreadcrumbTrail } from "@/features/product/pages/[slug]/mocks/breadcrumb.mocks";
-import { productDetailMock } from "@/features/product/pages/[slug]/mocks/product-detail.mocks";
+import { productDetailMock } from "@/features/product/pages/[slug]/pages/comments/mocks/product-detail.mocks";
 import { CommentsFilterSidebar } from "@/features/product/pages/[slug]/pages/comments/components/comments-filter-sidebar/comments-filter-sidebar";
 import { CommentsHeader } from "@/features/product/pages/[slug]/pages/comments/components/comments-header";
 import { CommentsSummaryCard } from "@/features/product/pages/[slug]/pages/comments/components/comments-summary/comments-summary-card";

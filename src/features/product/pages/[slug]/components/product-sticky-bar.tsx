@@ -6,6 +6,7 @@ import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import { getOriginalPrice } from "@/features/product/pages/[slug]/utils/price.mapper";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 
@@ -15,6 +16,11 @@ interface IProps {
 
 export function ProductStickyBar({ product }: IProps) {
   const { currency } = useCurrency();
+  const originalPrice = getOriginalPrice(
+    product.price,
+    product.discount,
+    product.discount_type,
+  );
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 600);
@@ -41,7 +47,7 @@ export function ProductStickyBar({ product }: IProps) {
           <div className="flex items-center flex-1 gap-2">
             <div className="relative w-14 aspect-3/4 shrink-0 overflow-hidden rounded-sm bg-muted">
               <Image
-                src={product.gallery[0]}
+                src={product.image_url}
                 alt={product.title}
                 fill
                 quality={90}
@@ -54,14 +60,14 @@ export function ProductStickyBar({ product }: IProps) {
               <span className="text-3xl font-bold leading-none">
                 {formatPrice(product.price, currency)}
               </span>
-              {product.originalPrice && (
+              {originalPrice && (
                 <span className="text-muted-foreground line-through">
-                  {formatPrice(product.originalPrice, currency)}
+                  {formatPrice(originalPrice, currency)}
                 </span>
               )}
-              {product.originalPrice && (
+              {originalPrice && (
                 <span className="rounded-[8px] bg-emerald-100 px-2 py-1.5 text-xs font-semibold text-emerald-700">
-                  {formatPrice(product.originalPrice - product.price, currency)}
+                  {formatPrice(originalPrice - product.price, currency)}
                 </span>
               )}
             </div>
