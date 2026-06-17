@@ -7,7 +7,6 @@ import { Footer } from "@/shared/components/footer/footer";
 import { PromoBanner } from "@/features/home/components/promo-banner";
 import { HeroCarousel } from "@/features/home/components/hero-carousel/hero-carousel";
 import { Categories } from "@/features/home/components/categories/categories";
-import { DiscountBanners } from "@/features/home/components/discount-banners/discount-banners";
 import { ProductSections } from "@/features/home/components/product-sections/product-sections";
 import { Stories } from "@/features/home/components/stories/stories";
 import type { IBanner } from "@/features/home/utils/banner.interface";

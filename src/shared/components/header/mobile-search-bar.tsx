@@ -26,7 +26,7 @@ export function MobileSearchBar({
     const data = new FormData(e.currentTarget);
     const q = String(data.get("q") ?? "").trim();
     if (!q) return;
-    router.push(`/${lang}/search?q=${encodeURIComponent(q)}`);
+    router.push(`/${lang}/demo/products?query=${encodeURIComponent(q)}`);
   };
 
   return (

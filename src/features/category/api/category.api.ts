@@ -16,11 +16,12 @@ export const categoryApi = {
     });
   },
 
-  getFilterOptions() {
+  getFilterOptions(params?: Record<string, string>) {
     return apiClient.get<IApiResponse<IApiFilterOptions>>(
       CATEGORY_ENDPOINTS.filterOptions,
       {
         skipAuth: true,
+        searchParams: params,
         next: { tags: [CATEGORY_FILTER_OPTIONS_CACHE_TAG] },
       },
     );

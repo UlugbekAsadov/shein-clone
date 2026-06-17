@@ -205,6 +205,20 @@ export function ProductsInfinite({
     });
   }, [sortSignature, rawSearchParams]);
 
+  const queryParam = rawSearchParams?.get("query") ?? "";
+  const prevQueryParamRef = useRef(queryParam);
+
+  useEffect(() => {
+    if (queryParam === prevQueryParamRef.current) return;
+    prevQueryParamRef.current = queryParam;
+    setBaseParams((prev) => {
+      const next = { ...prev };
+      if (queryParam) next.query = queryParam;
+      else delete next.query;
+      return next;
+    });
+  }, [queryParam]);
+
   const [initialFilters] = useState<IActiveFilters>(() =>
     parseFiltersFromUrl(new URLSearchParams(rawSearchParams?.toString() ?? "")),
   );

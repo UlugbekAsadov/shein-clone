@@ -6,6 +6,8 @@ interface IProps {
 }
 
 export function ProductMobileSimilar({ products }: IProps) {
+  if (!products.length) return null;
+
   return (
     <div className="mt-5">
       <ProductGrid

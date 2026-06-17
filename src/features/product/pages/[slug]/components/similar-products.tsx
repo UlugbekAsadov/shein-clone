@@ -8,6 +8,8 @@ interface IProps {
 }
 
 export function SimilarProducts({ products, countLabel }: IProps) {
+  if (!products.length) return null;
+
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-end justify-between">

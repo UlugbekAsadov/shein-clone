@@ -15,9 +15,10 @@ export const getCategories = cache(async (): Promise<ICategory[]> => {
 });
 
 export const getCategoryFilterOptions = cache(
-  async (): Promise<IApiFilterOptions | null> => {
+  async (query?: string): Promise<IApiFilterOptions | null> => {
     try {
-      const result = await categoryApi.getFilterOptions();
+      const params = query ? { query } : undefined;
+      const result = await categoryApi.getFilterOptions(params);
       return result.data ?? null;
     } catch (error) {
       if (error instanceof ApiError) return null;

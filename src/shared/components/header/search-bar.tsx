@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { searchHistory as initialSearchHistory } from "@/shared/mocks";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
@@ -25,10 +25,17 @@ export function SearchBar({
   visualSearchDict,
 }: IProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [open, setOpen] = useState(false);
   const [history, setHistory] = useState(initialSearchHistory);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(
+    () => searchParams?.get("query") ?? "",
+  );
+
+  useEffect(() => {
+    setSearchValue(searchParams?.get("query") ?? "");
+  }, [searchParams]);
 
   useEffect(() => {
     if (!open) return;
@@ -49,8 +56,10 @@ export function SearchBar({
   };
 
   const goToSearch = (text: string) => {
+    const trimmed = text.trim();
+    if (!trimmed) return;
     setOpen(false);
-    router.push(`/${lang}/search?q=${encodeURIComponent(text)}`);
+    router.push(`/${lang}/demo/products?query=${encodeURIComponent(trimmed)}`);
   };
 
   return (
@@ -84,11 +93,13 @@ export function SearchBar({
             onChange={(e) => setSearchValue(e.target.value)}
             placeholder={placeholder}
             onFocus={() => setOpen(true)}
+            onKeyDown={(e) => e.key === "Enter" && goToSearch(searchValue)}
             className="flex-1 bg-transparent pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
           />
           {searchValue.length ? (
             <button
               type="button"
+              onClick={() => goToSearch(searchValue)}
               className="rounded-sm cursor-pointer bg-foreground px-3 h-9.5 text-sm font-semibold text-background hover:bg-foreground/90"
             >
               {searchLabel}

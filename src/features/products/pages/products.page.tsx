@@ -44,7 +44,7 @@ function mapProduct(p: IApiProductsProduct): IProduct {
 export async function ProductsPage({ lang, dict, params }: IProps) {
   const [data, filterOptions] = await Promise.all([
     getProducts(params),
-    getCategoryFilterOptions(),
+    getCategoryFilterOptions(params.query),
   ]);
 
   const initialProducts = data ? data.data.map(mapProduct) : [];
