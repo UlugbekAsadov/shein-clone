@@ -32,8 +32,13 @@ export function FilterCategoryTree({ nodes, selectedIds, onChange }: IProps) {
         const isOpen = expanded[node.id];
         const isSelected = selectedIds.includes(node.id);
         return (
-          <li key={node.id} className="text-xs">
-            <div className="flex w-full items-center gap-1 py-1.5">
+          <li key={node.id} className="text-xs cursor-pointer">
+            <div
+              className={cn(
+                "flex w-full items-center gap-1 py-1.5 hover:bg-secondary p-1.5 rounded-[8px]",
+                isSelected && "bg-secondary"
+              )}
+            >
               {hasChildren ? (
                 <button
                   type="button"
@@ -54,7 +59,7 @@ export function FilterCategoryTree({ nodes, selectedIds, onChange }: IProps) {
                 type="button"
                 onClick={() => toggleSelection(node.id)}
                 className={cn(
-                  "flex flex-1 items-center justify-between text-left",
+                  "flex flex-1 items-center justify-between text-left  cursor-pointer",
                   isSelected
                     ? "text-primary font-semibold"
                     : "text-foreground font-medium",
@@ -71,12 +76,12 @@ export function FilterCategoryTree({ nodes, selectedIds, onChange }: IProps) {
                 {node.children.map((child) => {
                   const isChildSelected = selectedIds.includes(child.id);
                   return (
-                    <li key={child.id}>
+                    <li key={child.id} className="pr-1.5">
                       <button
                         type="button"
                         onClick={() => toggleSelection(child.id)}
                         className={cn(
-                          "flex w-full items-center justify-between py-1.5 text-left hover:text-foreground",
+                          "flex w-full items-center justify-between py-1.5 text-left hover:text-foreground cursor-pointer",
                           isChildSelected
                             ? "text-primary font-semibold"
                             : "text-muted-foreground",
