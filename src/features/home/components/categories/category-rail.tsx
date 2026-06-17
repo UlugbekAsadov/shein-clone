@@ -21,7 +21,7 @@ export function CategoryRail({ lang, items }: IProps) {
         className="flex gap-4 overflow-x-auto p-2 [&::-webkit-scrollbar]:hidden"
       >
         {items.map((item) => (
-          <CategoryCard key={item.id} lang={lang} category={item} />
+          <CategoryCard key={item.slug} lang={lang} category={item} />
         ))}
       </div>
       <div

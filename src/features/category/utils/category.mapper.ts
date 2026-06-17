@@ -2,7 +2,7 @@ import type { ICategory as IApiCategory } from "@/features/category/utils/catego
 import type { ICategory } from "@/types/category.interface";
 
 export const mapApiCategory = (c: IApiCategory): ICategory => ({
-  id: String(c.id),
+  id: c.id != null ? String(c.id) : c.slug,
   name: c.title,
   slug: c.slug,
   image: c.image_url,
