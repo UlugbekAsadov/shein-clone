@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
 import { Icon } from "@solar-icons/react/lib/types";
 import { ProductGroupHeader } from "./product-group-header";
+import type { ISolidBg, ILinearGradientBg, IRadialGradientBg, IImageBg } from "@/features/home/utils/product-section.interface";
+import { getBgStyle, getBgPrimaryHex } from "@/features/home/utils/bg-color.utils";
 
 interface IProps {
   title: string;
@@ -12,7 +14,7 @@ interface IProps {
   viewAllLabel: string;
   products: IProduct[];
   viewAllHref: string;
-  bgColor?: string;
+  bgColor?: ISolidBg | ILinearGradientBg | IRadialGradientBg | IImageBg;
   Icon?: Icon | React.FC;
   bgImage?: string;
   textColor?: string;
@@ -46,20 +48,27 @@ export function ProductGroup({
   timerColor,
   type = "card",
 }: IProps) {
+  const primaryHex = bgColor ? getBgPrimaryHex(bgColor) : undefined;
   const resolvedTextColor =
-    textColor ?? (bgColor ? getContrastColor(bgColor) : undefined);
+    textColor ?? (primaryHex ? getContrastColor(primaryHex) : undefined);
   const resolvedDescriptionColor =
     descriptionColor ??
-    (resolvedTextColor && bgColor ? `${resolvedTextColor}b3` : undefined);
+    (resolvedTextColor && primaryHex
+      ? `${resolvedTextColor}b3`
+      : undefined);
+
+  const sectionBgStyle =
+    type === "card" && bgColor
+      ? getBgStyle(bgColor)
+      : bgImage
+        ? { backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+        : {};
 
   return (
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
       <div
         className={cn(`rounded-md md:rounded-xl`, "md:p-5")}
-        style={{
-          backgroundImage: bgImage ? `url(${bgImage})` : "unset",
-          backgroundColor: type === "card" && bgColor ? bgColor : undefined,
-        }}
+        style={sectionBgStyle}
       >
         <ProductGroupHeader
           title={

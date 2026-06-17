@@ -4,6 +4,30 @@ interface IApiSectionName {
   uz: string;
 }
 
+export interface ISolidBg {
+  type: "solid";
+  color: string;
+}
+
+export interface IRadialGradientBg {
+  type: "radialGradient";
+  center: { x: number; y: number };
+  radius: number;
+  colors: string[];
+}
+
+export interface ILinearGradientBg {
+  type: "linearGradient";
+  begin: { x: number; y: number };
+  end: { x: number; y: number };
+  colors: string[];
+}
+
+export interface IImageBg {
+  type: "image";
+  url: string;
+}
+
 export interface IAutoFilter {
   limit?: number;
   sort_by?: string;
@@ -28,7 +52,7 @@ interface IApiSection {
   description: string;
   icon: string;
   cover_image: string | null;
-  bg_color: string;
+  bg_color: string | ISolidBg | ILinearGradientBg | IRadialGradientBg | IImageBg;
   timer: { end_at: string; remaining_seconds: number } | null;
   sort_order: number;
   type: "list" | "card";

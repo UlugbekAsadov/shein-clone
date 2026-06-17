@@ -6,6 +6,10 @@ import type {
   IApiSectionProduct,
 } from "@/features/home/utils/product-section.interface";
 import { buildAutoFilterQuery } from "@/features/home/utils/auto-filter.utils";
+import {
+  parseBgColor,
+  getBgPrimaryHex,
+} from "@/features/home/utils/bg-color.utils";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import type { IProduct } from "@/types/product.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
@@ -74,6 +78,11 @@ export function ProductSections({
           ? new Date(section.timer.end_at).getTime()
           : undefined;
 
+        const parsedBg = section.bg_color
+          ? parseBgColor(section.bg_color)
+          : undefined;
+        const timerHex = parsedBg ? getBgPrimaryHex(parsedBg) : undefined;
+
         return (
           <Fragment key={section.id}>
             <ProductGroup
@@ -82,10 +91,10 @@ export function ProductSections({
               viewAllLabel={viewAllLabel}
               products={mappedProducts}
               viewAllHref={`/${lang}/demo/products${section.auto_filter ? buildAutoFilterQuery(section.auto_filter) : ""}`}
-              bgColor={section.bg_color}
+              bgColor={parsedBg}
               Icon={SectionIcon}
               timer={timer}
-              timerColor={section.bg_color || undefined}
+              timerColor={timerHex}
               type={section.type ?? "card"}
             />
             {shouldShowShops && (
