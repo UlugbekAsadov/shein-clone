@@ -15,6 +15,7 @@ import { ProductRatingStars } from "@/shared/components/product/product-preview/
 import { Button } from "@/shared/components/ui/button";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useProductVariant } from "@/features/product/pages/[slug]/providers/product-variant.provider";
 
 interface IProps {
   product: IProductDetail;
@@ -22,8 +23,8 @@ interface IProps {
 
 export function ProductInfoPanel({ product }: IProps) {
   const { currency } = useCurrency();
+  const { colorId, setColorId } = useProductVariant();
   const colors = getVariantColorSwatches(product.variant_clothes);
-  const [colorId, setColorId] = useState(colors[0]?.id ?? "");
   const sizes = getVariantSizes(product.variant_clothes, colorId);
   const [sizeId, setSizeId] = useState(
     sizes.find((s) => s.id === product.size_recommendation)?.id ??

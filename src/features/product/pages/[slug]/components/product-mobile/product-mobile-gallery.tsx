@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, Heart } from "@solar-icons/react";
@@ -18,6 +18,7 @@ export function ProductMobileGallery({ images, alt }: IProps) {
   const callbackUrl = searchParams.get("callbackUrl");
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start" });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const prevImagesRef = useRef(images);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -30,6 +31,15 @@ export function ProductMobileGallery({ images, alt }: IProps) {
       emblaApi.off("reInit", onSelect);
     };
   }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (prevImagesRef.current === images) return;
+    prevImagesRef.current = images;
+    emblaApi.reInit();
+    emblaApi.scrollTo(0, true);
+    setSelectedIndex(0);
+  }, [images, emblaApi]);
 
   return (
     <div className="relative">

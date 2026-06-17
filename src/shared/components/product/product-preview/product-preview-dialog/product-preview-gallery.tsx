@@ -17,7 +17,10 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
   const [zooming, setZooming] = useState(false);
   const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
   const mainImageRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [railHeight, setRailHeight] = useState<number>();
+  const prevImagesRef = useRef(images);
 
   useEffect(() => {
     const el = mainImageRef.current;
@@ -41,19 +44,43 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
     };
   }, [emblaApi]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (prevImagesRef.current === images) return;
+    prevImagesRef.current = images;
+    emblaApi.reInit();
+    emblaApi.scrollTo(0, true);
+    setImageIndex(0);
+  }, [images, emblaApi]);
+
+  useEffect(() => {
+    const rail = railRef.current;
+    const thumb = thumbRefs.current[imageIndex];
+    if (!rail || !thumb) return;
+    const thumbRect = thumb.getBoundingClientRect();
+    const railRect = rail.getBoundingClientRect();
+    const relativeTop = thumbRect.top - railRect.top + rail.scrollTop;
+    rail.scrollTo({
+      top: relativeTop - rail.clientHeight / 2 + thumb.clientHeight / 2,
+      behavior: "smooth",
+    });
+  }, [imageIndex]);
+
   const goPrev = () => emblaApi?.scrollPrev();
   const goNext = () => emblaApi?.scrollNext();
 
   return (
     <div className="flex items-start gap-3">
       <div
-        className="flex  flex-col gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden p-1"
+        ref={railRef}
+        className="flex flex-col gap-2 overflow-y-auto [&::-webkit-scrollbar]:hidden p-1"
         style={{ maxHeight: railHeight }}
       >
         {images.map((src, i) => (
           <button
             type="button"
             key={src}
+            ref={(el) => { thumbRefs.current[i] = el; }}
             onClick={() => emblaApi?.scrollTo(i)}
             className={cn(
               "relative aspect-3/4 cursor-pointer overflow-hidden rounded-[16px] min-w-[88px] min-h-[117px] ring-2 transition",

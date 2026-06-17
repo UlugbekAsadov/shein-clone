@@ -27,6 +27,7 @@ export interface IProductVariantSize {
 export interface IProductVariant {
   color: string;
   image_url: string;
+  additional_images: string[];
   sizes: IProductVariantSize[];
 }
 

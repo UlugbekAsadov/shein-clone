@@ -32,3 +32,13 @@ export function getVariantSizeDetail(
   const variant = variants.find((v) => v.color === color);
   return variant?.sizes.find((s) => s.size === size);
 }
+
+export function getVariantImages(
+  variants: IProductVariant[],
+  color: string,
+  fallback: string[],
+): string[] {
+  const variant = variants.find((v) => v.color === color);
+  if (!variant) return fallback;
+  return [variant.image_url, ...variant.additional_images];
+}
