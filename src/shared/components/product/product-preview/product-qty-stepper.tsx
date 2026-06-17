@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@/shared/components/icons/outline";
-import { MinusIcon } from "@/shims/lucide-react";
+import { MinusIcon } from "../../icons/outline/minus-icon";
 
 interface IProps {
   value: number;
@@ -19,7 +19,7 @@ export function ProductQtyStepper({ value, onChange }: IProps) {
           aria-label="Decrease quantity"
           className="grid size-11 cursor-pointer place-items-center rounded-md bg-secondary text-foreground transition hover:bg-muted"
         >
-          <MinusIcon className="size-4" weight="Outline" />
+          <MinusIcon className="size-4" />
         </button>
         <div className="grid h-11 min-w-12 place-items-center px-3 text-base font-semibold">
           {value}

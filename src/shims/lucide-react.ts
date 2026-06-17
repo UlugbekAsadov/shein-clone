@@ -86,7 +86,6 @@ export {
   MenuDots as Ellipsis,
   MenuDots as EllipsisIcon,
   MinusCircle as Minus,
-  MinusCircle as MinusIcon,
   Pause,
   Pause as PauseIcon,
   Pen as Pencil,
