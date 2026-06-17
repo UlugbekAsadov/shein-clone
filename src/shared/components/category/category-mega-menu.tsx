@@ -65,7 +65,7 @@ export function CategoryMegaMenu({
           {categories.map((c) => (
             <li key={c.slug}>
               <Link
-                href={`/${lang}/category/${c.slug}`}
+                href={`/${lang}/demo/products?category_ids=${c.id}`}
                 onMouseEnter={() => onActiveChange(c.slug)}
                 onFocus={() => onActiveChange(c.slug)}
                 className={cn(
@@ -86,7 +86,7 @@ export function CategoryMegaMenu({
             {activeCategory?.children?.map((item) => (
               <Link
                 key={item.slug}
-                href={`/${lang}/category/${item.slug}`}
+                href={`/${lang}/demo/products?category_ids=${item.id}`}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
                 <span className="relative size-20 rounded-full bg-muted overflow-hidden ring-3 ring-border">
@@ -113,7 +113,7 @@ export function CategoryMegaMenu({
             {categories.map((item) => (
               <Link
                 key={item.slug}
-                href={`/${lang}/category/${item.slug}`}
+                href={`/${lang}/demo/products?category_ids=${item.id}`}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
                 <span className="relative size-20 rounded-full bg-muted overflow-hidden ring-3 ring-border">

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
 import type { IProductVariant } from "@/features/product/pages/[slug]/utils/product-detail.interface";
 import { getVariantImages } from "@/features/product/pages/[slug]/utils/variant.mapper";
 
@@ -32,8 +33,14 @@ export function ProductVariantProvider({
   fallbackImages,
   children,
 }: IProps) {
+  const searchParams = useSearchParams();
+
   const firstColor = variants[0]?.color ?? "";
-  const [colorId, setColorId] = useState(firstColor);
+  const validColors = new Set(variants.map((v) => v.color));
+  const urlColor = searchParams.get("color") ?? "";
+  const [colorId, setColorId] = useState(
+    validColors.has(urlColor) ? urlColor : firstColor,
+  );
 
   const galleryImages = getVariantImages(variants, colorId, fallbackImages);
 

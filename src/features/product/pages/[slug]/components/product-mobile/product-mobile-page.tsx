@@ -1,7 +1,8 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useState, useCallback } from "react";
 import type {
   IProductDetail,
   IProductHighlight,
@@ -56,26 +57,50 @@ export function ProductMobilePage({
   followingLabel,
 }: IProps) {
   const { lang } = useParams<{ lang: string }>();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const colors = getVariantColorSwatches(product.variant_clothes);
-  const [colorId, setColorId] = useState(colors[0]?.id ?? "");
+  const validColors = new Set(colors.map((c) => c.id));
+  const urlColor = searchParams.get("color") ?? "";
+  const [colorId, setColorId] = useState(
+    validColors.has(urlColor) ? urlColor : (colors[0]?.id ?? ""),
+  );
+
   const sizes = getVariantSizes(product.variant_clothes, colorId);
-  const [sizeId, setSizeId] = useState(
-    sizes.find((s) => s.id === product.size_recommendation)?.id ??
-      sizes[0]?.id ??
-      "",
+  const urlSize = searchParams.get("size") ?? "";
+  const [sizeId, setSizeIdState] = useState(
+    sizes.some((s) => s.id === urlSize)
+      ? urlSize
+      : (sizes.find((s) => s.id === product.size_recommendation)?.id ?? sizes[0]?.id ?? ""),
   );
 
   const commentsHref = `/${lang}/product/${product.slug}/comments`;
 
   function handleColorChange(nextColor: string) {
-    setColorId(nextColor);
     const nextSizes = getVariantSizes(product.variant_clothes, nextColor);
-    setSizeId(
+    const nextSize =
       nextSizes.find((s) => s.id === product.size_recommendation)?.id ??
-        nextSizes[0]?.id ??
-        "",
-    );
+      nextSizes[0]?.id ??
+      "";
+    setColorId(nextColor);
+    setSizeIdState(nextSize);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("color", nextColor);
+    params.set("size", nextSize);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
+  const handleSizeChange = useCallback(
+    (size: string) => {
+      setSizeIdState(size);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("size", size);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [pathname, router, searchParams],
+  );
 
   const mobileGalleryImages = getVariantImages(
     product.variant_clothes,
@@ -118,7 +143,7 @@ export function ProductMobilePage({
             sizes={sizes}
             value={sizeId}
             recommended={product.size_recommendation}
-            onChange={setSizeId}
+            onChange={handleSizeChange}
           />
         )}
 

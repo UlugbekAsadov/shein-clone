@@ -3,7 +3,6 @@ import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
-import { trendingProducts, womensFashion } from "@/shared/mocks";
 import { ProductBreadcrumb } from "@/features/product/pages/[slug]/components/product-breadcrumb";
 import { ProductStickyBar } from "@/features/product/pages/[slug]/components/product-sticky-bar";
 import { ProductInfoPanel } from "@/features/product/pages/[slug]/components/product-info/product-info-panel";
@@ -12,10 +11,15 @@ import { ProductSellerCard } from "@/features/product/pages/[slug]/components/pr
 import { ProductSellerFallback } from "@/features/product/pages/[slug]/components/product-info/product-seller-fallback";
 import { ProductReviewsSection } from "@/features/product/pages/[slug]/components/product-reviews/product-reviews-section";
 import { SimilarProducts } from "@/features/product/pages/[slug]/components/similar-products";
+import { RecommendedProducts } from "@/features/product/pages/[slug]/components/recommended-products";
 import { ProductMobilePage } from "@/features/product/pages/[slug]/components/product-mobile/product-mobile-page";
 import { ProductVariantProvider } from "@/features/product/pages/[slug]/providers/product-variant.provider";
 import { ProductGalleryPanel } from "@/features/product/pages/[slug]/components/product-gallery-panel";
-import { getProductDetail } from "@/features/product/services/products-detail.service";
+import {
+  getProductDetail,
+  getSimilarProducts,
+  getRecommendedProducts,
+} from "@/features/product/services/products-detail.service";
 import { getShopById } from "@/features/shop/services/shop.service";
 import type {
   IProductComment,
@@ -71,7 +75,12 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
   const product = await getProductDetail(slug);
   if (!product) notFound();
 
-  const shop = product.shop_id ? await getShopById(product.shop_id) : null;
+  const [shop, similarProducts, recommendedProducts] = await Promise.all([
+    product.shop_id ? getShopById(product.shop_id) : Promise.resolve(null),
+    getSimilarProducts(product.id),
+    getRecommendedProducts(product.id),
+  ]);
+
   const sellerFallbackHighlight = product.highlights.find((h) =>
     h.title.startsWith("Sold by"),
   );
@@ -79,7 +88,6 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
   const fallbackImages = [product.image_url, ...product.additional_images];
   const reviews = product.latest_comments.map(mapCommentToReview);
   const fitStats = mapFitStats(product.fit_stats);
-  const similar = [...trendingProducts, ...womensFashion].slice(0, 10);
 
   const breadcrumbItems = [
     { id: "home", label: dict.breadcrumb.home, href: `/${lang}` },
@@ -95,7 +103,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
         fitStats={fitStats}
         reviewMedia={product.review_images_gallery}
         reviews={reviews}
-        similar={similar.slice(0, 4)}
+        similar={similarProducts.slice(0, 4)}
         followLabel={dict.shop.follow}
         followingLabel={dict.shop.following}
       />
@@ -149,7 +157,11 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
               </div>
             </ProductVariantProvider>
 
-            <SimilarProducts products={similar} countLabel="3300+ products" />
+            <SimilarProducts products={similarProducts} countLabel={`${similarProducts.length}+ products`} />
+
+            {recommendedProducts.length > 0 && (
+              <RecommendedProducts products={recommendedProducts} countLabel={`${recommendedProducts.length}+ products`} />
+            )}
           </div>
         </main>
 

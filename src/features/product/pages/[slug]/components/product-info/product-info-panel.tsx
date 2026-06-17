@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
 import {
   getVariantColorSwatches,
@@ -24,34 +25,50 @@ interface IProps {
 export function ProductInfoPanel({ product }: IProps) {
   const { currency } = useCurrency();
   const { colorId, setColorId } = useProductVariant();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const colors = getVariantColorSwatches(product.variant_clothes);
   const sizes = getVariantSizes(product.variant_clothes, colorId);
-  const [sizeId, setSizeId] = useState(
-    sizes.find((s) => s.id === product.size_recommendation)?.id ??
-      sizes[0]?.id ??
-      "",
+
+  const urlSize = searchParams.get("size") ?? "";
+  const [sizeId, setSizeIdState] = useState(
+    sizes.some((s) => s.id === urlSize)
+      ? urlSize
+      : (sizes.find((s) => s.id === product.size_recommendation)?.id ?? sizes[0]?.id ?? ""),
   );
   const [qty, setQty] = useState(1);
 
-  const sizeDetail = getVariantSizeDetail(
-    product.variant_clothes,
-    colorId,
-    sizeId,
-  );
+  const sizeDetail = getVariantSizeDetail(product.variant_clothes, colorId, sizeId);
   const price = sizeDetail?.price ?? product.price;
   const discount = sizeDetail?.discount ?? product.discount;
   const discountType = sizeDetail?.discount_type ?? product.discount_type;
   const originalPrice = getOriginalPrice(price, discount, discountType);
 
   function handleColorChange(nextColor: string) {
-    setColorId(nextColor);
     const nextSizes = getVariantSizes(product.variant_clothes, nextColor);
-    setSizeId(
+    const nextSize =
       nextSizes.find((s) => s.id === product.size_recommendation)?.id ??
-        nextSizes[0]?.id ??
-        "",
-    );
+      nextSizes[0]?.id ??
+      "";
+    setColorId(nextColor);
+    setSizeIdState(nextSize);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("color", nextColor);
+    params.set("size", nextSize);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
+
+  const handleSizeChange = useCallback(
+    (size: string) => {
+      setSizeIdState(size);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("size", size);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [pathname, router, searchParams],
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -99,7 +116,7 @@ export function ProductInfoPanel({ product }: IProps) {
           sizes={sizes}
           value={sizeId}
           recommended={product.size_recommendation}
-          onChange={setSizeId}
+          onChange={handleSizeChange}
         />
       )}
 

@@ -66,7 +66,7 @@ export function CategoryNav({
           {categories.map((c) => (
             <Link
               key={c.slug}
-              href={`/${lang}/category/${c.slug}`}
+              href={`/${lang}/demo/products?category_ids=${c.id}`}
               onMouseEnter={() => {
                 setOpen(true);
                 setActiveSlug(c.slug);

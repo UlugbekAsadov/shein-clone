@@ -12,7 +12,7 @@ interface IProps {
 export function CategoryCard({ lang, category }: IProps) {
   return (
     <Link
-      href={`/${lang}/category/${category.slug}`}
+      href={`/${lang}/demo/products?category_ids=${category.id}`}
       className="group relative flex w-15 shrink-0 cursor-pointer flex-col items-center gap-2.5 text-center md:w-30"
     >
       <span
