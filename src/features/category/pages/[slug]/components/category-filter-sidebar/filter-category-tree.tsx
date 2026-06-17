@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AltArrowDown } from "@solar-icons/react";
 import type { IApiFilterCategoryNode } from "@/types/filter-options.interface";
@@ -12,7 +12,27 @@ interface IProps {
 }
 
 export function FilterCategoryTree({ nodes, selectedIds, onChange }: IProps) {
-  const [expanded, setExpanded] = useState<Record<number, boolean>>({});
+  const [expanded, setExpanded] = useState<Record<number, boolean>>(() => {
+    const initial: Record<number, boolean> = {};
+    nodes.forEach((node) => {
+      if (node.children?.some((child) => selectedIds.includes(child.id))) {
+        initial[node.id] = true;
+      }
+    });
+    return initial;
+  });
+
+  useEffect(() => {
+    setExpanded((prev) => {
+      const next = { ...prev };
+      nodes.forEach((node) => {
+        if (node.children?.some((child) => selectedIds.includes(child.id))) {
+          next[node.id] = true;
+        }
+      });
+      return next;
+    });
+  }, [selectedIds, nodes]);
 
   const toggleExpand = (id: number) =>
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));

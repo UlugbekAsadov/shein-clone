@@ -25,14 +25,11 @@ export function FilterSection({
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between text-left"
+        className="flex w-full items-center justify-between text-left cursor-pointer"
       >
         <span className="font-bold">{title}</span>
         <AltArrowUp
-          className={cn(
-            "size-5 transition-transform",
-            !open && "rotate-180",
-          )}
+          className={cn("size-5 transition-transform", !open && "rotate-180")}
         />
       </button>
       {open && <div className="pt-4">{children}</div>}
