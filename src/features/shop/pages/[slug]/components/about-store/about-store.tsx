@@ -12,11 +12,12 @@ interface IProps {
   shop: IShopDetail;
   about: IAboutContent;
   dict: IDictionary;
+  lang: string;
 }
 
 const EMPTY_SHOPS: IApiFeaturedShop[] = [];
 
-export function AboutStore({ shop, about, dict }: IProps) {
+export function AboutStore({ shop, about, dict, lang }: IProps) {
   return (
     <>
       <div className="mx-auto max-w-360 space-y-6 px-6 [&_.feature-item]:p-0">
@@ -46,6 +47,7 @@ export function AboutStore({ shop, about, dict }: IProps) {
         followLabel={dict.shop.follow}
         followingLabel={dict.shop.following}
         shops={EMPTY_SHOPS}
+        lang={lang}
       />
     </>
   );

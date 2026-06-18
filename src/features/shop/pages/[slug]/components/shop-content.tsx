@@ -18,9 +18,10 @@ interface IProps {
   coupons: ICoupon[];
   about: IAboutContent;
   dict: IDictionary;
+  lang: string;
 }
 
-export function ShopContent({ shop, products, coupons, about, dict }: IProps) {
+export function ShopContent({ shop, products, coupons, about, dict, lang }: IProps) {
   const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
 
   return (
@@ -41,7 +42,7 @@ export function ShopContent({ shop, products, coupons, about, dict }: IProps) {
         <DealsOffersPanel coupons={coupons} products={products} dict={dict} />
       )}
       {active === "about" && (
-        <AboutStorePanel shop={shop} about={about} dict={dict} />
+        <AboutStorePanel shop={shop} about={about} dict={dict} lang={lang} />
       )}
     </div>
   );

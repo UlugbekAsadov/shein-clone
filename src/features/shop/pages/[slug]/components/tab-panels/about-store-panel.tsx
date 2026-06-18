@@ -7,8 +7,9 @@ interface IProps {
   shop: IShopDetail;
   about: IAboutContent;
   dict: IDictionary;
+  lang: string;
 }
 
-export function AboutStorePanel({ shop, about, dict }: IProps) {
-  return <AboutStore shop={shop} about={about} dict={dict} />;
+export function AboutStorePanel({ shop, about, dict, lang }: IProps) {
+  return <AboutStore shop={shop} about={about} dict={dict} lang={lang} />;
 }

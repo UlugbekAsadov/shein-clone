@@ -48,7 +48,7 @@ export function ProductMobileShopCard({
             <VerifiedCheck className="size-3.5 shrink-0 fill-sky-500 text-white" />
           )}
         </div>
-        <p className="text-xs text-muted-foreground">{shop.location}</p>
+        <p className="text-xs text-muted-foreground">{shop.location.name}</p>
       </Link>
 
       <Button

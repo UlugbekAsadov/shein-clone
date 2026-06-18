@@ -72,6 +72,7 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
             coupons={coupons}
             about={about}
             dict={dict}
+            lang={lang}
           />
         </div>
       </main>
