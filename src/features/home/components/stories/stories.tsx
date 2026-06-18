@@ -3,8 +3,9 @@ import { StoriesList } from "./stories-list";
 
 export async function Stories() {
   const shops = await getShopStories();
+  const activeShops = shops.filter((shop) => shop.has_active_stories);
 
-  if (shops.length === 0) return null;
+  if (activeShops.length === 0) return null;
 
-  return <StoriesList shops={shops} />;
+  return <StoriesList shops={activeShops} />;
 }
