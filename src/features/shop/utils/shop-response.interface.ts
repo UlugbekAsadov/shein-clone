@@ -26,3 +26,23 @@ export interface IApiShop {
 export interface IApiShopByIdData {
   shop: IApiShop;
 }
+
+export interface IApiShopAboutLocationShipping {
+  store_location: string;
+  shipping_origin: string;
+  seller_type: string;
+}
+
+export interface IApiShopAboutTrustVerification {
+  verified_seller: boolean;
+  positive_feedback: string;
+  response_time: string;
+  member_since: string;
+}
+
+export interface IApiShopAbout {
+  description: string;
+  location_shipping: IApiShopAboutLocationShipping;
+  trust_verification: IApiShopAboutTrustVerification;
+  guarantees: unknown[];
+}

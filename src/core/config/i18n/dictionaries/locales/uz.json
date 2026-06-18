@@ -190,7 +190,21 @@
       "aboutTitle": "Do'kon haqida",
       "brandsWeCarry": "Biz sotadigan brendlar",
       "similarStores": "Shunga o'xshash do'konlar",
-      "verifiedSellersRealProducts": "Tasdiqlangan sotuvchilar, haqiqiy mahsulotlar"
+      "verifiedSellersRealProducts": "Tasdiqlangan sotuvchilar, haqiqiy mahsulotlar",
+      "locationAndShipping": "Joylashuv va yetkazib berish",
+      "trustAndVerification": "Ishonch va tasdiqlash",
+      "storeLocationLabel": "Do'kon joylashuvi",
+      "shippingOriginLabel": "Yetkazib berish manzili",
+      "sellerTypeLabel": "Sotuvchi turi",
+      "verifiedSeller": "Tasdiqlangan sotuvchi",
+      "notVerifiedSeller": "Tasdiqlanmagan",
+      "identityConfirmed": "Shaxs tasdiqlangan",
+      "positiveFeedbackLabel": "Ijobiy fikrlar",
+      "basedOnCustomerReviews": "Mijozlar sharhlariga asoslangan",
+      "responseTimeSuffix": "Javob vaqti",
+      "averageReplyTime": "O'rtacha javob vaqti",
+      "memberSincePrefix": "A'zo bo'lgan",
+      "establishedSeller": "Tajribali sotuvchi"
     }
   },
   "breadcrumb": {

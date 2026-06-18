@@ -190,7 +190,21 @@
       "aboutTitle": "About",
       "brandsWeCarry": "Brands We Carry",
       "similarStores": "Similar Stores You May Like",
-      "verifiedSellersRealProducts": "Verified sellers, real products"
+      "verifiedSellersRealProducts": "Verified sellers, real products",
+      "locationAndShipping": "Location & Shipping",
+      "trustAndVerification": "Trust & Verification",
+      "storeLocationLabel": "Store Location",
+      "shippingOriginLabel": "Shipping Origin",
+      "sellerTypeLabel": "Seller Type",
+      "verifiedSeller": "Verified Seller",
+      "notVerifiedSeller": "Not Verified",
+      "identityConfirmed": "Identity confirmed",
+      "positiveFeedbackLabel": "Positive Feedback",
+      "basedOnCustomerReviews": "Based on customer reviews",
+      "responseTimeSuffix": "Response Time",
+      "averageReplyTime": "Average reply time",
+      "memberSincePrefix": "Member since",
+      "establishedSeller": "Established seller"
     }
   },
   "breadcrumb": {

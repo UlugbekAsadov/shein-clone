@@ -10,9 +10,10 @@ import { shopAboutContent } from "@/features/shop/pages/[slug]/mocks/about-conte
 import { ShopProfile } from "@/features/shop/pages/[slug]/components/shop-profile/shop-profile";
 import { ShopContent } from "@/features/shop/pages/[slug]/components/shop-content";
 import { ShopMobilePage } from "@/features/shop/pages/[slug]/components/shop-mobile/shop-mobile-page";
-import { getShopHeader } from "@/features/shop/services/shop.service";
+import { getShopHeader, getShopAbout } from "@/features/shop/services/shop.service";
 import { getShopStories } from "@/features/shop/services/shop-stories.service";
 import { mapApiShopToDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.mapper";
+import { mapApiShopAboutToContent } from "@/features/shop/pages/[slug]/utils/about-content.mapper";
 import { ShopHighlights } from "@/features/shop/pages/[slug]/components/shop-highlights/shop-highlights";
 
 interface IProps {
@@ -25,7 +26,10 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
   const apiShop = await getShopHeader(slug);
   if (!apiShop) notFound();
 
-  const stories = await getShopStories(apiShop.id);
+  const [stories, apiAbout] = await Promise.all([
+    getShopStories(apiShop.id),
+    getShopAbout(apiShop.id),
+  ]);
   const activeStories = stories.filter((s) => s.is_active);
   const activeStoriesCount = activeStories.length;
   const viewedStoriesCount = activeStories.filter((s) => s.is_viewed).length;
@@ -33,7 +37,9 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
   const shop = mapApiShopToDetail(apiShop, lang, dict);
   const products = [...trendingProducts, ...womensFashion].slice(0, 16);
   const coupons = shopCoupons;
-  const about = shopAboutContent;
+  const about = apiAbout
+    ? mapApiShopAboutToContent(apiAbout, dict)
+    : shopAboutContent;
 
   return (
     <>

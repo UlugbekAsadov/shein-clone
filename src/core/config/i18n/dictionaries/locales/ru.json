@@ -188,7 +188,21 @@
       "aboutTitle": "О магазине",
       "brandsWeCarry": "Бренды, которые мы продаём",
       "similarStores": "Похожие магазины",
-      "verifiedSellersRealProducts": "Проверенные продавцы, настоящие товары"
+      "verifiedSellersRealProducts": "Проверенные продавцы, настоящие товары",
+      "locationAndShipping": "Местоположение и доставка",
+      "trustAndVerification": "Доверие и верификация",
+      "storeLocationLabel": "Местоположение магазина",
+      "shippingOriginLabel": "Откуда отправляется",
+      "sellerTypeLabel": "Тип продавца",
+      "verifiedSeller": "Проверенный продавец",
+      "notVerifiedSeller": "Не проверен",
+      "identityConfirmed": "Личность подтверждена",
+      "positiveFeedbackLabel": "Положительных отзывов",
+      "basedOnCustomerReviews": "По отзывам покупателей",
+      "responseTimeSuffix": "Время ответа",
+      "averageReplyTime": "Среднее время ответа",
+      "memberSincePrefix": "Участник с",
+      "establishedSeller": "Опытный продавец"
     }
   },
   "breadcrumb": {
