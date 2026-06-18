@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface IProps {
   products: IProduct[];
   className?: string;
-  variant?: "default" | "dark";
+  variant?: "default" | "dark" | "secondary";
 }
 
 export function ProductGrid({ products, className, variant }: IProps) {

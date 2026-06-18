@@ -17,11 +17,12 @@ import { Button } from "../ui/button";
 
 interface IProps {
   product: IProduct;
-  variant?: "default" | "dark";
+  variant?: "default" | "dark" | "secondary";
 }
 
 export function ProductCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
+  const isSecondary = variant === "secondary";
   const [previewOpen, setPreviewOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -43,11 +44,13 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         target="_blank"
         href={href}
         className={cn(
-          "group flex flex-col overflow-hidden rounded-[10px] ",
+          "group flex flex-col overflow-hidden rounded-[10px]",
           "md:p-1.5 md:rounded-lg",
           isDark
             ? "border-white/10 md:bg-secondary text-foreground"
-            : "border-border md:bg-card text-card-foreground",
+            : isSecondary
+              ? "border-border text-card-foreground bg-card md:bg-secondary"
+              : "border-border text-card-foreground bg-card",
         )}
       >
         <div
@@ -162,7 +165,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               "md:flex",
             )}
           >
-            <div className="bg-secondary px-2.5 py-2 flex items-center gap-1.5 rounded-[10px] h-9">
+            <div className={cn("px-2.5 py-2 flex items-center gap-1.5 rounded-[10px] h-9", isSecondary ? "bg-card" : "bg-secondary")}>
               {product.delivery && (
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   <TruckIconSolid className="size-5" fill="#898991" />

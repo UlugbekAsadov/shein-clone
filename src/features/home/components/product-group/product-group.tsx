@@ -5,8 +5,16 @@ import { cn } from "@/lib/utils";
 import { IProduct } from "@/types";
 import { Icon } from "@solar-icons/react/lib/types";
 import { ProductGroupHeader } from "./product-group-header";
-import type { ISolidBg, ILinearGradientBg, IRadialGradientBg, IImageBg } from "@/features/home/utils/product-section.interface";
-import { getBgStyle, getBgPrimaryHex } from "@/features/home/utils/bg-color.utils";
+import type {
+  ISolidBg,
+  ILinearGradientBg,
+  IRadialGradientBg,
+  IImageBg,
+} from "@/features/home/utils/product-section.interface";
+import {
+  getBgStyle,
+  getBgPrimaryHex,
+} from "@/features/home/utils/bg-color.utils";
 
 interface IProps {
   title: string;
@@ -53,15 +61,17 @@ export function ProductGroup({
     textColor ?? (primaryHex ? getContrastColor(primaryHex) : undefined);
   const resolvedDescriptionColor =
     descriptionColor ??
-    (resolvedTextColor && primaryHex
-      ? `${resolvedTextColor}b3`
-      : undefined);
+    (resolvedTextColor && primaryHex ? `${resolvedTextColor}b3` : undefined);
 
   const sectionBgStyle =
     type === "card" && bgColor
       ? getBgStyle(bgColor)
       : bgImage
-        ? { backgroundImage: `url(${bgImage})`, backgroundSize: "cover", backgroundPosition: "center" }
+        ? {
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }
         : {};
 
   return (
@@ -90,7 +100,7 @@ export function ProductGroup({
         />
 
         {type === "list" ? (
-          <ProductGrid products={products} />
+          <ProductGrid products={products} variant="secondary" />
         ) : (
           <>
             <div className="md:hidden">
