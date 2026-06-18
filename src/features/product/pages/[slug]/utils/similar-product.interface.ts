@@ -14,6 +14,33 @@ export interface ISimilarProductBadge {
   products_count: number;
 }
 
+export interface ISimilarProductAutoFilter {
+  limit: number;
+  sort_by: string;
+  sort_direction: string;
+  category_ids: number[];
+  brand_ids: number[];
+  badge_ids: number[];
+  season_ids: number[];
+  shop_ids: number[];
+  hashtag_ids: number[];
+  sizes: string[];
+  colors: string[];
+  materials: string[];
+  styles: string[];
+  min_price: number | null;
+  max_price: number | null;
+  has_discount: boolean;
+  is_original: boolean;
+  min_sold_count: number;
+  min_view_count: number;
+}
+
+export interface ISimilarProductsData {
+  auto_filter: ISimilarProductAutoFilter;
+  products: ISimilarProductItem[];
+}
+
 export interface ISimilarProductItem {
   id: number;
   slug: string;

@@ -75,11 +75,14 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
   const product = await getProductDetail(slug);
   if (!product) notFound();
 
-  const [shop, similarProducts, recommendedProducts] = await Promise.all([
+  const [shop, similarResult, recommendedResult] = await Promise.all([
     product.shop_id ? getShopById(product.shop_id) : Promise.resolve(null),
     getSimilarProducts(product.id),
     getRecommendedProducts(product.id),
   ]);
+
+  const similarProducts = similarResult.products;
+  const recommendedProducts = recommendedResult.products;
 
   const sellerFallbackHighlight = product.highlights.find((h) =>
     h.title.startsWith("Sold by"),
@@ -157,10 +160,20 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
               </div>
             </ProductVariantProvider>
 
-            <SimilarProducts products={similarProducts} countLabel={`${similarProducts.length}+ products`} />
+            <SimilarProducts
+              products={similarProducts}
+              countLabel={`${similarProducts.length}+ products`}
+              lang={lang}
+              autoFilter={similarResult.autoFilter}
+            />
 
             {recommendedProducts.length > 0 && (
-              <RecommendedProducts products={recommendedProducts} countLabel={`${recommendedProducts.length}+ products`} />
+              <RecommendedProducts
+                products={recommendedProducts}
+                countLabel={`${recommendedProducts.length}+ products`}
+                lang={lang}
+                autoFilter={recommendedResult.autoFilter}
+              />
             )}
           </div>
         </main>

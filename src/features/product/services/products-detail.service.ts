@@ -2,7 +2,13 @@ import { ApiError } from "@/core/api/api-error";
 import { productDetailApi } from "@/features/product/api/products-detail.api";
 import type { IProductDetail } from "@/features/product/pages/[slug]/utils/product-detail.interface";
 import { mapSimilarProductToProduct } from "@/features/product/pages/[slug]/utils/similar-product.mapper";
+import type { ISimilarProductAutoFilter } from "@/features/product/pages/[slug]/utils/similar-product.interface";
 import type { IProduct } from "@/types/product.interface";
+
+interface IProductListResult {
+  products: IProduct[];
+  autoFilter: ISimilarProductAutoFilter | null;
+}
 
 export async function getProductDetail(
   slug: string,
@@ -16,22 +22,32 @@ export async function getProductDetail(
   }
 }
 
-export async function getSimilarProducts(id: number): Promise<IProduct[]> {
+export async function getSimilarProducts(
+  id: number,
+): Promise<IProductListResult> {
   try {
     const result = await productDetailApi.getSimilarProducts(id);
-    return (result.data ?? []).map(mapSimilarProductToProduct);
+    return {
+      products: (result.data?.products ?? []).map(mapSimilarProductToProduct),
+      autoFilter: result.data?.auto_filter ?? null,
+    };
   } catch (error) {
-    if (error instanceof ApiError) return [];
+    if (error instanceof ApiError) return { products: [], autoFilter: null };
     throw error;
   }
 }
 
-export async function getRecommendedProducts(id: number): Promise<IProduct[]> {
+export async function getRecommendedProducts(
+  id: number,
+): Promise<IProductListResult> {
   try {
     const result = await productDetailApi.getRecommendedProducts(id);
-    return (result.data ?? []).map(mapSimilarProductToProduct);
+    return {
+      products: (result.data?.products ?? []).map(mapSimilarProductToProduct),
+      autoFilter: result.data?.auto_filter ?? null,
+    };
   } catch (error) {
-    if (error instanceof ApiError) return [];
+    if (error instanceof ApiError) return { products: [], autoFilter: null };
     throw error;
   }
 }

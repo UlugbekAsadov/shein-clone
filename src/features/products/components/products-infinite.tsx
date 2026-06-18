@@ -25,7 +25,11 @@ const FILTER_PARAM_KEYS = [
 
 function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
   const getIds = (key: string): number[] =>
-    params.get(key)?.split(",").map(Number).filter((n) => n > 0) ?? [];
+    params
+      .get(key)
+      ?.split(",")
+      .map(Number)
+      .filter((n) => n > 0) ?? [];
 
   return {
     categoryIds: getIds("category_ids"),
@@ -199,8 +203,10 @@ export function ProductsInfinite({
       const next = { ...prev };
       const sb = rawSearchParams?.get("sort_by");
       const sd = rawSearchParams?.get("sort_direction");
-      if (sb) next.sort_by = sb; else delete next.sort_by;
-      if (sd) next.sort_direction = sd; else delete next.sort_direction;
+      if (sb) next.sort_by = sb;
+      else delete next.sort_by;
+      if (sd) next.sort_direction = sd;
+      else delete next.sort_direction;
       return next;
     });
   }, [sortSignature, rawSearchParams]);
@@ -243,9 +249,11 @@ export function ProductsInfinite({
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    const key = makeCacheKey(mergeParamsWithFilters(baseParams, EMPTY_FILTERS), 1);
+    const key = makeCacheKey(
+      mergeParamsWithFilters(baseParams, EMPTY_FILTERS),
+      1,
+    );
     resultCache.set(key, { products: initialProducts, meta: initialMeta });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const hasMore = meta.current_page < meta.last_page;
