@@ -37,6 +37,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
             width={120}
             height={60}
             priority
+            style={{ height: "auto" }}
           />
         </Link>
 

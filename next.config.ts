@@ -28,11 +28,7 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     preloadEntriesOnStart: false,
-    optimizePackageImports: [
-      "@solar-icons/react",
-      "motion",
-      "radix-ui",
-    ],
+    optimizePackageImports: ["@solar-icons/react", "motion", "radix-ui"],
   },
 };
 
