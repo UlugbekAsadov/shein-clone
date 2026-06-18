@@ -22,7 +22,7 @@ export function ProductMobileShopCard({
 }: IProps) {
   const { lang } = useParams<{ lang: string }>();
   const [isFollowing, setIsFollowing] = useState(false);
-  const shopHref = `/${lang}/shop/${shop.username}`;
+  const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
   return (
     <div className="mt-5 flex items-center gap-3 rounded-[18px] bg-secondary p-3">

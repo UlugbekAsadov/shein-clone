@@ -114,7 +114,7 @@ export function FeaturedShops({
                   <div className="min-w-0">
                     <h3 className="flex items-center gap-1 text-base">
                       <Link
-                        href={`/${lang}/demo/shop/${shop.username}`}
+                        href={`/${lang}/demo/shop/${shop.id}`}
                         className="truncate text-sm font-bold hover:underline"
                       >
                         {shop.display_name}

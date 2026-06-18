@@ -41,7 +41,7 @@ export function FeaturedShopMobileCard({
 
       <h3 className="mt-3 flex items-center gap-1 text-base font-bold">
         <Link
-          href={`/${lang}/demo/shop/${shop.username}`}
+          href={`/${lang}/demo/shop/${shop.id}`}
           className="truncate hover:underline"
         >
           {shop.display_name}

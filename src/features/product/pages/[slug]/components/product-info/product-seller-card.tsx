@@ -15,7 +15,7 @@ interface IProps {
 
 export function ProductSellerCard({ shop }: IProps) {
   const { lang } = useParams<{ lang: string }>();
-  const shopHref = `/${lang}/shop/${shop.username}`;
+  const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
   const stats = [
     { id: "sold", label: "sold", value: String(shop.sales_count) },

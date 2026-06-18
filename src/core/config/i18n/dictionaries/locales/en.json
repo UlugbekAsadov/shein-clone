@@ -175,6 +175,9 @@
     "sels": "Sels",
     "followers": "Followers",
     "seller": "Seller",
+    "yearOne": "year",
+    "yearFew": "years",
+    "yearMany": "years",
     "response": "response",
     "coupons": {
       "label": "Coupon",

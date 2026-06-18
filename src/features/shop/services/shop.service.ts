@@ -11,3 +11,13 @@ export async function getShopById(id: number): Promise<IApiShop | null> {
     throw error;
   }
 }
+
+export async function getShopHeader(slug: string): Promise<IApiShop | null> {
+  try {
+    const result = await shopApi.getHeader(slug);
+    return result.data ?? null;
+  } catch (error) {
+    if (error instanceof ApiError) return null;
+    throw error;
+  }
+}

@@ -48,7 +48,7 @@ export function StoryCard({
   const { lang } = useParams<{ lang: string }>();
   const absDist = Math.abs(distance);
   const story = stories[storyIndex];
-  const shopHref = `/${lang}/shop/${shop.username}`;
+  const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
   function t(obj: IStoryText | null): string {
     if (!obj) return "";

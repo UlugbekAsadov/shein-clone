@@ -175,6 +175,9 @@
     "sels": "Sotuv",
     "followers": "Obunachilar",
     "seller": "Sotuvchi",
+    "yearOne": "yil",
+    "yearFew": "yil",
+    "yearMany": "yil",
     "response": "javob",
     "coupons": {
       "label": "Kupon",
