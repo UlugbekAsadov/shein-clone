@@ -67,7 +67,7 @@ export function ProductSellerCard({ shop }: IProps) {
                 <VerifiedCheck className="size-4 fill-blue-500 text-white" />
               )}
             </Link>
-            <p className="text-xs text-muted-foreground">{shop.location}</p>
+            <p className="text-xs text-muted-foreground">{shop.location.name}</p>
             <span className="flex items-center gap-1 text-xs mt-3">
               <Star className="size-4 fill-amber-400 text-amber-400" />
               <span className="font-semibold text-xs">
