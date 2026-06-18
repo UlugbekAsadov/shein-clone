@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
 import { ShopBadge } from "./shop-badge";
@@ -15,6 +16,7 @@ interface IProps {
   followLabel: string;
   followingLabel: string;
   shops: IApiFeaturedShop[];
+  lang: string;
 }
 
 export function FeaturedShops({
@@ -24,6 +26,7 @@ export function FeaturedShops({
   followLabel,
   followingLabel,
   shops,
+  lang,
 }: IProps) {
   if (shops.length === 0) return null;
 
@@ -57,6 +60,7 @@ export function FeaturedShops({
                 shop={shop}
                 followLabel={followLabel}
                 followingLabel={followingLabel}
+                lang={lang}
               />
             </div>
           ))}
@@ -109,9 +113,12 @@ export function FeaturedShops({
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <h3 className="flex items-center gap-1 text-base">
-                      <span className="truncate text-sm font-bold">
+                      <Link
+                        href={`/${lang}/demo/shop/${shop.username}`}
+                        className="truncate text-sm font-bold hover:underline"
+                      >
                         {shop.display_name}
-                      </span>
+                      </Link>
                       {shop.is_verified && (
                         <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
                       )}

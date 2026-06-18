@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { VerifiedCheck, Star } from "@solar-icons/react/ssr";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { XIcon } from "@/shared/components/icons/outline";
@@ -8,12 +9,14 @@ interface IProps {
   shop: IApiFeaturedShop;
   followLabel: string;
   followingLabel: string;
+  lang: string;
 }
 
 export function FeaturedShopMobileCard({
   shop,
   followLabel,
   followingLabel,
+  lang,
 }: IProps) {
   return (
     <article className="relative flex flex-col items-center rounded-[21px] border border-border bg-card p-4 pt-3">
@@ -37,7 +40,12 @@ export function FeaturedShopMobileCard({
       </div>
 
       <h3 className="mt-3 flex items-center gap-1 text-base font-bold">
-        <span className="truncate">{shop.display_name}</span>
+        <Link
+          href={`/${lang}/demo/shop/${shop.username}`}
+          className="truncate hover:underline"
+        >
+          {shop.display_name}
+        </Link>
         {shop.is_verified && (
           <VerifiedCheck className="size-4 shrink-0 fill-sky-500 text-white" weight="Outline" />
         )}

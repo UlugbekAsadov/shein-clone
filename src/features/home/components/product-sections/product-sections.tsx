@@ -105,6 +105,7 @@ export function ProductSections({
                 followLabel={followLabel}
                 followingLabel={followingLabel}
                 shops={safeShops}
+                lang={lang}
               />
             )}
           </Fragment>
