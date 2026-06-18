@@ -3,15 +3,19 @@ import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail
 import { ShopProfileStats } from "./shop-profile-stats";
 import { ShopFollowButton } from "./shop-follow-button";
 import { ShopProfileLocation } from "./shop-profile-location";
+import { ShopLogoStory } from "./shop-logo-story";
 import { Star, VerifiedCheck } from "@solar-icons/react/ssr";
 
 interface IProps {
   shop: IShopDetail;
+  shopId: number;
+  activeStoriesCount: number;
+  viewedStoriesCount: number;
   followLabel: string;
   followingLabel: string;
 }
 
-export function ShopProfile({ shop, followLabel, followingLabel }: IProps) {
+export function ShopProfile({ shop, shopId, activeStoriesCount, viewedStoriesCount, followLabel, followingLabel }: IProps) {
   return (
     <section className="overflow-hidden rounded-[24px] border border-border bg-card">
       <div className="relative h-56 w-full overflow-hidden bg-muted">
@@ -28,15 +32,12 @@ export function ShopProfile({ shop, followLabel, followingLabel }: IProps) {
 
       <div className="relative px-8 pb-6">
         <div className="relative -mt-12 flex items-end gap-5">
-          <div className="relative size-28 shrink-0 overflow-hidden rounded-full border-6 border-card bg-background">
-            <Image
-              src={shop.avatar}
-              alt={shop.name}
-              fill
-              sizes="96px"
-              className="object-cover"
-            />
-          </div>
+          <ShopLogoStory
+            shop={shop}
+            shopId={shopId}
+            activeCount={activeStoriesCount}
+            viewedCount={viewedStoriesCount}
+          />
         </div>
 
         <div className="mt-3 flex flex-wrap items-start justify-between gap-4">

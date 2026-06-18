@@ -15,33 +15,33 @@ interface IProps {
   total: number;
   viewedCount: number;
   className?: string;
+  strokeWidth?: number;
 }
 
 const CENTER = STORY_RING_VIEWBOX / 2;
-const RADIUS = CENTER - STORY_RING_STROKE / 2;
-
 const round = (n: number) => Math.round(n * 1000) / 1000;
 
-function polarToCartesian(angleDeg: number) {
+function polarToCartesian(angleDeg: number, radius: number) {
   const a = ((angleDeg - 90) * Math.PI) / 180;
   return {
-    x: round(CENTER + RADIUS * Math.cos(a)),
-    y: round(CENTER + RADIUS * Math.sin(a)),
+    x: round(CENTER + radius * Math.cos(a)),
+    y: round(CENTER + radius * Math.sin(a)),
   };
 }
 
-function arcPath(startAngle: number, endAngle: number) {
-  const start = polarToCartesian(startAngle);
-  const end = polarToCartesian(endAngle);
+function arcPath(startAngle: number, endAngle: number, radius: number) {
+  const start = polarToCartesian(startAngle, radius);
+  const end = polarToCartesian(endAngle, radius);
   const largeArc = endAngle - startAngle > 180 ? 1 : 0;
-  return `M ${start.x} ${start.y} A ${RADIUS} ${RADIUS} 0 ${largeArc} 1 ${end.x} ${end.y}`;
+  return `M ${start.x} ${start.y} A ${radius} ${radius} 0 ${largeArc} 1 ${end.x} ${end.y}`;
 }
 
-export function StoryRing({ total, viewedCount, className }: IProps) {
+export function StoryRing({ total, viewedCount, className, strokeWidth = STORY_RING_STROKE }: IProps) {
   const gradientId = useId();
   const safeTotal = Math.max(1, total);
   const allViewed = viewedCount >= safeTotal;
   const activeStroke = `url(#${gradientId})`;
+  const radius = CENTER - strokeWidth / 2;
 
   return (
     <svg
@@ -60,10 +60,10 @@ export function StoryRing({ total, viewedCount, className }: IProps) {
         <circle
           cx={CENTER}
           cy={CENTER}
-          r={RADIUS}
+          r={radius}
           fill="none"
           stroke={allViewed ? STORY_RING_VIEWED_COLOR : activeStroke}
-          strokeWidth={STORY_RING_STROKE}
+          strokeWidth={strokeWidth}
         />
       ) : (
         Array.from({ length: safeTotal }, (_, i) => {
@@ -73,10 +73,10 @@ export function StoryRing({ total, viewedCount, className }: IProps) {
           return (
             <path
               key={i}
-              d={arcPath(start, end)}
+              d={arcPath(start, end, radius)}
               fill="none"
               stroke={viewed ? STORY_RING_VIEWED_COLOR : activeStroke}
-              strokeWidth={STORY_RING_STROKE}
+              strokeWidth={strokeWidth}
               strokeLinecap="round"
             />
           );
