@@ -69,7 +69,7 @@ export function CategoryMegaMenu({
                 onMouseEnter={() => onActiveChange(c.slug)}
                 onFocus={() => onActiveChange(c.slug)}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-sm px-4 py-3 text-left font-medium hover:bg-[#0201061A] cursor-pointer",
+                  "flex w-full items-center justify-between rounded-sm px-5 py-4 text-left font-medium hover:bg-[#0201061A] cursor-pointer",
                   activeSlug === c.slug && "bg-[#0201061A]",
                 )}
               >
