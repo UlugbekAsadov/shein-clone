@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IApiShop, IApiShopAbout, IApiShopPromoCode, IApiShopProduct } from "@/features/shop/utils/shop-response.interface";
 import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
@@ -31,7 +32,26 @@ export function ShopMobilePage({
   about,
   dict,
 }: IProps) {
-  const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const rawTab = searchParams?.get("tab");
+  const initialTab = (SHOP_TAB_IDS as readonly string[]).includes(rawTab ?? "")
+    ? (rawTab as (typeof SHOP_TAB_IDS)[number])
+    : "all";
+
+  const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>(initialTab);
+
+  const handleTabChange = useCallback(
+    (tab: (typeof SHOP_TAB_IDS)[number]) => {
+      setActive(tab);
+      const params = new URLSearchParams(searchParams?.toString() ?? "");
+      params.set("tab", tab);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [router, pathname, searchParams],
+  );
 
   return (
     <div className="pb-6 md:hidden">
@@ -54,7 +74,7 @@ export function ShopMobilePage({
         <div className="px-4">
           <ShopTabs
             active={active}
-            onChange={setActive}
+            onChange={handleTabChange}
             allProductsLabel={dict.shop.tabs.allProducts}
             dealsOffersLabel={dict.shop.tabs.dealsOffers}
             aboutStoreLabel={dict.shop.tabs.aboutStore}

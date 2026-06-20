@@ -69,17 +69,19 @@ export function ListingShell({
         dict={dict.filter}
       />
 
-      <div className={cn("hidden", "md:block")}>
-        {header}
-        {/* <div className="mt-4">
+      {header && (
+        <div className={cn("hidden md:mb-6", "md:block")}>
+          {header}
+          {/* <div className="mt-4">
           <ListingTabs
-            similarLabel={dict.tabs.similar}
-            dealsLabel={dict.tabs.deals}
+          similarLabel={dict.tabs.similar}
+          dealsLabel={dict.tabs.deals}
           />
-        </div> */}
-      </div>
+          </div> */}
+        </div>
+      )}
 
-      <div className="md:mt-6 md:flex md:gap-8">
+      <div className="md:flex md:gap-8">
         {filterSidebarSlot ?? (
           <FilterSidebar
             dict={dict.filter}

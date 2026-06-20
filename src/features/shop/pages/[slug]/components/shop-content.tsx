@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type {
   IApiShop,
@@ -39,14 +40,33 @@ export function ShopContent({
   dict,
   lang,
 }: IProps) {
-  const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const rawTab = searchParams?.get("tab");
+  const initialTab = (SHOP_TAB_IDS as readonly string[]).includes(rawTab ?? "")
+    ? (rawTab as (typeof SHOP_TAB_IDS)[number])
+    : "all";
+
+  const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>(initialTab);
+
+  const handleTabChange = useCallback(
+    (tab: (typeof SHOP_TAB_IDS)[number]) => {
+      setActive(tab);
+      const params = new URLSearchParams(searchParams?.toString() ?? "");
+      params.set("tab", tab);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    },
+    [router, pathname, searchParams],
+  );
 
   return (
     <div className="space-y-6">
       <div className="mx-auto max-w-360 px-6 border-b border-border pb-4">
         <ShopTabs
           active={active}
-          onChange={setActive}
+          onChange={handleTabChange}
           allProductsLabel={dict.shop.tabs.allProducts}
           dealsOffersLabel={dict.shop.tabs.dealsOffers}
           aboutStoreLabel={dict.shop.tabs.aboutStore}
