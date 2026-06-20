@@ -13,6 +13,7 @@ import {
   getShopFilterOptions,
 } from "@/features/shop/services/shop.service";
 import { getShopStories } from "@/features/shop/services/shop-stories.service";
+import { getShopHighlights } from "@/features/shop/services/shop-highlight.service";
 import { ShopHighlights } from "@/features/shop/pages/[slug]/components/shop-highlights/shop-highlights";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
@@ -26,13 +27,14 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
   const apiShop = await getShopHeader(slug);
   if (!apiShop) notFound();
 
-  const [stories, apiAbout, apiPromoCodes, apiProducts, apiFilterOptions] =
+  const [stories, apiAbout, apiPromoCodes, apiProducts, apiFilterOptions, apiHighlights] =
     await Promise.all([
       getShopStories(apiShop.id),
       getShopAbout(apiShop.id),
       getShopPromoCodes(apiShop.id),
       getShopProducts(apiShop.id),
       getShopFilterOptions(apiShop.id),
+      getShopHighlights(apiShop.id),
     ]);
   const activeStories = stories.filter((s) => s.is_active);
   const activeStoriesCount = activeStories.length;
@@ -40,6 +42,7 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
 
   const products = apiProducts?.data ?? [];
   const initialMeta = apiProducts?.meta ?? { total: 0, current_page: 1, last_page: 0, per_page: 10 };
+  const activeHighlights = apiHighlights.filter((h) => h.is_active);
 
   return (
     <>
@@ -51,9 +54,12 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
           products={products}
           coupons={apiPromoCodes}
           about={apiAbout}
+          highlights={activeHighlights}
           dict={dict}
           shopId={apiShop.id}
           lang={lang}
+          activeStoriesCount={activeStoriesCount}
+          viewedStoriesCount={viewedStoriesCount}
         />
 
         <div className="hidden space-y-6 py-6 md:block">

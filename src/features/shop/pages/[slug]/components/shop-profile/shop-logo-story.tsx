@@ -13,9 +13,10 @@ interface IProps {
   shop: IApiShop;
   activeCount: number;
   viewedCount: number;
+  className?: string;
 }
 
-export function ShopLogoStory({ shop, activeCount, viewedCount }: IProps) {
+export function ShopLogoStory({ shop, activeCount, viewedCount, className }: IProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -47,8 +48,9 @@ export function ShopLogoStory({ shop, activeCount, viewedCount }: IProps) {
         type="button"
         onClick={() => hasStories && setOpen(true)}
         className={cn(
-          "relative size-32 shrink-0 bg-white rounded-full p-1",
+          "relative size-32 shrink-0 bg-white rounded-full p-0.5",
           hasStories ? "cursor-pointer" : "cursor-default",
+          className,
         )}
       >
         {hasStories && (
@@ -62,7 +64,7 @@ export function ShopLogoStory({ shop, activeCount, viewedCount }: IProps) {
           className={cn(
             "absolute overflow-hidden rounded-full bg-background z-10",
             hasStories
-              ? "inset-3 ring-2 ring-card"
+              ? "inset-2 ring-2 ring-card"
               : "inset-0 border-6 border-card",
           )}
         >

@@ -3,7 +3,14 @@
 import { useCallback, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IApiShop, IApiShopAbout, IApiShopPromoCode, IApiShopProduct } from "@/features/shop/utils/shop-response.interface";
+import type {
+  IApiShop,
+  IApiShopAbout,
+  IApiShopPromoCode,
+  IApiShopProduct,
+} from "@/features/shop/utils/shop-response.interface";
+import type { IApiShopHighlight } from "@/features/shop/utils/shop-highlight.interface";
+import { ShopHighlightsList } from "../shop-highlights/shop-highlights-list";
 import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabs } from "../shop-tabs/shop-tabs";
 import { CouponsStrip } from "../coupons-strip/coupons-strip";
@@ -11,7 +18,6 @@ import { ShopMobileHeader } from "./shop-mobile-header";
 import { ShopMobileProfile } from "./shop-mobile-profile";
 import { ShopMobileInfoRows } from "./shop-mobile-info-rows";
 import { ShopMobileActions } from "./shop-mobile-actions";
-import { ShopMobileBrands } from "./shop-mobile-brands";
 import { ShopMobileAllProducts } from "./shop-mobile-all-products";
 import { ShopMobileAbout } from "./shop-mobile-about";
 
@@ -21,8 +27,11 @@ interface IProps {
   products: IApiShopProduct[];
   coupons: IApiShopPromoCode[];
   about: IApiShopAbout | null;
+  highlights: IApiShopHighlight[];
   dict: IDictionary;
   lang: string;
+  activeStoriesCount: number;
+  viewedStoriesCount: number;
 }
 
 export function ShopMobilePage({
@@ -30,7 +39,10 @@ export function ShopMobilePage({
   products,
   coupons,
   about,
+  highlights,
   dict,
+  activeStoriesCount,
+  viewedStoriesCount,
 }: IProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -41,7 +53,8 @@ export function ShopMobilePage({
     ? (rawTab as (typeof SHOP_TAB_IDS)[number])
     : "all";
 
-  const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>(initialTab);
+  const [active, setActive] =
+    useState<(typeof SHOP_TAB_IDS)[number]>(initialTab);
 
   const handleTabChange = useCallback(
     (tab: (typeof SHOP_TAB_IDS)[number]) => {
@@ -58,7 +71,12 @@ export function ShopMobilePage({
       <ShopMobileHeader title={shop.username} />
 
       <div className="flex flex-col gap-4 pt-2">
-        <ShopMobileProfile shop={shop} dict={dict} />
+        <ShopMobileProfile
+          shop={shop}
+          dict={dict}
+          activeStoriesCount={activeStoriesCount}
+          viewedStoriesCount={viewedStoriesCount}
+        />
 
         <ShopMobileInfoRows shop={shop} responseLabel={dict.shop.response} />
 
@@ -69,7 +87,9 @@ export function ShopMobilePage({
           messageLabel={dict.shop.message}
         />
 
-        <ShopMobileBrands excludeSlug={shop.username} />
+        {highlights.length > 0 && (
+          <ShopHighlightsList highlights={highlights} />
+        )}
 
         <div className="px-4">
           <ShopTabs

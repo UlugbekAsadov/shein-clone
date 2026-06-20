@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { VerifiedCheck } from "@solar-icons/react/ssr";
 import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -6,10 +5,13 @@ import {
   formatCount,
   formatMemberYears,
 } from "@/features/shop/pages/[slug]/utils/shop-format.utils";
+import { ShopLogoStory } from "@/features/shop/pages/[slug]/components/shop-profile/shop-logo-story";
 
 interface IProps {
   shop: IApiShop;
   dict: IDictionary;
+  activeStoriesCount: number;
+  viewedStoriesCount: number;
 }
 
 interface IStatBlock {
@@ -17,7 +19,7 @@ interface IStatBlock {
   label: string;
 }
 
-export function ShopMobileProfile({ shop, dict }: IProps) {
+export function ShopMobileProfile({ shop, dict, activeStoriesCount, viewedStoriesCount }: IProps) {
   const blocks: IStatBlock[] = [
     { value: formatCount(shop.sales_count), label: dict.shop.sels },
     { value: formatCount(shop.followers_count), label: dict.shop.followers },
@@ -26,15 +28,12 @@ export function ShopMobileProfile({ shop, dict }: IProps) {
 
   return (
     <div className="flex items-center gap-4 px-4">
-      <div className="relative size-20 shrink-0 overflow-hidden rounded-full bg-foreground">
-        <Image
-          src={shop.logo_url}
-          alt={shop.display_name}
-          fill
-          sizes="80px"
-          className="object-cover"
-        />
-      </div>
+      <ShopLogoStory
+        shop={shop}
+        activeCount={activeStoriesCount}
+        viewedCount={viewedStoriesCount}
+        className="size-20"
+      />
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1">

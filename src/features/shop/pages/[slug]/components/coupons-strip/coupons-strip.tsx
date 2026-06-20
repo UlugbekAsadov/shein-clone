@@ -19,7 +19,7 @@ export function CouponsStrip({
   minOrderLabel,
 }: IProps) {
   return (
-    <div className="grid grid-cols-3 gap-4 overflow-x-scroll scrollbar-hidden">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 overflow-x-scroll scrollbar-hidden">
       {coupons.slice(0, 3).map((c) => (
         <div key={c.id} className="min-w-76 flex-1">
           <CouponCard
