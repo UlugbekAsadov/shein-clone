@@ -8,6 +8,7 @@ import type {
   IApiShopPromoCode,
   IApiShopProduct,
   IApiShopFilterOptions,
+  IApiShopProductsMeta,
 } from "@/features/shop/utils/shop-response.interface";
 import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabs } from "./shop-tabs/shop-tabs";
@@ -19,7 +20,7 @@ interface IProps {
   shop: IApiShop;
   shopId: number;
   products: IApiShopProduct[];
-  productCount: number;
+  initialMeta: IApiShopProductsMeta;
   filterOptions: IApiShopFilterOptions | null;
   coupons: IApiShopPromoCode[];
   about: IApiShopAbout | null;
@@ -31,7 +32,7 @@ export function ShopContent({
   shop,
   shopId,
   products,
-  productCount,
+  initialMeta,
   filterOptions,
   coupons,
   about,
@@ -57,7 +58,7 @@ export function ShopContent({
         <AllProductsPanel
           shopId={shopId}
           products={products}
-          productCount={productCount}
+          initialMeta={initialMeta}
           filterOptions={filterOptions}
           dict={dict}
           lang={lang}

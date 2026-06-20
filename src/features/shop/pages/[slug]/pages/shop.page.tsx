@@ -39,7 +39,7 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
   const viewedStoriesCount = activeStories.filter((s) => s.is_viewed).length;
 
   const products = apiProducts?.data ?? [];
-  const productCount = apiProducts?.meta?.total ?? 0;
+  const initialMeta = apiProducts?.meta ?? { total: 0, current_page: 1, last_page: 0, per_page: 10 };
 
   return (
     <>
@@ -71,7 +71,7 @@ export async function ShopPage({ lang, dict, slug }: IProps) {
           <ShopContent
             shop={apiShop}
             products={products}
-            productCount={productCount}
+            initialMeta={initialMeta}
             filterOptions={apiFilterOptions}
             coupons={apiPromoCodes}
             about={apiAbout}

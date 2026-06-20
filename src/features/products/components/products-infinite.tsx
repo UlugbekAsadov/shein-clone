@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type React from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ListingShell } from "@/shared/components/listing/listing-shell";
 import { productsApi } from "@/features/products/api/products.api";
@@ -146,6 +147,8 @@ interface IProps {
     original: string;
     new: string;
   };
+  fetchProducts?: (params: Record<string, string>, page: number) => Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null>;
+  renderFilterSidebar?: (onApply: (filters: IActiveFilters) => void, initialFilters: IActiveFilters) => React.ReactNode;
 }
 
 function mapProduct(p: IApiProductsProduct): IProduct {
@@ -182,6 +185,8 @@ export function ProductsInfinite({
   filterOptions,
   dict,
   quickFiltersLabels,
+  fetchProducts,
+  renderFilterSidebar,
 }: IProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -277,19 +282,31 @@ export function ProductsInfinite({
       if (page === 1) setIsLoading(true);
       else setIsFetchingNextPage(true);
       try {
-        const res = await productsApi.getProducts(mergedParams, page);
-        if (!res.data) return;
-        const incoming = res.data.data.map(mapProduct);
-        resultCache.set(cacheKey, { products: incoming, meta: res.data.meta });
+        let incoming: IProduct[];
+        let newMeta: IApiProductsMeta;
+
+        if (fetchProducts) {
+          const res = await fetchProducts(mergedParams, page);
+          if (!res) return;
+          incoming = res.products;
+          newMeta = res.meta;
+        } else {
+          const res = await productsApi.getProducts(mergedParams, page);
+          if (!res.data) return;
+          incoming = res.data.data.map(mapProduct);
+          newMeta = res.data.meta;
+        }
+
+        resultCache.set(cacheKey, { products: incoming, meta: newMeta });
         setProducts((prev) => (page === 1 ? incoming : [...prev, ...incoming]));
-        setMeta(res.data.meta);
+        setMeta(newMeta);
       } finally {
         loadingRef.current = false;
         if (page === 1) setIsLoading(false);
         else setIsFetchingNextPage(false);
       }
     },
-    [baseParams],
+    [baseParams, fetchProducts],
   );
 
   useEffect(() => {
@@ -334,15 +351,19 @@ export function ProductsInfinite({
     return () => observer.disconnect();
   }, [loadMore, hasMore]);
 
-  const filterSidebarSlot = filterOptions ? (
-    <CategoryFilterSidebar
-      filterOptions={filterOptions}
-      onApply={handleApplyFilters}
-      initialFilters={initialFilters}
-      dict={dict.filter}
-      quickFiltersLabels={quickFiltersLabels}
-    />
-  ) : undefined;
+  const filterSidebarSlot = renderFilterSidebar
+    ? renderFilterSidebar(handleApplyFilters, initialFilters)
+    : filterOptions
+      ? (
+          <CategoryFilterSidebar
+            filterOptions={filterOptions}
+            onApply={handleApplyFilters}
+            initialFilters={initialFilters}
+            dict={dict.filter}
+            quickFiltersLabels={quickFiltersLabels}
+          />
+        )
+      : undefined;
 
   return (
     <>

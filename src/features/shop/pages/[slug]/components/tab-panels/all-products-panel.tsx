@@ -1,20 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
-import type { IFilterState } from "@/types/filter.interface";
+import type { IApiProductsMeta } from "@/features/products/utils/products-response.interface";
+import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
+import type { IApiFilterOptions } from "@/types/filter-options.interface";
 import type {
   IApiShopProduct,
   IApiShopFilterOptions,
+  IApiShopProductsMeta,
 } from "@/features/shop/utils/shop-response.interface";
 import { shopApi } from "@/features/shop/api/shop.api";
-import { ShopProductListing } from "../shop-product-listing";
+import { CategoryFilterSidebar } from "@/features/category/pages/[slug]/components/category-filter-sidebar/category-filter-sidebar";
+import { ProductsInfinite } from "@/features/products/components/products-infinite";
 
 interface IProps {
   shopId: number;
   products: IApiShopProduct[];
-  productCount: number;
+  initialMeta: IApiShopProductsMeta;
   filterOptions: IApiShopFilterOptions | null;
   dict: IDictionary;
   lang: string;
@@ -41,112 +45,77 @@ function toProduct(p: IApiShopProduct): IProduct {
   };
 }
 
-function buildParams(opts: {
-  quickFilters: string[];
-  brandIds: number[];
-  categoryId?: number;
-  priceRange?: [number, number];
-}): Record<string, string | number | string[] | number[] | undefined> {
+function toApiFilterOptions(opts: IApiShopFilterOptions): IApiFilterOptions {
   return {
-    "quick_filters[]": opts.quickFilters.length > 0 ? opts.quickFilters : undefined,
-    "brand_ids[]": opts.brandIds.length > 0 ? opts.brandIds : undefined,
-    category_id: opts.categoryId,
-    min_price: opts.priceRange?.[0],
-    max_price: opts.priceRange?.[1],
+    price_range: { min: opts.price_range.min, max: opts.price_range.max },
+    quick_filters: opts.quick_filters
+      .filter((qf) => qf.available)
+      .map((qf) => ({ key: qf.key, label: qf.label, count: qf.products_count })),
+    badges: [],
+    categories: opts.categories,
+    brands: opts.brands,
+    seasons: opts.seasons,
+    attributes: opts.attributes,
   };
 }
 
-export function AllProductsPanel({
-  shopId,
-  products,
-  productCount,
-  filterOptions,
-  dict,
-}: IProps) {
-  const [currentProducts, setCurrentProducts] = useState(products);
-  const [currentCount, setCurrentCount] = useState(productCount);
-  const [currentFilterOptions, setCurrentFilterOptions] = useState(filterOptions);
-  const [isLoading, setIsLoading] = useState(false);
+export function AllProductsPanel({ shopId, products, initialMeta, filterOptions, dict }: IProps) {
+  const fetchProducts = useCallback(
+    async (
+      params: Record<string, string>,
+      page: number,
+    ): Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null> => {
+      const brandIds = params.brand_ids?.split(",").map(Number).filter(Boolean) ?? [];
+      const categoryIds = params.category_ids?.split(",").map(Number).filter(Boolean) ?? [];
+      const quickFilters: string[] = [
+        ...(params.has_discount === "1" ? ["has_discount"] : []),
+        ...(params.is_original === "1" ? ["is_original"] : []),
+      ];
 
-  const [selectedQuickFilters, setSelectedQuickFilters] = useState<string[]>([]);
-  const [selectedBrandIds, setSelectedBrandIds] = useState<number[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | undefined>();
-  const [appliedPriceRange, setAppliedPriceRange] = useState<[number, number] | undefined>();
+      const result = await shopApi.getProducts(shopId, {
+        page,
+        min_price: params.min_price ? Number(params.min_price) : undefined,
+        max_price: params.max_price ? Number(params.max_price) : undefined,
+        category_id: categoryIds[0],
+        "brand_ids[]": brandIds.length > 0 ? brandIds : undefined,
+        "quick_filters[]": quickFilters.length > 0 ? quickFilters : undefined,
+      });
 
-  useEffect(() => {
-    const params = buildParams({
-      quickFilters: selectedQuickFilters,
-      brandIds: selectedBrandIds,
-      categoryId: selectedCategoryId,
-      priceRange: appliedPriceRange,
-    });
+      if (!result.data) return null;
+      return {
+        products: result.data.map(toProduct),
+        meta: result.meta,
+      };
+    },
+    [shopId],
+  );
 
-    let cancelled = false;
-
-    async function fetchData() {
-      setIsLoading(true);
-      try {
-        const [productsResult, filterOptionsResult] = await Promise.all([
-          shopApi.getProducts(shopId, params),
-          shopApi.getFilterOptions(shopId, params),
-        ]);
-        if (cancelled) return;
-        setCurrentProducts(productsResult.data ?? []);
-        setCurrentCount(productsResult.meta?.total ?? 0);
-        if (filterOptionsResult.data) setCurrentFilterOptions(filterOptionsResult.data);
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    }
-
-    fetchData();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [shopId, selectedQuickFilters, selectedBrandIds, selectedCategoryId, appliedPriceRange]);
-
-  function toggleQuickFilter(key: string) {
-    setSelectedQuickFilters((prev) =>
-      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key],
-    );
-  }
-
-  function toggleBrand(id: number) {
-    setSelectedBrandIds((prev) =>
-      prev.includes(id) ? prev.filter((b) => b !== id) : [...prev, id],
-    );
-  }
-
-  function selectCategory(id: number | undefined) {
-    setSelectedCategoryId((prev) => (prev === id ? undefined : id));
-  }
-
-  function applyPriceRange(range: [number, number]) {
-    setAppliedPriceRange(range);
-  }
-
-  const filterState: IFilterState = {
-    quickFilters: selectedQuickFilters,
-    brandIds: selectedBrandIds,
-    categoryId: selectedCategoryId,
-    priceRange: appliedPriceRange,
-  };
+  const apiFilterOptions = filterOptions ? toApiFilterOptions(filterOptions) : null;
 
   return (
-    <div className="mx-auto max-w-360 px-6">
-      <ShopProductListing
-        products={currentProducts.map(toProduct)}
-        productCount={currentCount}
-        filterOptions={currentFilterOptions}
-        isLoading={isLoading}
-        filterState={filterState}
-        onToggleQuickFilter={toggleQuickFilter}
-        onToggleBrand={toggleBrand}
-        onSelectCategory={selectCategory}
-        onApplyPrice={applyPriceRange}
-        dict={dict}
-      />
-    </div>
+    <ProductsInfinite
+      title=""
+      header={null}
+      initialProducts={products.map(toProduct)}
+      initialMeta={initialMeta}
+      initialParams={{ shop_id: String(shopId) }}
+      filterOptions={null}
+      dict={dict.listing}
+      quickFiltersLabels={dict.nav.filters}
+      fetchProducts={fetchProducts}
+      renderFilterSidebar={
+        apiFilterOptions
+          ? (onApply, initialFilters) => (
+              <CategoryFilterSidebar
+                filterOptions={apiFilterOptions}
+                initialFilters={initialFilters}
+                onApply={onApply}
+                dict={dict.listing.filter}
+                quickFiltersLabels={dict.nav.filters}
+              />
+            )
+          : undefined
+      }
+    />
   );
 }
