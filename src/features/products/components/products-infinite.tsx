@@ -149,6 +149,7 @@ interface IProps {
   };
   fetchProducts?: (params: Record<string, string>, page: number) => Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null>;
   renderFilterSidebar?: (onApply: (filters: IActiveFilters) => void, initialFilters: IActiveFilters) => React.ReactNode;
+  onFiltersChange?: (params: Record<string, string>) => void;
 }
 
 function mapProduct(p: IApiProductsProduct): IProduct {
@@ -187,6 +188,7 @@ export function ProductsInfinite({
   quickFiltersLabels,
   fetchProducts,
   renderFilterSidebar,
+  onFiltersChange,
 }: IProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -324,11 +326,12 @@ export function ProductsInfinite({
     (filters: IActiveFilters) => {
       setAppliedFilters(filters);
       const merged = mergeParamsWithFilters(baseParams, filters);
+      onFiltersChange?.(merged);
       const params = new URLSearchParams(merged);
       const str = params.toString();
       router.replace(`${pathname}${str ? `?${str}` : ""}`, { scroll: false });
     },
-    [router, pathname, baseParams],
+    [router, pathname, baseParams, onFiltersChange],
   );
 
   const loadMore = useCallback(async () => {

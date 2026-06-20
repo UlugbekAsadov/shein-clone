@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
 import type { IApiProductsMeta } from "@/features/products/utils/products-response.interface";
@@ -59,38 +59,51 @@ function toApiFilterOptions(opts: IApiShopFilterOptions): IApiFilterOptions {
   };
 }
 
+function parseShopParams(
+  params: Record<string, string>,
+): Record<string, string | number | number[] | string[] | undefined> {
+  const brandIds = params.brand_ids?.split(",").map(Number).filter(Boolean) ?? [];
+  const categoryIds = params.category_ids?.split(",").map(Number).filter(Boolean) ?? [];
+  const quickFilters: string[] = [
+    ...(params.has_discount === "1" ? ["has_discount"] : []),
+    ...(params.is_original === "1" ? ["is_original"] : []),
+  ];
+  return {
+    min_price: params.min_price ? Number(params.min_price) : undefined,
+    max_price: params.max_price ? Number(params.max_price) : undefined,
+    category_id: categoryIds[0],
+    "brand_ids[]": brandIds.length > 0 ? brandIds : undefined,
+    "quick_filters[]": quickFilters.length > 0 ? quickFilters : undefined,
+  };
+}
+
 export function AllProductsPanel({ shopId, products, initialMeta, filterOptions, dict }: IProps) {
+  const [currentFilterOptions, setCurrentFilterOptions] = useState(filterOptions);
+
   const fetchProducts = useCallback(
     async (
       params: Record<string, string>,
       page: number,
     ): Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null> => {
-      const brandIds = params.brand_ids?.split(",").map(Number).filter(Boolean) ?? [];
-      const categoryIds = params.category_ids?.split(",").map(Number).filter(Boolean) ?? [];
-      const quickFilters: string[] = [
-        ...(params.has_discount === "1" ? ["has_discount"] : []),
-        ...(params.is_original === "1" ? ["is_original"] : []),
-      ];
-
       const result = await shopApi.getProducts(shopId, {
         page,
-        min_price: params.min_price ? Number(params.min_price) : undefined,
-        max_price: params.max_price ? Number(params.max_price) : undefined,
-        category_id: categoryIds[0],
-        "brand_ids[]": brandIds.length > 0 ? brandIds : undefined,
-        "quick_filters[]": quickFilters.length > 0 ? quickFilters : undefined,
+        ...parseShopParams(params),
       });
-
       if (!result.data) return null;
-      return {
-        products: result.data.map(toProduct),
-        meta: result.meta,
-      };
+      return { products: result.data.map(toProduct), meta: result.meta };
     },
     [shopId],
   );
 
-  const apiFilterOptions = filterOptions ? toApiFilterOptions(filterOptions) : null;
+  const handleFiltersChange = useCallback(
+    async (params: Record<string, string>) => {
+      const result = await shopApi.getFilterOptions(shopId, parseShopParams(params));
+      if (result.data) setCurrentFilterOptions(result.data);
+    },
+    [shopId],
+  );
+
+  const apiFilterOptions = currentFilterOptions ? toApiFilterOptions(currentFilterOptions) : null;
 
   return (
     <ProductsInfinite
@@ -103,6 +116,7 @@ export function AllProductsPanel({ shopId, products, initialMeta, filterOptions,
       dict={dict.listing}
       quickFiltersLabels={dict.nav.filters}
       fetchProducts={fetchProducts}
+      onFiltersChange={handleFiltersChange}
       renderFilterSidebar={
         apiFilterOptions
           ? (onApply, initialFilters) => (
