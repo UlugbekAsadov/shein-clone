@@ -16,7 +16,7 @@ export function ShopHighlightsList({ highlights }: IProps) {
   const { ref, atStart, atEnd } = useScrollEdges<HTMLDivElement>();
 
   return (
-    <div className="relative mb-3 md:mb-8 max-w-360 pt-3 md:pt-0">
+    <div className="relative mb-3 md:mb-8 max-w-360 mx-auto pt-3 md:pt-0 w-full">
       <div
         ref={ref}
         className="flex gap-3 overflow-x-auto px-4 md:gap-6 md:px-6 [&::-webkit-scrollbar]:hidden"
