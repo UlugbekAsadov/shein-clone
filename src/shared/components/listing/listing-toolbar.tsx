@@ -25,6 +25,7 @@ interface IProps {
     rating: string;
   };
   productCount?: number;
+  isLoading?: boolean;
 }
 
 export function ListingToolbar({
@@ -33,6 +34,7 @@ export function ListingToolbar({
   priceLabel,
   sortLabels,
   productCount,
+  isLoading,
 }: IProps) {
   const { view, setView } = useListingView();
   const router = useRouter();
@@ -91,7 +93,7 @@ export function ListingToolbar({
       <p className="text-sm text-secondary-foreground flex items-center gap-1">
         <Box weight="Bold" className="size-4.5" />
         <span className="text-muted-foreground">{productFoundLabel}:</span>{" "}
-        <span className="font-semibold text-foreground">
+        <span className={cn("font-semibold text-foreground", isLoading && "opacity-50")}>
           {productCount ?? 0}
         </span>
       </p>

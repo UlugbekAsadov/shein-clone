@@ -1,10 +1,10 @@
-import type { IBrandChip } from "@/features/shop/pages/[slug]/utils/brand-chip.interface";
+import type { IApiShopAboutBrand } from "@/features/shop/utils/shop-response.interface";
 import { BrandChipItem } from "./brand-chip-item";
 import { cn } from "@/lib/utils";
 
 interface IProps {
   title: string;
-  brands: IBrandChip[];
+  brands: IApiShopAboutBrand[];
 }
 
 export function BrandsCarried({ title, brands }: IProps) {

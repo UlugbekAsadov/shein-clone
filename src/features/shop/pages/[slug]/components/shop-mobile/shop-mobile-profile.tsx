@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { VerifiedCheck } from "@solar-icons/react/ssr";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
+import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
+import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import {
+  formatCount,
+  formatMemberYears,
+} from "@/features/shop/pages/[slug]/utils/shop-format.utils";
 
 interface IProps {
-  shop: IShopDetail;
-  labels: {
-    sels: string;
-    followers: string;
-    seller: string;
-  };
+  shop: IApiShop;
+  dict: IDictionary;
 }
 
 interface IStatBlock {
@@ -16,23 +17,19 @@ interface IStatBlock {
   label: string;
 }
 
-export function ShopMobileProfile({ shop, labels }: IProps) {
-  const sels = shop.stats.find((s) => s.icon === "box");
-  const followers = shop.stats.find((s) => s.icon === "users");
-  const years = shop.stats.find((s) => s.icon === "medal");
-
+export function ShopMobileProfile({ shop, dict }: IProps) {
   const blocks: IStatBlock[] = [
-    { value: sels?.value ?? "—", label: labels.sels },
-    { value: followers?.value ?? "—", label: labels.followers },
-    { value: years?.value ?? "—", label: labels.seller },
+    { value: formatCount(shop.sales_count), label: dict.shop.sels },
+    { value: formatCount(shop.followers_count), label: dict.shop.followers },
+    { value: formatMemberYears(shop.member_since, dict), label: dict.shop.seller },
   ];
 
   return (
     <div className="flex items-center gap-4 px-4">
       <div className="relative size-20 shrink-0 overflow-hidden rounded-full bg-foreground">
         <Image
-          src={shop.avatar}
-          alt={shop.name}
+          src={shop.logo_url}
+          alt={shop.display_name}
           fill
           sizes="80px"
           className="object-cover"
@@ -42,9 +39,9 @@ export function ShopMobileProfile({ shop, labels }: IProps) {
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1">
           <span className="truncate font-semibold text-foreground">
-            {shop.name}
+            {shop.display_name}
           </span>
-          {shop.verified && (
+          {shop.is_verified && (
             <VerifiedCheck className="size-5 shrink-0 fill-sky-500 text-white" />
           )}
         </div>

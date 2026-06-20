@@ -12,10 +12,15 @@ import { cn } from "@/lib/utils";
 
 interface IProps {
   toLabel: string;
+  min?: number;
+  max?: number;
+  onApply?: (range: [number, number]) => void;
 }
 
-export function PriceFilter({ toLabel }: IProps) {
-  const [range, setRange] = useState<[number, number]>(defaultPriceRange);
+export function PriceFilter({ toLabel, min, max, onApply }: IProps) {
+  const effectiveBounds = { min: min ?? priceBounds.min, max: max ?? priceBounds.max };
+  const effectiveDefault: [number, number] = [min ?? defaultPriceRange[0], max ?? defaultPriceRange[1]];
+  const [range, setRange] = useState<[number, number]>(effectiveDefault);
   const [activePreset, setActivePreset] = useState<string | null>(null);
 
   return (
@@ -26,8 +31,12 @@ export function PriceFilter({ toLabel }: IProps) {
           setRange([v[0], v[1]] as [number, number]);
           setActivePreset(null);
         }}
-        min={priceBounds.min}
-        max={priceBounds.max}
+        onValueCommit={(v) => {
+          const committed: [number, number] = [v[0], v[1]];
+          onApply?.(committed);
+        }}
+        min={effectiveBounds.min}
+        max={effectiveBounds.max}
         step={5}
       />
 
@@ -43,6 +52,7 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([n, range[1]]);
               setActivePreset(null);
             }}
+            onBlur={() => onApply?.(range)}
             className={cn(
               "h-12 pl-7 text-sm rounded-[12px] bg-secondary font-medium",
               "md:h-9",
@@ -64,6 +74,7 @@ export function PriceFilter({ toLabel }: IProps) {
               setRange([range[0], n]);
               setActivePreset(null);
             }}
+            onBlur={() => onApply?.(range)}
             className={cn(
               "h-12 pl-7 text-sm rounded-[12px] bg-secondary font-medium",
               "md:h-9",

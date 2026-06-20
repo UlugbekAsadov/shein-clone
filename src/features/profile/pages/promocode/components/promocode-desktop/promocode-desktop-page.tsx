@@ -1,11 +1,11 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { PromocodeDesktopList } from "./promocode-desktop-list";
 import { PromocodeDesktopEmpty } from "./promocode-desktop-empty";
 
 interface IProps {
   dict: IDictionary;
-  coupons: ICoupon[];
+  coupons: IApiShopPromoCode[];
 }
 
 export function PromocodeDesktopPage({ dict, coupons }: IProps) {

@@ -1,12 +1,12 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { PromocodeMobileHeader } from "./promocode-mobile-header";
 import { PromocodeMobileList } from "./promocode-mobile-list";
 import { PromocodeMobileEmpty } from "./promocode-mobile-empty";
 
 interface IProps {
   dict: IDictionary;
-  coupons: ICoupon[];
+  coupons: IApiShopPromoCode[];
 }
 
 export function PromocodeMobilePage({ dict, coupons }: IProps) {

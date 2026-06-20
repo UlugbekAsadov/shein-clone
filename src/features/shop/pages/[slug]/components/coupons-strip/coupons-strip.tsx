@@ -1,8 +1,8 @@
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { CouponCard } from "./coupon-card";
 
 interface IProps {
-  coupons: ICoupon[];
+  coupons: IApiShopPromoCode[];
   couponLabel: string;
   daysLeftLabel: string;
   copyLabel: string;
@@ -19,7 +19,7 @@ export function CouponsStrip({
   minOrderLabel,
 }: IProps) {
   return (
-    <div className="flex gap-4 overflow-x-scroll scrollbar-hidden">
+    <div className="grid grid-cols-3 gap-4 overflow-x-scroll scrollbar-hidden">
       {coupons.slice(0, 3).map((c) => (
         <div key={c.id} className="min-w-76 flex-1">
           <CouponCard

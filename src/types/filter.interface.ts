@@ -43,3 +43,10 @@ export interface ISortOption {
   id: string;
   label: string;
 }
+
+export interface IFilterState {
+  quickFilters: string[];
+  brandIds: number[];
+  categoryId?: number;
+  priceRange?: [number, number];
+}

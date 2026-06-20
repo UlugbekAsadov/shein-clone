@@ -2,11 +2,25 @@
 
 import { useState } from "react";
 import { CheckCircle, Copy, Ticket } from "@solar-icons/react/ssr";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { cn } from "@/lib/utils";
 
+const CURRENCY_LABELS: Record<string, string> = {
+  USD: "$",
+  EUR: "€",
+  UZS: "so'm",
+  RUB: "₽",
+};
+
+function formatExpiresAt(isoDate: string): string {
+  const date = new Date(isoDate);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  return `${day}.${month}.${date.getFullYear()}`;
+}
+
 interface IProps {
-  coupon: ICoupon;
+  coupon: IApiShopPromoCode;
   couponLabel: string;
   daysLeftLabel: string;
   copyLabel: string;
@@ -34,6 +48,9 @@ export function CouponCard({
     }
   };
 
+  const currencyLabel = CURRENCY_LABELS[coupon.currency] ?? coupon.currency;
+  const discountUnit = coupon.discount_type === "percentage" ? "%" : currencyLabel;
+
   return (
     <article className="relative overflow-hidden rounded-md border-dashed border-2">
       <div
@@ -52,7 +69,7 @@ export function CouponCard({
           {couponLabel}
         </div>
         <span className="text-xs font-medium text-muted-foreground">
-          {coupon.expiresAt}
+          {formatExpiresAt(coupon.expires_at)}
         </span>
       </div>
       <div
@@ -61,14 +78,24 @@ export function CouponCard({
       >
         <div className="relative flex items-start justify-between gap-3 overflow-hidden">
           <div className="min-w-0">
-            <p
-              className={cn(
-                "text-[24px] font-bold leading-none tracking-tight text-foreground",
-                "md:text-[40px] md:font-extrabold",
-              )}
-            >
-              {coupon.discount}
-            </p>
+            <div className="flex items-baseline gap-1">
+              <span
+                className={cn(
+                  "text-[24px] font-bold leading-none tracking-tight text-foreground",
+                  "md:text-[40px] md:font-extrabold",
+                )}
+              >
+                {coupon.discount_value}
+              </span>
+              <span
+                className={cn(
+                  "text-sm font-semibold text-foreground",
+                  "md:text-xl",
+                )}
+              >
+                {discountUnit}
+              </span>
+            </div>
             <p
               className={cn(
                 "mt-3 text-lg font-bold text-foreground",
@@ -80,11 +107,11 @@ export function CouponCard({
             <p
               className={cn("mt-0.5 text-xs text-muted-foreground", "md:mt-1")}
             >
-              {minOrderLabel} ${coupon.minOrderAmount}
+              {minOrderLabel} {currencyLabel}{coupon.min_order_amount}
             </p>
           </div>
           <span className="shrink-0 rounded-[8px] bg-[#E83737] px-2.5 py-1.5 text-xs font-semibold text-white">
-            {coupon.daysLeft} {daysLeftLabel}
+            {coupon.days_left} {daysLeftLabel}
           </span>
         </div>
 

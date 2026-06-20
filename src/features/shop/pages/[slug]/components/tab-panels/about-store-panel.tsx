@@ -1,11 +1,10 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
-import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
+import type { IApiShop, IApiShopAbout } from "@/features/shop/utils/shop-response.interface";
 import { AboutStore } from "../about-store/about-store";
 
 interface IProps {
-  shop: IShopDetail;
-  about: IAboutContent;
+  shop: IApiShop;
+  about: IApiShopAbout | null;
   dict: IDictionary;
   lang: string;
 }

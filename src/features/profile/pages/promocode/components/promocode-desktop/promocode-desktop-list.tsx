@@ -1,9 +1,9 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { CouponCard } from "@/features/shop/pages/[slug]/components/coupons-strip/coupon-card";
 
 interface IProps {
-  coupons: ICoupon[];
+  coupons: IApiShopPromoCode[];
   dict: IDictionary;
 }
 

@@ -3,24 +3,23 @@
 import { useState } from "react";
 import { Input } from "@/shared/components/ui/input";
 import { Checkbox } from "@/shared/components/ui/checkbox";
-import { brandFilters } from "@/shared/mocks";
+import type { IBrandFilter } from "@/types/filter.interface";
 import { cn } from "@/lib/utils";
 import { SearchIcon } from "../../icons/outline";
 
 interface IProps {
   searchPlaceholder: string;
+  brands: IBrandFilter[];
+  selectedBrands?: number[];
+  onToggle?: (id: number) => void;
 }
 
-export function BrandFilter({ searchPlaceholder }: IProps) {
+export function BrandFilter({ searchPlaceholder, brands, selectedBrands, onToggle }: IProps) {
   const [query, setQuery] = useState("");
-  const [selected, setSelected] = useState<Record<string, boolean>>({});
 
-  const filtered = brandFilters.filter((b) =>
+  const filtered = brands.filter((b) =>
     b.name.toLowerCase().includes(query.toLowerCase()),
   );
-
-  const toggle = (id: string) =>
-    setSelected((prev) => ({ ...prev, [id]: !prev[id] }));
 
   return (
     <div className="flex flex-col gap-3">
@@ -42,8 +41,8 @@ export function BrandFilter({ searchPlaceholder }: IProps) {
           >
             <label className="flex flex-1 cursor-pointer items-center gap-2.5">
               <Checkbox
-                checked={!!selected[brand.id]}
-                onCheckedChange={() => toggle(brand.id)}
+                checked={!!selectedBrands?.includes(Number(brand.id))}
+                onCheckedChange={() => onToggle?.(Number(brand.id))}
               />
 
               <span className="font-medium">{brand.name}</span>

@@ -1,16 +1,14 @@
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProduct } from "@/types/product.interface";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
+import type { IApiShopPromoCode } from "@/features/shop/utils/shop-response.interface";
 import { CouponsStrip } from "../coupons-strip/coupons-strip";
-import { ShopProductListing } from "../shop-product-listing";
 
 interface IProps {
-  coupons: ICoupon[];
-  products: IProduct[];
+  coupons: IApiShopPromoCode[];
   dict: IDictionary;
 }
 
-export function DealsOffersPanel({ coupons, products, dict }: IProps) {
+export function DealsOffersPanel({ coupons, dict }: IProps) {
   return (
     <div className="mx-auto max-w-360 space-y-6 px-6">
       <CouponsStrip
@@ -21,7 +19,6 @@ export function DealsOffersPanel({ coupons, products, dict }: IProps) {
         copiedLabel={dict.shop.coupons.copied}
         minOrderLabel={dict.shop.coupons.minOrder}
       />
-      <ShopProductListing products={products} dict={dict} />
     </div>
   );
 }

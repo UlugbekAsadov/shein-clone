@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IProduct } from "@/types/product.interface";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
-import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
+import type { IApiShop, IApiShopAbout, IApiShopPromoCode, IApiShopProduct } from "@/features/shop/utils/shop-response.interface";
 import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabs } from "../shop-tabs/shop-tabs";
 import { CouponsStrip } from "../coupons-strip/coupons-strip";
@@ -18,11 +15,13 @@ import { ShopMobileAllProducts } from "./shop-mobile-all-products";
 import { ShopMobileAbout } from "./shop-mobile-about";
 
 interface IProps {
-  shop: IShopDetail;
-  products: IProduct[];
-  coupons: ICoupon[];
-  about: IAboutContent;
+  shop: IApiShop;
+  shopId: number;
+  products: IApiShopProduct[];
+  coupons: IApiShopPromoCode[];
+  about: IApiShopAbout | null;
   dict: IDictionary;
+  lang: string;
 }
 
 export function ShopMobilePage({
@@ -33,32 +32,24 @@ export function ShopMobilePage({
   dict,
 }: IProps) {
   const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
-  const handle = shop.handle.replace(/^@/, "");
 
   return (
     <div className="pb-6 md:hidden">
-      <ShopMobileHeader title={handle} />
+      <ShopMobileHeader title={shop.username} />
 
       <div className="flex flex-col gap-4 pt-2">
-        <ShopMobileProfile
-          shop={shop}
-          labels={{
-            sels: dict.shop.sels,
-            followers: dict.shop.followers,
-            seller: dict.shop.seller,
-          }}
-        />
+        <ShopMobileProfile shop={shop} dict={dict} />
 
         <ShopMobileInfoRows shop={shop} responseLabel={dict.shop.response} />
 
         <ShopMobileActions
-          initialFollowing={shop.isFollowing}
+          initialFollowing={shop.is_followed}
           followLabel={dict.shop.follow}
           followingLabel={dict.shop.following}
           messageLabel={dict.shop.message}
         />
 
-        <ShopMobileBrands excludeSlug={shop.slug} />
+        <ShopMobileBrands excludeSlug={shop.username} />
 
         <div className="px-4">
           <ShopTabs

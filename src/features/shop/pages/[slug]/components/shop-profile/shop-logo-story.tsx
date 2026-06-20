@@ -7,21 +7,15 @@ import { cn } from "@/lib/utils";
 import { StoryRing } from "@/features/home/components/stories/story-item/story-ring";
 import { StoryViewer } from "@/features/home/components/stories/story-viewer/story-viewer";
 import type { IShop } from "@/features/home/utils/shop-story.interface";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
+import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
 
 interface IProps {
-  shop: IShopDetail;
-  shopId: number;
+  shop: IApiShop;
   activeCount: number;
   viewedCount: number;
 }
 
-export function ShopLogoStory({
-  shop,
-  shopId,
-  activeCount,
-  viewedCount,
-}: IProps) {
+export function ShopLogoStory({ shop, activeCount, viewedCount }: IProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -29,12 +23,12 @@ export function ShopLogoStory({
   const safeTotal = Math.max(1, activeCount);
 
   const shopForViewer: IShop = {
-    id: shopId,
-    username: String(shopId),
-    name: shop.name,
-    display_name: shop.name,
-    avatar_url: shop.avatar,
-    is_verified: shop.verified ?? false,
+    id: shop.id,
+    username: shop.username,
+    name: shop.display_name,
+    display_name: shop.display_name,
+    avatar_url: shop.logo_url,
+    is_verified: shop.is_verified,
     active_stories_count: activeCount,
     viewed_stories_count: viewedCount,
     has_active_stories: hasStories,
@@ -73,8 +67,8 @@ export function ShopLogoStory({
           )}
         >
           <Image
-            src={shop.avatar}
-            alt={shop.name}
+            src={shop.logo_url}
+            alt={shop.display_name}
             fill
             sizes="128px"
             className="object-cover"

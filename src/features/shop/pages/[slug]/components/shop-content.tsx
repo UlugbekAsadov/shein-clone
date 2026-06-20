@@ -2,10 +2,13 @@
 
 import { useState } from "react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import type { IProduct } from "@/types/product.interface";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
-import type { ICoupon } from "@/features/shop/pages/[slug]/utils/coupon.interface";
-import type { IAboutContent } from "@/features/shop/pages/[slug]/utils/about-content.interface";
+import type {
+  IApiShop,
+  IApiShopAbout,
+  IApiShopPromoCode,
+  IApiShopProduct,
+  IApiShopFilterOptions,
+} from "@/features/shop/utils/shop-response.interface";
 import { SHOP_TAB_IDS } from "@/features/shop/pages/[slug]/utils/shop-tabs.constants";
 import { ShopTabs } from "./shop-tabs/shop-tabs";
 import { AllProductsPanel } from "./tab-panels/all-products-panel";
@@ -13,15 +16,28 @@ import { DealsOffersPanel } from "./tab-panels/deals-offers-panel";
 import { AboutStorePanel } from "./tab-panels/about-store-panel";
 
 interface IProps {
-  shop: IShopDetail;
-  products: IProduct[];
-  coupons: ICoupon[];
-  about: IAboutContent;
+  shop: IApiShop;
+  shopId: number;
+  products: IApiShopProduct[];
+  productCount: number;
+  filterOptions: IApiShopFilterOptions | null;
+  coupons: IApiShopPromoCode[];
+  about: IApiShopAbout | null;
   dict: IDictionary;
   lang: string;
 }
 
-export function ShopContent({ shop, products, coupons, about, dict, lang }: IProps) {
+export function ShopContent({
+  shop,
+  shopId,
+  products,
+  productCount,
+  filterOptions,
+  coupons,
+  about,
+  dict,
+  lang,
+}: IProps) {
   const [active, setActive] = useState<(typeof SHOP_TAB_IDS)[number]>("all");
 
   return (
@@ -37,10 +53,17 @@ export function ShopContent({ shop, products, coupons, about, dict, lang }: IPro
         />
       </div>
 
-      {active === "all" && <AllProductsPanel products={products} dict={dict} />}
-      {active === "deals" && (
-        <DealsOffersPanel coupons={coupons} products={products} dict={dict} />
+      {active === "all" && (
+        <AllProductsPanel
+          shopId={shopId}
+          products={products}
+          productCount={productCount}
+          filterOptions={filterOptions}
+          dict={dict}
+          lang={lang}
+        />
       )}
+      {active === "deals" && <DealsOffersPanel coupons={coupons} dict={dict} />}
       {active === "about" && (
         <AboutStorePanel shop={shop} about={about} dict={dict} lang={lang} />
       )}

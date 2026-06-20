@@ -1,5 +1,6 @@
 import Image from "next/image";
-import type { IShopDetail } from "@/features/shop/pages/[slug]/utils/shop-detail.interface";
+import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
+import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { ShopProfileStats } from "./shop-profile-stats";
 import { ShopFollowButton } from "./shop-follow-button";
 import { ShopProfileLocation } from "./shop-profile-location";
@@ -7,21 +8,19 @@ import { ShopLogoStory } from "./shop-logo-story";
 import { Star, VerifiedCheck } from "@solar-icons/react/ssr";
 
 interface IProps {
-  shop: IShopDetail;
-  shopId: number;
+  shop: IApiShop;
+  dict: IDictionary;
   activeStoriesCount: number;
   viewedStoriesCount: number;
-  followLabel: string;
-  followingLabel: string;
 }
 
-export function ShopProfile({ shop, shopId, activeStoriesCount, viewedStoriesCount, followLabel, followingLabel }: IProps) {
+export function ShopProfile({ shop, dict, activeStoriesCount, viewedStoriesCount }: IProps) {
   return (
     <section className="overflow-hidden rounded-[24px] border border-border bg-card">
       <div className="relative h-56 w-full overflow-hidden bg-muted">
         <Image
-          src={shop.banner}
-          alt={shop.name}
+          src={shop.banner_url}
+          alt={shop.display_name}
           fill
           quality={95}
           priority
@@ -34,7 +33,6 @@ export function ShopProfile({ shop, shopId, activeStoriesCount, viewedStoriesCou
         <div className="relative -mt-12 flex items-end gap-5">
           <ShopLogoStory
             shop={shop}
-            shopId={shopId}
             activeCount={activeStoriesCount}
             viewedCount={viewedStoriesCount}
           />
@@ -43,29 +41,29 @@ export function ShopProfile({ shop, shopId, activeStoriesCount, viewedStoriesCou
         <div className="mt-3 flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
             <h1 className="flex flex-wrap items-center gap-1 text-2xl font-semibold">
-              <span>{shop.name}</span>
-              {shop.verified && (
+              <span>{shop.display_name}</span>
+              {shop.is_verified && (
                 <VerifiedCheck className="size-5 shrink-0 fill-sky-500 text-white" />
               )}
               <span className="ml-2 flex items-center gap-1 text-sm font-medium text-secondary-foreground">
                 <Star className="size-4 fill-amber-400 text-amber-400" />
                 <span className="text-primary">{shop.rating.toFixed(1)}</span>
-                <span>({shop.reviews})</span>
+                <span>({shop.reviews_count})</span>
               </span>
             </h1>
-            <p className="mt-2 text-muted-foreground">{shop.handle}</p>
+            <p className="mt-2 text-muted-foreground">@{shop.username}</p>
 
-            <ShopProfileStats stats={shop.stats} />
+            <ShopProfileStats shop={shop} dict={dict} />
             <ShopProfileLocation
-              countryLabel={shop.countryLabel}
-              shipsFrom={shop.shipsFrom}
+              countryLabel={shop.location.name}
+              shipsFrom={shop.ships_from}
             />
           </div>
 
           <ShopFollowButton
-            initialFollowing={shop.isFollowing}
-            followLabel={followLabel}
-            followingLabel={followingLabel}
+            initialFollowing={shop.is_followed}
+            followLabel={dict.shop.follow}
+            followingLabel={dict.shop.following}
           />
         </div>
       </div>
