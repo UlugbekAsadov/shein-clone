@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { ApiError } from "@/core/api/api-error";
 import { shopApi } from "@/features/shop/api/shop.api";
 import type {
@@ -19,15 +20,17 @@ export async function getShopById(id: number): Promise<IApiShop | null> {
   }
 }
 
-export async function getShopHeader(slug: string): Promise<IApiShop | null> {
-  try {
-    const result = await shopApi.getHeader(slug);
-    return result.data ?? null;
-  } catch (error) {
-    if (error instanceof ApiError) return null;
-    throw error;
-  }
-}
+export const getShopHeader = cache(
+  async (slug: string): Promise<IApiShop | null> => {
+    try {
+      const result = await shopApi.getHeader(slug);
+      return result.data ?? null;
+    } catch (error) {
+      if (error instanceof ApiError) return null;
+      throw error;
+    }
+  },
+);
 
 export async function getShopAbout(id: number): Promise<IApiShopAbout | null> {
   try {

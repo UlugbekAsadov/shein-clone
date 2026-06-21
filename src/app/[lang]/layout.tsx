@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { hasLocale, locales } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
+import { env } from "@/core/config/env";
 import { Providers } from "@/core/providers/providers";
 import { getCurrentUser } from "@/features/auth/services/auth.service";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
@@ -25,12 +26,31 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[lang]/demo">): Promise<Metadata> {
   const { lang } = await params;
+  const metadataBase = new URL(env.siteUrl);
   if (!hasLocale(lang))
-    return { title: "2020mall", description: "2020mall client" };
+    return { metadataBase, title: "2020mall", description: "2020mall client" };
   const dict = await getDictionary(lang);
+  const title = dict.site?.title ?? "2020mall";
+  const description = dict.site?.metaDescription ?? "2020mall client";
+  const ogLocale =
+    lang === "uz" ? "uz_UZ" : lang === "ru" ? "ru_RU" : "en_US";
   return {
-    title: dict.site?.title ?? "2020mall",
-    description: dict.site?.metaDescription ?? "2020mall client",
+    metadataBase,
+    title,
+    description,
+    openGraph: {
+      type: "website",
+      siteName: "2020Mall",
+      locale: ogLocale,
+      title,
+      description,
+      url: `${env.siteUrl}/${lang}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 

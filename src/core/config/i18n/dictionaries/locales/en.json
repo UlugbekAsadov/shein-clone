@@ -5,6 +5,10 @@
     "slogan": "Everything in One Place.",
     "comingSoon": "Coming Soon"
   },
+  "seo": {
+    "categoriesTitle": "All Categories",
+    "categoriesDescription": "Browse all product categories on 2020Mall — fashion, electronics, home, beauty and more from trusted sellers."
+  },
   "home": {
     "title": "Welcome",
     "greeting": "Hello",
