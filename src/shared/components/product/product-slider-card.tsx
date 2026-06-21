@@ -18,7 +18,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
   const isDark = variant === "dark";
   const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
-  const href = `/${lang}/product/${product.slug ?? product.id}`;
+  const href = `/${lang}/products/${product.slug ?? product.id}`;
 
   return (
     <Link

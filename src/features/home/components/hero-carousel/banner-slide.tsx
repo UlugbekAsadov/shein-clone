@@ -21,7 +21,7 @@ function getHref(
     case "category":
       return { href: `/${lang}/category/${banner.target_id}`, external: false };
     case "product":
-      return { href: `/${lang}/product/${banner.target_id}`, external: false };
+      return { href: `/${lang}/products/${banner.target_id}`, external: false };
     case "shop":
       return { href: `/${lang}/shop/${banner.target_id}`, external: false };
     default:

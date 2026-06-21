@@ -32,7 +32,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const searchParams = useSearchParams();
   const query = searchParams.toString();
   const callbackUrl = query ? `${pathname}?${query}` : pathname;
-  const href = `/${lang}/product/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
+  const href = `/${lang}/products/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
   const images =
     product.images && product.images.length > 0
       ? product.images

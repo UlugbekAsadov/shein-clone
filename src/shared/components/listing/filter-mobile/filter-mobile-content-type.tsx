@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { contentTypeFilterOptions } from "@/features/product/pages/[slug]/pages/comments/mocks/comments-filter.mocks";
+import { contentTypeFilterOptions } from "@/features/products/pages/[slug]/pages/comments/mocks/comments-filter.mocks";
 import { cn } from "@/lib/utils";
 
 interface IProps {

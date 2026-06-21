@@ -25,7 +25,7 @@ export function ProductListItem({ product }: IProps) {
   const searchParams = useSearchParams();
   const query = searchParams.toString();
   const callbackUrl = query ? `${pathname}?${query}` : pathname;
-  const href = `/${lang}/product/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
+  const href = `/${lang}/products/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
 
   return (
     <article className="relative">

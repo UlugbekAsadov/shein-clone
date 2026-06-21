@@ -1,4 +1,4 @@
-import type { IProductLocaleText } from "@/features/product/pages/[slug]/utils/product-detail.interface";
+import type { IProductLocaleText } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 
 export interface IApiShopProductBadge {
   id: number;
