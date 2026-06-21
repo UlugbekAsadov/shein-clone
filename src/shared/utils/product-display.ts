@@ -5,13 +5,25 @@ export function getProductImages(product: IProduct): string[] {
   return [product.image_url];
 }
 
+export function getOriginalPrice(
+  price: number,
+  discount: number,
+  discountType: string,
+): number | undefined {
+  if (discount <= 0) return undefined;
+  return discountType === "percent"
+    ? price / (1 - discount / 100)
+    : price + discount;
+}
+
 export function getProductOriginalPrice(product: IProduct): number | undefined {
   if (product.old_price && product.old_price > 0) return product.old_price;
-  if (product.discount && product.discount > 0) {
-    if (product.discount_type === "fixed") return product.price + product.discount;
-    if (product.discount_type === "percent")
-      return product.price / (1 - product.discount / 100);
-  }
+  if (product.discount && product.discount > 0 && product.discount_type)
+    return getOriginalPrice(
+      product.price,
+      product.discount,
+      product.discount_type,
+    );
   return undefined;
 }
 

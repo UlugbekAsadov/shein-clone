@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ICategory } from "@/types/category.interface";
+import type { ICategory } from "@/features/category/utils/category-group.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { cn } from "@/lib/utils";
 
@@ -21,21 +21,16 @@ export function CategoryCard({ lang, category }: IProps) {
         )}
       >
         <Image
-          src={category.image ?? "/placeholders/category.svg"}
-          alt={category.name}
+          src={category.image_url ?? "/placeholders/category.svg"}
+          alt={category.title}
           fill
           quality={95}
           sizes="120px"
           className="object-cover transition-transform group-hover:scale-110"
         />
       </span>
-      {category.badge && (
-        <span className="absolute -right-2 md:-right-1 -top-1 grid h-4 md:h-6.75 min-w-6 md:min-w-10 place-items-center rounded-full bg-rose-500 px-1.5 text-[10px] md:text-xs font-bold text-white">
-          {category.badge}
-        </span>
-      )}
       <span className="text-xs md:text-base line-clamp-1 font-medium text-foreground">
-        {category.name}
+        {category.title}
       </span>
     </Link>
   );

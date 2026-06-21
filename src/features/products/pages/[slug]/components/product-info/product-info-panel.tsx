@@ -8,7 +8,7 @@ import {
   getVariantSizeDetail,
   getVariantSizes,
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
-import { getOriginalPrice } from "@/features/products/pages/[slug]/utils/price.mapper";
+import { getOriginalPrice } from "@/shared/utils/product-display";
 import { ProductColorSelector } from "@/shared/components/product/product-preview/product-color-selector";
 import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";

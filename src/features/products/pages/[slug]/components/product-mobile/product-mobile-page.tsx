@@ -18,7 +18,7 @@ import {
   getVariantImages,
   getVariantSizes,
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
-import { getOriginalPrice } from "@/features/products/pages/[slug]/utils/price.mapper";
+import { getOriginalPrice } from "@/shared/utils/product-display";
 import { ProductMobileGallery } from "./product-mobile-gallery";
 import { ProductMobileRatingRow } from "./product-mobile-rating-row";
 import { ProductMobileDescription } from "./product-mobile-description";

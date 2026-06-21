@@ -1,6 +1,6 @@
 "use client";
 
-import type { ICategory } from "@/types/category.interface";
+import type { ICategory } from "@/features/category/utils/category-group.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { cn } from "@/lib/utils";
 import { useScrollEdges } from "@/features/home/hooks/use-scroll-edges";

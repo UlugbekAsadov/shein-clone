@@ -6,7 +6,7 @@ import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
-import { getOriginalPrice } from "@/features/products/pages/[slug]/utils/price.mapper";
+import { getOriginalPrice } from "@/shared/utils/product-display";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 
