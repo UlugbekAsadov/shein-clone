@@ -27,7 +27,8 @@ export function ProductPreviewGallery({
   const railRef = useRef<HTMLDivElement>(null);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [railHeight, setRailHeight] = useState<number>();
-  const prevImagesRef = useRef(images);
+  const imagesKey = images.join("|");
+  const prevImagesKeyRef = useRef(imagesKey);
   const onActiveIndexChangeRef = useRef(onActiveIndexChange);
 
   useEffect(() => {
@@ -62,12 +63,13 @@ export function ProductPreviewGallery({
 
   useEffect(() => {
     if (!emblaApi) return;
-    if (prevImagesRef.current === images) return;
-    prevImagesRef.current = images;
+    if (prevImagesKeyRef.current === imagesKey) return;
+    prevImagesKeyRef.current = imagesKey;
+    const target = activeIndex ?? 0;
     emblaApi.reInit();
-    emblaApi.scrollTo(0, true);
-    setImageIndex(0);
-  }, [images, emblaApi]);
+    emblaApi.scrollTo(target, true);
+    setImageIndex(target);
+  }, [imagesKey, emblaApi, activeIndex]);
 
   useEffect(() => {
     if (!emblaApi) return;
