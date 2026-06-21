@@ -1,15 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
 import type { IProductVariant } from "@/features/products/pages/[slug]/utils/product-detail.interface";
-import { getVariantImages } from "@/features/products/pages/[slug]/utils/variant.mapper";
 
 interface IProductVariantContext {
   colorId: string;
   setColorId: (color: string) => void;
   galleryImages: string[];
+  activeImageIndex?: number;
 }
 
 const ProductVariantContext = createContext<IProductVariantContext>({
@@ -42,10 +42,21 @@ export function ProductVariantProvider({
     validColors.has(urlColor) ? urlColor : firstColor,
   );
 
-  const galleryImages = getVariantImages(variants, colorId, fallbackImages);
+  const variantImages = useMemo(
+    () => variants.map((variant) => variant.image_url),
+    [variants],
+  );
+
+  const hasVariants = variants.length > 0;
+  const galleryImages = hasVariants ? variantImages : fallbackImages;
+  const activeImageIndex = hasVariants
+    ? Math.max(0, variants.findIndex((variant) => variant.color === colorId))
+    : undefined;
 
   return (
-    <ProductVariantContext.Provider value={{ colorId, setColorId, galleryImages }}>
+    <ProductVariantContext.Provider
+      value={{ colorId, setColorId, galleryImages, activeImageIndex }}
+    >
       {children}
     </ProductVariantContext.Provider>
   );

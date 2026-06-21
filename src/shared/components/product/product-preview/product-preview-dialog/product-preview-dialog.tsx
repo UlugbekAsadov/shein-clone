@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { XIcon } from "@/shared/components/icons/outline";
-import { galleryPool } from "@/shared/mocks/product-preview.mocks";
+import {
+  colorSwatches,
+  colorVariantImages,
+} from "@/shared/mocks/product-preview.mocks";
 import { TRANSITION_MS } from "@/shared/constants/product-preview.constants";
 import { cn } from "@/lib/utils";
 import { ProductPreviewGallery } from "./product-preview-gallery";
@@ -18,6 +21,12 @@ interface IProps {
 export function ProductPreviewDialog({ product, open, onClose }: IProps) {
   const [mounted, setMounted] = useState(false);
   const [closing, setClosing] = useState(false);
+  const [colorId, setColorId] = useState(colorSwatches[0].id);
+
+  const activeColorIndex = Math.max(
+    0,
+    colorSwatches.findIndex((swatch) => swatch.id === colorId),
+  );
 
   useEffect(() => {
     if (open) {
@@ -81,9 +90,19 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
         </button>
 
         <div className="grid max-h-[80vh] grid-cols-1 gap-10 md:grid-cols-2 mt-5">
-          <ProductPreviewGallery images={galleryPool} alt={product.title} />
+          <ProductPreviewGallery
+            images={colorVariantImages}
+            alt={product.title}
+            activeIndex={activeColorIndex}
+            onActiveIndexChange={(index) => setColorId(colorSwatches[index].id)}
+          />
 
-          <ProductPreviewInfo product={product} onClose={onClose} />
+          <ProductPreviewInfo
+            product={product}
+            onClose={onClose}
+            colorId={colorId}
+            onColorChange={setColorId}
+          />
         </div>
       </div>
     </div>

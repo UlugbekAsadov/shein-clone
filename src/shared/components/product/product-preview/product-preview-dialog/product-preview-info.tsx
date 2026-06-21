@@ -15,11 +15,17 @@ import { useCurrency } from "@/shared/hooks/use-currency";
 interface IProps {
   product: IProduct;
   onClose: () => void;
+  colorId: string;
+  onColorChange: (id: string) => void;
 }
 
-export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
+export const ProductPreviewInfo = ({
+  product,
+  onClose,
+  colorId,
+  onColorChange,
+}: IProps) => {
   const { currency } = useCurrency();
-  const [colorId, setColorId] = useState(colorSwatches[0].id);
   const [sizeId, setSizeId] = useState("XS");
   const [qty, setQty] = useState(1);
   const soldCount = product.reviews * 5 + 123;
@@ -61,7 +67,7 @@ export const ProductPreviewInfo = ({ product, onClose }: IProps) => {
       <ProductColorSelector
         swatches={colorSwatches}
         value={colorId}
-        onChange={setColorId}
+        onChange={onColorChange}
       />
 
       <ProductSizeSelector

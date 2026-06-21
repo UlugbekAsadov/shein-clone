@@ -8,6 +8,12 @@ interface IProps {
 }
 
 export function ProductGalleryPanel({ alt }: IProps) {
-  const { galleryImages } = useProductVariant();
-  return <ProductPreviewGallery images={galleryImages} alt={alt} />;
+  const { galleryImages, activeImageIndex } = useProductVariant();
+  return (
+    <ProductPreviewGallery
+      images={galleryImages}
+      alt={alt}
+      activeIndex={activeImageIndex}
+    />
+  );
 }

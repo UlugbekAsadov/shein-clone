@@ -18,6 +18,8 @@ export const colorSwatches = [
   { id: "tan", name: "Tan", image: galleryPool[3] },
 ];
 
+export const colorVariantImages = colorSwatches.map((swatch) => swatch.image);
+
 export const sizes = [
   { id: "XS", available: true },
   { id: "S", available: true },

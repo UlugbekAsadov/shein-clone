@@ -9,9 +9,16 @@ import { AltArrowLeft, AltArrowRight, Heart } from "@solar-icons/react";
 interface IProps {
   images: string[];
   alt: string;
+  activeIndex?: number;
+  onActiveIndexChange?: (index: number) => void;
 }
 
-export function ProductPreviewGallery({ images, alt }: IProps) {
+export function ProductPreviewGallery({
+  images,
+  alt,
+  activeIndex,
+  onActiveIndexChange,
+}: IProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [imageIndex, setImageIndex] = useState(0);
   const [zooming, setZooming] = useState(false);
@@ -21,6 +28,11 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [railHeight, setRailHeight] = useState<number>();
   const prevImagesRef = useRef(images);
+  const onActiveIndexChangeRef = useRef(onActiveIndexChange);
+
+  useEffect(() => {
+    onActiveIndexChangeRef.current = onActiveIndexChange;
+  }, [onActiveIndexChange]);
 
   useEffect(() => {
     const el = mainImageRef.current;
@@ -34,7 +46,11 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    const onSelect = () => setImageIndex(emblaApi.selectedScrollSnap());
+    const onSelect = () => {
+      const snap = emblaApi.selectedScrollSnap();
+      setImageIndex(snap);
+      onActiveIndexChangeRef.current?.(snap);
+    };
     onSelect();
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
@@ -52,6 +68,13 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
     emblaApi.scrollTo(0, true);
     setImageIndex(0);
   }, [images, emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (activeIndex === undefined) return;
+    if (activeIndex === emblaApi.selectedScrollSnap()) return;
+    emblaApi.scrollTo(activeIndex);
+  }, [activeIndex, emblaApi]);
 
   useEffect(() => {
     const rail = railRef.current;
@@ -79,7 +102,7 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
         {images.map((src, i) => (
           <button
             type="button"
-            key={src}
+            key={i}
             ref={(el) => { thumbRefs.current[i] = el; }}
             onClick={() => emblaApi?.scrollTo(i)}
             className={cn(
@@ -118,7 +141,7 @@ export function ProductPreviewGallery({ images, alt }: IProps) {
           <div className="flex h-full">
             {images.map((src, i) => (
               <div
-                key={src}
+                key={i}
                 className="relative h-full w-full shrink-0 grow-0 basis-full overflow-hidden"
               >
                 <Image
