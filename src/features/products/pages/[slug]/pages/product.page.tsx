@@ -8,7 +8,6 @@ import { ProductStickyBar } from "@/features/products/pages/[slug]/components/pr
 import { ProductInfoPanel } from "@/features/products/pages/[slug]/components/product-info/product-info-panel";
 import { ProductShippingInfo } from "@/features/products/pages/[slug]/components/product-info/product-shipping-info";
 import { ProductSellerCard } from "@/features/products/pages/[slug]/components/product-info/product-seller-card";
-import { ProductSellerFallback } from "@/features/products/pages/[slug]/components/product-info/product-seller-fallback";
 import { ProductReviewsSection } from "@/features/products/pages/[slug]/components/product-reviews/product-reviews-section";
 import { SimilarProducts } from "@/features/products/pages/[slug]/components/similar-products";
 import { RecommendedProducts } from "@/features/products/pages/[slug]/components/recommended-products";
@@ -44,9 +43,9 @@ function mapCommentToReview(comment: IProductComment): IReview {
     date: comment.created_at,
     rating: comment.rating,
     meta: [
-      { id: "color", label: "Color", value: comment.color },
-      { id: "size", label: "Size", value: comment.size },
-      { id: "fit", label: "Fit", value: comment.fit.replace(/_/g, " ") },
+      { id: "color", label: "Color", value: comment?.color },
+      { id: "size", label: "Size", value: comment?.size },
+      { id: "fit", label: "Fit", value: comment?.fit.replace(/_/g, " ") },
     ],
     text: comment.content,
     images: comment.images,
@@ -141,15 +140,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
                 <div className="flex flex-col gap-6">
                   <ProductInfoPanel product={product} />
                   <ProductShippingInfo highlights={product.highlights} />
-                  {shop ? (
-                    <ProductSellerCard shop={shop} />
-                  ) : (
-                    sellerFallbackHighlight && (
-                      <ProductSellerFallback
-                        highlight={sellerFallbackHighlight}
-                      />
-                    )
-                  )}
+                  {shop ? <ProductSellerCard shop={shop} /> : null}
                 </div>
 
                 {reviews.length > 0 && (
