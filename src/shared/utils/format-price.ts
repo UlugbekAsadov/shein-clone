@@ -1,6 +1,6 @@
 import { currencies } from "@/shared/constants/currencies.constants";
 
-function groupDigits(n: number): string {
+export function groupDigits(n: number): string {
   return Math.round(n)
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, " ");

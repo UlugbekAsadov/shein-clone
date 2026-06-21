@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { useScrollEdges } from "@/features/home/hooks/use-scroll-edges";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import { StoryViewer } from "./story-viewer/story-viewer";
 import { StoryItem } from "./story-item/story-item";
 
 interface IProps {
-  shops: IShop[];
+  shops: IShopStory[];
 }
 
 export function StoriesList({ shops }: IProps) {

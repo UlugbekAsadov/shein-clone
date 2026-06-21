@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import type { IStory, IStoryText } from "@/features/home/utils/story.interface";
 import { Pause, Play, VolumeCross, VolumeLoud } from "@solar-icons/react";
 import { XIcon } from "@/shared/components/icons/outline";
@@ -13,7 +13,7 @@ import { StoryMedia } from "./story-media";
 import { ProgressBar } from "./progress-bar";
 
 interface IProps {
-  shop: IShop;
+  shop: IShopStory;
   stories: IStory[];
   isLoading: boolean;
   isActive: boolean;

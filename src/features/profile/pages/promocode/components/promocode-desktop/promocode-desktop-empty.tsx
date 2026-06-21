@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { EmptyState } from "@/shared/components/empty-state/empty-state";
 
 interface IProps {
   title: string;
@@ -7,18 +8,20 @@ interface IProps {
 
 export function PromocodeDesktopEmpty({ title, description }: IProps) {
   return (
-    <div className="flex min-h-[400px] flex-col items-center justify-center px-6 text-center">
-      <Image
-        src="/icons/promocode-empty-state.svg"
-        alt=""
-        width={180}
-        height={180}
-        priority
-      />
-      <h2 className="mt-3 text-lg font-bold text-foreground">{title}</h2>
-      <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-        {description}
-      </p>
-    </div>
+    <EmptyState
+      title={title}
+      description={description}
+      size="lg"
+      className="min-h-[400px]"
+      media={
+        <Image
+          src="/icons/promocode-empty-state.svg"
+          alt=""
+          width={180}
+          height={180}
+          priority
+        />
+      }
+    />
   );
 }

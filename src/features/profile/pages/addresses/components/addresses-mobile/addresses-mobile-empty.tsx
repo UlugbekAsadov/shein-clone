@@ -1,4 +1,6 @@
 import { MapPointWave } from "@solar-icons/react/ssr";
+import { EmptyState } from "@/shared/components/empty-state/empty-state";
+import { EmptyStateIcon } from "@/shared/components/empty-state/empty-state-icon";
 
 interface IProps {
   title: string;
@@ -7,18 +9,16 @@ interface IProps {
 
 export function AddressesMobileEmpty({ title, description }: IProps) {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-6 pb-32 text-center">
-      <div className="relative grid size-44 place-items-center">
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-full bg-secondary/60"
+    <EmptyState
+      title={title}
+      description={description}
+      size="lg"
+      className="flex-1 pb-32"
+      media={
+        <EmptyStateIcon
+          icon={<MapPointWave className="relative size-24 text-muted-foreground" />}
         />
-        <MapPointWave className="relative size-24 text-muted-foreground" />
-      </div>
-      <h2 className="mt-2 text-lg font-bold text-foreground">{title}</h2>
-      <p className="mt-2 max-w-xs text-sm text-muted-foreground">
-        {description}
-      </p>
-    </div>
+      }
+    />
   );
 }

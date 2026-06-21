@@ -13,7 +13,7 @@ export interface IProductAccordionItem {
   body: string;
 }
 
-export interface IProductDetail {
+export interface IProductDetailUI {
   id: string;
   slug: string;
   title: string;

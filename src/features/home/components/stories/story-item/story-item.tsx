@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import { StoryRing } from "./story-ring";
 import { cn } from "@/lib/utils";
 
 interface IProps {
-  shop: IShop;
+  shop: IShopStory;
   onClick: () => void;
   nameClassName?: string;
 }

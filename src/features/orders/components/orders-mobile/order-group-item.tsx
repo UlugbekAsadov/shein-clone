@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IOrderGroupItem } from "@/features/orders/utils/order-group.interface";
+import { groupDigits } from "@/shared/utils/format-price";
 
 interface IProps {
   item: IOrderGroupItem;
@@ -9,7 +10,7 @@ interface IProps {
 
 export function OrderGroupItem({ item, dict }: IProps) {
   const t = dict.profile.orders;
-  const formattedPrice = item.price.toLocaleString("ru-RU").replace(/,/g, " ");
+  const formattedPrice = groupDigits(item.price);
 
   return (
     <div className="flex gap-3 py-3">

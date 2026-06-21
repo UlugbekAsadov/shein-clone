@@ -1,4 +1,4 @@
-export interface IShop {
+export interface IShopStory {
   id: number;
   username: string;
   name: string;
@@ -14,7 +14,7 @@ export interface IShop {
 }
 
 export interface IShopStoriesPage {
-  data: IShop[];
+  data: IShopStory[];
   links: {
     first: string | null;
     last: string | null;

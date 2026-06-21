@@ -2,6 +2,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IOrderDetail } from "@/features/orders/utils/order-detail.interface";
 import { OrderGroupItem } from "@/features/orders/components/orders-mobile/order-group-item";
 import { OrderGroupStatusBadge } from "@/features/orders/components/orders-mobile/order-group-status-badge";
+import { groupDigits } from "@/shared/utils/format-price";
 import { OrderDetailPayment } from "./order-detail-payment";
 
 interface IProps {
@@ -13,9 +14,7 @@ export function OrderDetailCard({ order, dict }: IProps) {
   const t = dict.profile.orders;
   const td = t.detail;
   const statusLabel = t.status[order.status];
-  const formattedTotal = order.totalPrice
-    .toLocaleString("ru-RU")
-    .replace(/,/g, " ");
+  const formattedTotal = groupDigits(order.totalPrice);
 
   return (
     <article className="rounded-[20px] bg-secondary p-3">

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import type { IStory } from "@/features/home/utils/story.interface";
 import { ACTIVE_SLOT_WIDTH, EASING, SLOT_WIDTH, TRANSITION_MS } from "@/features/home/utils/brand-story.constants";
 import { storyApi } from "@/features/home/api/story.api";
@@ -10,7 +10,7 @@ import { getClientSessionId } from "@/lib/session-id";
 import { StoryCard } from "./story-card";
 
 interface IProps {
-  shops: IShop[];
+  shops: IShopStory[];
   initialShopIndex: number;
   onClose: () => void;
 }

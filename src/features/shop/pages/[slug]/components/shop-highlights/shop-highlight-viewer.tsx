@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 import type { IApiShopHighlight } from "@/features/shop/utils/shop-highlight.interface";
 import type { IStory } from "@/features/home/utils/story.interface";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import { ACTIVE_SLOT_WIDTH, EASING, SLOT_WIDTH, TRANSITION_MS } from "@/features/home/utils/brand-story.constants";
 import { storyApi } from "@/features/home/api/story.api";
 import { getClientSessionId } from "@/lib/session-id";
@@ -21,7 +21,7 @@ function firstUnviewedIdx(stories: IStory[]): number {
   return idx === -1 ? 0 : idx;
 }
 
-function toShop(highlight: IApiShopHighlight): IShop {
+function toShop(highlight: IApiShopHighlight): IShopStory {
   return {
     id: highlight.id,
     username: String(highlight.shop_id),

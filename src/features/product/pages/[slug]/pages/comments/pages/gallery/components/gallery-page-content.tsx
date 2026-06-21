@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { CommentsStickyBar } from "@/features/product/pages/[slug]/pages/comments/components/comments-sticky-bar";
-import type { IProductDetail } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
+import type { IProductDetailUI } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
 import type { IGalleryItem } from "@/features/product/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
 import { GalleryDetail } from "./gallery-detail";
 import { GalleryGrid } from "./gallery-grid";
 
 interface IProps {
   items: IGalleryItem[];
-  product: IProductDetail;
+  product: IProductDetailUI;
   backHref: string;
 }
 

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { StoryRing } from "@/features/home/components/stories/story-item/story-ring";
 import { StoryViewer } from "@/features/home/components/stories/story-viewer/story-viewer";
-import type { IShop } from "@/features/home/utils/shop-story.interface";
+import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
 
 interface IProps {
@@ -23,7 +23,7 @@ export function ShopLogoStory({ shop, activeCount, viewedCount, className }: IPr
   const hasStories = activeCount > 0;
   const safeTotal = Math.max(1, activeCount);
 
-  const shopForViewer: IShop = {
+  const shopForViewer: IShopStory = {
     id: shop.id,
     username: shop.username,
     name: shop.display_name,

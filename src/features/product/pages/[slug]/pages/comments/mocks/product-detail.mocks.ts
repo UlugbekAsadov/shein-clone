@@ -3,9 +3,9 @@ import {
   galleryPool,
   sizes,
 } from "@/shared/mocks/product-preview.mocks";
-import type { IProductDetail } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
+import type { IProductDetailUI } from "@/features/product/pages/[slug]/pages/comments/utils/product-detail.interface";
 
-export const productDetailMock: IProductDetail = {
+export const productDetailMock: IProductDetailUI = {
   id: "p-1",
   slug: "womens-casual-pullover-sweatshirt-orange-sports-car",
   title: "Sweatshirt",

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IOrderGroup } from "@/features/orders/utils/order-group.interface";
+import { groupDigits } from "@/shared/utils/format-price";
 import { OrderGroupItem } from "./order-group-item";
 import { OrderGroupStatusBadge } from "./order-group-status-badge";
 
@@ -14,9 +15,7 @@ interface IProps {
 export function OrderGroupCard({ lang, order, dict }: IProps) {
   const t = dict.profile.orders;
   const statusLabel = t.status[order.status];
-  const formattedTotal = order.totalPrice
-    .toLocaleString("ru-RU")
-    .replace(/,/g, " ");
+  const formattedTotal = groupDigits(order.totalPrice);
 
   return (
     <Link
