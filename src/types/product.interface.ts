@@ -1,15 +1,26 @@
+export interface IProductName {
+  uz: string;
+  en: string;
+  ru: string;
+}
+
 export interface IProduct {
-  id: string;
+  id: number;
   slug?: string;
   title: string;
-  subtitle: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
+  name?: IProductName;
+  image_url: string;
   images?: string[];
+  price: number;
+  old_price?: number;
+  discount?: number;
+  discount_type?: string;
+  discount_percentage?: number;
+  currency?: string;
   rating: number;
-  reviews: number;
-  badge?: "Original" | "New" | "Sale";
-  discountLabel?: string;
-  delivery?: string;
+  reviews_count?: number;
+  delivery_date_text?: string;
+  is_original?: boolean;
+  is_wishlist?: boolean;
+  subtitle?: string;
 }

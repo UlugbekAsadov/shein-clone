@@ -24,27 +24,6 @@ interface IProps {
   lang: string;
 }
 
-function toProduct(p: IApiShopProduct): IProduct {
-  return {
-    id: String(p.id),
-    slug: p.slug,
-    title: p.title,
-    subtitle: "",
-    price: p.price,
-    image: p.image_url,
-    rating: p.rating,
-    reviews: 0,
-    badge: p.is_original ? "Original" : undefined,
-    discountLabel:
-      p.discount > 0
-        ? p.discount_type === "percent"
-          ? `${p.discount}%`
-          : String(p.discount)
-        : undefined,
-    delivery: p.delivery_date_text,
-  };
-}
-
 function toApiFilterOptions(opts: IApiShopFilterOptions): IApiFilterOptions {
   return {
     price_range: { min: opts.price_range.min, max: opts.price_range.max },
@@ -90,7 +69,7 @@ export function AllProductsPanel({ shopId, products, initialMeta, filterOptions,
         ...parseShopParams(params),
       });
       if (!result.data) return null;
-      return { products: result.data.map(toProduct), meta: result.meta };
+      return { products: result.data, meta: result.meta };
     },
     [shopId],
   );
@@ -109,7 +88,7 @@ export function AllProductsPanel({ shopId, products, initialMeta, filterOptions,
     <ProductsInfinite
       title=""
       header={null}
-      initialProducts={products.map(toProduct)}
+      initialProducts={products}
       initialMeta={initialMeta}
       initialParams={{ shop_id: String(shopId) }}
       filterOptions={null}

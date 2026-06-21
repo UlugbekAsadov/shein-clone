@@ -10,6 +10,10 @@ import {
   RECOMMENDED_SIZE,
 } from "@/shared/constants/product-preview.constants";
 import { formatPrice } from "@/shared/utils/format-price";
+import {
+  getProductOriginalPrice,
+  getProductReviews,
+} from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 
 interface IProps {
@@ -28,7 +32,9 @@ export const ProductPreviewInfo = ({
   const { currency } = useCurrency();
   const [sizeId, setSizeId] = useState("XS");
   const [qty, setQty] = useState(1);
-  const soldCount = product.reviews * 5 + 123;
+  const reviews = getProductReviews(product);
+  const originalPrice = getProductOriginalPrice(product);
+  const soldCount = reviews * 5 + 123;
 
   return (
     <div className="flex flex-col  pr-2">
@@ -40,7 +46,7 @@ export const ProductPreviewInfo = ({
           <ProductRatingStars />
           <span className="text-secondary-foreground">|</span>
           <span className="text-secondary-foreground">
-            {product.reviews} reviews
+            {reviews} reviews
           </span>
           <span className="text-secondary-foreground">|</span>
           <span className="text-secondary-foreground">{soldCount} sold</span>
@@ -52,14 +58,14 @@ export const ProductPreviewInfo = ({
         <span className="text-4xl font-bold">
           {formatPrice(product.price, currency)}
         </span>
-        {product.originalPrice && (
+        {originalPrice && (
           <span className="text-lg text-secondary-foreground line-through">
-            {formatPrice(product.originalPrice, currency)}
+            {formatPrice(originalPrice, currency)}
           </span>
         )}
-        {product.originalPrice && (
+        {originalPrice && (
           <span className="rounded-md bg-emerald-100 px-2.5 py-1 text-sm font-semibold text-emerald-700">
-            {formatPrice(product.originalPrice - product.price, currency)}
+            {formatPrice(originalPrice - product.price, currency)}
           </span>
         )}
       </div>

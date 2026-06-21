@@ -2,7 +2,6 @@ import { cache } from "react";
 import { ApiError } from "@/core/api/api-error";
 import { productDetailApi } from "@/features/products/api/products-detail.api";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
-import { mapSimilarProductToProduct } from "@/features/products/pages/[slug]/utils/similar-product.mapper";
 import type { ISimilarProductAutoFilter } from "@/features/products/pages/[slug]/utils/similar-product.interface";
 import type { IProduct } from "@/types/product.interface";
 
@@ -29,7 +28,7 @@ export async function getSimilarProducts(
   try {
     const result = await productDetailApi.getSimilarProducts(id);
     return {
-      products: (result.data?.products ?? []).map(mapSimilarProductToProduct),
+      products: result.data?.products ?? [],
       autoFilter: result.data?.auto_filter ?? null,
     };
   } catch (error) {
@@ -44,7 +43,7 @@ export async function getRecommendedProducts(
   try {
     const result = await productDetailApi.getRecommendedProducts(id);
     return {
-      products: (result.data?.products ?? []).map(mapSimilarProductToProduct),
+      products: result.data?.products ?? [],
       autoFilter: result.data?.auto_filter ?? null,
     };
   } catch (error) {

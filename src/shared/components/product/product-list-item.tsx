@@ -6,6 +6,12 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { formatPrice } from "@/shared/utils/format-price";
+import {
+  getProductOriginalPrice,
+  getProductDiscountLabel,
+  getProductBadge,
+  getProductReviews,
+} from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
@@ -26,6 +32,10 @@ export function ProductListItem({ product }: IProps) {
   const query = searchParams.toString();
   const callbackUrl = query ? `${pathname}?${query}` : pathname;
   const href = `/${lang}/products/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
+  const originalPrice = getProductOriginalPrice(product);
+  const discountLabel = getProductDiscountLabel(product);
+  const badge = getProductBadge(product);
+  const reviews = getProductReviews(product);
 
   return (
     <article className="relative">
@@ -36,16 +46,16 @@ export function ProductListItem({ product }: IProps) {
       >
         <div className="relative aspect-3/4 w-[165px] shrink-0 overflow-hidden rounded-[10px] bg-muted">
           <Image
-            src={product.image}
+            src={product.image_url}
             alt={product.title}
             fill
             quality={95}
             sizes="200px"
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-          {product.discountLabel && (
+          {discountLabel && (
             <span className="absolute right-2 top-2 z-10 rounded-[8px] bg-rose-500 px-2 py-1 text-xs font-bold text-white">
-              {product.discountLabel}
+              {discountLabel}
             </span>
           )}
         </div>
@@ -57,38 +67,35 @@ export function ProductListItem({ product }: IProps) {
           </p>
 
           <div className="mt-1 flex items-center gap-3 text-xs">
-            {product.delivery && (
+            {product.delivery_date_text && (
               <span className="flex items-center gap-1.5 font-medium text-muted-foreground">
                 <TruckIconSolid className="size-5" fill="#898991" />
-                {product.delivery}
+                {product.delivery_date_text}
               </span>
             )}
             <span className="flex items-center gap-1 font-semibold text-foreground">
               <Star className="size-4 fill-primary text-primary" />
               {product.rating}
               <span className="font-normal text-muted-foreground">
-                ({product.reviews})
+                ({reviews})
               </span>
             </span>
-            {product.badge && <Tag label={product.badge} variant="success" />}
+            {badge && <Tag label={badge} variant="success" />}
           </div>
 
           <div className="flex flex-col flex-1 justify-end">
-            {product.originalPrice && (
+            {originalPrice && (
               <span className="text-sm font-medium text-muted-foreground line-through">
-                {formatPrice(product.originalPrice, currency)}
+                {formatPrice(originalPrice, currency)}
               </span>
             )}
             <div className="flex items-center gap-2">
               <span className="text-xl font-extrabold">
                 {formatPrice(product.price, currency)}
               </span>
-              {product.originalPrice && (
+              {originalPrice && (
                 <span className="text-sm font-bold text-[#21BE65]">
-                  {formatPrice(
-                    product.originalPrice - product.price,
-                    currency,
-                  )}
+                  {formatPrice(originalPrice - product.price, currency)}
                 </span>
               )}
             </div>

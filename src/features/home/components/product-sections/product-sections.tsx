@@ -1,17 +1,13 @@
 import { Fragment } from "react";
 import { ProductGroup } from "@/features/home/components/product-group/product-group";
 import { FeaturedShops } from "@/features/home/components/featured-shops/featured-shops";
-import type {
-  IProductSection,
-  IApiSectionProduct,
-} from "@/features/home/utils/product-section.interface";
+import type { IProductSection } from "@/features/home/utils/product-section.interface";
 import { buildAutoFilterQuery } from "@/features/home/utils/auto-filter.utils";
 import {
   parseBgColor,
   getBgPrimaryHex,
 } from "@/features/home/utils/bg-color.utils";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
-import type { IProduct } from "@/types/product.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
@@ -23,26 +19,6 @@ interface IProps {
   featuredShopsSubtitle: string;
   followLabel: string;
   followingLabel: string;
-}
-
-function mapApiProduct(apiProduct: IApiSectionProduct): IProduct {
-  return {
-    id: String(apiProduct.id),
-    slug: apiProduct.slug,
-    title: apiProduct.title,
-    subtitle: "",
-    price: apiProduct.price,
-    originalPrice: apiProduct.old_price > 0 ? apiProduct.old_price : undefined,
-    image: apiProduct.image_url,
-    rating: apiProduct.rating,
-    reviews: 0,
-    badge: apiProduct.is_original ? "Original" : undefined,
-    discountLabel:
-      apiProduct.discount_percentage > 0
-        ? `${apiProduct.discount_percentage}%`
-        : undefined,
-    delivery: apiProduct.delivery_date_text,
-  };
 }
 
 export function ProductSections({
@@ -62,7 +38,6 @@ export function ProductSections({
     <>
       {safeSections.map((item, index) => {
         const { section, products } = item;
-        const mappedProducts = products.map(mapApiProduct);
         const sectionNumber = index + 1;
         const isLastSection = index === safeSections.length - 1;
         const shouldShowShops =
@@ -89,7 +64,7 @@ export function ProductSections({
               title={section.name}
               subtitle={section.description}
               viewAllLabel={viewAllLabel}
-              products={mappedProducts}
+              products={products}
               viewAllHref={`/${lang}/demo/products${section.auto_filter ? buildAutoFilterQuery(section.auto_filter) : ""}`}
               bgColor={parsedBg}
               Icon={SectionIcon}

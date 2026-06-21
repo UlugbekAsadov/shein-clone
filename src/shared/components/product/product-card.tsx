@@ -6,6 +6,13 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { formatPrice } from "@/shared/utils/format-price";
+import {
+  getProductImages,
+  getProductOriginalPrice,
+  getProductDiscountLabel,
+  getProductBadge,
+  getProductReviews,
+} from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
@@ -33,10 +40,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const query = searchParams.toString();
   const callbackUrl = query ? `${pathname}?${query}` : pathname;
   const href = `/${lang}/products/${product.slug ?? product.id}?callbackUrl=${encodeURIComponent(callbackUrl)}`;
-  const images =
-    product.images && product.images.length > 0
-      ? product.images
-      : [product.image];
+  const images = getProductImages(product);
+  const originalPrice = getProductOriginalPrice(product);
+  const discountLabel = getProductDiscountLabel(product);
+  const badge = getProductBadge(product);
+  const reviews = getProductReviews(product);
 
   return (
     <article>
@@ -121,19 +129,19 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               className={cn("size-4.5 text-secondary-foreground", "md:size-5")}
             />
           </button>
-          {product.discountLabel && (
+          {discountLabel && (
             <span
               className={cn(
                 "absolute left-2 top-2 z-20 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
                 "md:left-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
               )}
             >
-              {product.discountLabel}
+              {discountLabel}
             </span>
           )}
-          {product.badge && (
+          {badge && (
             <Tag
-              label={product.badge}
+              label={badge}
               variant="success"
               className="absolute bottom-3 left-3 z-20"
             />
@@ -153,9 +161,9 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             <span className="text-base font-extrabold">
               {formatPrice(product.price, currency)}
             </span>
-            {product.originalPrice && (
+            {originalPrice && (
               <span className="text-xs text-muted-foreground line-through font-medium">
-                {formatPrice(product.originalPrice, currency)}
+                {formatPrice(originalPrice, currency)}
               </span>
             )}
           </div>
@@ -166,17 +174,17 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             )}
           >
             <div className={cn("px-2.5 py-2 flex items-center gap-1.5 rounded-[10px] h-9", isSecondary ? "bg-card" : "bg-secondary")}>
-              {product.delivery && (
+              {product.delivery_date_text && (
                 <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                   <TruckIconSolid className="size-5" fill="#898991" />
-                  {product.delivery}
+                  {product.delivery_date_text}
                 </span>
               )}
               <span className="flex items-center gap-1 text-xs font-semibold text-foreground ">
                 <Star className="size-4 fill-amber-400 text-amber-400" />
                 {product.rating}
                 <span className="text-muted-foreground font-normal">
-                  ({product.reviews})
+                  ({reviews})
                 </span>
               </span>
             </div>

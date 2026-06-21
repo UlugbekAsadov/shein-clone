@@ -12,22 +12,22 @@ const productImg = (n: number) => PRODUCT_IMAGES[n % PRODUCT_IMAGES.length];
 
 interface IPriceVariant {
   price: number;
-  originalPrice: number;
-  discountLabel: string;
+  oldPrice: number;
+  discountPercentage: number;
 }
 
 const PRICE_VARIANTS: IPriceVariant[] = [
-  { price: 33.49, originalPrice: 63.49, discountLabel: "47%" },
-  { price: 24.99, originalPrice: 39.99, discountLabel: "38%" },
-  { price: 45.0, originalPrice: 75.0, discountLabel: "40%" },
-  { price: 18.99, originalPrice: 29.99, discountLabel: "37%" },
-  { price: 59.99, originalPrice: 99.99, discountLabel: "40%" },
+  { price: 33.49, oldPrice: 63.49, discountPercentage: 47 },
+  { price: 24.99, oldPrice: 39.99, discountPercentage: 38 },
+  { price: 45.0, oldPrice: 75.0, discountPercentage: 40 },
+  { price: 18.99, oldPrice: 29.99, discountPercentage: 37 },
+  { price: 59.99, oldPrice: 99.99, discountPercentage: 40 },
 ];
 
 const baseProduct = (
-  id: string,
+  id: number,
   index: number,
-  badge?: IProduct["badge"],
+  isOriginal = false,
 ): IProduct => {
   const variant = PRICE_VARIANTS[index % PRICE_VARIANTS.length];
   return {
@@ -35,8 +35,9 @@ const baseProduct = (
     title: "Sweatshirt",
     subtitle: "Women's Casual Pullover Sweats...",
     price: variant.price,
-    originalPrice: variant.originalPrice,
-    image: productImg(index),
+    old_price: variant.oldPrice,
+    discount_percentage: variant.discountPercentage,
+    image_url: productImg(index),
     images: [
       productImg(index),
       productImg(index + 1),
@@ -44,34 +45,33 @@ const baseProduct = (
       productImg(index + 3),
     ],
     rating: 4.5,
-    reviews: 324,
-    badge,
-    discountLabel: variant.discountLabel,
-    delivery: "1-2 days",
+    reviews_count: 324,
+    is_original: isOriginal,
+    delivery_date_text: "1-2 days",
   };
 };
 
 export const trendingProducts: IProduct[] = Array.from({ length: 10 }, (_, i) =>
-  baseProduct(`t${i + 1}`, i, i === 0 ? "Original" : undefined),
+  baseProduct(i + 1, i, i === 0),
 );
 
 export const womensFashion: IProduct[] = [
-  { ...baseProduct("w1", 0), title: "FUNNY RACING" },
-  { ...baseProduct("w2", 1), title: "Street Sears Retro" },
-  { ...baseProduct("w3", 2), title: "Summer shirts" },
-  { ...baseProduct("w4", 3), title: "Sweatshirt" },
-  { ...baseProduct("w5", 4), title: "Sweatshirt" },
-  { ...baseProduct("w6", 5), title: "Sweatshirt" },
-  { ...baseProduct("w7", 6), title: "Sweatshirt" },
-  { ...baseProduct("w8", 7), title: "Sweatshirt" },
-  { ...baseProduct("w9", 8), title: "Sweatshirt" },
-  { ...baseProduct("w10", 9), title: "Sweatshirt" },
+  { ...baseProduct(101, 0), title: "FUNNY RACING" },
+  { ...baseProduct(102, 1), title: "Street Sears Retro" },
+  { ...baseProduct(103, 2), title: "Summer shirts" },
+  { ...baseProduct(104, 3), title: "Sweatshirt" },
+  { ...baseProduct(105, 4), title: "Sweatshirt" },
+  { ...baseProduct(106, 5), title: "Sweatshirt" },
+  { ...baseProduct(107, 6), title: "Sweatshirt" },
+  { ...baseProduct(108, 7), title: "Sweatshirt" },
+  { ...baseProduct(109, 8), title: "Sweatshirt" },
+  { ...baseProduct(110, 9), title: "Sweatshirt" },
 ];
 
 export const moreToExplore: IProduct[] = Array.from({ length: 10 }, (_, i) =>
-  baseProduct(`m${i + 1}`, i, i === 0 ? "Original" : undefined),
+  baseProduct(201 + i, i, i === 0),
 );
 
 export const hotDeals: IProduct[] = Array.from({ length: 10 }, (_, i) =>
-  baseProduct(`h${i + 1}`, i, i === 0 ? "Original" : undefined),
+  baseProduct(301 + i, i, i === 0),
 );

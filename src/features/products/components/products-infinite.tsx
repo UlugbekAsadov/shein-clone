@@ -6,10 +6,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ListingShell } from "@/shared/components/listing/listing-shell";
 import { productsApi } from "@/features/products/api/products.api";
 import type { IProduct } from "@/types/product.interface";
-import type {
-  IApiProductsMeta,
-  IApiProductsProduct,
-} from "@/features/products/utils/products-response.interface";
+import type { IApiProductsMeta } from "@/features/products/utils/products-response.interface";
 import type { IApiFilterOptions } from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
 import { CategoryFilterSidebar } from "@/features/category/pages/[slug]/components/category-filter-sidebar/category-filter-sidebar";
@@ -152,31 +149,6 @@ interface IProps {
   onFiltersChange?: (params: Record<string, string>) => void;
 }
 
-function mapProduct(p: IApiProductsProduct): IProduct {
-  return {
-    id: String(p.id),
-    slug: p.slug,
-    title: p.title,
-    subtitle: "",
-    price: p.price,
-    originalPrice:
-      p.discount > 0 && p.discount_type === "fixed"
-        ? p.price + p.discount
-        : p.discount > 0 && p.discount_type === "percent"
-          ? p.price / (1 - p.discount / 100)
-          : undefined,
-    image: p.image_url,
-    rating: p.rating,
-    reviews: 0,
-    badge: p.is_original ? "Original" : undefined,
-    discountLabel:
-      p.discount_type === "percent" && p.discount > 0
-        ? `${p.discount}%`
-        : undefined,
-    delivery: p.delivery_date_text,
-  };
-}
-
 export function ProductsInfinite({
   title,
   header,
@@ -295,7 +267,7 @@ export function ProductsInfinite({
         } else {
           const res = await productsApi.getProducts(mergedParams, page);
           if (!res.data) return;
-          incoming = res.data.data.map(mapProduct);
+          incoming = res.data.data;
           newMeta = res.data.meta;
         }
 

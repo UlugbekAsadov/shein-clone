@@ -63,16 +63,15 @@ export function ProductGroup({
     descriptionColor ??
     (resolvedTextColor && primaryHex ? `${resolvedTextColor}b3` : undefined);
 
-  const sectionBgStyle =
-    bgColor
-      ? getBgStyle(bgColor)
-      : bgImage
-        ? {
-            backgroundImage: `url(${bgImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }
-        : {};
+  const sectionBgStyle = bgColor
+    ? getBgStyle(bgColor)
+    : bgImage
+      ? {
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }
+      : {};
 
   return (
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>

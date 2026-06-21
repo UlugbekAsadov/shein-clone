@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import type { IProduct } from "@/types/product.interface";
 import { formatPrice } from "@/shared/utils/format-price";
+import { getProductOriginalPrice } from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import { Heart } from "@solar-icons/react";
@@ -19,6 +20,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
   const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const href = `/${lang}/products/${product.slug ?? product.id}`;
+  const originalPrice = getProductOriginalPrice(product);
 
   return (
     <Link
@@ -32,7 +34,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
     >
       <div className="relative aspect-4/5 overflow-hidden bg-muted">
         <Image
-          src={product.image}
+          src={product.image_url}
           alt={product.title}
           fill
           quality={95}
@@ -60,9 +62,9 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
           <span className="text-lg font-bold">
             {formatPrice(product.price, currency)}
           </span>
-          {product.originalPrice && (
+          {originalPrice && (
             <span className="text-sm text-muted-foreground line-through">
-              {formatPrice(product.originalPrice, currency)}
+              {formatPrice(originalPrice, currency)}
             </span>
           )}
         </div>
