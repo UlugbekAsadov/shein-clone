@@ -64,7 +64,7 @@ export function ProductGroup({
     (resolvedTextColor && primaryHex ? `${resolvedTextColor}b3` : undefined);
 
   const sectionBgStyle =
-    type === "card" && bgColor
+    bgColor
       ? getBgStyle(bgColor)
       : bgImage
         ? {
@@ -77,13 +77,20 @@ export function ProductGroup({
   return (
     <section className={cn("mx-auto max-w-360 px-4 py-2", "md:px-6 md:py-3")}>
       <div
-        className={cn(`rounded-md md:rounded-xl`, "md:p-5")}
+        className={cn(
+          `rounded-md md:rounded-xl`,
+          "md:p-5",
+          type === "list" && "max-md:bg-transparent! max-md:bg-none!",
+        )}
         style={sectionBgStyle}
       >
         <ProductGroupHeader
           title={
             <span
-              className={cn("flex items-center gap-2")}
+              className={cn(
+                "flex items-center gap-2 whitespace-nowrap",
+                type === "list" && "max-md:text-foreground!",
+              )}
               style={{ color: resolvedTextColor }}
             >
               {title}
@@ -95,6 +102,7 @@ export function ProductGroup({
           viewAllLabel={viewAllLabel}
           viewAllHiddenOnMobile={type === "card"}
           subTitleColor={resolvedDescriptionColor}
+          colorHiddenOnMobile={type === "list"}
           timer={timer}
           timerColor={timerColor}
         />
@@ -109,7 +117,7 @@ export function ProductGroup({
                 <Link
                   href={viewAllHref}
                   className={cn(
-                    "mt-3 grid h-10.5 w-full place-items-center rounded-[12px] bg-foreground text-base font-semibold text-background hover:bg-foreground/90",
+                    "mt-3 grid h-10.5 w-full place-items-center rounded-[12px] bg-foreground text-base font-semibold text-background whitespace-nowrap hover:bg-foreground/90",
                   )}
                 >
                   {viewAllLabel}

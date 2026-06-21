@@ -53,7 +53,7 @@ export function ProductSliderCard({ product, variant = "default" }: IProps) {
       </div>
 
       <div className="flex flex-col items-center gap-1 px-3 py-4 text-center">
-        <h3 className="text-base font-semibold leading-tight">
+        <h3 className="text-base font-semibold leading-tight line-clamp-1">
           {product.title}
         </h3>
         <div className="flex items-baseline gap-2">

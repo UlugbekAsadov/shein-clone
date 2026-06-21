@@ -13,6 +13,7 @@ interface IProps {
   className?: string;
   subTitleClassName?: string;
   subTitleColor?: string;
+  colorHiddenOnMobile?: boolean;
   timer?: number;
   timerColor?: string;
 }
@@ -27,6 +28,7 @@ export function ProductGroupHeader({
   className,
   subTitleClassName,
   subTitleColor,
+  colorHiddenOnMobile,
   timer,
   timerColor,
 }: IProps) {
@@ -56,6 +58,7 @@ export function ProductGroupHeader({
             <p
               className={cn(
                 "mt-1 text-xs text-muted-foreground",
+                colorHiddenOnMobile && "max-md:text-muted-foreground!",
                 subTitleClassName,
               )}
               style={{ color: subTitleColor }}
@@ -74,8 +77,9 @@ export function ProductGroupHeader({
             <Link
               href={viewAllHref}
               className={cn(
-                "inline-flex text-[13px] md:text-base items-center gap-1 font-medium text-secondary-foreground",
+                "inline-flex text-[13px] whitespace-nowrap md:text-base items-center gap-1 font-medium text-secondary-foreground",
                 viewAllHiddenOnMobile && "hidden md:inline-flex",
+                colorHiddenOnMobile && "max-md:text-secondary-foreground!",
                 className,
               )}
               style={{ color: subTitleColor }}
