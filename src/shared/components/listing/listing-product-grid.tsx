@@ -2,7 +2,6 @@
 
 import type { IProduct } from "@/types/product.interface";
 import { ProductCard } from "@/shared/components/product/product-card";
-import { ProductListItem } from "@/shared/components/product/product-list-item";
 import { cn } from "@/lib/utils";
 import { useListingView } from "./hooks/use-listing-view";
 
@@ -13,9 +12,8 @@ interface IProps {
 }
 
 const desktopGridByView = {
-  comfortable: "md:grid-cols-3",
-  compact: "md:grid-cols-4",
-  list: "md:grid-cols-1",
+  comfortable: "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
+  compact: "md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6",
 } as const;
 
 export function ListingProductGrid({
@@ -33,19 +31,11 @@ export function ListingProductGrid({
         ))}
       </div>
 
-      {view === "list" ? (
-        <div className="hidden flex-col gap-3 md:flex">
-          {products.map((p) => (
-            <ProductListItem key={p.id} product={p} />
-          ))}
-        </div>
-      ) : (
-        <div className={cn("hidden gap-3 md:grid", desktopGridByView[view])}>
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      )}
+      <div className={cn("hidden gap-3 md:grid", desktopGridByView[view])}>
+        {products.map((p) => (
+          <ProductCard key={p.id} product={p} />
+        ))}
+      </div>
     </div>
   );
 }

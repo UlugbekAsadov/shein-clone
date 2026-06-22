@@ -6,4 +6,5 @@ export interface IActiveFilters {
   maxPrice: number | null;
   hasDiscount: boolean;
   isOriginal: boolean;
+  attributeItemIds: number[];
 }

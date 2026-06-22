@@ -12,7 +12,7 @@ import type {
   IApiShopProductsMeta,
 } from "@/features/shop/utils/shop-response.interface";
 import { shopApi } from "@/features/shop/api/shop.api";
-import { CategoryFilterSidebar } from "@/features/category/pages/[slug]/components/category-filter-sidebar/category-filter-sidebar";
+import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
 import { ProductsInfinite } from "@/features/products/components/products-infinite";
 
 interface IProps {
@@ -96,10 +96,10 @@ export function AllProductsPanel({ shopId, products, initialMeta, filterOptions,
       quickFiltersLabels={dict.nav.filters}
       fetchProducts={fetchProducts}
       onFiltersChange={handleFiltersChange}
-      renderFilterSidebar={
+      renderFilterBar={
         apiFilterOptions
           ? (onApply, initialFilters) => (
-              <CategoryFilterSidebar
+              <CategoryFilterBar
                 filterOptions={apiFilterOptions}
                 initialFilters={initialFilters}
                 onApply={onApply}

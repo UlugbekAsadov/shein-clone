@@ -1,17 +1,16 @@
 import type { IProduct } from "@/types/product.interface";
-import { FilterSidebar } from "./filter-sidebar/filter-sidebar";
 import { ListingMobileHeader } from "./listing-mobile-header/listing-mobile-header";
 import { ListingProductGrid } from "./listing-product-grid";
 import { ListingProductGridSkeleton } from "./listing-product-grid-skeleton";
-import { ListingTabs } from "./listing-tabs";
-import { ListingToolbar } from "./listing-toolbar";
-import { cn } from "@/lib/utils";
+import { ListingCount } from "./listing-count";
+import { ListingSort } from "./listing-sort";
+import { ListingViewToggle } from "./listing-view-toggle";
 
 interface IProps {
   title: string;
   header: React.ReactNode;
   products: IProduct[];
-  filterSidebarSlot?: React.ReactNode;
+  filterBarSlot?: React.ReactNode;
   productCount?: number;
   isLoading?: boolean;
   dict: {
@@ -54,11 +53,10 @@ export function ListingShell({
   title,
   header,
   products,
-  filterSidebarSlot,
+  filterBarSlot,
   productCount,
   isLoading,
   dict,
-  quickFiltersLabels,
 }: IProps) {
   return (
     <div className="mx-auto max-w-360 px-4 pb-6 pt-2 md:px-6 md:pt-4">
@@ -69,46 +67,37 @@ export function ListingShell({
         dict={dict.filter}
       />
 
-      {header && (
-        <div className={cn("hidden md:mb-6", "md:block")}>
-          {header}
-          {/* <div className="mt-4">
-          <ListingTabs
-          similarLabel={dict.tabs.similar}
-          dealsLabel={dict.tabs.deals}
-          />
-          </div> */}
-        </div>
-      )}
+      {header && <div className="hidden md:mb-4 md:block">{header}</div>}
 
-      <div className="md:flex md:gap-8">
-        {filterSidebarSlot ?? (
-          <FilterSidebar
-            dict={dict.filter}
-            quickFiltersLabels={quickFiltersLabels}
-          />
-        )}
+      <div className="hidden md:block">
+        <ListingCount
+          label={dict.toolbar.productFound}
+          count={productCount}
+          isLoading={isLoading}
+        />
 
-        <div className="flex-1">
-          <ListingToolbar
-            productFoundLabel={dict.toolbar.productFound}
-            mostPopularLabel={dict.toolbar.mostPopular}
-            priceLabel={dict.toolbar.price}
-            sortLabels={{
-              newest: dict.toolbar.sortNewest,
-              priceLow: dict.toolbar.sortPriceLow,
-              priceHigh: dict.toolbar.sortPriceHigh,
-              rating: dict.toolbar.sortRating,
-            }}
-            productCount={productCount}
-          />
-          {isLoading ? (
-            <ListingProductGridSkeleton />
-          ) : (
-            <ListingProductGrid products={products} />
-          )}
+        <div className="mt-4 mb-6 flex items-start gap-3">
+          <div className="flex flex-1 flex-wrap items-center gap-2">
+            {filterBarSlot}
+          </div>
+          <div className="flex shrink-0 items-center gap-2">
+            <ListingSort
+              priceLabel={dict.toolbar.price}
+              sortLabels={{
+                priceLow: dict.toolbar.sortPriceLow,
+                priceHigh: dict.toolbar.sortPriceHigh,
+              }}
+            />
+            <ListingViewToggle />
+          </div>
         </div>
       </div>
+
+      {isLoading ? (
+        <ListingProductGridSkeleton />
+      ) : (
+        <ListingProductGrid products={products} />
+      )}
     </div>
   );
 }

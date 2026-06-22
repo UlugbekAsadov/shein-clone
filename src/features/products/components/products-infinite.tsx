@@ -9,12 +9,13 @@ import type { IProduct } from "@/types/product.interface";
 import type { IApiProductsMeta } from "@/features/products/utils/products-response.interface";
 import type { IApiFilterOptions } from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
-import { CategoryFilterSidebar } from "@/features/category/pages/[slug]/components/category-filter-sidebar/category-filter-sidebar";
+import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
 
 const FILTER_PARAM_KEYS = [
   "category_ids",
   "brand_ids",
   "season_ids",
+  "attribute_ids",
   "min_price",
   "max_price",
   "has_discount",
@@ -33,6 +34,7 @@ function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
     categoryIds: getIds("category_ids"),
     brandIds: getIds("brand_ids"),
     seasonIds: getIds("season_ids"),
+    attributeItemIds: getIds("attribute_ids"),
     minPrice:
       params.get("min_price") !== null ? Number(params.get("min_price")) : null,
     maxPrice:
@@ -47,6 +49,7 @@ function hasActiveFilters(filters: IActiveFilters): boolean {
     filters.categoryIds.length > 0 ||
     filters.brandIds.length > 0 ||
     filters.seasonIds.length > 0 ||
+    filters.attributeItemIds.length > 0 ||
     filters.minPrice !== null ||
     filters.maxPrice !== null ||
     filters.hasDiscount ||
@@ -67,6 +70,8 @@ function mergeParamsWithFilters(
     result.brand_ids = filters.brandIds.join(",");
   if (filters.seasonIds.length > 0)
     result.season_ids = filters.seasonIds.join(",");
+  if (filters.attributeItemIds.length > 0)
+    result.attribute_ids = filters.attributeItemIds.join(",");
   if (filters.minPrice !== null) result.min_price = String(filters.minPrice);
   if (filters.maxPrice !== null) result.max_price = String(filters.maxPrice);
   if (filters.hasDiscount) result.has_discount = "1";
@@ -94,6 +99,7 @@ const EMPTY_FILTERS: IActiveFilters = {
   categoryIds: [],
   brandIds: [],
   seasonIds: [],
+  attributeItemIds: [],
   minPrice: null,
   maxPrice: null,
   hasDiscount: false,
@@ -148,7 +154,7 @@ interface IProps {
     params: Record<string, string>,
     page: number,
   ) => Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null>;
-  renderFilterSidebar?: (
+  renderFilterBar?: (
     onApply: (filters: IActiveFilters) => void,
     initialFilters: IActiveFilters,
   ) => React.ReactNode;
@@ -165,7 +171,7 @@ export function ProductsInfinite({
   dict,
   quickFiltersLabels,
   fetchProducts,
-  renderFilterSidebar,
+  renderFilterBar,
   onFiltersChange,
 }: IProps) {
   const router = useRouter();
@@ -332,10 +338,10 @@ export function ProductsInfinite({
     return () => observer.disconnect();
   }, [loadMore, hasMore]);
 
-  const filterSidebarSlot = renderFilterSidebar ? (
-    renderFilterSidebar(handleApplyFilters, initialFilters)
+  const filterBarSlot = renderFilterBar ? (
+    renderFilterBar(handleApplyFilters, initialFilters)
   ) : filterOptions ? (
-    <CategoryFilterSidebar
+    <CategoryFilterBar
       filterOptions={filterOptions}
       onApply={handleApplyFilters}
       initialFilters={initialFilters}
@@ -350,7 +356,7 @@ export function ProductsInfinite({
         title={title}
         header={header}
         products={products}
-        filterSidebarSlot={filterSidebarSlot}
+        filterBarSlot={filterBarSlot}
         productCount={meta.total}
         isLoading={isLoading}
         dict={dict}
