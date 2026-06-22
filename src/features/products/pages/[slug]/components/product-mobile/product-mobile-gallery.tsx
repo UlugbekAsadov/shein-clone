@@ -10,15 +10,17 @@ import { cn } from "@/lib/utils";
 interface IProps {
   images: string[];
   alt: string;
+  activeIndex?: number;
 }
 
-export function ProductMobileGallery({ images, alt }: IProps) {
+export function ProductMobileGallery({ images, alt, activeIndex }: IProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const [emblaRef, emblaApi] = useEmblaCarousel({ align: "start" });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const prevImagesRef = useRef(images);
+  const imagesKey = images.join("|");
+  const prevImagesKeyRef = useRef(imagesKey);
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -34,12 +36,20 @@ export function ProductMobileGallery({ images, alt }: IProps) {
 
   useEffect(() => {
     if (!emblaApi) return;
-    if (prevImagesRef.current === images) return;
-    prevImagesRef.current = images;
+    if (prevImagesKeyRef.current === imagesKey) return;
+    prevImagesKeyRef.current = imagesKey;
+    const target = activeIndex ?? 0;
     emblaApi.reInit();
-    emblaApi.scrollTo(0, true);
-    setSelectedIndex(0);
-  }, [images, emblaApi]);
+    emblaApi.scrollTo(target, true);
+    setSelectedIndex(target);
+  }, [imagesKey, emblaApi, activeIndex]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (activeIndex === undefined) return;
+    if (activeIndex === emblaApi.selectedScrollSnap()) return;
+    emblaApi.scrollTo(activeIndex);
+  }, [activeIndex, emblaApi]);
 
   return (
     <div className="relative">

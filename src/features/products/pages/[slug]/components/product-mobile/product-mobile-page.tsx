@@ -15,7 +15,6 @@ import type {
 } from "@/features/products/pages/[slug]/utils/review.interface";
 import {
   getVariantColorSwatches,
-  getVariantImages,
   getVariantSizes,
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
 import { getOriginalPrice } from "@/shared/utils/product-display";
@@ -102,17 +101,23 @@ export function ProductMobilePage({
     [pathname, router, searchParams],
   );
 
-  const mobileGalleryImages = getVariantImages(
-    product.variant_clothes,
-    colorId,
-    [product.image_url, ...product.additional_images],
-  );
+  const hasVariants = product.variant_clothes.length > 0;
+  const mobileGalleryImages = hasVariants
+    ? product.variant_clothes.map((variant) => variant.image_url)
+    : [product.image_url, ...product.additional_images];
+  const activeImageIndex = hasVariants
+    ? Math.max(
+        0,
+        product.variant_clothes.findIndex((variant) => variant.color === colorId),
+      )
+    : 0;
 
   return (
     <div className="md:hidden">
       <ProductMobileGallery
         images={mobileGalleryImages}
         alt={product.title}
+        activeIndex={activeImageIndex}
       />
 
       <div className="relative -mt-4 flex flex-col rounded-t-[20px] bg-background px-3 pt-3 pb-3">
