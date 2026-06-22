@@ -132,7 +132,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             <span
               className={cn(
                 "absolute left-2 top-2 z-20 rounded-full bg-rose-500 px-1 py-0.5 text-[11px] font-bold text-white",
-                "md:left-3 md:top-3 md:rounded-[8px] md:px-2 md:py-1.5 md:text-xs",
+                "md:left-3 md:top-3 md:rounded-[8px] md:px-1.5 md:py-1 md:text-xs",
               )}
             >
               {discountLabel}
@@ -143,6 +143,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               label={badge}
               variant="success"
               className="absolute bottom-3 left-3 z-20"
+              size='sm'
             />
           )}
         </div>

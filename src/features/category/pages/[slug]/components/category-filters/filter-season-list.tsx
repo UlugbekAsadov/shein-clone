@@ -1,15 +1,15 @@
 "use client";
 
 import { Checkbox } from "@/shared/components/ui/checkbox";
-import type { IApiFilterAttributeItem } from "@/types/filter-options.interface";
+import type { IApiFilterSeason } from "@/types/filter-options.interface";
 
 interface IProps {
-  items: IApiFilterAttributeItem[];
+  seasons: IApiFilterSeason[];
   selectedIds: number[];
   onChange: (ids: number[]) => void;
 }
 
-export function FilterBarAttribute({ items, selectedIds, onChange }: IProps) {
+export function FilterSeasonList({ seasons, selectedIds, onChange }: IProps) {
   const toggle = (id: number) => {
     if (selectedIds.includes(id)) {
       onChange(selectedIds.filter((i) => i !== id));
@@ -20,14 +20,14 @@ export function FilterBarAttribute({ items, selectedIds, onChange }: IProps) {
 
   return (
     <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
-      {items.map((item) => (
-        <li key={item.id} className="py-1.5">
+      {seasons.map((season) => (
+        <li key={season.id} className="py-1.5">
           <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium">
             <Checkbox
-              checked={selectedIds.includes(item.id)}
-              onCheckedChange={() => toggle(item.id)}
+              checked={selectedIds.includes(season.id)}
+              onCheckedChange={() => toggle(season.id)}
             />
-            <span>{item.name}</span>
+            <span>{season.name}</span>
           </label>
         </li>
       ))}

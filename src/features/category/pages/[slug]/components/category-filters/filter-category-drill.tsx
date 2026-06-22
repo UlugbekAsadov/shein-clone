@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
+import { ArrowLeft, AltArrowRight } from "@solar-icons/react";
 import type { IApiFilterCategoryNode } from "@/types/filter-options.interface";
 
 interface IProps {
@@ -63,9 +63,11 @@ export function FilterCategoryDrill({
         <button
           type="button"
           onClick={goBack}
-          className="flex items-center gap-1 pb-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground cursor-pointer"
+          className={cn(
+            "flex w-full items-center gap-2 rounded-[8px] pb-2 text-left transition-colors cursor-pointer font-medium hover:text-primary text-muted-foreground",
+          )}
         >
-          <AltArrowLeft className="size-4.5" />
+          <ArrowLeft className="size-5" />
           <span>{backLabel}</span>
         </button>
       )}
@@ -74,7 +76,7 @@ export function FilterCategoryDrill({
         {header ? header.name : rootLabel}
       </p>
 
-      <ul className="flex max-h-72 flex-col overflow-y-auto">
+      <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
         {currentChildren.map((node) => {
           const hasChildren = !!node.children?.length;
           const isSelected = selectedIds.includes(node.id);
@@ -84,7 +86,7 @@ export function FilterCategoryDrill({
                 type="button"
                 onClick={() => handleNodeClick(node)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-2 rounded-[8px] px-1.5 py-2 text-left text-sm transition-colors cursor-pointer hover:bg-secondary",
+                  "flex w-full items-center justify-between gap-2 rounded-[8px] py-2 text-left text-sm transition-colors cursor-pointer hover:text-primary",
                   isSelected
                     ? "font-semibold text-primary"
                     : "font-medium text-muted-foreground",

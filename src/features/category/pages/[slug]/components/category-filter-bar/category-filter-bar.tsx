@@ -1,17 +1,36 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { IApiFilterOptions } from "@/types/filter-options.interface";
+import type {
+  IApiFilterOptions,
+  IApiFilterCategoryNode,
+} from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
 import { FilterBarDropdown } from "@/shared/components/listing/filter-bar/filter-bar-dropdown";
 import { FilterCategoryDrill } from "@/features/category/pages/[slug]/components/category-filters/filter-category-drill";
 import { FilterPriceRange } from "@/features/category/pages/[slug]/components/category-filters/filter-price-range";
 import { FilterBrandList } from "@/features/category/pages/[slug]/components/category-filters/filter-brand-list";
-import { FilterSeasonChips } from "@/features/category/pages/[slug]/components/category-filters/filter-season-chips";
+import { FilterSeasonList } from "@/features/category/pages/[slug]/components/category-filters/filter-season-list";
 import { FilterBarAttribute } from "./filter-bar-attribute";
+import { FilterBarColor } from "./filter-bar-color";
 import { FilterBarQuickChips } from "./filter-bar-quick-chips";
 
 const DEBOUNCE_MS = 500;
+
+function findCategoryParentName(
+  nodes: IApiFilterCategoryNode[],
+  targetId: number,
+  parentName: string | null = null,
+): string | null | undefined {
+  for (const node of nodes) {
+    if (node.id === targetId) return parentName;
+    if (node.children?.length) {
+      const found = findCategoryParentName(node.children, targetId, node.name);
+      if (found !== undefined) return found;
+    }
+  }
+  return undefined;
+}
 
 interface IDict {
   category: string;
@@ -43,6 +62,7 @@ export function CategoryFilterBar({
   quickFiltersLabels,
 }: IProps) {
   const [pending, setPending] = useState<IActiveFilters>(initialFilters);
+  const [categoryOpen, setCategoryOpen] = useState(false);
   const onApplyRef = useRef(onApply);
   const isFirstRender = useRef(true);
 
@@ -85,15 +105,24 @@ export function CategoryFilterBar({
     <div className="flex flex-wrap items-center gap-2">
       {filterOptions.categories.length > 0 && (
         <FilterBarDropdown
-          label={dict.category}
-          count={pending.categoryIds.length}
+          label={
+            (pending.categoryIds.length > 0
+              ? findCategoryParentName(
+                  filterOptions.categories,
+                  pending.categoryIds[0],
+                )
+              : null) ?? dict.category
+          }
+          open={categoryOpen}
+          onOpenChange={setCategoryOpen}
         >
           <FilterCategoryDrill
             nodes={filterOptions.categories}
             selectedIds={pending.categoryIds}
-            onChange={(ids) =>
-              setPending((prev) => ({ ...prev, categoryIds: ids }))
-            }
+            onChange={(ids) => {
+              setPending((prev) => ({ ...prev, categoryIds: ids }));
+              if (ids.length > 0) setCategoryOpen(false);
+            }}
             rootLabel={dict.category}
           />
         </FilterBarDropdown>
@@ -110,11 +139,19 @@ export function CategoryFilterBar({
             label={attribute.name}
             count={selectedIds.length}
           >
-            <FilterBarAttribute
-              items={attribute.items}
-              selectedIds={selectedIds}
-              onChange={(nextIds) => setAttributeIds(itemIds, nextIds)}
-            />
+            {attribute.slug === "color" ? (
+              <FilterBarColor
+                items={attribute.items}
+                selectedIds={selectedIds}
+                onChange={(nextIds) => setAttributeIds(itemIds, nextIds)}
+              />
+            ) : (
+              <FilterBarAttribute
+                items={attribute.items}
+                selectedIds={selectedIds}
+                onChange={(nextIds) => setAttributeIds(itemIds, nextIds)}
+              />
+            )}
           </FilterBarDropdown>
         );
       })}
@@ -144,8 +181,11 @@ export function CategoryFilterBar({
       )}
 
       {filterOptions.seasons.length > 0 && (
-        <FilterBarDropdown label={dict.seasons} count={pending.seasonIds.length}>
-          <FilterSeasonChips
+        <FilterBarDropdown
+          label={dict.seasons}
+          count={pending.seasonIds.length}
+        >
+          <FilterSeasonList
             seasons={filterOptions.seasons}
             selectedIds={pending.seasonIds}
             onChange={(ids) =>

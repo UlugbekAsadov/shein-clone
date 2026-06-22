@@ -12,6 +12,8 @@ interface IProps {
   count?: number;
   children: React.ReactNode;
   contentClassName?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export function FilterBarDropdown({
@@ -19,11 +21,13 @@ export function FilterBarDropdown({
   count,
   children,
   contentClassName,
+  open,
+  onOpenChange,
 }: IProps) {
   const active = !!count && count > 0;
 
   return (
-    <HoverCard>
+    <HoverCard open={open} onOpenChange={onOpenChange}>
       <HoverCardTrigger asChild>
         <button
           type="button"

@@ -44,7 +44,7 @@ export function FilterBrandList({
           className="h-9 pl-9 text-sm rounded-[12px] bg-secondary"
         />
       </div>
-      <ul className="flex flex-col">
+      <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
         {filtered.map((brand) => (
           <li
             key={brand.id}

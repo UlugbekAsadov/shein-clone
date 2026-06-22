@@ -3,7 +3,6 @@ import { ListingMobileHeader } from "./listing-mobile-header/listing-mobile-head
 import { ListingProductGrid } from "./listing-product-grid";
 import { ListingProductGridSkeleton } from "./listing-product-grid-skeleton";
 import { ListingCount } from "./listing-count";
-import { ListingSort } from "./listing-sort";
 import { ListingViewToggle } from "./listing-view-toggle";
 
 interface IProps {
@@ -81,13 +80,6 @@ export function ListingShell({
             {filterBarSlot}
           </div>
           <div className="flex shrink-0 items-center gap-2">
-            <ListingSort
-              priceLabel={dict.toolbar.price}
-              sortLabels={{
-                priceLow: dict.toolbar.sortPriceLow,
-                priceHigh: dict.toolbar.sortPriceHigh,
-              }}
-            />
             <ListingViewToggle />
           </div>
         </div>

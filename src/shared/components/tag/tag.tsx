@@ -13,7 +13,7 @@ const VARIANT_BG: Record<NonNullable<IProps["variant"]>, string> = {
 };
 
 const SIZE_PADDING: Record<NonNullable<IProps["size"]>, string> = {
-  sm: "px-1.25 py-1 rounded-[3px]",
+  sm: "px-1 py-0.5 rounded-[3px]",
   base: "px-1 py-0.5 md:px-1.75 md:py-1.5 rounded-[4px]",
   md: "px-2.5 py-2 rounded-[5px]",
   lg: "px-3 py-2.5 rounded-[6px]",

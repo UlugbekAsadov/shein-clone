@@ -46,6 +46,7 @@ export interface IApiFilterAttributeItem {
   id: number;
   name: string;
   value: string;
+  hex: string;
 }
 
 export interface IApiFilterAttribute {
