@@ -19,6 +19,7 @@ export function CategorySubcategoriesDesktop({
   trail,
 }: IProps) {
   const tiles = getSubcategoryTiles(group);
+  const parent = trail.length > 1 ? trail[trail.length - 2] : null;
 
   return (
     <div className="py-6 h-full">
@@ -29,7 +30,12 @@ export function CategorySubcategoriesDesktop({
       </h1>
 
       <div className="flex gap-8">
-        <CategorySidebarList lang={lang} categories={group.children} />
+        <CategorySidebarList
+          lang={lang}
+          title={group.title}
+          categories={group.children}
+          parent={parent}
+        />
         <CategoryTileGrid lang={lang} categories={tiles} />
       </div>
     </div>
