@@ -8,7 +8,8 @@ export async function getProducts(
 ): Promise<IApiProductsData | null> {
   try {
     const result = await productsApi.getProducts(params, page);
-    return result.data ?? null;
+    if (!result.data) return null;
+    return { data: result.data, meta: result.meta };
   } catch (error) {
     if (error instanceof ApiError) return null;
     throw error;

@@ -144,8 +144,14 @@ interface IProps {
     original: string;
     new: string;
   };
-  fetchProducts?: (params: Record<string, string>, page: number) => Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null>;
-  renderFilterSidebar?: (onApply: (filters: IActiveFilters) => void, initialFilters: IActiveFilters) => React.ReactNode;
+  fetchProducts?: (
+    params: Record<string, string>,
+    page: number,
+  ) => Promise<{ products: IProduct[]; meta: IApiProductsMeta } | null>;
+  renderFilterSidebar?: (
+    onApply: (filters: IActiveFilters) => void,
+    initialFilters: IActiveFilters,
+  ) => React.ReactNode;
   onFiltersChange?: (params: Record<string, string>) => void;
 }
 
@@ -267,8 +273,8 @@ export function ProductsInfinite({
         } else {
           const res = await productsApi.getProducts(mergedParams, page);
           if (!res.data) return;
-          incoming = res.data.data;
-          newMeta = res.data.meta;
+          incoming = res.data;
+          newMeta = res.meta;
         }
 
         resultCache.set(cacheKey, { products: incoming, meta: newMeta });
@@ -326,19 +332,17 @@ export function ProductsInfinite({
     return () => observer.disconnect();
   }, [loadMore, hasMore]);
 
-  const filterSidebarSlot = renderFilterSidebar
-    ? renderFilterSidebar(handleApplyFilters, initialFilters)
-    : filterOptions
-      ? (
-          <CategoryFilterSidebar
-            filterOptions={filterOptions}
-            onApply={handleApplyFilters}
-            initialFilters={initialFilters}
-            dict={dict.filter}
-            quickFiltersLabels={quickFiltersLabels}
-          />
-        )
-      : undefined;
+  const filterSidebarSlot = renderFilterSidebar ? (
+    renderFilterSidebar(handleApplyFilters, initialFilters)
+  ) : filterOptions ? (
+    <CategoryFilterSidebar
+      filterOptions={filterOptions}
+      onApply={handleApplyFilters}
+      initialFilters={initialFilters}
+      dict={dict.filter}
+      quickFiltersLabels={quickFiltersLabels}
+    />
+  ) : undefined;
 
   return (
     <>

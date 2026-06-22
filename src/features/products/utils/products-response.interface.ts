@@ -31,6 +31,13 @@ export interface IApiProductsMeta {
   per_page: number;
 }
 
+export interface IApiProductsResponse {
+  success: boolean;
+  message: string;
+  data: IApiProductsProduct[];
+  meta: IApiProductsMeta;
+}
+
 export interface IApiProductsData {
   data: IApiProductsProduct[];
   meta: IApiProductsMeta;

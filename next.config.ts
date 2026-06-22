@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
       { protocol: "http", hostname: "api.monera.uz" },
       { protocol: "https", hostname: "api.shein.uz" },
       { protocol: "https", hostname: "cdn.2020mall.com" },
+      { protocol: "https", hostname: "imghk1.tnscdn.com" },
+      { protocol: "https", hostname: "cbu01.alicdn.com" },
     ],
   },
   turbopack: {
