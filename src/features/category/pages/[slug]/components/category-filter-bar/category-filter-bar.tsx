@@ -138,6 +138,7 @@ export function CategoryFilterBar({
             key={attribute.id}
             label={attribute.name}
             count={selectedIds.length}
+            onClear={() => setAttributeIds(itemIds, [])}
           >
             {attribute.slug === "color" ? (
               <FilterBarColor
@@ -156,7 +157,13 @@ export function CategoryFilterBar({
         );
       })}
 
-      <FilterBarDropdown label={dict.priceRange} count={priceActive}>
+      <FilterBarDropdown
+        label={dict.priceRange}
+        count={priceActive}
+        onClear={() =>
+          setPending((prev) => ({ ...prev, minPrice: null, maxPrice: null }))
+        }
+      >
         <FilterPriceRange
           toLabel={dict.priceTo}
           bounds={filterOptions.price_range}
@@ -171,6 +178,7 @@ export function CategoryFilterBar({
         <FilterBarDropdown
           label={dict.brands}
           count={pending.brandIds.length}
+          onClear={() => setPending((prev) => ({ ...prev, brandIds: [] }))}
         >
           <FilterBrandList
             brands={filterOptions.brands}
@@ -187,6 +195,7 @@ export function CategoryFilterBar({
         <FilterBarDropdown
           label={dict.seasons}
           count={pending.seasonIds.length}
+          onClear={() => setPending((prev) => ({ ...prev, seasonIds: [] }))}
         >
           <FilterSeasonList
             seasons={filterOptions.seasons}

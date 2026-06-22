@@ -16,6 +16,7 @@ interface IProps {
   contentClassName?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onClear?: () => void;
 }
 
 export function FilterBarDropdown({
@@ -25,6 +26,7 @@ export function FilterBarDropdown({
   contentClassName,
   open,
   onOpenChange,
+  onClear,
 }: IProps) {
   const active = !!count && count > 0;
 
@@ -43,7 +45,26 @@ export function FilterBarDropdown({
           <span>{label}</span>
           {active && <span className="grid font-bold">{count}</span>}
           {active ? (
-            <XIcon className={cn("size-4.5 text-white cursor-pointer")} />
+            <span
+              role="button"
+              tabIndex={0}
+              aria-label={`${label} clear`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onClear?.();
+              }}
+              onPointerDown={(e) => e.stopPropagation()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onClear?.();
+                }
+              }}
+            >
+              <XIcon className={cn("size-4.5 text-white cursor-pointer")} />
+            </span>
           ) : (
             <AltArrowDown
               className={cn("size-4.5 text-secondary-foreground")}
