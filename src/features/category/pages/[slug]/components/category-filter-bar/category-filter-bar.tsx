@@ -203,6 +203,8 @@ export function CategoryFilterBar({
         availableKeys={availableQuickFilterKeys}
         hasDiscount={pending.hasDiscount}
         isOriginal={pending.isOriginal}
+        freeDelivery={pending.freeDelivery}
+        isNew={pending.isNew}
         onToggle={(key, value) =>
           setPending((prev) => ({ ...prev, [key]: value }))
         }

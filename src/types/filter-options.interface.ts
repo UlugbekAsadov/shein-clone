@@ -2,6 +2,7 @@ export interface IApiFilterQuickFilter {
   key: string;
   label: string;
   count: number;
+  available?: boolean;
 }
 
 export interface IApiFilterBadgeStyle {

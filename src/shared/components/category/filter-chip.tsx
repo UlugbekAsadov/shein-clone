@@ -17,7 +17,7 @@ export function FilterChip({ icon, label, tone, active, onClick }: IProps) {
       type="button"
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-[8px] px-3 h-9.5 text-xs font-medium cursor-pointer transition-colors",
+        "inline-flex items-center gap-1.5 rounded-[8px] px-3 h-9.5 text-sm font-medium cursor-pointer transition-colors",
         active
           ? "bg-foreground text-background hover:bg-foreground/90"
           : "bg-secondary hover:bg-muted/80",

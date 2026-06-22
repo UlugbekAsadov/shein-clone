@@ -23,6 +23,8 @@ const FILTER_PARAM_KEYS = [
   "max_price",
   "has_discount",
   "is_original",
+  "free_delivery",
+  "is_new",
 ] as const;
 
 function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
@@ -44,6 +46,8 @@ function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
       params.get("max_price") !== null ? Number(params.get("max_price")) : null,
     hasDiscount: params.get("has_discount") === "1",
     isOriginal: params.get("is_original") === "1",
+    freeDelivery: params.get("free_delivery") === "1",
+    isNew: params.get("is_new") === "1",
   };
 }
 
@@ -56,7 +60,9 @@ function hasActiveFilters(filters: IActiveFilters): boolean {
     filters.minPrice !== null ||
     filters.maxPrice !== null ||
     filters.hasDiscount ||
-    filters.isOriginal
+    filters.isOriginal ||
+    filters.freeDelivery ||
+    filters.isNew
   );
 }
 
@@ -79,6 +85,8 @@ function mergeParamsWithFilters(
   if (filters.maxPrice !== null) result.max_price = String(filters.maxPrice);
   if (filters.hasDiscount) result.has_discount = "1";
   if (filters.isOriginal) result.is_original = "1";
+  if (filters.freeDelivery) result.free_delivery = "1";
+  if (filters.isNew) result.is_new = "1";
 
   return result;
 }
@@ -121,6 +129,8 @@ const EMPTY_FILTERS: IActiveFilters = {
   maxPrice: null,
   hasDiscount: false,
   isOriginal: false,
+  freeDelivery: false,
+  isNew: false,
 };
 
 interface IListingDict {
