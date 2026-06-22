@@ -18,8 +18,7 @@ import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
 import { Tag } from "@/shared/components/tag/tag";
-import { Bag, CartLarge2, Heart, Star } from "@solar-icons/react";
-import { TruckIconSolid } from "../icons/solid";
+import { Bag, Cart5, Heart, Star } from "@solar-icons/react";
 import { Button } from "../ui/button";
 
 interface IProps {
@@ -53,11 +52,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         href={href}
         className={cn(
           "group flex flex-col overflow-hidden rounded-[10px]",
-          "md:p-1.5 md:rounded-lg",
+          "md:rounded-lg",
           isDark
-            ? "border-white/10 md:bg-secondary text-foreground"
+            ? "border-white/10 md:bg-white text-foreground"
             : isSecondary
-              ? "border-border text-card-foreground bg-card md:bg-secondary"
+              ? "border-border text-card-foreground bg-card md:bg-white"
               : "border-border text-card-foreground bg-card",
         )}
       >
@@ -151,14 +150,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
         <div
           className={cn(
             "flex flex-col gap-1 p-0 pt-1 pb-0.5",
-            "md:p-2.5 md:pb-3.5",
+            "md:p-2 md:pb-2",
           )}
         >
-          <h3 className="line-clamp-1 text-sm font-medium leading-tight">
-            {product.title}
-          </h3>
           <div className="flex items-baseline gap-2">
-            <span className="text-base font-extrabold">
+            <span className="text-sm font-bold">
               {formatPrice(product.price, currency)}
             </span>
             {originalPrice && (
@@ -167,52 +163,29 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               </span>
             )}
           </div>
-          <div
-            className={cn(
-              "mt-4 items-center justify-between gap-2 rounded-xl hidden",
-              "md:flex",
-            )}
-          >
-            <div className={cn("px-2.5 py-2 flex items-center gap-1.5 rounded-[10px] h-9", isSecondary ? "bg-card" : "bg-secondary")}>
-              {product.delivery_date_text && (
-                <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                  <TruckIconSolid className="size-5" fill="#898991" />
-                  {product.delivery_date_text}
-                </span>
-              )}
-              <span className="flex items-center gap-1 text-xs font-semibold text-foreground ">
-                <Star className="size-4 fill-amber-400 text-amber-400" />
-                {product.rating}
-                <span className="text-muted-foreground font-normal">
-                  ({reviews})
-                </span>
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setPreviewOpen(true);
-              }}
-              aria-label="Add to cart"
-              className=" grid cursor-pointer size-9 place-items-center rounded-[10px] bg-foreground text-background transition-colors hover:bg-foreground/90"
-            >
-              <CartLarge2 className="size-6" />
-            </button>
-          </div>
-          <Button
+          <h3 className="line-clamp-1 text-xs font-medium leading-tight">
+            {product.title}
+          </h3>
+
+          <span className="flex items-center gap-1 text-xs font-semibold text-foreground my-2">
+            <Star className="size-4 fill-amber-400 text-amber-400" />
+            {product.rating}
+            <span className="text-muted-foreground font-normal">
+              ({reviews})
+            </span>
+          </span>
+          <button
             type="button"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              setCartDrawerOpen(true);
+              setPreviewOpen(true);
             }}
-            className={cn("flex items-center gap-2 rounded-[8px]", "md:hidden")}
+            aria-label="Add to cart"
+            className=" flex items-center gap-2 justify-center cursor-pointer h-10 w-full place-items-center rounded-[10px] bg-[#DEDEE4] text-[#383838] transition-colors hover:bg-#DEDEE490"
           >
-            <span>12-May</span>
-            <Bag />
-          </Button>
+            <Cart5 className="size-6" /> {product.delivery_date_text}
+          </button>
         </div>
       </Link>
 
