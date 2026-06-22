@@ -19,15 +19,16 @@ export function FilterSeasonList({ seasons, selectedIds, onChange }: IProps) {
   };
 
   return (
-    <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
+    <ul className="flex max-h-72 flex-col pr-1.5">
       {seasons.map((season) => (
-        <li key={season.id} className="py-1.5">
-          <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium">
+        <li key={season.id} className="py-2.5">
+          <label className="flex items-center justify-between cursor-pointer gap-2.5 text-sm font-semibold">
+            <span>{season.name}</span>
             <Checkbox
               checked={selectedIds.includes(season.id)}
               onCheckedChange={() => toggle(season.id)}
+              className="size-6"
             />
-            <span>{season.name}</span>
           </label>
         </li>
       ))}

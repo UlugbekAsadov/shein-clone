@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Checkbox } from "@/shared/components/ui/checkbox";
 import type { IApiFilterAttributeItem } from "@/types/filter-options.interface";
 
 interface IProps {
@@ -19,7 +20,7 @@ export function FilterBarColor({ items, selectedIds, onChange }: IProps) {
   };
 
   return (
-    <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
+    <ul className="scrollbar-slim flex max-h-[70vh] flex-col overflow-y-auto pr-1.5">
       {items.map((item) => {
         const isSelected = selectedIds.includes(item.id);
         return (
@@ -28,10 +29,7 @@ export function FilterBarColor({ items, selectedIds, onChange }: IProps) {
               type="button"
               onClick={() => toggle(item.id)}
               className={cn(
-                "flex w-full items-center gap-2.5 rounded-[8px] py-2 text-left text-sm transition-colors cursor-pointer hover:text-primary",
-                isSelected
-                  ? "font-semibold text-primary"
-                  : "font-medium text-muted-foreground",
+                "flex w-full items-center gap-2.5 rounded-[8px] py-2.5 text-left text-sm transition-colors cursor-pointer hover:text-primary font-semibold text-primary",
               )}
             >
               <span
@@ -39,6 +37,7 @@ export function FilterBarColor({ items, selectedIds, onChange }: IProps) {
                 style={{ backgroundColor: item.hex || "transparent" }}
               />
               <span className="flex-1">{item.name}</span>
+              <Checkbox checked={isSelected} className="size-6" />
             </button>
           </li>
         );

@@ -183,9 +183,9 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               setPreviewOpen(true);
             }}
             aria-label="Add to cart"
-            className=" flex items-center gap-2 justify-center cursor-pointer h-10 w-full place-items-center rounded-[10px] bg-[#DEDEE4] text-[#383838] transition-colors hover:bg-#DEDEE490"
+            className=" flex items-center gap-2 justify-center cursor-pointer h-6.5 md:h-10 w-full place-items-center rounded-[10px] bg-[#DEDEE4] text-[#383838] transition-colors hover:bg-#DEDEE490 text-sm md:text-base"
           >
-            <Cart5 className="size-6" /> {product.delivery_date_text}
+            <Cart5 className="size-4.5 md:size-6" /> {product.delivery_date_text}
           </button>
         </div>
       </Link>

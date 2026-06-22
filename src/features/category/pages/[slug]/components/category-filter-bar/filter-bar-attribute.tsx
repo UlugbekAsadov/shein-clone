@@ -19,15 +19,16 @@ export function FilterBarAttribute({ items, selectedIds, onChange }: IProps) {
   };
 
   return (
-    <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
+    <ul className="scrollbar-slim flex max-h-72 flex-col pr-1.5">
       {items.map((item) => (
-        <li key={item.id} className="py-1.5">
-          <label className="flex cursor-pointer items-center gap-2.5 text-sm font-medium">
+        <li key={item.id} className="py-2.5">
+          <label className="flex items-center justify-between cursor-pointer gap-2.5 text-sm font-semibold">
+            <span>{item.name}</span>
             <Checkbox
               checked={selectedIds.includes(item.id)}
               onCheckedChange={() => toggle(item.id)}
+              className="size-6"
             />
-            <span>{item.name}</span>
           </label>
         </li>
       ))}

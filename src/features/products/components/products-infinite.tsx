@@ -15,7 +15,7 @@ import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/acti
 import { Tuning2 } from "@solar-icons/react";
 import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
 import { CategoryFilterMobile } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile";
-import { CategoryFilterMobileChips } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile-chips";
+import { CategoryFilterMobileBar } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile-bar";
 
 const FILTER_PARAM_KEYS = [
   "category_ids",
@@ -428,11 +428,12 @@ export function ProductsInfinite({
   ) : undefined;
 
   const mobileQuickChipsSlot = filterOptions ? (
-    <CategoryFilterMobileChips
-      availableKeys={filterOptions.quick_filters?.map((f) => f.key) ?? []}
+    <CategoryFilterMobileBar
+      filterOptions={filterOptions}
       appliedFilters={appliedFilters}
       onApply={handleApplyFilters}
-      labels={quickFiltersLabels}
+      dict={dict.filter}
+      quickFiltersLabels={quickFiltersLabels}
     />
   ) : undefined;
 
