@@ -30,15 +30,15 @@ export function ProductInfoPanel({ product }: IProps) {
   const searchParams = useSearchParams();
 
   const colors = getVariantColorSwatches(product.variant_clothes);
-  const sizes = getVariantSizes(product.variant_clothes, colorId);
+  const displayColor = colorId || colors[0]?.id || "";
+  const sizes = getVariantSizes(product.variant_clothes, displayColor);
 
   const urlSize = searchParams.get("size") ?? "";
   const [sizeId, setSizeIdState] = useState(
-    sizes.some((s) => s.id === urlSize)
-      ? urlSize
-      : (sizes.find((s) => s.id === product.size_recommendation)?.id ?? sizes[0]?.id ?? ""),
+    sizes.some((s) => s.id === urlSize) ? urlSize : "",
   );
   const [qty, setQty] = useState(1);
+  const [showErrors, setShowErrors] = useState(false);
 
   const sizeDetail = getVariantSizeDetail(product.variant_clothes, colorId, sizeId);
   const price = sizeDetail?.price ?? product.price;
@@ -48,16 +48,24 @@ export function ProductInfoPanel({ product }: IProps) {
 
   function handleColorChange(nextColor: string) {
     const nextSizes = getVariantSizes(product.variant_clothes, nextColor);
-    const nextSize =
-      nextSizes.find((s) => s.id === product.size_recommendation)?.id ??
-      nextSizes[0]?.id ??
-      "";
+    const nextSize = nextSizes.some((s) => s.id === sizeId) ? sizeId : "";
     setColorId(nextColor);
     setSizeIdState(nextSize);
     const params = new URLSearchParams(searchParams.toString());
     params.set("color", nextColor);
-    params.set("size", nextSize);
+    if (nextSize) {
+      params.set("size", nextSize);
+    } else {
+      params.delete("size");
+    }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
+
+  function handleSubmit() {
+    if (!colorId || !sizeId) {
+      setShowErrors(true);
+      return;
+    }
   }
 
   const handleSizeChange = useCallback(
@@ -107,6 +115,7 @@ export function ProductInfoPanel({ product }: IProps) {
         <ProductColorSelector
           swatches={colors}
           value={colorId}
+          error={showErrors && !colorId}
           onChange={handleColorChange}
         />
       )}
@@ -116,6 +125,7 @@ export function ProductInfoPanel({ product }: IProps) {
           sizes={sizes}
           value={sizeId}
           recommended={product.size_recommendation}
+          error={showErrors && !sizeId}
           onChange={handleSizeChange}
         />
       )}
@@ -125,6 +135,7 @@ export function ProductInfoPanel({ product }: IProps) {
       <div className="mt-2 flex gap-3">
         <Button
           type="button"
+          onClick={handleSubmit}
           className="flex-1 cursor-pointer py-4 text-base font-semibold transition hover:bg-foreground/90"
           variant="default"
           size="lg"
@@ -134,6 +145,7 @@ export function ProductInfoPanel({ product }: IProps) {
 
         <Button
           type="button"
+          onClick={handleSubmit}
           className="flex-1 cursor-pointer py-4 text-base font-semibold transition"
           variant="outline"
           size="lg"

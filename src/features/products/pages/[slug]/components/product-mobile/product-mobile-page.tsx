@@ -64,31 +64,39 @@ export function ProductMobilePage({
   const validColors = new Set(colors.map((c) => c.id));
   const urlColor = searchParams.get("color") ?? "";
   const [colorId, setColorId] = useState(
-    validColors.has(urlColor) ? urlColor : (colors[0]?.id ?? ""),
+    validColors.has(urlColor) ? urlColor : "",
   );
 
-  const sizes = getVariantSizes(product.variant_clothes, colorId);
+  const displayColor = colorId || colors[0]?.id || "";
+  const sizes = getVariantSizes(product.variant_clothes, displayColor);
   const urlSize = searchParams.get("size") ?? "";
   const [sizeId, setSizeIdState] = useState(
-    sizes.some((s) => s.id === urlSize)
-      ? urlSize
-      : (sizes.find((s) => s.id === product.size_recommendation)?.id ?? sizes[0]?.id ?? ""),
+    sizes.some((s) => s.id === urlSize) ? urlSize : "",
   );
+  const [showErrors, setShowErrors] = useState(false);
 
   const commentsHref = `/${lang}/products/${product.slug}/comments`;
 
   function handleColorChange(nextColor: string) {
     const nextSizes = getVariantSizes(product.variant_clothes, nextColor);
-    const nextSize =
-      nextSizes.find((s) => s.id === product.size_recommendation)?.id ??
-      nextSizes[0]?.id ??
-      "";
+    const nextSize = nextSizes.some((s) => s.id === sizeId) ? sizeId : "";
     setColorId(nextColor);
     setSizeIdState(nextSize);
     const params = new URLSearchParams(searchParams.toString());
     params.set("color", nextColor);
-    params.set("size", nextSize);
+    if (nextSize) {
+      params.set("size", nextSize);
+    } else {
+      params.delete("size");
+    }
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
+
+  function handleAddToCart() {
+    if (!colorId || !sizeId) {
+      setShowErrors(true);
+      return;
+    }
   }
 
   const handleSizeChange = useCallback(
@@ -139,6 +147,7 @@ export function ProductMobilePage({
           <ProductMobileColor
             swatches={colors}
             value={colorId}
+            error={showErrors && !colorId}
             onChange={handleColorChange}
           />
         )}
@@ -148,6 +157,7 @@ export function ProductMobilePage({
             sizes={sizes}
             value={sizeId}
             recommended={product.size_recommendation}
+            error={showErrors && !sizeId}
             onChange={handleSizeChange}
           />
         )}
@@ -190,6 +200,7 @@ export function ProductMobilePage({
 
         <ProductMobileCta
           label="Add to cart"
+          onClick={handleAddToCart}
           price={product.price}
           originalPrice={getOriginalPrice(
             product.price,

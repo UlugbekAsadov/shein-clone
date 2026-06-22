@@ -7,17 +7,29 @@ import { cn } from "@/lib/utils";
 interface IProps {
   swatches: ISwatch[];
   value: string;
+  error?: boolean;
   onChange: (id: string) => void;
 }
 
-export function ProductMobileColor({ swatches, value, onChange }: IProps) {
+export function ProductMobileColor({
+  swatches,
+  value,
+  error,
+  onChange,
+}: IProps) {
   const selected = swatches.find((s) => s.id === value);
 
   return (
-    <div className="mt-5">
+    <div className={cn("mt-5", error && "animate-[shake_0.4s_ease-in-out]")}>
       <div className="mb-2 flex items-center gap-1.5">
         <span className="text-sm font-bold text-foreground">Color:</span>
-        <span className="text-xs text-muted-foreground">{selected?.name}</span>
+        {selected ? (
+          <span className="text-xs text-muted-foreground">{selected.name}</span>
+        ) : error ? (
+          <span className="text-xs font-medium text-destructive">
+            Please select a color
+          </span>
+        ) : null}
       </div>
       <div className="-mx-4 overflow-x-auto px-4 py-1 [&::-webkit-scrollbar]:hidden">
         <div className="flex w-max gap-3">

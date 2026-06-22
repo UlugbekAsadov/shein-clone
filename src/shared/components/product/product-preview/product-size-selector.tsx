@@ -14,6 +14,7 @@ interface IProps {
   variant?: "pill" | "card";
   showHeader?: boolean;
   showRecommendation?: boolean;
+  error?: boolean;
   className?: string;
 }
 
@@ -26,13 +27,27 @@ export function ProductSizeSelector({
   variant = "pill",
   showHeader = true,
   showRecommendation = true,
+  error = false,
   className,
 }: IProps) {
   return (
-    <div className={cn("mt-4", className)}>
+    <div
+      className={cn(
+        "mt-4",
+        error && "animate-[shake_0.4s_ease-in-out]",
+        className,
+      )}
+    >
       {showHeader && (
         <div className="mb-2 text-sm flex items-center justify-between font-bold">
-          <span>Size:</span>
+          <span>
+            Size:{" "}
+            {error && !value && (
+              <span className="text-destructive font-medium">
+                Please select a size
+              </span>
+            )}
+          </span>
           {headerAction}
         </div>
       )}

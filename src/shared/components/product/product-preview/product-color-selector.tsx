@@ -7,17 +7,29 @@ import { cn } from "@/lib/utils";
 interface IProps {
   swatches: ISwatch[];
   value: string;
+  error?: boolean;
   onChange: (id: string) => void;
 }
 
-export function ProductColorSelector({ swatches, value, onChange }: IProps) {
+export function ProductColorSelector({
+  swatches,
+  value,
+  error,
+  onChange,
+}: IProps) {
   const selected = swatches.find((s) => s.id === value);
 
   return (
-    <div className="">
+    <div className={cn(error && "animate-[shake_0.4s_ease-in-out]")}>
       <div className="mb-2">
         <span className="font-bold">Color:</span>{" "}
-        <span className="text-muted-foreground text-xs">{selected?.name}</span>
+        {selected ? (
+          <span className="text-muted-foreground text-xs">{selected.name}</span>
+        ) : error ? (
+          <span className="text-destructive text-xs font-medium">
+            Please select a color
+          </span>
+        ) : null}
       </div>
       <div className="flex flex-wrap gap-3">
         {swatches.map((c) => (

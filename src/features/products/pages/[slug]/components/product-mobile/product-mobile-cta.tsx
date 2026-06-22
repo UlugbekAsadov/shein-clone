@@ -9,9 +9,15 @@ interface IProps {
   label: string;
   price: number;
   originalPrice?: number;
+  onClick?: () => void;
 }
 
-export function ProductMobileCta({ label, price, originalPrice }: IProps) {
+export function ProductMobileCta({
+  label,
+  price,
+  originalPrice,
+  onClick,
+}: IProps) {
   const { currency } = useCurrency();
   return (
     <div className="sticky bottom-0 z-20 -mx-4 mt-4 bg-background p-3 pb-[max(env(safe-area-inset-bottom),1rem)] shadow-[0px_-4px_20px_0px_#A9B9C629]">
@@ -34,6 +40,7 @@ export function ProductMobileCta({ label, price, originalPrice }: IProps) {
       <Button
         type="button"
         size="lg"
+        onClick={onClick}
         className="h-12.5 w-full rounded-[8px] text-lg font-medium"
       >
         <span>{label}</span>

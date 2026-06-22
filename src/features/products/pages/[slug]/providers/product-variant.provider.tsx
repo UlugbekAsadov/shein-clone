@@ -35,11 +35,10 @@ export function ProductVariantProvider({
 }: IProps) {
   const searchParams = useSearchParams();
 
-  const firstColor = variants[0]?.color ?? "";
   const validColors = new Set(variants.map((v) => v.color));
   const urlColor = searchParams.get("color") ?? "";
   const [colorId, setColorId] = useState(
-    validColors.has(urlColor) ? urlColor : firstColor,
+    validColors.has(urlColor) ? urlColor : "",
   );
 
   const variantImages = useMemo(

@@ -9,6 +9,7 @@ interface IProps {
   sizes: ISize[];
   value: string;
   recommended: string;
+  error?: boolean;
   onChange: (id: string) => void;
 }
 
@@ -16,6 +17,7 @@ export function ProductMobileSize({
   sizes,
   value,
   recommended,
+  error,
   onChange,
 }: IProps) {
   const [guideOpen, setGuideOpen] = useState(false);
@@ -26,6 +28,7 @@ export function ProductMobileSize({
         variant="card"
         showHeader
         showRecommendation
+        error={error}
         className="mt-0"
         sizes={sizes}
         value={value}
