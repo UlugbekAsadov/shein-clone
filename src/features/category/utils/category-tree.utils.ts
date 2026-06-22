@@ -23,6 +23,28 @@ export function findCategoryBySlug(
   return null;
 }
 
+export function findCategoryById(
+  categories: ICategory[],
+  id: number,
+): ICategory | null {
+  for (const category of categories) {
+    if (category.id === id) return category;
+    const found = findCategoryById(category.children, id);
+    if (found) return found;
+  }
+  return null;
+}
+
+export function findCategoryByKey(
+  categories: ICategory[],
+  key: string,
+): ICategory | null {
+  const bySlug = findCategoryBySlug(categories, key);
+  if (bySlug) return bySlug;
+  const id = Number(key);
+  return Number.isInteger(id) ? findCategoryById(categories, id) : null;
+}
+
 export function findCategoryTrail(
   categories: ICategory[],
   slug: string,

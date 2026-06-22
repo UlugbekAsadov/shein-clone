@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { IProductBreadcrumbItem } from "@/features/products/pages/[slug]/utils/breadcrumb.interface";
 
 interface IProps {
@@ -12,15 +13,24 @@ export function ProductBreadcrumb({ items }: IProps) {
           const isLast = idx === items.length - 1;
           return (
             <li key={item.id} className="flex items-center gap-1.5">
-              <span
-                className={
-                  isLast
-                    ? "max-w-[480px] truncate text-foreground"
-                    : "hover:text-foreground"
-                }
-              >
-                {item.label}
-              </span>
+              {item.href && !isLast ? (
+                <Link
+                  href={item.href}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span
+                  className={
+                    isLast
+                      ? "max-w-[480px] truncate text-foreground"
+                      : "hover:text-foreground"
+                  }
+                >
+                  {item.label}
+                </span>
+              )}
               {!isLast && <span aria-hidden>/</span>}
             </li>
           );

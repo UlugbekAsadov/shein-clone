@@ -5,7 +5,7 @@ import { Footer } from "@/shared/components/footer/footer";
 import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
 import { getCategories } from "@/features/category/services/category.service";
 import {
-  findCategoryBySlug,
+  findCategoryByKey,
   findCategoryTrail,
 } from "@/features/category/utils/category-tree.utils";
 import { CategoryDrillHeader } from "@/features/category/components/category-drill-header";
@@ -23,7 +23,7 @@ export async function CategoryPage({ lang, dict, groupSlug }: IProps) {
   const categories = await getCategories();
 
   const activeGroup = groupSlug
-    ? findCategoryBySlug(categories, groupSlug)
+    ? findCategoryByKey(categories, groupSlug)
     : null;
   const trail = activeGroup
     ? (findCategoryTrail(categories, activeGroup.slug) ?? [])

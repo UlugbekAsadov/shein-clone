@@ -92,7 +92,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
   const fitStats = mapFitStats(product.fit_stats);
 
   const breadcrumbItems = [
-    { id: "home", label: dict.breadcrumb.home, href: `/${lang}` },
+    { id: "home", label: dict.breadcrumb.home, href: `/${lang}/demo` },
     { id: "current", label: product.title },
   ];
 

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils";
 import type { IApiFilterCategoryNode } from "@/types/filter-options.interface";
 
 interface IProps {
@@ -38,7 +37,10 @@ export function ProductsBreadcrumb({
   const categoryIdRaw = searchParams.get("category_ids")?.split(",")[0];
   const categoryId = categoryIdRaw ? Number(categoryIdRaw) : null;
   const trail = categoryId ? findCategoryTrail(categories, categoryId) : null;
-  const crumbs = trail && trail.length > 0 ? trail.map((n) => n.name) : [title];
+  const crumbs =
+    trail && trail.length > 0
+      ? trail.map((node) => ({ name: node.name, id: node.id }))
+      : [{ name: title, id: null as number | null }];
 
   return (
     <nav aria-label="Breadcrumb">
@@ -52,14 +54,25 @@ export function ProductsBreadcrumb({
           </Link>
           <span aria-hidden>/</span>
         </li>
-        {crumbs.map((name, index) => {
+        {crumbs.map((crumb, index) => {
           const isLast = index === crumbs.length - 1;
           return (
             <li
-              key={`${name}-${index}`}
+              key={`${crumb.name}-${index}`}
               className="flex items-center gap-1.5"
             >
-              <span className={cn(isLast && "text-foreground")}>{name}</span>
+              {isLast || crumb.id === null ? (
+                <span className={isLast ? "text-foreground" : undefined}>
+                  {crumb.name}
+                </span>
+              ) : (
+                <Link
+                  href={`/${lang}/demo/category?group=${crumb.id}`}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {crumb.name}
+                </Link>
+              )}
               {!isLast && <span aria-hidden>/</span>}
             </li>
           );
