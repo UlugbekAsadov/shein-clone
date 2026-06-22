@@ -121,6 +121,11 @@ function findCategoryName(
   return undefined;
 }
 
+function mergeUniqueById(prev: IProduct[], incoming: IProduct[]): IProduct[] {
+  const seen = new Set(prev.map((p) => p.id));
+  return [...prev, ...incoming.filter((p) => !seen.has(p.id))];
+}
+
 function makeCacheKey(params: Record<string, string>, page: number): string {
   const sorted = Object.keys(params)
     .sort()
@@ -301,7 +306,7 @@ export function ProductsInfinite({
 
       if (cached) {
         setProducts((prev) =>
-          page === 1 ? cached.products : [...prev, ...cached.products],
+          page === 1 ? cached.products : mergeUniqueById(prev, cached.products),
         );
         setMeta(cached.meta);
         return;
@@ -328,7 +333,9 @@ export function ProductsInfinite({
         }
 
         resultCache.set(cacheKey, { products: incoming, meta: newMeta });
-        setProducts((prev) => (page === 1 ? incoming : [...prev, ...incoming]));
+        setProducts((prev) =>
+          page === 1 ? incoming : mergeUniqueById(prev, incoming),
+        );
         setMeta(newMeta);
       } finally {
         loadingRef.current = false;

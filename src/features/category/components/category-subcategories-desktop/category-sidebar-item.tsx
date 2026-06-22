@@ -6,21 +6,19 @@ import { useCategoryNavigation } from "@/features/category/hooks/use-category-na
 
 interface IProps {
   lang: (typeof locales)[number];
-  subgroup: ICategory;
+  category: ICategory;
 }
 
-export function CategorySubcategoryRow({ lang, subgroup }: IProps) {
+export function CategorySidebarItem({ lang, category }: IProps) {
   const navigate = useCategoryNavigation(lang);
 
   return (
     <button
       type="button"
-      onClick={() => navigate(subgroup)}
-      className="flex w-full items-center justify-between py-2 text-left"
+      onClick={() => navigate(category)}
+      className="flex w-full items-center justify-between gap-3 text-left text-secondary-foreground hover:text-primary transition-colors cursor-pointer"
     >
-      <span className="text-sm font-semibold text-foreground">
-        {subgroup.title}
-      </span>
+      <span className="line-clamp-1 font-medium">{category.title}</span>
     </button>
   );
 }

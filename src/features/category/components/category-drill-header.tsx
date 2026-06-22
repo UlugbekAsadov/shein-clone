@@ -2,22 +2,21 @@
 
 import { useRouter } from "next/navigation";
 import { AltArrowLeft } from "@solar-icons/react";
-import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
-  lang: (typeof locales)[number];
   title: string;
+  backHref: string;
 }
 
-export function CategoryDrillHeader({ lang, title }: IProps) {
+export function CategoryDrillHeader({ title, backHref }: IProps) {
   const router = useRouter();
 
   return (
     <div className="flex items-center gap-2 px-4 pb-2 md:px-6">
       <button
         type="button"
-        onClick={() => router.push(`/${lang}/category`)}
-        aria-label="Back to categories"
+        onClick={() => router.push(backHref)}
+        aria-label="Back"
         className="grid size-8 place-items-center text-foreground"
       >
         <AltArrowLeft className="size-6" />

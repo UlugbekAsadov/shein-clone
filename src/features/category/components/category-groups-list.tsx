@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
+import { useCategoryNavigation } from "@/features/category/hooks/use-category-navigation";
 import { CategoryGroupRow } from "./category-group-row";
 
 interface IProps {
@@ -11,21 +11,13 @@ interface IProps {
 }
 
 export function CategoryGroupsList({ lang, categories }: IProps) {
-  const router = useRouter();
-
-  const handleClick = (group: ICategory) => {
-    if (group.children.length > 0) {
-      router.push(`/${lang}/category?group=${group.slug}`);
-      return;
-    }
-    router.push(`/${lang}/category/${group.slug}`);
-  };
+  const navigate = useCategoryNavigation(lang);
 
   return (
     <ul className="flex flex-col gap-1">
       {categories.map((group) => (
         <li key={group.slug}>
-          <CategoryGroupRow group={group} onClick={handleClick} />
+          <CategoryGroupRow group={group} onClick={navigate} />
         </li>
       ))}
     </ul>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
+import { getCategoryHref } from "@/features/category/utils/category-tree.utils";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import { cn } from "@/lib/utils";
 
@@ -12,12 +13,12 @@ interface IProps {
 export function CategoryCard({ lang, category }: IProps) {
   return (
     <Link
-      href={`/${lang}/demo/products?category_ids=${category.id}`}
-      className="group relative flex w-15 shrink-0 cursor-pointer flex-col items-center gap-2.5 text-center md:w-30"
+      href={getCategoryHref(lang, category)}
+      className="group relative flex w-15 group shrink-0 cursor-pointer flex-col items-center gap-2.5 text-center md:w-30"
     >
       <span
         className={cn(
-          "relative size-15 md:size-30 overflow-hidden rounded-full bg-muted ring-2 md:ring-3 ring-border",
+          "relative size-15 md:size-30 overflow-hidden rounded-[52px] bg-muted ring-2 md:ring-3 ring-border",
         )}
       >
         <Image

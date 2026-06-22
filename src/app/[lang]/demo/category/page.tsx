@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { getCategories } from "@/features/category/services/category.service";
+import { findCategoryBySlug } from "@/features/category/utils/category-tree.utils";
 import { CategoryPage } from "@/features/category/pages/category.page";
 import { buildMetadata } from "@/shared/utils/seo";
 
@@ -19,7 +20,7 @@ export async function generateMetadata({
 
   const categories = await getCategories();
   const current = groupSlug
-    ? categories.find((category) => category.slug === groupSlug)
+    ? findCategoryBySlug(categories, groupSlug)
     : null;
 
   const title = current?.title ?? dict.seo.categoriesTitle;

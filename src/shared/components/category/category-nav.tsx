@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
+import { getCategoryHref } from "@/features/category/utils/category-tree.utils";
 import { CategoryMegaMenu } from "./category-mega-menu";
 import { cn } from "@/lib/utils";
 import { LayoutGridSolid } from "../icons/solid";
@@ -66,7 +67,7 @@ export function CategoryNav({
           {categories.map((c) => (
             <Link
               key={c.slug}
-              href={`/${lang}/demo/products?category_ids=${c.id}`}
+              href={getCategoryHref(lang, c)}
               onMouseEnter={() => {
                 setOpen(true);
                 setActiveSlug(c.slug);

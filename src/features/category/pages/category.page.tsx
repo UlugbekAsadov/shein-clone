@@ -4,9 +4,14 @@ import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
 import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
 import { getCategories } from "@/features/category/services/category.service";
+import {
+  findCategoryBySlug,
+  findCategoryTrail,
+} from "@/features/category/utils/category-tree.utils";
 import { CategoryDrillHeader } from "@/features/category/components/category-drill-header";
 import { CategoryGroupsList } from "@/features/category/components/category-groups-list";
 import { CategorySubcategoriesView } from "@/features/category/components/category-subcategories-view";
+import { CategorySubcategoriesDesktop } from "@/features/category/components/category-subcategories-desktop/category-subcategories-desktop";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -18,29 +23,48 @@ export async function CategoryPage({ lang, dict, groupSlug }: IProps) {
   const categories = await getCategories();
 
   const activeGroup = groupSlug
-    ? categories.find((g) => g.slug === groupSlug)
+    ? findCategoryBySlug(categories, groupSlug)
     : null;
+  const trail = activeGroup
+    ? (findCategoryTrail(categories, activeGroup.slug) ?? [])
+    : [];
+  const parent = trail.length > 1 ? trail[trail.length - 2] : null;
+  const backHref = parent
+    ? `/${lang}/demo/category?group=${parent.slug}`
+    : `/${lang}/demo/category`;
 
   return (
     <>
       <Header lang={lang} dict={dict} />
 
       <main className="flex-1">
-        <div className="pb-6">
-          <div className="sticky top-0 z-30 bg-background pt-3 md:pt-4">
+        <div className="pb-6 h-full">
+          <div className="sticky top-0 z-30 bg-background pt-3 md:hidden">
             <MobileSearchBar
               lang={lang}
               placeholder={dict.header.searchPlaceholder}
               visualSearchDict={dict.visualSearch}
             />
             {activeGroup && (
-              <CategoryDrillHeader lang={lang} title={activeGroup.title} />
+              <CategoryDrillHeader title={activeGroup.title} backHref={backHref} />
             )}
           </div>
 
-          <div className="mx-auto max-w-360 px-4 md:px-6">
+          <div className="mx-auto max-w-360 px-4 md:px-6 h-full">
             {activeGroup ? (
-              <CategorySubcategoriesView lang={lang} group={activeGroup} />
+              <>
+                <div className="md:hidden">
+                  <CategorySubcategoriesView lang={lang} group={activeGroup} />
+                </div>
+                <div className="hidden md:block h-full">
+                  <CategorySubcategoriesDesktop
+                    lang={lang}
+                    homeLabel={dict.breadcrumb.home}
+                    group={activeGroup}
+                    trail={trail}
+                  />
+                </div>
+              </>
             ) : (
               <CategoryGroupsList lang={lang} categories={categories} />
             )}

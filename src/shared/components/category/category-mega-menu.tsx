@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
+import { getCategoryHref } from "@/features/category/utils/category-tree.utils";
 import { cn } from "@/lib/utils";
 import { FilterChip } from "./filter-chip";
 import { AltArrowRight, Sale, ShieldCheck, Tag } from "@solar-icons/react";
@@ -65,7 +66,7 @@ export function CategoryMegaMenu({
           {categories.map((c) => (
             <li key={c.slug}>
               <Link
-                href={`/${lang}/demo/products?category_ids=${c.id}`}
+                href={getCategoryHref(lang, c)}
                 onMouseEnter={() => onActiveChange(c.slug)}
                 onFocus={() => onActiveChange(c.slug)}
                 className={cn(
@@ -86,10 +87,10 @@ export function CategoryMegaMenu({
             {activeCategory?.children?.map((item) => (
               <Link
                 key={item.slug}
-                href={`/${lang}/demo/products?category_ids=${item.id}`}
+                href={getCategoryHref(lang, item)}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
-                <span className="relative size-20 rounded-full bg-muted overflow-hidden ring-3 ring-border">
+                <span className="relative size-20 rounded-[36px] bg-muted overflow-hidden ring-3 ring-border">
                   <Image
                     src={item.image_url ?? "/placeholders/category.svg"}
                     alt={item.title}
@@ -113,10 +114,10 @@ export function CategoryMegaMenu({
             {categories.map((item) => (
               <Link
                 key={item.slug}
-                href={`/${lang}/demo/products?category_ids=${item.id}`}
+                href={getCategoryHref(lang, item)}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
-                <span className="relative size-20 rounded-full bg-muted overflow-hidden ring-3 ring-border">
+                <span className="relative size-20 rounded-[36px] bg-muted overflow-hidden ring-3 ring-border">
                   <Image
                     src={item.image_url ?? "/placeholders/category.svg"}
                     alt={item.title}
