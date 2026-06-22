@@ -1,13 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type React from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ListingShell } from "@/shared/components/listing/listing-shell";
 import { productsApi } from "@/features/products/api/products.api";
 import type { IProduct } from "@/types/product.interface";
 import type { IApiProductsMeta } from "@/features/products/utils/products-response.interface";
-import type { IApiFilterOptions } from "@/types/filter-options.interface";
+import type {
+  IApiFilterOptions,
+  IApiFilterCategoryNode,
+} from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
 import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
 
@@ -78,6 +81,20 @@ function mergeParamsWithFilters(
   if (filters.isOriginal) result.is_original = "1";
 
   return result;
+}
+
+function findCategoryName(
+  nodes: IApiFilterCategoryNode[],
+  targetId: number,
+): string | undefined {
+  for (const node of nodes) {
+    if (node.id === targetId) return node.name;
+    if (node.children?.length) {
+      const found = findCategoryName(node.children, targetId);
+      if (found !== undefined) return found;
+    }
+  }
+  return undefined;
 }
 
 function makeCacheKey(params: Record<string, string>, page: number): string {
@@ -338,6 +355,15 @@ export function ProductsInfinite({
     return () => observer.disconnect();
   }, [loadMore, hasMore]);
 
+  const selectedCategoryName = useMemo(() => {
+    if (!filterOptions || appliedFilters.categoryIds.length === 0)
+      return undefined;
+    return findCategoryName(
+      filterOptions.categories,
+      appliedFilters.categoryIds[0],
+    );
+  }, [filterOptions, appliedFilters]);
+
   const filterBarSlot = renderFilterBar ? (
     renderFilterBar(handleApplyFilters, initialFilters)
   ) : filterOptions ? (
@@ -359,6 +385,7 @@ export function ProductsInfinite({
         filterBarSlot={filterBarSlot}
         productCount={meta.total}
         isLoading={isLoading}
+        categoryName={selectedCategoryName}
         dict={dict}
         quickFiltersLabels={quickFiltersLabels}
       />

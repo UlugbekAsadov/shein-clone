@@ -168,7 +168,10 @@ export function CategoryFilterBar({
       </FilterBarDropdown>
 
       {filterOptions.brands.length > 0 && (
-        <FilterBarDropdown label={dict.brands} count={pending.brandIds.length}>
+        <FilterBarDropdown
+          label={dict.brands}
+          count={pending.brandIds.length}
+        >
           <FilterBrandList
             brands={filterOptions.brands}
             selectedIds={pending.brandIds}

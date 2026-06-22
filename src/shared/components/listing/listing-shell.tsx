@@ -12,6 +12,7 @@ interface IProps {
   filterBarSlot?: React.ReactNode;
   productCount?: number;
   isLoading?: boolean;
+  categoryName?: string;
   dict: {
     tabs: { similar: string; deals: string };
     toolbar: {
@@ -55,6 +56,7 @@ export function ListingShell({
   filterBarSlot,
   productCount,
   isLoading,
+  categoryName,
   dict,
 }: IProps) {
   return (
@@ -73,6 +75,7 @@ export function ListingShell({
           label={dict.toolbar.productFound}
           count={productCount}
           isLoading={isLoading}
+          categoryName={categoryName}
         />
 
         <div className="mt-4 mb-6 flex items-start gap-3">

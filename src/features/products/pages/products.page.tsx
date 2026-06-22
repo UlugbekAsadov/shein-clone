@@ -42,6 +42,7 @@ export async function ProductsPage({ lang, dict, params }: IProps) {
                 homeLabel={dict.breadcrumb.home}
                 title={title}
                 lang={lang}
+                categories={filterOptions?.categories ?? []}
               />
             }
             initialProducts={initialProducts}
