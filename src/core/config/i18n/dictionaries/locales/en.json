@@ -157,7 +157,8 @@
       "style": "Style",
       "material": "Material",
       "seasons": "Seasons",
-      "apply": "Apply"
+      "apply": "Apply",
+      "reset": "Reset"
     },
     "search": {
       "resultsFound": "Search results found"

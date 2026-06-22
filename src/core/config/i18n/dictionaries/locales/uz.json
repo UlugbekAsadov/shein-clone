@@ -157,7 +157,8 @@
       "style": "Uslub",
       "material": "Material",
       "seasons": "Fasllar",
-      "apply": "Qo'llash"
+      "apply": "Qo'llash",
+      "reset": "Tozalash"
     },
     "search": {
       "resultsFound": "Qidiruv natijalari"

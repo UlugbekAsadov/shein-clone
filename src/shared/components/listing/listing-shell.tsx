@@ -10,6 +10,8 @@ interface IProps {
   header: React.ReactNode;
   products: IProduct[];
   filterBarSlot?: React.ReactNode;
+  mobileFilterSlot?: React.ReactNode;
+  mobileQuickChipsSlot?: React.ReactNode;
   productCount?: number;
   isLoading?: boolean;
   categoryName?: string;
@@ -54,6 +56,8 @@ export function ListingShell({
   header,
   products,
   filterBarSlot,
+  mobileFilterSlot,
+  mobileQuickChipsSlot,
   productCount,
   isLoading,
   categoryName,
@@ -66,6 +70,8 @@ export function ListingShell({
         priceLabel={dict.toolbar.price}
         applyLabel={dict.filter.apply}
         dict={dict.filter}
+        filterSlot={mobileFilterSlot}
+        quickChipsSlot={mobileQuickChipsSlot}
       />
 
       {header && <div className="hidden md:mb-4 md:block">{header}</div>}

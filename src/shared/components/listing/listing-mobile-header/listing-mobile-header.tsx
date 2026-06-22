@@ -19,6 +19,8 @@ interface IProps {
     style: string;
     material: string;
   };
+  filterSlot?: React.ReactNode;
+  quickChipsSlot?: React.ReactNode;
 }
 
 export function ListingMobileHeader({
@@ -26,6 +28,8 @@ export function ListingMobileHeader({
   priceLabel,
   applyLabel,
   dict,
+  filterSlot,
+  quickChipsSlot,
 }: IProps) {
   const router = useRouter();
 
@@ -45,26 +49,30 @@ export function ListingMobileHeader({
           {title}
         </h1>
 
-        <ListingFilterDrawer
-          dict={dict}
-          trigger={
-            <button
-              type="button"
-              aria-label={dict.title}
-              className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
-            >
-              <Tuning2 className="size-6 rotate-90" />
-            </button>
-          }
-        />
+        {filterSlot ?? (
+          <ListingFilterDrawer
+            dict={dict}
+            trigger={
+              <button
+                type="button"
+                aria-label={dict.title}
+                className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
+              >
+                <Tuning2 className="size-6 rotate-90" />
+              </button>
+            }
+          />
+        )}
       </div>
 
       <div className="-mx-4 pb-3">
-        <ListingFilterChips
-          priceLabel={priceLabel}
-          applyLabel={applyLabel}
-          dict={dict}
-        />
+        {quickChipsSlot ?? (
+          <ListingFilterChips
+            priceLabel={priceLabel}
+            applyLabel={applyLabel}
+            dict={dict}
+          />
+        )}
       </div>
     </div>
   );

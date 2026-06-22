@@ -12,7 +12,10 @@ import type {
   IApiFilterCategoryNode,
 } from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
+import { Tuning2 } from "@solar-icons/react";
 import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
+import { CategoryFilterMobile } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile";
+import { CategoryFilterMobileChips } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile-chips";
 
 const FILTER_PARAM_KEYS = [
   "category_ids",
@@ -49,6 +52,19 @@ function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
     freeDelivery: params.get("free_delivery") === "1",
     isNew: params.get("is_new") === "1",
   };
+}
+
+function countActiveFilters(filters: IActiveFilters): number {
+  return (
+    filters.attributeItemIds.length +
+    filters.brandIds.length +
+    filters.seasonIds.length +
+    (filters.minPrice !== null || filters.maxPrice !== null ? 1 : 0) +
+    (filters.hasDiscount ? 1 : 0) +
+    (filters.isOriginal ? 1 : 0) +
+    (filters.freeDelivery ? 1 : 0) +
+    (filters.isNew ? 1 : 0)
+  );
 }
 
 function hasActiveFilters(filters: IActiveFilters): boolean {
@@ -160,6 +176,7 @@ interface IListingDict {
     material: string;
     seasons: string;
     apply: string;
+    reset: string;
   };
 }
 
@@ -386,6 +403,39 @@ export function ProductsInfinite({
     />
   ) : undefined;
 
+  const mobileFilterSlot = filterOptions ? (
+    <CategoryFilterMobile
+      filterOptions={filterOptions}
+      appliedFilters={appliedFilters}
+      onApply={handleApplyFilters}
+      dict={dict.filter}
+      quickFiltersLabels={quickFiltersLabels}
+      trigger={
+        <button
+          type="button"
+          aria-label={dict.filter.title}
+          className="relative grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
+        >
+          <Tuning2 className="size-6 rotate-90" />
+          {countActiveFilters(appliedFilters) > 0 && (
+            <span className="absolute -right-1 -top-1 grid size-4.5 place-items-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+              {countActiveFilters(appliedFilters)}
+            </span>
+          )}
+        </button>
+      }
+    />
+  ) : undefined;
+
+  const mobileQuickChipsSlot = filterOptions ? (
+    <CategoryFilterMobileChips
+      availableKeys={filterOptions.quick_filters?.map((f) => f.key) ?? []}
+      appliedFilters={appliedFilters}
+      onApply={handleApplyFilters}
+      labels={quickFiltersLabels}
+    />
+  ) : undefined;
+
   return (
     <>
       <ListingShell
@@ -393,6 +443,8 @@ export function ProductsInfinite({
         header={header}
         products={products}
         filterBarSlot={filterBarSlot}
+        mobileFilterSlot={mobileFilterSlot}
+        mobileQuickChipsSlot={mobileQuickChipsSlot}
         productCount={meta.total}
         isLoading={isLoading}
         categoryName={selectedCategoryName}
