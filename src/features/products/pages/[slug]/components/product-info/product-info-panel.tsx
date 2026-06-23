@@ -43,7 +43,6 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
   );
   const [qty, setQty] = useState(1);
   const [showErrors, setShowErrors] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   const sizeDetail = getVariantSizeDetail(product.variant_clothes, colorId, sizeId);
   const price = sizeDetail?.price ?? product.price;
@@ -67,19 +66,15 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (!colorId || !sizeId || !sizeDetail) {
       setShowErrors(true);
       return;
     }
-    setSubmitting(true);
-    const result = await add(product.id, sizeDetail.sku_id, qty);
-    setSubmitting(false);
-    if (result.ok) {
-      toast.success(result.message ?? "Added to cart");
-    } else {
-      toast.error(result.message ?? "Couldn't add to cart");
-    }
+    void add(product, sizeDetail.sku_id, qty).then((result) => {
+      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+    });
+    toast.success("Added to cart");
   }
 
   const handleSizeChange = useCallback(
@@ -151,7 +146,6 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
         <Button
           type="button"
           onClick={handleSubmit}
-          disabled={submitting}
           className="flex-1 cursor-pointer py-4 text-base font-semibold transition hover:bg-foreground/90"
           variant="default"
           size="lg"

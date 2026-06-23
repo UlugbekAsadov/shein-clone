@@ -24,7 +24,6 @@ interface IProps {
 export function CartView({ lang, dict }: IProps) {
   const { items, count, loading, update, remove, clear } = useCart();
   const [selectedKeys, setSelectedKeys] = useState<Set<number>>(new Set());
-  const [pendingKeys, setPendingKeys] = useState<Set<number>>(new Set());
   const [clearing, setClearing] = useState(false);
   const prevKeysRef = useRef<Set<number>>(new Set());
 
@@ -78,29 +77,15 @@ export function CartView({ lang, dict }: IProps) {
     else setSelectedKeys(new Set(availableItems.map((item) => item.line.sku_id)));
   }
 
-  function withPending(skuId: number, add: boolean) {
-    setPendingKeys((prev) => {
-      const next = new Set(prev);
-      if (add) next.add(skuId);
-      else next.delete(skuId);
-      return next;
-    });
-  }
-
   async function handleQtyChange(item: ICartItemView, nextCount: number) {
-    if (nextCount < 1) return;
-    withPending(item.line.sku_id, true);
+    if (nextCount < 1) {
+      const result = await remove(item.product.id);
+      if (result.ok) toast.success(dict.cart.removed);
+      else toast.error(result.message ?? "Couldn't remove item");
+      return;
+    }
     const result = await update(item.product.id, item.line.sku_id, nextCount);
-    withPending(item.line.sku_id, false);
     if (!result.ok) toast.error(result.message ?? "Couldn't update item");
-  }
-
-  async function handleRemove(item: ICartItemView) {
-    withPending(item.line.sku_id, true);
-    const result = await remove(item.product.id);
-    withPending(item.line.sku_id, false);
-    if (result.ok) toast.success(dict.cart.removed);
-    else toast.error(result.message ?? "Couldn't remove item");
   }
 
   async function handleClear() {
@@ -139,10 +124,8 @@ export function CartView({ lang, dict }: IProps) {
           dict={dict.cart}
           lang={lang}
           selectedKeys={selectedKeys}
-          pendingKeys={pendingKeys}
           onToggleSelect={toggleSelect}
           onQtyChange={handleQtyChange}
-          onRemove={handleRemove}
         />
       </div>
 

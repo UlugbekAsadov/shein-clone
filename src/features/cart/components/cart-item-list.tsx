@@ -9,10 +9,8 @@ interface IProps {
   dict: IDictionary["cart"];
   lang: string;
   selectedKeys: Set<number>;
-  pendingKeys: Set<number>;
   onToggleSelect: (skuId: number) => void;
   onQtyChange: (item: ICartItemView, count: number) => void;
-  onRemove: (item: ICartItemView) => void;
 }
 
 export function CartItemList({
@@ -20,10 +18,8 @@ export function CartItemList({
   dict,
   lang,
   selectedKeys,
-  pendingKeys,
   onToggleSelect,
   onQtyChange,
-  onRemove,
 }: IProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -34,10 +30,8 @@ export function CartItemList({
           dict={dict}
           lang={lang}
           selected={selectedKeys.has(item.line.sku_id)}
-          pending={pendingKeys.has(item.line.sku_id)}
           onToggleSelect={() => onToggleSelect(item.line.sku_id)}
           onQtyChange={(count) => onQtyChange(item, count)}
-          onRemove={() => onRemove(item)}
         />
       ))}
     </div>

@@ -28,7 +28,6 @@ export function ProductStickyBar({ product }: IProps) {
     product.discount_type,
   );
   const [visible, setVisible] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 600);
     handleScroll();
@@ -36,7 +35,7 @@ export function ProductStickyBar({ product }: IProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  async function handleAddToCart() {
+  function handleAddToCart() {
     const color = searchParams.get("color") ?? "";
     const size = searchParams.get("size") ?? "";
     const sizeDetail = getVariantSizeDetail(
@@ -48,14 +47,10 @@ export function ProductStickyBar({ product }: IProps) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    setSubmitting(true);
-    const result = await add(product.id, sizeDetail.sku_id, 1);
-    setSubmitting(false);
-    if (result.ok) {
-      toast.success(result.message ?? "Added to cart");
-    } else {
-      toast.error(result.message ?? "Couldn't add to cart");
-    }
+    void add(product, sizeDetail.sku_id, 1).then((result) => {
+      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+    });
+    toast.success("Added to cart");
   }
 
   return (
@@ -106,7 +101,6 @@ export function ProductStickyBar({ product }: IProps) {
             <Button
               type="button"
               onClick={handleAddToCart}
-              disabled={submitting}
               className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
               size="lg"
             >

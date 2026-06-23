@@ -47,7 +47,6 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
   const [colorId, setColorId] = useState("");
   const [sizeId, setSizeId] = useState("");
   const [showErrors, setShowErrors] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   const colors = data ? getVariantColorSwatches(data.variant_clothes) : [];
   const displayColor = colorId || colors[0]?.id || "";
@@ -78,20 +77,16 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
     setSizeId(nextSizes.some((s) => s.id === sizeId) ? sizeId : "");
   }
 
-  async function handleAddToCart() {
+  function handleAddToCart() {
     if (!colorId || !sizeId || !sizeDetail) {
       setShowErrors(true);
       return;
     }
-    setSubmitting(true);
-    const result = await add(product.id, sizeDetail.sku_id, 1);
-    setSubmitting(false);
-    if (result.ok) {
-      toast.success(result.message ?? "Added to cart");
-      onOpenChange(false);
-    } else {
-      toast.error(result.message ?? "Couldn't add to cart");
-    }
+    void add(product, sizeDetail.sku_id, 1).then((result) => {
+      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+    });
+    toast.success("Added to cart");
+    onOpenChange(false);
   }
 
   return (
@@ -182,7 +177,6 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
               <Button
                 className="h-12 w-full rounded-sm text-base font-semibold"
                 onClick={handleAddToCart}
-                disabled={submitting}
               >
                 <span>Add to cart</span>
                 <CartLarge2 className="ml-1 size-6" />

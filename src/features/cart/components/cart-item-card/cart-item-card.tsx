@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { TrashBinMinimalistic } from "@solar-icons/react";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import { formatPrice } from "@/shared/utils/format-price";
@@ -18,10 +17,8 @@ interface IProps {
   dict: IDictionary["cart"];
   lang: string;
   selected: boolean;
-  pending: boolean;
   onToggleSelect: () => void;
   onQtyChange: (count: number) => void;
-  onRemove: () => void;
 }
 
 export function CartItemCard({
@@ -29,10 +26,8 @@ export function CartItemCard({
   dict,
   lang,
   selected,
-  pending,
   onToggleSelect,
   onQtyChange,
-  onRemove,
 }: IProps) {
   const { currency } = useCurrency();
   const { product, line } = item;
@@ -42,105 +37,103 @@ export function CartItemCard({
   return (
     <div
       className={cn(
-        "rounded-xl border bg-card p-4",
-        item.isAvailable ? "border-border" : "border-rose-300",
+        "rounded-[20px] bg-secondary p-4",
+        !item.isAvailable && "ring-1 ring-rose-300",
       )}
     >
-      <div className="flex items-center justify-between gap-2 pb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-lg">
           {!item.isAvailable && (
-            <span className="rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-600">
+            <span className="mr-2 rounded-full bg-rose-100 px-2 py-0.5 text-xs font-semibold text-rose-600">
               {dict.outOfStock}
             </span>
           )}
-          {deliveryDate && (
-            <span className="text-sm text-foreground">
-              {dict.deliveryDate}:{" "}
-              <span className="font-semibold">{deliveryDate}</span>
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={onRemove}
-            disabled={pending}
-            aria-label="Remove item"
-            className="grid size-8 cursor-pointer place-items-center rounded-full text-muted-foreground transition hover:bg-secondary hover:text-foreground disabled:opacity-50"
-          >
-            <TrashBinMinimalistic className="size-5" weight="Outline" />
-          </button>
-          <Checkbox
-            checked={selected}
-            onCheckedChange={onToggleSelect}
-            disabled={!item.isAvailable}
-            aria-label="Select item"
-          />
-        </div>
+          <span className="text-muted-foreground">{dict.deliveryDate}: </span>
+          <span className="font-bold text-foreground">{deliveryDate}</span>
+        </span>
+        <Checkbox
+          checked={selected}
+          onCheckedChange={onToggleSelect}
+          disabled={!item.isAvailable}
+          aria-label="Select item"
+          className="size-7 cursor-pointer rounded-[8px]"
+        />
       </div>
 
-      <div className="flex gap-4 border-t border-border pt-3">
+      <div className="my-4 border-t-2 border-dashed border-border " />
+
+      <div className="flex gap-4">
         <Link
           href={productHref}
-          className="relative aspect-3/4 w-24 shrink-0 overflow-hidden rounded-lg bg-muted"
+          className="relative aspect-3/4 w-28 shrink-0 overflow-hidden rounded-lg bg-muted sm:w-44"
         >
           <Image
             src={product.image_url}
             alt={product.title}
             fill
             quality={90}
-            sizes="96px"
+            sizes="(max-width: 640px) 112px, 176px"
             className="object-cover"
           />
         </Link>
 
-        <div className="flex flex-1 flex-col gap-1">
+        <div className="flex flex-1 flex-col">
           <Link
             href={productHref}
-            className="line-clamp-2 text-sm font-medium leading-snug hover:underline"
+            className="line-clamp-2 text-base font-bold leading-snug hover:underline sm:text-lg"
           >
             {product.title}
           </Link>
 
-          <div className="mt-1 flex flex-col gap-0.5 text-xs text-muted-foreground">
+          <div className="mt-2 flex flex-col gap-1.5 text-sm">
             {line.color && (
-              <span>
-                {dict.color}:{" "}
-                <span className="font-medium text-foreground">{line.color}</span>
-              </span>
+              <div className="flex items-center">
+                <span className="text-muted-foreground">{dict.color}:</span>
+                <span className="ml-2 font-bold text-foreground">
+                  {line.color}
+                </span>
+                <span
+                  className="ml-2 inline-block size-4 rounded-[5px] ring-1 ring-black/10"
+                  style={{ backgroundColor: line.color }}
+                />
+              </div>
             )}
             {line.size && (
-              <span>
-                {dict.size}:{" "}
-                <span className="font-medium text-foreground">{line.size}</span>
-              </span>
+              <div className="flex items-center">
+                <span className="text-muted-foreground">{dict.size}:</span>
+                <span className="ml-2 font-bold text-foreground">
+                  {line.size}
+                </span>
+              </div>
             )}
+            <div className="flex items-center">
+              <span className="text-muted-foreground">{dict.qty}:</span>
+              <span className="ml-2 font-bold text-foreground">
+                {line.count}
+              </span>
+            </div>
           </div>
 
-          <div className="mt-auto flex items-end justify-between gap-3 pt-2">
-            <div className="flex flex-col gap-1">
+          <div className="mt-auto flex items-end justify-between gap-3 pt-4">
+            <div className="flex flex-col gap-0.5">
               {item.originalUnitPrice && (
-                <span className="text-xs text-muted-foreground line-through">
+                <span className="text-sm text-muted-foreground line-through">
                   {formatPrice(item.originalUnitPrice, currency)}
                 </span>
               )}
-              <div className="flex items-center gap-2">
-                <span className="text-base font-bold text-foreground">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                <span className="text-[22px] font-extrabold leading-none tracking-tight">
                   {formatPrice(item.unitPrice, currency)}
                 </span>
                 {item.savings > 0 && (
-                  <span className="text-xs font-semibold text-emerald-600">
-                    {formatPrice(item.originalUnitPrice! - item.unitPrice, currency)}
+                  <span className="text-sm font-medium text-emerald-500">
+                    {dict.save} {formatPrice(item.savings, currency)}
                   </span>
                 )}
               </div>
             </div>
 
-            <CartItemQtyStepper
-              value={line.count}
-              disabled={pending}
-              onChange={onQtyChange}
-            />
+            <CartItemQtyStepper value={line.count} onChange={onQtyChange} />
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ export interface ICartContextValue {
   totalQuantity: number;
   loading: boolean;
   add: (
-    productId: number,
+    product: IProduct,
     skuId: number,
     count: number,
   ) => Promise<IActionResult<ICartData>>;

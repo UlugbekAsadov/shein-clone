@@ -78,7 +78,6 @@ export function ProductMobilePage({
     sizes.some((s) => s.id === urlSize) ? urlSize : "",
   );
   const [showErrors, setShowErrors] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
 
   const commentsHref = `/${lang}/products/${product.slug}/comments`;
 
@@ -97,7 +96,7 @@ export function ProductMobilePage({
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  async function handleAddToCart() {
+  function handleAddToCart() {
     const sizeDetail = getVariantSizeDetail(
       product.variant_clothes,
       colorId,
@@ -107,14 +106,10 @@ export function ProductMobilePage({
       setShowErrors(true);
       return;
     }
-    setSubmitting(true);
-    const result = await add(product.id, sizeDetail.sku_id, 1);
-    setSubmitting(false);
-    if (result.ok) {
-      toast.success(result.message ?? "Added to cart");
-    } else {
-      toast.error(result.message ?? "Couldn't add to cart");
-    }
+    void add(product, sizeDetail.sku_id, 1).then((result) => {
+      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+    });
+    toast.success("Added to cart");
   }
 
   const handleSizeChange = useCallback(
@@ -219,7 +214,6 @@ export function ProductMobilePage({
         <ProductMobileCta
           label="Add to cart"
           onClick={handleAddToCart}
-          disabled={submitting}
           price={product.price}
           originalPrice={getOriginalPrice(
             product.price,

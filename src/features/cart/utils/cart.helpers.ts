@@ -6,6 +6,71 @@ import type {
   ICartTotals,
 } from "./cart.interface";
 
+export function createEmptyCart(): ICartData {
+  return {
+    count: 0,
+    total_quantity: 0,
+    sku_ids: [],
+    product_ids: [],
+    items: [],
+    products: [],
+  };
+}
+
+function recalcCart(items: ICartData["items"], products: IProduct[]): ICartData {
+  return {
+    items,
+    products,
+    count: items.length,
+    total_quantity: items.reduce((sum, line) => sum + line.count, 0),
+    sku_ids: items.map((line) => line.sku_id),
+    product_ids: [...new Set(items.map((line) => line.product_id))],
+  };
+}
+
+export function addLineToCart(
+  data: ICartData | null,
+  product: IProduct,
+  skuId: number,
+  count: number,
+): ICartData {
+  const base = data ?? createEmptyCart();
+  const items = [...base.items];
+  const index = items.findIndex((line) => line.sku_id === skuId);
+  if (index >= 0) {
+    items[index] = { ...items[index], count: items[index].count + count };
+  } else {
+    items.push({ sku_id: skuId, product_id: product.id, count });
+  }
+  const products = base.products.some((p) => p.id === product.id)
+    ? base.products
+    : [...base.products, product];
+  return recalcCart(items, products);
+}
+
+export function setCartLineCount(
+  data: ICartData | null,
+  skuId: number,
+  count: number,
+): ICartData | null {
+  if (!data) return data;
+  const items = data.items.map((line) =>
+    line.sku_id === skuId ? { ...line, count } : line,
+  );
+  return recalcCart(items, data.products);
+}
+
+export function removeCartProduct(
+  data: ICartData | null,
+  productId: number,
+): ICartData | null {
+  if (!data) return data;
+  const items = data.items.filter((line) => line.product_id !== productId);
+  const usedProductIds = new Set(items.map((line) => line.product_id));
+  const products = data.products.filter((p) => usedProductIds.has(p.id));
+  return recalcCart(items, products);
+}
+
 export function buildCartItemViews(data: ICartData | null): ICartItemView[] {
   if (!data || !data.items || !data.products) return [];
   const productsById = new Map<number, IProduct>(
