@@ -84,7 +84,7 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
           <XIcon className="size-6" />
         </button>
 
-        <div className="mt-5 max-h-[calc(80vh-5rem)] overflow-y-auto pr-1">
+        <div className="mt-5 max-h-[calc(80vh-5rem)] overflow-y-auto scrollbar-hidden pr-1">
           {data ? (
             <ProductVariantProvider
               variants={data.variant_clothes}

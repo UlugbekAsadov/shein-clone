@@ -14,6 +14,7 @@ import {
   getProductReviews,
 } from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useIsMobile } from "@/shared/hooks/use-is-mobile";
 import { cn } from "@/lib/utils";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
@@ -32,6 +33,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = useIsMobile();
   const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
@@ -180,7 +182,8 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              setPreviewOpen(true);
+              if (isMobile) setCartDrawerOpen(true);
+              else setPreviewOpen(true);
             }}
             aria-label="Add to cart"
             className=" flex items-center gap-2 justify-center cursor-pointer h-6.5 md:h-10 w-full place-items-center rounded-[10px] bg-[#DEDEE4] text-[#383838] transition-colors hover:bg-#DEDEE490 text-sm md:text-base"
@@ -197,6 +200,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
       />
 
       <ProductCardCartDrawer
+        product={product}
         open={cartDrawerOpen}
         onOpenChange={setCartDrawerOpen}
       />

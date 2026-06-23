@@ -82,7 +82,7 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
   );
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 scrollbar-hidden">
       <div>
         <h1 className="text-2xl font-bold leading-tight">{product.title}</h1>
         <div className="mt-3 flex items-center gap-3 text-sm">
