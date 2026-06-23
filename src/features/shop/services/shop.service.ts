@@ -47,7 +47,7 @@ export async function getShopPromoCodes(
 ): Promise<IApiShopPromoCode[]> {
   try {
     const result = await shopApi.getPromoCodes(id);
-    return result.data?.data ?? [];
+    return result.data ?? [];
   } catch (error) {
     if (error instanceof ApiError) return [];
     throw error;

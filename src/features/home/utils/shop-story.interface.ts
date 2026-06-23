@@ -12,22 +12,3 @@ export interface IShopStory {
   all_stories_viewed: boolean;
   story_ring_state: "unviewed" | "viewed" | "none";
 }
-
-export interface IShopStoriesPage {
-  data: IShopStory[];
-  links: {
-    first: string | null;
-    last: string | null;
-    prev: string | null;
-    next: string | null;
-  };
-  meta: {
-    current_page: number;
-    from: number | null;
-    last_page: number;
-    path: string;
-    per_page: number;
-    to: number | null;
-    total: number;
-  };
-}

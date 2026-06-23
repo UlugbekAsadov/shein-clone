@@ -4,7 +4,7 @@ import type {
   IApiShop,
   IApiShopAbout,
   IApiShopByIdData,
-  IApiShopPromoCodesData,
+  IApiShopPromoCode,
   IApiShopProductsResponse,
   IApiShopFilterOptions,
 } from "@/features/shop/utils/shop-response.interface";
@@ -30,7 +30,7 @@ export const shopApi = {
     );
   },
   getPromoCodes(id: number) {
-    return apiClient.get<IApiResponse<IApiShopPromoCodesData>>(
+    return apiClient.get<IApiResponse<IApiShopPromoCode[]>>(
       SHOP_ENDPOINTS.promoCodes(id),
       { skipAuth: true },
     );

@@ -9,7 +9,7 @@ export async function getShopHighlights(shopId: number): Promise<IApiShopHighlig
 
   try {
     const result = await shopHighlightApi.getByShop(shopId, sessionId);
-    return result.data?.data ?? [];
+    return result.data ?? [];
   } catch (error) {
     if (error instanceof ApiError) return [];
     throw error;

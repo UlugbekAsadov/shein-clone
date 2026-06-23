@@ -171,7 +171,3 @@ export interface IApiShopPromoCode {
   expires_at: string;
   days_left: number;
 }
-
-export interface IApiShopPromoCodesData {
-  data: IApiShopPromoCode[];
-}

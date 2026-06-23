@@ -10,7 +10,7 @@ export const getShopStories = cache(async (): Promise<IShopStory[]> => {
 
   try {
     const result = await shopStoriesApi.getAll(sessionId);
-    return result.data?.data ?? [];
+    return result.data ?? [];
   } catch (error) {
     if (error instanceof ApiError) return [];
     throw error;

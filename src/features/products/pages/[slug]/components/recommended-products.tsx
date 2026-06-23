@@ -37,7 +37,13 @@ function buildViewAllHref(
   return `${base}?${params.toString()}`;
 }
 
-export function RecommendedProducts({ products, countLabel, lang, autoFilter }: IProps) {
+export function RecommendedProducts({
+  products,
+  countLabel,
+  lang,
+  autoFilter,
+}: IProps) {
+  console.log({ products });
   if (!products.length) return null;
 
   return (
