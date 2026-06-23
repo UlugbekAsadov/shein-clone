@@ -136,7 +136,7 @@ export const apiClient = {
   patch<TData>(endpoint: string, body?: unknown, options?: IHttpOptions) {
     return request<TData>("PATCH", endpoint, body, options);
   },
-  delete<TData>(endpoint: string, options?: IHttpOptions) {
-    return request<TData>("DELETE", endpoint, undefined, options);
+  delete<TData>(endpoint: string, body?: unknown, options?: IHttpOptions) {
+    return request<TData>("DELETE", endpoint, body, options);
   },
 };

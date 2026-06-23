@@ -8,8 +8,9 @@ import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
 import { HeaderUserAction } from "./header-user-action";
 import { HeaderScrollWrapper } from "./header-scroll-wrapper";
+import { HeaderCartButton } from "./header-cart-button";
 import { CategoryNav } from "../category/category-nav";
-import { CartLarge2, Heart } from "@solar-icons/react/ssr";
+import { Heart } from "@solar-icons/react/ssr";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -54,16 +55,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
 
           <div className="h-8 w-px bg-border" aria-hidden />
 
-          <button
-            type="button"
-            aria-label="Cart"
-            className="relative rounded-full cursor-pointer"
-          >
-            <CartLarge2 className="size-6 text-secondary-foreground" />
-            <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
-              8
-            </span>
-          </button>
+          <HeaderCartButton lang={lang} />
           <Link
             href={`/${lang}/profile/wishlist`}
             aria-label="Wishlist"

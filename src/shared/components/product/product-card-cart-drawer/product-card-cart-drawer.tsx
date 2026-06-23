@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import { AltArrowLeft, CartLarge2 } from "@solar-icons/react";
 import { XIcon } from "@/shared/components/icons/outline";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ import type { IProduct } from "@/types/product.interface";
 import { formatPrice } from "@/shared/utils/format-price";
 import { getOriginalPrice } from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useCart } from "@/features/cart/hooks/use-cart";
 import { useProductDetail } from "@/features/products/hooks/use-product-detail";
 import {
   getVariantColorSwatches,
@@ -37,6 +39,7 @@ const VIEW_TRANSITION_MS = 300;
 
 export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
   const { currency } = useCurrency();
+  const { add } = useCart();
   const slug = product.slug ?? String(product.id);
   const { data, loading, error } = useProductDetail(slug, open);
 
@@ -44,6 +47,7 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
   const [colorId, setColorId] = useState("");
   const [sizeId, setSizeId] = useState("");
   const [showErrors, setShowErrors] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const colors = data ? getVariantColorSwatches(data.variant_clothes) : [];
   const displayColor = colorId || colors[0]?.id || "";
@@ -74,12 +78,20 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
     setSizeId(nextSizes.some((s) => s.id === sizeId) ? sizeId : "");
   }
 
-  function handleAddToCart() {
-    if (!colorId || !sizeId) {
+  async function handleAddToCart() {
+    if (!colorId || !sizeId || !sizeDetail) {
       setShowErrors(true);
       return;
     }
-    onOpenChange(false);
+    setSubmitting(true);
+    const result = await add(product.id, sizeDetail.sku_id, 1);
+    setSubmitting(false);
+    if (result.ok) {
+      toast.success(result.message ?? "Added to cart");
+      onOpenChange(false);
+    } else {
+      toast.error(result.message ?? "Couldn't add to cart");
+    }
   }
 
   return (
@@ -170,6 +182,7 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
               <Button
                 className="h-12 w-full rounded-sm text-base font-semibold"
                 onClick={handleAddToCart}
+                disabled={submitting}
               >
                 <span>Add to cart</span>
                 <CartLarge2 className="ml-1 size-6" />

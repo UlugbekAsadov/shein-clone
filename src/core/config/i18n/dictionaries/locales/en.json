@@ -105,6 +105,27 @@
     "ordersTitle": "No orders yet",
     "ordersDescription": "Once you place an order, it will show up here for tracking and reordering."
   },
+  "cart": {
+    "itemsInCart": "items in cart",
+    "clearCart": "Clear cart",
+    "selectAll": "Select all",
+    "color": "Color",
+    "size": "Size",
+    "qty": "Qty",
+    "location": "Location",
+    "deliveryDate": "Delivery date",
+    "outOfStock": "Out of stock",
+    "outOfStockNote": "Sorry, this product is out of stock. Take a look at these similar options.",
+    "exploreSimilar": "Explore Similar Items",
+    "yourOrder": "Your Order",
+    "products": "Products",
+    "discounts": "Discounts",
+    "totalPrice": "Total price",
+    "next": "Next",
+    "added": "Added to cart",
+    "removed": "Removed from cart",
+    "cleared": "Cart cleared"
+  },
   "sections": {
     "shopByCategory": "Shop by Category",
     "trendingNow": "Trending Now",

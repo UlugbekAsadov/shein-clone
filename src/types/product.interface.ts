@@ -22,5 +22,6 @@ export interface IProduct {
   delivery_date_text?: string;
   is_original?: boolean;
   is_wishlist?: boolean;
+  is_available?: boolean;
   subtitle?: string;
 }

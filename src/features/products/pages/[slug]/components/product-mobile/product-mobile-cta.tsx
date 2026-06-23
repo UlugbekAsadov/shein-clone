@@ -10,6 +10,7 @@ interface IProps {
   price: number;
   originalPrice?: number;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 export function ProductMobileCta({
@@ -17,6 +18,7 @@ export function ProductMobileCta({
   price,
   originalPrice,
   onClick,
+  disabled,
 }: IProps) {
   const { currency } = useCurrency();
   return (
@@ -41,6 +43,7 @@ export function ProductMobileCta({
         type="button"
         size="lg"
         onClick={onClick}
+        disabled={disabled}
         className="h-12.5 w-full rounded-[8px] text-lg font-medium"
       >
         <span>{label}</span>

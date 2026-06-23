@@ -2,13 +2,17 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 import { getOriginalPrice } from "@/shared/utils/product-display";
+import { getVariantSizeDetail } from "@/features/products/pages/[slug]/utils/variant.mapper";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useCart } from "@/features/cart/hooks/use-cart";
 
 interface IProps {
   product: IProductDetail;
@@ -16,18 +20,43 @@ interface IProps {
 
 export function ProductStickyBar({ product }: IProps) {
   const { currency } = useCurrency();
+  const { add } = useCart();
+  const searchParams = useSearchParams();
   const originalPrice = getOriginalPrice(
     product.price,
     product.discount,
     product.discount_type,
   );
   const [visible, setVisible] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 600);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  async function handleAddToCart() {
+    const color = searchParams.get("color") ?? "";
+    const size = searchParams.get("size") ?? "";
+    const sizeDetail = getVariantSizeDetail(
+      product.variant_clothes,
+      color,
+      size,
+    );
+    if (!sizeDetail) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    setSubmitting(true);
+    const result = await add(product.id, sizeDetail.sku_id, 1);
+    setSubmitting(false);
+    if (result.ok) {
+      toast.success(result.message ?? "Added to cart");
+    } else {
+      toast.error(result.message ?? "Couldn't add to cart");
+    }
+  }
 
   return (
     <div
@@ -76,6 +105,8 @@ export function ProductStickyBar({ product }: IProps) {
           <div className=" flex items-center gap-3">
             <Button
               type="button"
+              onClick={handleAddToCart}
+              disabled={submitting}
               className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
               size="lg"
             >

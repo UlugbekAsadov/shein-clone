@@ -105,6 +105,27 @@
     "ordersTitle": "Hozircha buyurtmalar yo'q",
     "ordersDescription": "Buyurtma bergandan so'ng u shu yerda kuzatuv uchun ko'rinadi."
   },
+  "cart": {
+    "itemsInCart": "ta mahsulot savatda",
+    "clearCart": "Savatni tozalash",
+    "selectAll": "Hammasini tanlash",
+    "color": "Rang",
+    "size": "O'lcham",
+    "qty": "Soni",
+    "location": "Manzil",
+    "deliveryDate": "Yetkazib berish sanasi",
+    "outOfStock": "Tugagan",
+    "outOfStockNote": "Kechirasiz, bu mahsulot tugagan. Quyidagi o'xshash variantlarni ko'ring.",
+    "exploreSimilar": "O'xshash mahsulotlar",
+    "yourOrder": "Buyurtmangiz",
+    "products": "Mahsulotlar",
+    "discounts": "Chegirmalar",
+    "totalPrice": "Umumiy narx",
+    "next": "Davom etish",
+    "added": "Savatga qo'shildi",
+    "removed": "Savatdan o'chirildi",
+    "cleared": "Savat tozalandi"
+  },
   "sections": {
     "shopByCategory": "Kategoriya bo'yicha",
     "trendingNow": "Hozir trendda",

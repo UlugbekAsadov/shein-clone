@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { toast } from "sonner";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 import {
@@ -16,6 +17,7 @@ import { ProductRatingStars } from "@/shared/components/product/product-preview/
 import { Button } from "@/shared/components/ui/button";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useCart } from "@/features/cart/hooks/use-cart";
 import { useProductVariant } from "@/features/products/pages/[slug]/providers/product-variant.provider";
 
 interface IProps {
@@ -25,6 +27,7 @@ interface IProps {
 
 export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
   const { currency } = useCurrency();
+  const { add } = useCart();
   const { colorId, setColorId } = useProductVariant();
   const router = useRouter();
   const pathname = usePathname();
@@ -40,6 +43,7 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
   );
   const [qty, setQty] = useState(1);
   const [showErrors, setShowErrors] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const sizeDetail = getVariantSizeDetail(product.variant_clothes, colorId, sizeId);
   const price = sizeDetail?.price ?? product.price;
@@ -63,10 +67,18 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  function handleSubmit() {
-    if (!colorId || !sizeId) {
+  async function handleSubmit() {
+    if (!colorId || !sizeId || !sizeDetail) {
       setShowErrors(true);
       return;
+    }
+    setSubmitting(true);
+    const result = await add(product.id, sizeDetail.sku_id, qty);
+    setSubmitting(false);
+    if (result.ok) {
+      toast.success(result.message ?? "Added to cart");
+    } else {
+      toast.error(result.message ?? "Couldn't add to cart");
     }
   }
 
@@ -139,6 +151,7 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
         <Button
           type="button"
           onClick={handleSubmit}
+          disabled={submitting}
           className="flex-1 cursor-pointer py-4 text-base font-semibold transition hover:bg-foreground/90"
           variant="default"
           size="lg"

@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useState, useCallback } from "react";
+import { toast } from "sonner";
 import type {
   IProductDetail,
   IProductHighlight,
@@ -15,9 +16,11 @@ import type {
 } from "@/features/products/pages/[slug]/utils/review.interface";
 import {
   getVariantColorSwatches,
+  getVariantSizeDetail,
   getVariantSizes,
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
 import { getOriginalPrice } from "@/shared/utils/product-display";
+import { useCart } from "@/features/cart/hooks/use-cart";
 import { ProductMobileGallery } from "./product-mobile-gallery";
 import { ProductMobileRatingRow } from "./product-mobile-rating-row";
 import { ProductMobileDescription } from "./product-mobile-description";
@@ -59,6 +62,7 @@ export function ProductMobilePage({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { add } = useCart();
 
   const colors = getVariantColorSwatches(product.variant_clothes);
   const validColors = new Set(colors.map((c) => c.id));
@@ -74,6 +78,7 @@ export function ProductMobilePage({
     sizes.some((s) => s.id === urlSize) ? urlSize : "",
   );
   const [showErrors, setShowErrors] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const commentsHref = `/${lang}/products/${product.slug}/comments`;
 
@@ -92,10 +97,23 @@ export function ProductMobilePage({
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
-  function handleAddToCart() {
-    if (!colorId || !sizeId) {
+  async function handleAddToCart() {
+    const sizeDetail = getVariantSizeDetail(
+      product.variant_clothes,
+      colorId,
+      sizeId,
+    );
+    if (!colorId || !sizeId || !sizeDetail) {
       setShowErrors(true);
       return;
+    }
+    setSubmitting(true);
+    const result = await add(product.id, sizeDetail.sku_id, 1);
+    setSubmitting(false);
+    if (result.ok) {
+      toast.success(result.message ?? "Added to cart");
+    } else {
+      toast.error(result.message ?? "Couldn't add to cart");
     }
   }
 
@@ -201,6 +219,7 @@ export function ProductMobilePage({
         <ProductMobileCta
           label="Add to cart"
           onClick={handleAddToCart}
+          disabled={submitting}
           price={product.price}
           originalPrice={getOriginalPrice(
             product.price,

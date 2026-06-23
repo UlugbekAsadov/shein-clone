@@ -5,6 +5,7 @@ import { SolarProvider } from "@solar-icons/react";
 import { Toaster } from "@/shared/components/ui/sonner";
 import { UserProvider } from "@/features/auth/providers/user-provider";
 import { AuthDialogProvider } from "@/features/auth/providers/auth-dialog-provider";
+import { CartProvider } from "@/features/cart/providers/cart-provider";
 import { LoginDialog } from "@/features/auth/login/components/login-dialog";
 import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -27,10 +28,12 @@ export function Providers({ user, dict, children }: IProps) {
         <TooltipProvider>
           <CurrencyProvider>
             <UserProvider user={user}>
-              <AuthDialogProvider>
-                {children}
-                <LoginDialog dict={dict} />
-              </AuthDialogProvider>
+              <CartProvider>
+                <AuthDialogProvider>
+                  {children}
+                  <LoginDialog dict={dict} />
+                </AuthDialogProvider>
+              </CartProvider>
             </UserProvider>
           </CurrencyProvider>
         </TooltipProvider>
