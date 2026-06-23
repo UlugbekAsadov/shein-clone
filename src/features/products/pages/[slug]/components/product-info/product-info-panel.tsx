@@ -20,9 +20,10 @@ import { useProductVariant } from "@/features/products/pages/[slug]/providers/pr
 
 interface IProps {
   product: IProductDetail;
+  syncToUrl?: boolean;
 }
 
-export function ProductInfoPanel({ product }: IProps) {
+export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
   const { currency } = useCurrency();
   const { colorId, setColorId } = useProductVariant();
   const router = useRouter();
@@ -33,7 +34,7 @@ export function ProductInfoPanel({ product }: IProps) {
   const displayColor = colorId || colors[0]?.id || "";
   const sizes = getVariantSizes(product.variant_clothes, displayColor);
 
-  const urlSize = searchParams.get("size") ?? "";
+  const urlSize = syncToUrl ? searchParams.get("size") ?? "" : "";
   const [sizeId, setSizeIdState] = useState(
     sizes.some((s) => s.id === urlSize) ? urlSize : "",
   );
@@ -51,6 +52,7 @@ export function ProductInfoPanel({ product }: IProps) {
     const nextSize = nextSizes.some((s) => s.id === sizeId) ? sizeId : "";
     setColorId(nextColor);
     setSizeIdState(nextSize);
+    if (!syncToUrl) return;
     const params = new URLSearchParams(searchParams.toString());
     params.set("color", nextColor);
     if (nextSize) {
@@ -71,11 +73,12 @@ export function ProductInfoPanel({ product }: IProps) {
   const handleSizeChange = useCallback(
     (size: string) => {
       setSizeIdState(size);
+      if (!syncToUrl) return;
       const params = new URLSearchParams(searchParams.toString());
       params.set("size", size);
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [pathname, router, searchParams],
+    [pathname, router, searchParams, syncToUrl],
   );
 
   return (

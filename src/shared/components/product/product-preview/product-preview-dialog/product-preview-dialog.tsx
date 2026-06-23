@@ -3,14 +3,13 @@
 import { useEffect, useState } from "react";
 import type { IProduct } from "@/types/product.interface";
 import { XIcon } from "@/shared/components/icons/outline";
-import {
-  colorSwatches,
-  colorVariantImages,
-} from "@/shared/mocks/product-preview.mocks";
 import { TRANSITION_MS } from "@/shared/constants/product-preview.constants";
 import { cn } from "@/lib/utils";
-import { ProductPreviewGallery } from "./product-preview-gallery";
-import { ProductPreviewInfo } from "./product-preview-info";
+import { useProductDetail } from "@/features/products/hooks/use-product-detail";
+import { ProductVariantProvider } from "@/features/products/pages/[slug]/providers/product-variant.provider";
+import { ProductGalleryPanel } from "@/features/products/pages/[slug]/components/product-gallery-panel";
+import { ProductInfoPanel } from "@/features/products/pages/[slug]/components/product-info/product-info-panel";
+import { ProductPreviewSkeleton } from "./product-preview-skeleton";
 
 interface IProps {
   product: IProduct;
@@ -21,12 +20,8 @@ interface IProps {
 export function ProductPreviewDialog({ product, open, onClose }: IProps) {
   const [mounted, setMounted] = useState(false);
   const [closing, setClosing] = useState(false);
-  const [colorId, setColorId] = useState(colorSwatches[0].id);
-
-  const activeColorIndex = Math.max(
-    0,
-    colorSwatches.findIndex((swatch) => swatch.id === colorId),
-  );
+  const slug = product.slug ?? String(product.id);
+  const { data, loading, error } = useProductDetail(slug, mounted);
 
   useEffect(() => {
     if (open) {
@@ -89,20 +84,26 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
           <XIcon className="size-6" />
         </button>
 
-        <div className="grid max-h-[80vh] grid-cols-1 gap-10 md:grid-cols-2 mt-5">
-          <ProductPreviewGallery
-            images={colorVariantImages}
-            alt={product.title}
-            activeIndex={activeColorIndex}
-            onActiveIndexChange={(index) => setColorId(colorSwatches[index].id)}
-          />
-
-          <ProductPreviewInfo
-            product={product}
-            onClose={onClose}
-            colorId={colorId}
-            onColorChange={setColorId}
-          />
+        <div className="mt-5 max-h-[calc(80vh-5rem)] overflow-y-auto pr-1">
+          {data ? (
+            <ProductVariantProvider
+              variants={data.variant_clothes}
+              fallbackImages={[data.image_url, ...data.additional_images]}
+            >
+              <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+                <ProductGalleryPanel alt={data.title} />
+                <ProductInfoPanel product={data} syncToUrl={false} />
+              </div>
+            </ProductVariantProvider>
+          ) : error && !loading ? (
+            <div className="grid place-items-center py-20 text-center">
+              <p className="text-secondary-foreground">
+                Couldn&apos;t load this product. Please try again.
+              </p>
+            </div>
+          ) : (
+            <ProductPreviewSkeleton />
+          )}
         </div>
       </div>
     </div>

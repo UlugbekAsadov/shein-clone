@@ -5,12 +5,13 @@ import type { ISimilarProductsData } from "@/features/products/pages/[slug]/util
 import { PRODUCT_DETAIL_ENDPOINTS } from "./products-detail.endpoints";
 
 export const productDetailApi = {
-  getBySlug(slug: string) {
+  getBySlug(slug: string, signal?: AbortSignal) {
     return apiClient.get<IApiResponse<IProductDetail>>(
       PRODUCT_DETAIL_ENDPOINTS.bySlug(slug),
       {
         skipAuth: true,
         searchParams: { variant_clothes: "true" },
+        signal,
       },
     );
   },
