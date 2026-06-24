@@ -36,6 +36,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<Record<number, boolean>>({});
   const isMobile = useIsMobile();
   const { confirmed } = useAdultConsent();
   const { open: openAdultDialog } = useAdultDialog();
@@ -80,6 +81,13 @@ export function ProductCard({ product, variant = "default" }: IProps) {
             "md:rounded-md",
           )}
         >
+          <Image
+            src="/images/image-placeholder.webp"
+            alt=""
+            fill
+            sizes="(max-width: 1440px) 25vw, 360px"
+            className="object-cover"
+          />
           {images.map((src, idx) => (
             <Image
               key={`${src}-${idx}`}
@@ -88,10 +96,15 @@ export function ProductCard({ product, variant = "default" }: IProps) {
               fill
               quality={95}
               sizes="(max-width: 1440px) 25vw, 360px"
+              onLoad={() =>
+                setLoadedImages((prev) => ({ ...prev, [idx]: true }))
+              }
               className={cn(
                 "object-cover transition-opacity duration-300",
                 "group-hover:scale-105",
-                idx === activeIndex ? "opacity-100" : "opacity-0",
+                idx === activeIndex && loadedImages[idx]
+                  ? "opacity-100"
+                  : "opacity-0",
                 isBlurred && "scale-110 blur-2xl group-hover:scale-110",
               )}
             />
