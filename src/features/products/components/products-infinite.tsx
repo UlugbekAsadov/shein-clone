@@ -16,6 +16,9 @@ import { Tuning2 } from "@solar-icons/react";
 import { CategoryFilterBar } from "@/features/category/pages/[slug]/components/category-filter-bar/category-filter-bar";
 import { CategoryFilterMobile } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile";
 import { CategoryFilterMobileBar } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile-bar";
+import { useAdultConsent } from "@/shared/hooks/use-adult-consent";
+import { AdultConfirmBanner } from "@/features/products/components/adult-confirm/adult-confirm-banner";
+import type { IAdultDict } from "@/features/products/utils/adult.interface";
 
 const FILTER_PARAM_KEYS = [
   "category_ids",
@@ -183,6 +186,7 @@ interface IListingDict {
     apply: string;
     reset: string;
   };
+  adult: IAdultDict;
 }
 
 interface IProps {
@@ -226,6 +230,7 @@ export function ProductsInfinite({
   const router = useRouter();
   const pathname = usePathname();
   const rawSearchParams = useSearchParams();
+  const { confirmed: adultConfirmed, confirmAdult } = useAdultConsent();
 
   const [baseParams, setBaseParams] = useState<Record<string, string>>(() => {
     const result = { ...initialParams };
@@ -398,6 +403,16 @@ export function ProductsInfinite({
     );
   }, [filterOptions, appliedFilters]);
 
+  const hasAdultProducts = useMemo(
+    () => products.some((p) => p.is_adult),
+    [products],
+  );
+
+  const adultBannerSlot =
+    hasAdultProducts && !adultConfirmed ? (
+      <AdultConfirmBanner dict={dict.adult} onConfirm={confirmAdult} />
+    ) : undefined;
+
   const filterBarSlot = renderFilterBar ? (
     renderFilterBar(handleApplyFilters, initialFilters)
   ) : filterOptions ? (
@@ -452,6 +467,7 @@ export function ProductsInfinite({
         header={header}
         products={products}
         filterBarSlot={filterBarSlot}
+        bannerSlot={adultBannerSlot}
         mobileFilterSlot={mobileFilterSlot}
         mobileQuickChipsSlot={mobileQuickChipsSlot}
         productCount={meta.total}

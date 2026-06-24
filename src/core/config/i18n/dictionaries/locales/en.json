@@ -193,6 +193,15 @@
     "wishlist": {
       "title": "Wishlist",
       "subtitle": "Your saved items"
+    },
+    "adult": {
+      "badge": "18+",
+      "bannerText": "Please confirm that you are at least 18 years old to access these products",
+      "confirm": "Confirm",
+      "modalTitle": "Are you 18 or older?",
+      "modalDescription": "You must be at least 18 years old to view and purchase this product",
+      "decline": "No, Exit",
+      "accept": "Over 18"
     }
   },
   "shop": {

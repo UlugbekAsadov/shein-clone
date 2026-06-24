@@ -15,7 +15,9 @@ import {
 } from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useIsMobile } from "@/shared/hooks/use-is-mobile";
+import { useAdultConsent } from "@/shared/hooks/use-adult-consent";
 import { cn } from "@/lib/utils";
+import { ProductAdultOverlay } from "./product-adult-overlay/product-adult-overlay";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
 import { ProductCardCartDrawer } from "./product-card-cart-drawer/product-card-cart-drawer";
 import { Tag } from "@/shared/components/tag/tag";
@@ -34,6 +36,8 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
+  const { confirmed } = useAdultConsent();
+  const isBlurred = Boolean(product.is_adult) && !confirmed;
   const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
@@ -80,9 +84,11 @@ export function ProductCard({ product, variant = "default" }: IProps) {
                 "object-cover transition-opacity duration-300",
                 "group-hover:scale-105",
                 idx === activeIndex ? "opacity-100" : "opacity-0",
+                isBlurred && "scale-110 blur-2xl group-hover:scale-110",
               )}
             />
           ))}
+          {isBlurred && <ProductAdultOverlay />}
           {images.length > 1 && (
             <div
               className="absolute inset-0 z-10 grid"

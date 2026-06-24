@@ -23,5 +23,6 @@ export interface IProduct {
   is_original?: boolean;
   is_wishlist?: boolean;
   is_available?: boolean;
+  is_adult?: boolean;
   subtitle?: string;
 }

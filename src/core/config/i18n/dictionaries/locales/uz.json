@@ -193,6 +193,15 @@
     "wishlist": {
       "title": "Saralangan",
       "subtitle": "Sizning saqlangan mahsulotlaringiz"
+    },
+    "adult": {
+      "badge": "18+",
+      "bannerText": "Ushbu mahsulotlarga kirish uchun kamida 18 yoshda ekanligingizni tasdiqlang",
+      "confirm": "Tasdiqlash",
+      "modalTitle": "Sizga 18 yosh to'lganmi?",
+      "modalDescription": "Ushbu mahsulotni ko'rish va sotib olish uchun kamida 18 yoshda bo'lishingiz kerak",
+      "decline": "Yo'q, chiqish",
+      "accept": "18 dan katta"
     }
   },
   "shop": {

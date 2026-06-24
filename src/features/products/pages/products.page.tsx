@@ -53,6 +53,7 @@ export async function ProductsPage({ lang, dict, params }: IProps) {
               tabs: dict.listing.tabs,
               toolbar: dict.listing.toolbar,
               filter: dict.listing.filter,
+              adult: dict.listing.adult,
             }}
             quickFiltersLabels={dict.nav.filters}
           />

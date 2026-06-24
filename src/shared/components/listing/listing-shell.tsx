@@ -10,6 +10,7 @@ interface IProps {
   header: React.ReactNode;
   products: IProduct[];
   filterBarSlot?: React.ReactNode;
+  bannerSlot?: React.ReactNode;
   mobileFilterSlot?: React.ReactNode;
   mobileQuickChipsSlot?: React.ReactNode;
   productCount?: number;
@@ -56,6 +57,7 @@ export function ListingShell({
   header,
   products,
   filterBarSlot,
+  bannerSlot,
   mobileFilterSlot,
   mobileQuickChipsSlot,
   productCount,
@@ -83,6 +85,8 @@ export function ListingShell({
           isLoading={isLoading}
           categoryName={categoryName}
         />
+
+        {bannerSlot && <div className="mt-3">{bannerSlot}</div>}
 
         <div className="mt-4 mb-6 flex items-start gap-3">
           <div className="flex flex-1 flex-wrap items-center gap-2">
