@@ -8,7 +8,7 @@ import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { cn } from "@/lib/utils";
 import type { ICartItemView } from "@/features/cart/utils/cart.interface";
-import { getDeliveryDate } from "@/features/cart/utils/cart.helpers";
+import { getCartLineAttributes } from "@/features/cart/utils/cart.helpers";
 import { CartItemQtyStepper } from "./cart-item-qty-stepper";
 import { CartItemOutOfStock } from "./cart-item-out-of-stock";
 
@@ -32,7 +32,13 @@ export function CartItemCard({
   const { currency } = useCurrency();
   const { product, line } = item;
   const productHref = `/${lang}/products/${product.slug ?? product.id}`;
-  const deliveryDate = getDeliveryDate(product.delivery_date_text);
+  const attributes = getCartLineAttributes(line);
+
+  const attributeLabel = (slug: string, name: string) => {
+    if (slug === "color") return dict.color;
+    if (slug === "size") return dict.size;
+    return name;
+  };
 
   return (
     <div
@@ -49,7 +55,9 @@ export function CartItemCard({
             </span>
           )}
           <span className="text-muted-foreground">{dict.deliveryDate}: </span>
-          <span className="font-bold text-foreground">{deliveryDate}</span>
+          <span className="font-bold text-foreground">
+            {product.delivery_date_text}
+          </span>
         </span>
         <Checkbox
           checked={selected}
@@ -86,26 +94,16 @@ export function CartItemCard({
           </Link>
 
           <div className="mt-2 flex flex-col gap-1.5 text-sm">
-            {line.color && (
-              <div className="flex items-center">
-                <span className="text-muted-foreground">{dict.color}:</span>
-                <span className="ml-2 font-bold text-foreground">
-                  {line.color}
+            {attributes.map((attribute) => (
+              <div key={attribute.slug} className="flex items-center">
+                <span className="text-muted-foreground">
+                  {attributeLabel(attribute.slug, attribute.name)}:
                 </span>
-                <span
-                  className="ml-2 inline-block size-4 rounded-[5px] ring-1 ring-black/10"
-                  style={{ backgroundColor: line.color }}
-                />
-              </div>
-            )}
-            {line.size && (
-              <div className="flex items-center">
-                <span className="text-muted-foreground">{dict.size}:</span>
                 <span className="ml-2 font-bold text-foreground">
-                  {line.size}
+                  {attribute.value}
                 </span>
               </div>
-            )}
+            ))}
             <div className="flex items-center">
               <span className="text-muted-foreground">{dict.qty}:</span>
               <span className="ml-2 font-bold text-foreground">

@@ -17,6 +17,7 @@ import { formatPrice } from "@/shared/utils/format-price";
 import { getOriginalPrice } from "@/shared/utils/product-display";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useCart } from "@/features/cart/hooks/use-cart";
+import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
 import { useProductDetail } from "@/features/products/hooks/use-product-detail";
 import {
   getVariantColorSwatches,
@@ -82,7 +83,12 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
       setShowErrors(true);
       return;
     }
-    void add(product, sizeDetail.sku_id, 1).then((result) => {
+    void add(
+      product,
+      sizeDetail.sku_id,
+      1,
+      buildSelectedSkuInfo(sizeId, colorId),
+    ).then((result) => {
       if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
     });
     toast.success("Added to cart");

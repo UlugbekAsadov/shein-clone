@@ -10,23 +10,23 @@ interface IProps {
 
 export function CartItemQtyStepper({ value, onChange }: IProps) {
   return (
-    <div className="inline-flex items-center gap-1.5 rounded-3xl bg-indigo-50 p-1.5">
+    <div className="inline-flex items-center gap-1.5 rounded-3xl bg-white ">
       <button
         type="button"
         onClick={() => onChange(value - 1)}
         aria-label="Decrease quantity"
-        className="grid size-11 cursor-pointer place-items-center rounded-2xl bg-indigo-100/60 text-foreground transition hover:bg-indigo-100"
+        className="grid size-11 cursor-pointer place-items-center rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <MinusIcon className="size-5" />
       </button>
-      <div className="grid h-11 min-w-14 place-items-center rounded-2xl bg-white px-4 text-lg font-bold">
+      <div className="grid h-11  place-items-center rounded-2xl bg-white px-3 text-lg font-bold">
         {value}
       </div>
       <button
         type="button"
         onClick={() => onChange(value + 1)}
         aria-label="Increase quantity"
-        className="grid size-11 cursor-pointer place-items-center rounded-2xl bg-indigo-100/60 text-foreground transition hover:bg-indigo-100"
+        className="grid size-11 cursor-pointer place-items-center rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <PlusIcon className="size-5" />
       </button>

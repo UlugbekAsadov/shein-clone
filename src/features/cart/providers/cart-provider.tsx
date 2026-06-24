@@ -10,7 +10,6 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 import type { IProduct } from "@/types/product.interface";
-import { useCurrency } from "@/shared/hooks/use-currency";
 import { useUser } from "@/features/auth/hooks/use-user";
 import type { IActionResult } from "@/types/action-result.interface";
 import {
@@ -25,12 +24,14 @@ import {
   buildCartItemViews,
   computeCartTotals,
   createEmptyCart,
+  mergeServerCartProducts,
   removeCartProduct,
   setCartLineCount,
 } from "@/features/cart/utils/cart.helpers";
 import type {
   ICartContextValue,
   ICartData,
+  ICartSkuInfo,
 } from "@/features/cart/utils/cart.interface";
 
 export const CartContext = createContext<ICartContextValue | undefined>(
@@ -43,8 +44,9 @@ interface IProps {
   children: ReactNode;
 }
 
+const OK_RESULT: IActionResult<ICartData> = { ok: true };
+
 export function CartProvider({ children }: IProps) {
-  const { currency } = useCurrency();
   const { user } = useUser();
   const [data, setData] = useState<ICartData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -56,13 +58,16 @@ export function CartProvider({ children }: IProps) {
   }, [data]);
 
   useEffect(() => {
+    let initial: ICartData | null = null;
     try {
       const raw = localStorage.getItem(CART_STORAGE_KEY);
-      if (raw) setData(JSON.parse(raw) as ICartData);
+      if (raw) initial = JSON.parse(raw) as ICartData;
     } catch {
-      setData(null);
+      initial = null;
     }
+    setData(initial);
     setHydrated(true);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -77,78 +82,75 @@ export function CartProvider({ children }: IProps) {
 
   const syncFromServer = useCallback(async () => {
     const result = await getCartAction();
-    if (result.ok) setData(result.data ?? null);
+    if (!result.ok || !result.data) return;
+    const server = result.data;
+    setData((current) => {
+      if (!current || current.items.length === 0) {
+        return server.items.length ? server : current;
+      }
+      return mergeServerCartProducts(current, server.products);
+    });
   }, []);
 
   const refresh = useCallback(async () => {
-    setLoading(true);
     await syncFromServer();
-    setLoading(false);
   }, [syncFromServer]);
 
   useEffect(() => {
-    void refresh();
-  }, [refresh, currency, user?.id]);
+    if (!hydrated) return;
+    void syncFromServer();
+  }, [hydrated, user?.id, syncFromServer]);
 
-  const reconcile = useCallback(
-    async (
-      result: IActionResult<ICartData>,
-      previous: ICartData | null,
-    ): Promise<IActionResult<ICartData>> => {
-      if (!result.ok) {
-        setData(previous);
-        return result;
-      }
-      if (result.data?.items && result.data?.products) {
-        setData(result.data);
-      } else {
-        await syncFromServer();
-      }
-      return result;
+  const persistInBackground = useCallback(
+    (action: () => Promise<IActionResult<ICartData>>) => {
+      void action().catch(() => undefined);
     },
-    [syncFromServer],
+    [],
   );
 
   const add = useCallback(
-    async (product: IProduct, skuId: number, count: number) => {
-      const previous = dataRef.current;
-      setData((current) => addLineToCart(current, product, skuId, count));
-      const result = await addToCartAction({
-        productId: product.id,
-        skuId,
-        count,
-      });
-      return reconcile(result, previous);
+    async (
+      product: IProduct,
+      skuId: number,
+      count: number,
+      skuInfo?: ICartSkuInfo[],
+    ) => {
+      setData((current) =>
+        addLineToCart(current, product, skuId, count, skuInfo),
+      );
+      persistInBackground(() =>
+        addToCartAction({ productId: product.id, skuId, count }),
+      );
+      return OK_RESULT;
     },
-    [reconcile],
+    [persistInBackground],
   );
 
   const update = useCallback(
     async (productId: number, skuId: number, count: number) => {
-      const previous = dataRef.current;
       setData((current) => setCartLineCount(current, skuId, count));
-      const result = await updateCartItemAction({ productId, skuId, count });
-      return reconcile(result, previous);
+      persistInBackground(() =>
+        updateCartItemAction({ productId, skuId, count }),
+      );
+      return OK_RESULT;
     },
-    [reconcile],
+    [persistInBackground],
   );
 
   const remove = useCallback(
     async (productId: number) => {
-      const previous = dataRef.current;
       setData((current) => removeCartProduct(current, productId));
-      const result = await removeCartItemAction(productId);
-      return reconcile(result, previous);
+      persistInBackground(() => removeCartItemAction(productId));
+      return OK_RESULT;
     },
-    [reconcile],
+    [persistInBackground],
   );
 
   const clear = useCallback(async () => {
-    const previous = dataRef.current;
     setData(createEmptyCart());
-    const result = await clearCartAction();
-    return reconcile(result, previous);
-  }, [reconcile]);
+    persistInBackground(() => clearCartAction());
+    return OK_RESULT;
+  }, [persistInBackground]);
 
   const items = useMemo(() => buildCartItemViews(data), [data]);
   const totals = useMemo(() => computeCartTotals(items), [items]);

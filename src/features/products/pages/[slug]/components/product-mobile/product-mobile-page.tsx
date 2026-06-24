@@ -21,6 +21,7 @@ import {
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
 import { getOriginalPrice } from "@/shared/utils/product-display";
 import { useCart } from "@/features/cart/hooks/use-cart";
+import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
 import { ProductMobileGallery } from "./product-mobile-gallery";
 import { ProductMobileRatingRow } from "./product-mobile-rating-row";
 import { ProductMobileDescription } from "./product-mobile-description";
@@ -106,7 +107,12 @@ export function ProductMobilePage({
       setShowErrors(true);
       return;
     }
-    void add(product, sizeDetail.sku_id, 1).then((result) => {
+    void add(
+      product,
+      sizeDetail.sku_id,
+      1,
+      buildSelectedSkuInfo(sizeId, colorId),
+    ).then((result) => {
       if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
     });
     toast.success("Added to cart");

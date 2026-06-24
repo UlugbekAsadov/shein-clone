@@ -13,22 +13,10 @@ interface IProps {
   onClear: () => void;
 }
 
-export function CartHeaderBar({
-  count,
-  allSelected,
-  clearing,
-  dict,
-  onToggleAll,
-  onClear,
-}: IProps) {
+export function CartHeaderBar({ count, clearing, dict, onClear }: IProps) {
   return (
     <div className="flex items-center justify-between gap-4">
       <div className="flex items-center gap-3">
-        <Checkbox
-          checked={allSelected}
-          onCheckedChange={onToggleAll}
-          aria-label={dict.selectAll}
-        />
         <h1 className="text-lg font-bold">
           {count} {dict.itemsInCart}
         </h1>
@@ -37,10 +25,10 @@ export function CartHeaderBar({
         type="button"
         onClick={onClear}
         disabled={clearing}
-        className="inline-flex items-center gap-1.5 rounded-md bg-rose-50 px-3 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-100 disabled:opacity-50"
+        className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#E837371F] px-3 py-3 text-sm font-semibold text-[#E83737] transition hover:bg-[#e8373732] cursor-pointer disabled:opacity-50"
       >
         {dict.clearCart}
-        <TrashBinMinimalistic className="size-4" weight="Outline" />
+        <TrashBinMinimalistic className="size-4.5" weight="Outline" />
       </button>
     </div>
   );

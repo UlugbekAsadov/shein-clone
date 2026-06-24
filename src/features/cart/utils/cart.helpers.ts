@@ -3,8 +3,62 @@ import { getProductOriginalPrice } from "@/shared/utils/product-display";
 import type {
   ICartData,
   ICartItemView,
+  ICartLine,
+  ICartLineAttribute,
+  ICartSkuInfo,
   ICartTotals,
 } from "./cart.interface";
+
+export function buildSelectedSkuInfo(
+  size?: string,
+  color?: string,
+): ICartSkuInfo[] {
+  const info: ICartSkuInfo[] = [];
+  if (size)
+    info.push({
+      attribute_slug: "size",
+      attribute_name: "",
+      item_name: size,
+      value: size,
+    });
+  if (color)
+    info.push({
+      attribute_slug: "color",
+      attribute_name: "",
+      item_name: color,
+      value: color,
+    });
+  return info;
+}
+
+export function getCartLineAttributes(line: ICartLine): ICartLineAttribute[] {
+  if (!line.sku_info) return [];
+  return line.sku_info
+    .map((info) => ({
+      slug: info.attribute_slug,
+      name: info.attribute_name,
+      value: info.item_name || info.value,
+    }))
+    .filter((attribute) => attribute.value);
+}
+
+export function mergeServerCartProducts(
+  local: ICartData,
+  serverProducts: IProduct[],
+): ICartData {
+  if (!serverProducts.length) return local;
+  const serverById = new Map(
+    serverProducts.map((product) => [product.id, product]),
+  );
+  const localById = new Map(
+    local.products.map((product) => [product.id, product]),
+  );
+  const productIds = [...new Set(local.items.map((line) => line.product_id))];
+  const products = productIds
+    .map((id) => serverById.get(id) ?? localById.get(id))
+    .filter((product): product is IProduct => Boolean(product));
+  return { ...local, products };
+}
 
 export function createEmptyCart(): ICartData {
   return {
@@ -17,7 +71,10 @@ export function createEmptyCart(): ICartData {
   };
 }
 
-function recalcCart(items: ICartData["items"], products: IProduct[]): ICartData {
+function recalcCart(
+  items: ICartData["items"],
+  products: IProduct[],
+): ICartData {
   return {
     items,
     products,
@@ -33,6 +90,7 @@ export function addLineToCart(
   product: IProduct,
   skuId: number,
   count: number,
+  skuInfo?: ICartSkuInfo[],
 ): ICartData {
   const base = data ?? createEmptyCart();
   const items = [...base.items];
@@ -40,7 +98,12 @@ export function addLineToCart(
   if (index >= 0) {
     items[index] = { ...items[index], count: items[index].count + count };
   } else {
-    items.push({ sku_id: skuId, product_id: product.id, count });
+    items.push({
+      sku_id: skuId,
+      product_id: product.id,
+      count,
+      sku_info: skuInfo,
+    });
   }
   const products = base.products.some((p) => p.id === product.id)
     ? base.products
@@ -85,8 +148,7 @@ export function buildCartItemViews(data: ICartData | null): ICartItemView[] {
     const originalUnitPrice = getProductOriginalPrice(product);
     const lineTotal = unitPrice * line.count;
     const originalLineTotal = (originalUnitPrice ?? unitPrice) * line.count;
-    const isAvailable =
-      line.is_available ?? product.is_available ?? true;
+    const isAvailable = line.is_available ?? product.is_available ?? true;
 
     return [
       {
@@ -113,16 +175,4 @@ export function computeCartTotals(items: ICartItemView[]): ICartTotals {
     }),
     { productsCount: 0, productsTotal: 0, discounts: 0, totalPrice: 0 },
   );
-}
-
-export function getDeliveryDate(deliveryDateText?: string): string {
-  if (!deliveryDateText) return "";
-  const days = Number(deliveryDateText);
-  if (!Number.isFinite(days) || days <= 0) return deliveryDateText;
-
-  const date = new Date();
-  date.setDate(date.getDate() + days);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  return `${day}.${month}.${date.getFullYear()}`;
 }

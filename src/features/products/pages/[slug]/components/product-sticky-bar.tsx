@@ -13,6 +13,7 @@ import { getVariantSizeDetail } from "@/features/products/pages/[slug]/utils/var
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useCart } from "@/features/cart/hooks/use-cart";
+import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
 
 interface IProps {
   product: IProductDetail;
@@ -47,7 +48,12 @@ export function ProductStickyBar({ product }: IProps) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    void add(product, sizeDetail.sku_id, 1).then((result) => {
+    void add(
+      product,
+      sizeDetail.sku_id,
+      1,
+      buildSelectedSkuInfo(size, color),
+    ).then((result) => {
       if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
     });
     toast.success("Added to cart");

@@ -10,6 +10,7 @@ import {
   getVariantSizes,
 } from "@/features/products/pages/[slug]/utils/variant.mapper";
 import { getOriginalPrice } from "@/shared/utils/product-display";
+import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
 import { ProductColorSelector } from "@/shared/components/product/product-preview/product-color-selector";
 import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
 import { ProductQtyStepper } from "@/shared/components/product/product-preview/product-qty-stepper";
@@ -71,7 +72,12 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
       setShowErrors(true);
       return;
     }
-    void add(product, sizeDetail.sku_id, qty).then((result) => {
+    void add(
+      product,
+      sizeDetail.sku_id,
+      qty,
+      buildSelectedSkuInfo(sizeId, colorId),
+    ).then((result) => {
       if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
     });
     toast.success("Added to cart");

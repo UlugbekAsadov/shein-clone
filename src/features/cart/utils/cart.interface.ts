@@ -1,12 +1,24 @@
 import type { IProduct } from "@/types/product.interface";
 import type { IActionResult } from "@/types/action-result.interface";
 
+export interface ICartSkuInfo {
+  attribute_slug: string;
+  attribute_name: string;
+  item_name: string;
+  value: string;
+}
+
+export interface ICartLineAttribute {
+  slug: string;
+  name: string;
+  value: string;
+}
+
 export interface ICartLine {
   sku_id: number;
   product_id: number;
   count: number;
-  color?: string;
-  size?: string;
+  sku_info?: ICartSkuInfo[];
   is_available?: boolean;
 }
 
@@ -48,6 +60,7 @@ export interface ICartContextValue {
     product: IProduct,
     skuId: number,
     count: number,
+    skuInfo?: ICartSkuInfo[],
   ) => Promise<IActionResult<ICartData>>;
   update: (
     productId: number,

@@ -6,10 +6,7 @@ import { toast } from "sonner";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
 import { useCart } from "@/features/cart/hooks/use-cart";
-import {
-  computeCartTotals,
-  getDeliveryDate,
-} from "@/features/cart/utils/cart.helpers";
+import { computeCartTotals } from "@/features/cart/utils/cart.helpers";
 import type { ICartItemView } from "@/features/cart/utils/cart.interface";
 import { CartHeaderBar } from "./cart-header-bar";
 import { CartItemList } from "./cart-item-list";
@@ -56,11 +53,17 @@ export function CartView({ lang, dict }: IProps) {
     availableItems.length > 0 && selectedItems.length === availableItems.length;
 
   const summaryDeliveryDate = useMemo(() => {
-    const maxDays = selectedItems.reduce((max, item) => {
+    let best: ICartItemView | undefined;
+    let bestDays = -Infinity;
+    for (const item of selectedItems) {
       const days = Number(item.product.delivery_date_text);
-      return Number.isFinite(days) ? Math.max(max, days) : max;
-    }, 0);
-    return maxDays > 0 ? getDeliveryDate(String(maxDays)) : "";
+      const value = Number.isFinite(days) ? days : 0;
+      if (value > bestDays) {
+        bestDays = value;
+        best = item;
+      }
+    }
+    return best?.product.delivery_date_text ?? "";
   }, [selectedItems]);
 
   function toggleSelect(skuId: number) {
