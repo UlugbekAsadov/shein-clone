@@ -21,10 +21,10 @@ export function AdultConfirmBanner({ dict, onConfirm }: IProps) {
   return (
     <div className="mb-4 flex items-center gap-3 rounded-[12px] bg-[#E8373733] py-2.5 px-4 text-foreground">
       <span className="text-xl font-bold">{dict.badge}</span>
-      <p className="flex-1 text-sm font-medium">{dict.bannerText}</p>
+      <p className="flex-1 text-xs md:text-sm font-medium">{dict.bannerText}</p>
       <Button
         size="lg"
-        className="rounded-[8px] bg-[#E83737] px-5 h-10 text-white hover:bg-[#E83737]/90 font-semibold"
+        className="rounded-[8px] bg-[#E83737] px-2 md:px-5 h-10 text-white hover:bg-[#E83737]/90 font-semibold"
         onClick={() => setOpen(true)}
       >
         {dict.confirm}

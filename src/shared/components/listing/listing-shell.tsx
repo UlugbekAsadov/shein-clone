@@ -76,6 +76,8 @@ export function ListingShell({
         quickChipsSlot={mobileQuickChipsSlot}
       />
 
+      {bannerSlot && <div className="md:hidden">{bannerSlot}</div>}
+
       {header && <div className="hidden md:mb-4 md:block">{header}</div>}
 
       <div className="hidden md:block">
