@@ -25,7 +25,7 @@ export function CartHeaderBar({ count, clearing, dict, onClear }: IProps) {
         type="button"
         onClick={onClear}
         disabled={clearing}
-        className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#E837371F] px-3 py-3 text-sm font-semibold text-[#E83737] transition hover:bg-[#e8373732] cursor-pointer disabled:opacity-50"
+        className="inline-flex items-center gap-1.5 rounded-[8px] bg-[#E837371F] px-3 py-2.5 text-sm font-semibold text-[#E83737] transition hover:bg-[#e8373732] cursor-pointer disabled:opacity-50"
       >
         {dict.clearCart}
         <TrashBinMinimalistic className="size-4.5" weight="Outline" />
