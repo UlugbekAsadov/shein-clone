@@ -39,7 +39,3 @@ export interface IApiFeaturedShop {
   is_followed: boolean;
   badges: IApiBadge[];
 }
-
-export interface IApiFeaturedShopsPage {
-  data: IApiFeaturedShop[];
-}

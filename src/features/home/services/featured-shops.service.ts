@@ -6,7 +6,7 @@ import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.inter
 export const getFeaturedShops = cache(async (): Promise<IApiFeaturedShop[]> => {
   try {
     const result = await featuredShopsApi.getAll();
-    return Array.isArray(result.data?.data) ? result.data?.data : [];
+    return Array.isArray(result.data) ? result.data : [];
   } catch (error) {
     if (error instanceof ApiError) return [];
     throw error;
