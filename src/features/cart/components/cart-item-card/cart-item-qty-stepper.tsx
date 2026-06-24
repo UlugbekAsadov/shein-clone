@@ -15,18 +15,18 @@ export function CartItemQtyStepper({ value, onChange }: IProps) {
         type="button"
         onClick={() => onChange(value - 1)}
         aria-label="Decrease quantity"
-        className="grid size-11 cursor-pointer place-items-center rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
+        className="grid size-8 md:size-11 cursor-pointer place-items-center rounded-[8px] md:rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <MinusIcon className="size-5" />
       </button>
-      <div className="grid h-11  place-items-center rounded-2xl bg-white px-3 text-lg font-bold tabular-nums">
+      <div className="grid h-8 md:h-11  place-items-center rounded-[8px] md:rounded-2xl bg-white px-2 md:px-3 text-sm md:text-lg font-bold tabular-nums">
         {value}
       </div>
       <button
         type="button"
         onClick={() => onChange(value + 1)}
         aria-label="Increase quantity"
-        className="grid size-11 cursor-pointer place-items-center rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
+        className="grid size-8 md:size-11 cursor-pointer place-items-center rounded-[8px] md:rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <PlusIcon className="size-5" />
       </button>

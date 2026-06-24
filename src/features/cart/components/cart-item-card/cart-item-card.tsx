@@ -43,7 +43,7 @@ export function CartItemCard({
   return (
     <div
       className={cn(
-        "rounded-[20px] bg-secondary p-4",
+        "rounded-[20px] bg-secondary p-3 md:p-4 space-y-3 md:space-y-0",
         !item.isAvailable && "ring-1 ring-rose-300",
       )}
     >
@@ -54,8 +54,10 @@ export function CartItemCard({
               {dict.outOfStock}
             </span>
           )}
-          <span className="text-muted-foreground">{dict.deliveryDate}: </span>
-          <span className="font-bold text-foreground">
+          <span className="text-muted-foreground text-xs md:text-base">
+            {dict.deliveryDate}:{" "}
+          </span>
+          <span className="font-bold text-foreground text-xs md:text-base">
             {product.delivery_date_text}
           </span>
         </span>
@@ -64,16 +66,16 @@ export function CartItemCard({
           onCheckedChange={onToggleSelect}
           disabled={!item.isAvailable}
           aria-label="Select item"
-          className="size-7 cursor-pointer rounded-[8px]"
+          className="size-6 md:size-7 cursor-pointer rounded-[8px]"
         />
       </div>
 
-      <div className="my-4 border-t-2 border-dashed border-border " />
+      <div className="my-4 border-t-2 border-dashed border-border hidden md:block" />
 
       <div className="flex gap-4">
         <Link
           href={productHref}
-          className="relative aspect-3/4 w-28 shrink-0 overflow-hidden rounded-lg bg-muted sm:w-44"
+          className="relative aspect-3/4 w-20 md:w-28 shrink-0 overflow-hidden rounded-[8px] md:rounded-lg bg-muted sm:w-44"
         >
           <Image
             src={product.image_url}
@@ -88,14 +90,17 @@ export function CartItemCard({
         <div className="flex flex-1 flex-col">
           <Link
             href={productHref}
-            className="line-clamp-2 text-base font-bold leading-snug hover:underline sm:text-lg"
+            className={cn(
+              "line-clamp-1 text-sm  font-bold leading-snug hover:underline ",
+              "md:line-clamp-2 md:text-lg",
+            )}
           >
             {product.title}
           </Link>
 
           <div className="mt-2 flex flex-col gap-1.5 text-sm">
             {attributes.map((attribute) => (
-              <div key={attribute.slug} className="flex items-center">
+              <div key={attribute.slug} className="flex items-center text-xs md:text-sm">
                 <span className="text-muted-foreground">
                   {attributeLabel(attribute.slug, attribute.name)}:
                 </span>
@@ -112,7 +117,7 @@ export function CartItemCard({
             </div>
           </div>
 
-          <div className="mt-auto flex items-end justify-between gap-3 pt-4">
+          <div className="mt-auto  items-end justify-between gap-3 pt-4 hidden md:flex">
             <div className="flex flex-col gap-0.5">
               {item.originalUnitPrice && (
                 <span className="text-sm text-muted-foreground line-through">
@@ -124,7 +129,7 @@ export function CartItemCard({
                   {formatPrice(item.unitPrice, currency)}
                 </span>
                 {item.savings > 0 && (
-                  <span className="text-sm font-medium text-emerald-500">
+                  <span className="text-sm font-medium text-emerald-500 hidden md:block">
                     {dict.save} {formatPrice(item.savings, currency)}
                   </span>
                 )}
@@ -134,6 +139,30 @@ export function CartItemCard({
             <CartItemQtyStepper value={line.count} onChange={onQtyChange} />
           </div>
         </div>
+      </div>
+
+      <div className="border-t-2 border-dashed my-3 md:hidden" />
+
+      <div className="mt-auto flex items-center  justify-between gap-3 md:hidden">
+        <div className="flex flex-col gap-0.5">
+          {item.originalUnitPrice && (
+            <span className="text-xs md:text-sm text-muted-foreground line-through">
+              {formatPrice(item.originalUnitPrice, currency)}
+            </span>
+          )}
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <span className="md:text-[22px] font-extrabold leading-none tracking-tight">
+              {formatPrice(item.unitPrice, currency)}
+            </span>
+            {item.savings > 0 && (
+              <span className="text-sm font-medium text-emerald-500 hidden md:block">
+                {dict.save} {formatPrice(item.savings, currency)}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <CartItemQtyStepper value={line.count} onChange={onQtyChange} />
       </div>
 
       {!item.isAvailable && (

@@ -12,6 +12,7 @@ import type { ICartItemView } from "@/features/cart/utils/cart.interface";
 import { CartHeaderBar } from "./cart-header-bar";
 import { CartItemList } from "./cart-item-list";
 import { CartMinOrderBanner } from "./cart-min-order-banner";
+import { CartMobileView } from "./cart-mobile/cart-mobile-view";
 import { CartOrderSummary } from "./cart-order-summary";
 import { CartSkeleton } from "./cart-skeleton";
 import { ClearCartDialog } from "./clear-cart-dialog";
@@ -118,40 +119,56 @@ export function CartView({ lang, dict }: IProps) {
   }
 
   return (
-    <div className="mx-auto grid max-w-360 gap-6 px-6 py-8 lg:grid-cols-[1fr_460px]">
-      <div className="flex flex-col gap-5">
-        <CartHeaderBar
-          count={count}
-          allSelected={allSelected}
-          clearing={clearing}
-          dict={dict.cart}
-          onToggleAll={toggleAll}
-          onClear={() => setConfirmClearOpen(true)}
-        />
-        <CartItemList
-          items={items}
-          dict={dict.cart}
-          lang={lang}
-          selectedKeys={selectedKeys}
-          onToggleSelect={toggleSelect}
-          onQtyChange={handleQtyChange}
-        />
-      </div>
+    <>
+      <div className="mx-auto hidden max-w-360 gap-6 px-6 py-8 md:grid lg:grid-cols-[1fr_460px]">
+        <div className="flex flex-col gap-5">
+          <CartHeaderBar
+            count={count}
+            allSelected={allSelected}
+            clearing={clearing}
+            dict={dict.cart}
+            onToggleAll={toggleAll}
+            onClear={() => setConfirmClearOpen(true)}
+          />
+          <CartItemList
+            items={items}
+            dict={dict.cart}
+            lang={lang}
+            selectedKeys={selectedKeys}
+            onToggleSelect={toggleSelect}
+            onQtyChange={handleQtyChange}
+          />
+        </div>
 
-      <div className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
-        {minOrderAmount !== null && minOrderAmount > 0 && (
-          <CartMinOrderBanner
-            amount={minOrderAmount}
-            currentTotal={totals.totalPrice}
+        <div className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
+          {minOrderAmount !== null && minOrderAmount > 0 && (
+            <CartMinOrderBanner
+              amount={minOrderAmount}
+              currentTotal={totals.totalPrice}
+              dict={dict.cart}
+            />
+          )}
+          <CartOrderSummary
+            totals={totals}
+            deliveryDate={summaryDeliveryDate}
             dict={dict.cart}
           />
-        )}
-        <CartOrderSummary
-          totals={totals}
-          deliveryDate={summaryDeliveryDate}
-          dict={dict.cart}
-        />
+        </div>
       </div>
+
+      <CartMobileView
+        lang={lang}
+        dict={dict.cart}
+        navTitle={dict.mobileNav.cart}
+        items={items}
+        totals={totals}
+        minOrderAmount={minOrderAmount}
+        selectedKeys={selectedKeys}
+        clearing={clearing}
+        onToggleSelect={toggleSelect}
+        onQtyChange={handleQtyChange}
+        onClear={() => setConfirmClearOpen(true)}
+      />
 
       <ClearCartDialog
         open={confirmClearOpen}
@@ -160,6 +177,6 @@ export function CartView({ lang, dict }: IProps) {
         onOpenChange={setConfirmClearOpen}
         onConfirm={handleClear}
       />
-    </div>
+    </>
   );
 }
