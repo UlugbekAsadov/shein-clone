@@ -407,6 +407,7 @@ export function ProductsInfinite({
       initialFilters={initialFilters}
       dict={dict.filter}
       quickFiltersLabels={quickFiltersLabels}
+      selectedCategoryName={selectedCategoryName}
     />
   ) : undefined;
 

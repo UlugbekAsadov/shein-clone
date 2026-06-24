@@ -52,6 +52,7 @@ interface IProps {
     freeDelivery: string;
     new: string;
   };
+  selectedCategoryName?: string;
 }
 
 export function CategoryFilterBar({
@@ -60,6 +61,7 @@ export function CategoryFilterBar({
   onApply,
   dict,
   quickFiltersLabels,
+  selectedCategoryName,
 }: IProps) {
   const [pending, setPending] = useState<IActiveFilters>(initialFilters);
   const [categoryOpen, setCategoryOpen] = useState(false);
@@ -105,14 +107,7 @@ export function CategoryFilterBar({
     <div className="flex flex-wrap items-center gap-2">
       {filterOptions.categories.length > 0 && (
         <FilterBarDropdown
-          label={
-            (pending.categoryIds.length > 0
-              ? findCategoryParentName(
-                  filterOptions.categories,
-                  pending.categoryIds[0],
-                )
-              : null) ?? dict.category
-          }
+          label={selectedCategoryName ?? ""}
           open={categoryOpen}
           onOpenChange={setCategoryOpen}
         >
