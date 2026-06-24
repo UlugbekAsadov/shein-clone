@@ -7,7 +7,7 @@ import {
   DialogTitle,
 } from "@/shared/components/ui/dialog";
 import { Button } from "@/shared/components/ui/button";
-import type { IAdultDict } from "@/features/products/utils/adult.interface";
+import type { IAdultDict } from "@/types/adult.interface";
 
 interface IProps {
   open: boolean;

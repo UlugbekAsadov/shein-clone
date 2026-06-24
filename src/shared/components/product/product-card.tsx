@@ -16,6 +16,7 @@ import {
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useIsMobile } from "@/shared/hooks/use-is-mobile";
 import { useAdultConsent } from "@/shared/hooks/use-adult-consent";
+import { useAdultDialog } from "@/shared/hooks/use-adult-dialog";
 import { cn } from "@/lib/utils";
 import { ProductAdultOverlay } from "./product-adult-overlay/product-adult-overlay";
 import { ProductPreviewDialog } from "./product-preview/product-preview-dialog/product-preview-dialog";
@@ -37,6 +38,7 @@ export function ProductCard({ product, variant = "default" }: IProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
   const { confirmed } = useAdultConsent();
+  const { open: openAdultDialog } = useAdultDialog();
   const isBlurred = Boolean(product.is_adult) && !confirmed;
   const { currency } = useCurrency();
   const { lang } = useParams<{ lang: string }>();
@@ -56,6 +58,12 @@ export function ProductCard({ product, variant = "default" }: IProps) {
       <Link
         target="_blank"
         href={href}
+        onClick={(e) => {
+          if (isBlurred) {
+            e.preventDefault();
+            openAdultDialog();
+          }
+        }}
         className={cn(
           "group flex flex-col overflow-hidden rounded-[10px]",
           "md:rounded-lg",

@@ -7,3 +7,9 @@ export interface IAdultDict {
   decline: string;
   accept: string;
 }
+
+export interface IAdultDialogContextValue {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+}

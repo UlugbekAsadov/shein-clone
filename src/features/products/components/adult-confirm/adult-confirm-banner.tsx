@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Button } from "@/shared/components/ui/button";
-import type { IAdultDict } from "@/features/products/utils/adult.interface";
-import { AdultConfirmDialog } from "./adult-confirm-dialog";
+import type { IAdultDict } from "@/types/adult.interface";
+import { AdultConfirmDialog } from "@/shared/components/product/adult-confirm/adult-confirm-dialog";
 
 interface IProps {
   dict: IAdultDict;

@@ -11,6 +11,8 @@ import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import Scroll from "@/shared/components/scroll";
 import { CurrencyProvider } from "@/shared/providers/currency-provider";
+import { AdultDialogProvider } from "@/shared/providers/adult-dialog-provider";
+import { AdultGateDialog } from "@/shared/components/product/adult-confirm/adult-gate-dialog";
 import { TooltipProvider } from "@/shared/components/ui/tooltip";
 
 interface IProps {
@@ -30,8 +32,11 @@ export function Providers({ user, dict, children }: IProps) {
             <UserProvider user={user}>
               <CartProvider>
                 <AuthDialogProvider>
-                  {children}
-                  <LoginDialog dict={dict} />
+                  <AdultDialogProvider>
+                    {children}
+                    <LoginDialog dict={dict} />
+                    <AdultGateDialog dict={dict.listing.adult} />
+                  </AdultDialogProvider>
                 </AuthDialogProvider>
               </CartProvider>
             </UserProvider>

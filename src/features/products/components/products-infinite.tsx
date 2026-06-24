@@ -18,7 +18,7 @@ import { CategoryFilterMobile } from "@/features/category/pages/[slug]/component
 import { CategoryFilterMobileBar } from "@/features/category/pages/[slug]/components/category-filter-mobile/category-filter-mobile-bar";
 import { useAdultConsent } from "@/shared/hooks/use-adult-consent";
 import { AdultConfirmBanner } from "@/features/products/components/adult-confirm/adult-confirm-banner";
-import type { IAdultDict } from "@/features/products/utils/adult.interface";
+import type { IAdultDict } from "@/types/adult.interface";
 
 const FILTER_PARAM_KEYS = [
   "category_ids",
