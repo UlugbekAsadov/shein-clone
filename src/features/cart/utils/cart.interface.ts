@@ -49,6 +49,10 @@ export interface ICartTotals {
   totalPrice: number;
 }
 
+export interface IMinOrderAmount {
+  amount: number;
+}
+
 export interface ICartContextValue {
   data: ICartData | null;
   items: ICartItemView[];

@@ -6,10 +6,12 @@ import { toast } from "sonner";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { PagePlaceholder } from "@/shared/components/page-placeholder/page-placeholder";
 import { useCart } from "@/features/cart/hooks/use-cart";
+import { useMinOrderAmount } from "@/features/cart/hooks/use-min-order-amount";
 import { computeCartTotals } from "@/features/cart/utils/cart.helpers";
 import type { ICartItemView } from "@/features/cart/utils/cart.interface";
 import { CartHeaderBar } from "./cart-header-bar";
 import { CartItemList } from "./cart-item-list";
+import { CartMinOrderBanner } from "./cart-min-order-banner";
 import { CartOrderSummary } from "./cart-order-summary";
 import { CartSkeleton } from "./cart-skeleton";
 import { ClearCartDialog } from "./clear-cart-dialog";
@@ -21,6 +23,7 @@ interface IProps {
 
 export function CartView({ lang, dict }: IProps) {
   const { items, count, loading, update, remove, clear } = useCart();
+  const minOrderAmount = useMinOrderAmount();
   const [selectedKeys, setSelectedKeys] = useState<Set<number>>(new Set());
   const [clearing, setClearing] = useState(false);
   const [confirmClearOpen, setConfirmClearOpen] = useState(false);
@@ -135,7 +138,14 @@ export function CartView({ lang, dict }: IProps) {
         />
       </div>
 
-      <div className="lg:sticky lg:top-24 lg:self-start">
+      <div className="flex flex-col gap-4 lg:sticky lg:top-24 lg:self-start">
+        {minOrderAmount !== null && minOrderAmount > 0 && (
+          <CartMinOrderBanner
+            amount={minOrderAmount}
+            currentTotal={totals.totalPrice}
+            dict={dict.cart}
+          />
+        )}
         <CartOrderSummary
           totals={totals}
           deliveryDate={summaryDeliveryDate}

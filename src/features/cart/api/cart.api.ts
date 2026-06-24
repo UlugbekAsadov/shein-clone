@@ -1,6 +1,9 @@
 import { apiClient } from "@/core/api/api-client";
 import type { IApiResponse } from "@/core/api/interfaces/api-response.interface";
-import type { ICartData } from "@/features/cart/utils/cart.interface";
+import type {
+  ICartData,
+  IMinOrderAmount,
+} from "@/features/cart/utils/cart.interface";
 import { CART_ENDPOINTS } from "./cart.endpoints";
 
 export const cartApi = {
@@ -30,5 +33,10 @@ export const cartApi = {
     return apiClient.delete<IApiResponse<ICartData>>(CART_ENDPOINTS.base, {
       session_id: sessionId,
     });
+  },
+  getMinOrderAmount() {
+    return apiClient.get<IApiResponse<IMinOrderAmount>>(
+      CART_ENDPOINTS.minOrderAmount,
+    );
   },
 };

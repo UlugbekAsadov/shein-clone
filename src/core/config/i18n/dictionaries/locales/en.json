@@ -120,6 +120,7 @@
     "outOfStock": "Out of stock",
     "outOfStockNote": "Sorry, this product is out of stock. Take a look at these similar options.",
     "exploreSimilar": "Explore Similar Items",
+    "minOrderAmount": "Minimum order amount is",
     "yourOrder": "Your Order",
     "products": "Products",
     "discounts": "Discounts",

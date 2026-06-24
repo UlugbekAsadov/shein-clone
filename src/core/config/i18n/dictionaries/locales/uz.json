@@ -120,6 +120,7 @@
     "outOfStock": "Tugagan",
     "outOfStockNote": "Kechirasiz, bu mahsulot tugagan. Quyidagi o'xshash variantlarni ko'ring.",
     "exploreSimilar": "O'xshash mahsulotlar",
+    "minOrderAmount": "Minimal buyurtma summasi",
     "yourOrder": "Buyurtmangiz",
     "products": "Mahsulotlar",
     "discounts": "Chegirmalar",

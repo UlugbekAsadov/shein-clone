@@ -3,7 +3,10 @@
 import { ApiError } from "@/core/api/api-error";
 import type { IActionResult } from "@/types/action-result.interface";
 import { cartApi } from "@/features/cart/api/cart.api";
-import type { ICartData } from "@/features/cart/utils/cart.interface";
+import type {
+  ICartData,
+  IMinOrderAmount,
+} from "@/features/cart/utils/cart.interface";
 import { getCartSessionId } from "./cart-session";
 
 interface IAddToCartInput {
@@ -68,5 +71,23 @@ export async function clearCartAction(): Promise<IActionResult<ICartData>> {
     return { ok: true, message: result.message, data: result.data };
   } catch (error) {
     return toActionError(error);
+  }
+}
+
+export async function getMinOrderAmountAction(): Promise<
+  IActionResult<IMinOrderAmount>
+> {
+  try {
+    const result = await cartApi.getMinOrderAmount();
+    return { ok: true, message: result.message, data: result.data };
+  } catch (error) {
+    if (error instanceof ApiError) {
+      return {
+        ok: false,
+        message: error.userMessage,
+        errorCode: error.errorCode,
+      };
+    }
+    throw error;
   }
 }

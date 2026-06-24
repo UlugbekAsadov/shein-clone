@@ -10,7 +10,7 @@ interface IProps {
 
 export function CartItemQtyStepper({ value, onChange }: IProps) {
   return (
-    <div className="inline-flex items-center gap-1.5 rounded-3xl bg-white ">
+    <div className="inline-flex items-center gap-1.5 rounded-3xl bg-white border border-border">
       <button
         type="button"
         onClick={() => onChange(value - 1)}
@@ -19,7 +19,7 @@ export function CartItemQtyStepper({ value, onChange }: IProps) {
       >
         <MinusIcon className="size-5" />
       </button>
-      <div className="grid h-11  place-items-center rounded-2xl bg-white px-3 text-lg font-bold">
+      <div className="grid h-11  place-items-center rounded-2xl bg-white px-3 text-lg font-bold tabular-nums">
         {value}
       </div>
       <button
