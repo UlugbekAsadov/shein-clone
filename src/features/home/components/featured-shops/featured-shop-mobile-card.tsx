@@ -3,7 +3,7 @@ import Link from "next/link";
 import { VerifiedCheck, Star } from "@solar-icons/react/ssr";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { XIcon } from "@/shared/components/icons/outline";
-import { cn } from "@/lib/utils";
+import { FeaturedShopFollowButton } from "./featured-shop-follow-button";
 
 interface IProps {
   shop: IApiFeaturedShop;
@@ -58,17 +58,12 @@ export function FeaturedShopMobileCard({
         <span className="text-muted-foreground">({shop.sales_count})</span>
       </div>
 
-      <button
-        type="button"
-        className={cn(
-          "mt-3 h-10 w-full rounded-[10px] text-sm font-semibold transition",
-          shop.is_followed
-            ? "border border-foreground bg-card text-foreground hover:bg-muted"
-            : "bg-foreground text-background hover:bg-foreground/90",
-        )}
-      >
-        {shop.is_followed ? followingLabel : followLabel}
-      </button>
+      <FeaturedShopFollowButton
+        shopId={shop.id}
+        initialFollowing={shop.is_followed}
+        followLabel={followLabel}
+        followingLabel={followingLabel}
+      />
     </article>
   );
 }

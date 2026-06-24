@@ -26,22 +26,34 @@ interface IProps {
 export async function ShopPage({ lang, dict, slug }: IProps) {
   const apiShop = await getShopHeader(slug);
   if (!apiShop) notFound();
+  console.log({ apiShop });
 
-  const [stories, apiAbout, apiPromoCodes, apiProducts, apiFilterOptions, apiHighlights] =
-    await Promise.all([
-      getShopStories(apiShop.id),
-      getShopAbout(apiShop.id),
-      getShopPromoCodes(apiShop.id),
-      getShopProducts(apiShop.id),
-      getShopFilterOptions(apiShop.id),
-      getShopHighlights(apiShop.id),
-    ]);
+  const [
+    stories,
+    apiAbout,
+    apiPromoCodes,
+    apiProducts,
+    apiFilterOptions,
+    apiHighlights,
+  ] = await Promise.all([
+    getShopStories(apiShop.id),
+    getShopAbout(apiShop.id),
+    getShopPromoCodes(apiShop.id),
+    getShopProducts(apiShop.id),
+    getShopFilterOptions(apiShop.id),
+    getShopHighlights(apiShop.id),
+  ]);
   const activeStories = stories.filter((s) => s.is_active);
   const activeStoriesCount = activeStories.length;
   const viewedStoriesCount = activeStories.filter((s) => s.is_viewed).length;
 
   const products = apiProducts?.data ?? [];
-  const initialMeta = apiProducts?.meta ?? { total: 0, current_page: 1, last_page: 0, per_page: 10 };
+  const initialMeta = apiProducts?.meta ?? {
+    total: 0,
+    current_page: 1,
+    last_page: 0,
+    per_page: 10,
+  };
   const activeHighlights = apiHighlights.filter((h) => h.is_active);
 
   return (

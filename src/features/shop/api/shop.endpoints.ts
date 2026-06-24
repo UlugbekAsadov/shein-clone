@@ -5,4 +5,5 @@ export const SHOP_ENDPOINTS = {
   promoCodes: (id: number) => `/_c/shops/${id}/promo-codes`,
   products: (id: number) => `/_c/shops/${id}/products`,
   filterOptions: (id: number) => `/_c/shops/${id}/filter-options`,
+  follow: (id: number) => `/_c/shops/${id}/follow`,
 } as const;

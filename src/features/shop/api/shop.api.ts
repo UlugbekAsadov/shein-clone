@@ -47,4 +47,7 @@ export const shopApi = {
       { skipAuth: true, searchParams },
     );
   },
+  toggleFollow(id: number) {
+    return apiClient.post<IApiResponse<null>>(SHOP_ENDPOINTS.follow(id));
+  },
 };

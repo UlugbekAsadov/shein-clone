@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { FeaturedShopMobileCard } from "./featured-shop-mobile-card";
+import { FeaturedShopGridFollowButton } from "./featured-shop-grid-follow-button";
 import { ShopBadge } from "./shop-badge";
 import { ShopSolid } from "@/shared/components/icons/solid";
-import { Button } from "@/shared/components/ui/button";
 import { MedalRibbonStar, Star, Box, VerifiedCheck } from "@solar-icons/react/ssr";
 import { cn } from "@/lib/utils";
 import { FeaturedShopsHeader } from "./featured-shops-header";
@@ -128,12 +128,12 @@ export function FeaturedShops({
                     </p>
                   </div>
 
-                  <Button
-                    variant={shop.is_followed ? "outline" : "default"}
-                    className="h-8 px-5 text-xs font-bold rounded-[10px]"
-                  >
-                    {shop.is_followed ? followingLabel : followLabel}
-                  </Button>
+                  <FeaturedShopGridFollowButton
+                    shopId={shop.id}
+                    initialFollowing={shop.is_followed}
+                    followLabel={followLabel}
+                    followingLabel={followingLabel}
+                  />
                 </div>
 
                 <div className="mt-3 flex items-center gap-1.5 text-sm">

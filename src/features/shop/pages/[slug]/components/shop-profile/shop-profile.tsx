@@ -14,7 +14,12 @@ interface IProps {
   viewedStoriesCount: number;
 }
 
-export function ShopProfile({ shop, dict, activeStoriesCount, viewedStoriesCount }: IProps) {
+export function ShopProfile({
+  shop,
+  dict,
+  activeStoriesCount,
+  viewedStoriesCount,
+}: IProps) {
   return (
     <section className="overflow-hidden rounded-[24px] border border-border bg-card">
       <div className="relative h-56 w-full overflow-hidden bg-muted">
@@ -61,6 +66,7 @@ export function ShopProfile({ shop, dict, activeStoriesCount, viewedStoriesCount
           </div>
 
           <ShopFollowButton
+            shopId={shop.id}
             initialFollowing={shop.is_followed}
             followLabel={dict.shop.follow}
             followingLabel={dict.shop.following}

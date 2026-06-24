@@ -5,14 +5,14 @@ import { useShopFollow } from "@/features/shop/hooks/use-shop-follow";
 
 interface IProps {
   shopId: number;
-  initialFollowing?: boolean;
+  initialFollowing: boolean;
   followLabel: string;
   followingLabel: string;
 }
 
-export function ShopFollowButton({
+export function FeaturedShopFollowButton({
   shopId,
-  initialFollowing = false,
+  initialFollowing,
   followLabel,
   followingLabel,
 }: IProps) {
@@ -27,9 +27,9 @@ export function ShopFollowButton({
       onClick={toggle}
       disabled={isPending}
       className={cn(
-        "shrink-0 cursor-pointer border rounded-[10px] px-8 py-2.5 text-sm font-semibold transition disabled:opacity-60",
+        "mt-3 h-10 w-full cursor-pointer rounded-[10px] text-sm font-semibold transition disabled:opacity-60",
         isFollowing
-          ? " border-foreground bg-card text-foreground hover:bg-muted"
+          ? "border border-foreground bg-card text-foreground hover:bg-muted"
           : "bg-foreground text-background hover:bg-foreground/90",
       )}
     >

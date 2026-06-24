@@ -81,6 +81,7 @@ export function ShopMobilePage({
         <ShopMobileInfoRows shop={shop} responseLabel={dict.shop.response} />
 
         <ShopMobileActions
+          shopId={shop.id}
           initialFollowing={shop.is_followed}
           followLabel={dict.shop.follow}
           followingLabel={dict.shop.following}

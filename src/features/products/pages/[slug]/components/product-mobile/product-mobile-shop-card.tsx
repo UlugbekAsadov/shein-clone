@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useState } from "react";
 import { VerifiedCheck } from "@solar-icons/react/ssr";
 import { Button } from "@/shared/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
+import { useShopFollow } from "@/features/shop/hooks/use-shop-follow";
 
 interface IProps {
   shop: IApiShop;
@@ -21,7 +21,10 @@ export function ProductMobileShopCard({
   followingLabel,
 }: IProps) {
   const { lang } = useParams<{ lang: string }>();
-  const [isFollowing, setIsFollowing] = useState(false);
+  const { isFollowing, toggle, isPending } = useShopFollow(
+    shop.id,
+    shop.is_followed,
+  );
   const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
   return (
@@ -54,7 +57,8 @@ export function ProductMobileShopCard({
       <Button
         type="button"
         size="sm"
-        onClick={() => setIsFollowing((v) => !v)}
+        onClick={toggle}
+        disabled={isPending}
         className={cn(
           "h-9 rounded-[8px] px-8 text-sm font-bold",
           isFollowing
