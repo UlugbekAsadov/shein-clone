@@ -19,7 +19,7 @@ export function FilterBarColor({ items, selectedIds, onChange }: IProps) {
   };
 
   return (
-    <ul className="scrollbar-slim flex max-h-[70vh] flex-col overflow-y-auto pr-1.5">
+    <ul className="scrollbar-slim flex max-h-[70vh] flex-col overflow-y-auto overflow-x-hidden pr-1.5">
       {items.map((item) => (
         <li key={item.id} className="py-2.5">
           <label className="flex cursor-pointer items-center gap-2.5 text-sm font-semibold text-primary transition-colors hover:text-primary">

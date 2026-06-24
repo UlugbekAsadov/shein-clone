@@ -19,7 +19,7 @@ export function FilterBarAttribute({ items, selectedIds, onChange }: IProps) {
   };
 
   return (
-    <ul className="scrollbar-slim flex max-h-72 flex-col pr-1.5">
+    <ul className="scrollbar-slim overflow-y-auto overflow-x-hidden flex max-h-72 flex-col pr-1.5">
       {items.map((item) => (
         <li key={item.id} className="py-2.5">
           <label className="flex items-center justify-between cursor-pointer gap-2.5 text-sm font-semibold">

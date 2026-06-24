@@ -76,7 +76,7 @@ export function FilterCategoryDrill({
         {header ? header.name : rootLabel}
       </p>
 
-      <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto pr-1.5">
+      <ul className="scrollbar-slim flex max-h-72 flex-col overflow-y-auto overflow-x-hidden pr-1.5">
         {currentChildren.map((node) => {
           const hasChildren = !!node.children?.length;
           const isSelected = selectedIds.includes(node.id);
