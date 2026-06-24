@@ -43,7 +43,6 @@ export function RecommendedProducts({
   lang,
   autoFilter,
 }: IProps) {
-  console.log({ products });
   if (!products.length) return null;
 
   return (
