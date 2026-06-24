@@ -108,6 +108,9 @@
   "cart": {
     "itemsInCart": "items in cart",
     "clearCart": "Clear cart",
+    "clearCartTitle": "Clear your cart?",
+    "clearCartDescription": "Are you sure you want to remove all items from your cart? This action cannot be undone.",
+    "cancel": "Cancel",
     "selectAll": "Select all",
     "color": "Color",
     "size": "Size",

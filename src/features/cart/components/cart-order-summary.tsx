@@ -16,37 +16,42 @@ export function CartOrderSummary({ totals, deliveryDate, dict }: IProps) {
   const { currency } = useCurrency();
 
   return (
-    <aside className="rounded-xl border border-border bg-card p-5">
-      <h2 className="text-lg font-bold">{dict.yourOrder}</h2>
+    <aside className="rounded-[30px] bg-secondary p-5">
+      <h2 className="text-[20px] font-bold">{dict.yourOrder}</h2>
 
-      <dl className="mt-4 flex flex-col gap-3 text-sm">
+      <div className="mt-4 flex flex-col gap-3 text-sm">
         {deliveryDate && (
-          <div className="flex items-center justify-between gap-2 border-b border-dashed border-border pb-3">
+          <div className="flex items-center justify-between gap-2 pb-3 text-lg">
             <dt className="text-muted-foreground">{dict.deliveryDate}:</dt>
+            <div className="flex-1 border-b border-dashed border-[#DEDEE4] translate-y-2" />
             <dd className="font-semibold">{deliveryDate}</dd>
           </div>
         )}
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 text-lg">
           <dt className="text-muted-foreground">
             {dict.products} ({totals.productsCount})
           </dt>
+          <div className="flex-1 border-b border-dashed border-[#DEDEE4] translate-y-2" />
           <dd className="font-semibold">
             {formatPrice(totals.productsTotal, currency)}
           </dd>
         </div>
         {totals.discounts > 0 && (
-          <div className="flex items-center justify-between gap-2 border-b border-dashed border-border pb-3">
+          <div className="flex items-center justify-between gap-2 pb-3 text-lg">
             <dt className="text-muted-foreground">{dict.discounts}</dt>
+            <div className="flex-1 border-b border-dashed border-[#DEDEE4] translate-y-2" />
             <dd className="font-semibold text-rose-500">
               -{formatPrice(totals.discounts, currency)}
             </dd>
           </div>
         )}
-      </dl>
+      </div>
 
-      <div className="mt-4 flex items-center justify-between gap-2">
+      <div className="border-b-2 border-dashed border-[#DEDEE4] my-4" />
+
+      <div className=" flex items-center justify-between gap-2 text-lg">
         <span className="font-semibold">{dict.totalPrice}</span>
-        <span className="text-lg font-bold">
+        <span className="text-[24px] font-bold">
           {formatPrice(totals.totalPrice, currency)}
         </span>
       </div>
@@ -55,7 +60,7 @@ export function CartOrderSummary({ totals, deliveryDate, dict }: IProps) {
         type="button"
         size="lg"
         disabled
-        className="mt-5 h-12 w-full rounded-lg text-base font-semibold"
+        className="mt-5 h-12 w-full rounded-[11px] text-base font-semibold"
       >
         {dict.next}
       </Button>

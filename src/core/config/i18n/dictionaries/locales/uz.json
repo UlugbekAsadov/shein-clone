@@ -108,6 +108,9 @@
   "cart": {
     "itemsInCart": "ta mahsulot savatda",
     "clearCart": "Savatni tozalash",
+    "clearCartTitle": "Savatni tozalaysizmi?",
+    "clearCartDescription": "Savatdagi barcha mahsulotlarni o'chirmoqchimisiz? Bu amalni ortga qaytarib bo'lmaydi.",
+    "cancel": "Bekor qilish",
     "selectAll": "Hammasini tanlash",
     "color": "Rang",
     "size": "O'lcham",

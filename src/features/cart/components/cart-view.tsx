@@ -12,6 +12,7 @@ import { CartHeaderBar } from "./cart-header-bar";
 import { CartItemList } from "./cart-item-list";
 import { CartOrderSummary } from "./cart-order-summary";
 import { CartSkeleton } from "./cart-skeleton";
+import { ClearCartDialog } from "./clear-cart-dialog";
 
 interface IProps {
   lang: string;
@@ -22,6 +23,7 @@ export function CartView({ lang, dict }: IProps) {
   const { items, count, loading, update, remove, clear } = useCart();
   const [selectedKeys, setSelectedKeys] = useState<Set<number>>(new Set());
   const [clearing, setClearing] = useState(false);
+  const [confirmClearOpen, setConfirmClearOpen] = useState(false);
   const prevKeysRef = useRef<Set<number>>(new Set());
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export function CartView({ lang, dict }: IProps) {
     setClearing(true);
     const result = await clear();
     setClearing(false);
+    setConfirmClearOpen(false);
     if (result.ok) toast.success(dict.cart.cleared);
     else toast.error(result.message ?? "Couldn't clear cart");
   }
@@ -112,7 +115,7 @@ export function CartView({ lang, dict }: IProps) {
   }
 
   return (
-    <div className="mx-auto grid max-w-360 gap-6 px-6 py-8 lg:grid-cols-[1fr_360px]">
+    <div className="mx-auto grid max-w-360 gap-6 px-6 py-8 lg:grid-cols-[1fr_460px]">
       <div className="flex flex-col gap-5">
         <CartHeaderBar
           count={count}
@@ -120,7 +123,7 @@ export function CartView({ lang, dict }: IProps) {
           clearing={clearing}
           dict={dict.cart}
           onToggleAll={toggleAll}
-          onClear={handleClear}
+          onClear={() => setConfirmClearOpen(true)}
         />
         <CartItemList
           items={items}
@@ -139,6 +142,14 @@ export function CartView({ lang, dict }: IProps) {
           dict={dict.cart}
         />
       </div>
+
+      <ClearCartDialog
+        open={confirmClearOpen}
+        clearing={clearing}
+        dict={dict.cart}
+        onOpenChange={setConfirmClearOpen}
+        onConfirm={handleClear}
+      />
     </div>
   );
 }
