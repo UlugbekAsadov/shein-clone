@@ -622,6 +622,11 @@
     "recommendedProducts": "Рекомендуемые товары",
     "fastShipping": "Быстрая доставка",
     "previousReviews": "Предыдущие отзывы",
-    "nextReviews": "Следующие отзывы"
+    "nextReviews": "Следующие отзывы",
+    "fitStats": {
+      "small": "Маломерит",
+      "trueToSize": "Размер в размер",
+      "large": "Большемерит"
+    }
   }
 }

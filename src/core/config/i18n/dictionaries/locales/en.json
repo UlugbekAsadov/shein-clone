@@ -624,6 +624,11 @@
     "recommendedProducts": "Recommended Products",
     "fastShipping": "Fast shipping",
     "previousReviews": "Previous reviews",
-    "nextReviews": "Next reviews"
+    "nextReviews": "Next reviews",
+    "fitStats": {
+      "small": "Small",
+      "trueToSize": "True to size",
+      "large": "Large"
+    }
   }
 }

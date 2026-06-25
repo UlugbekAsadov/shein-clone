@@ -58,15 +58,23 @@ function mapCommentToReview(comment: IProductComment): IReview {
   };
 }
 
-function mapFitStats(stats: IProductFitStats): IFitStat[] {
+function mapFitStats(stats: IProductFitStats, dict: IDictionary): IFitStat[] {
   return [
-    { id: "small", label: "Small", percent: stats.small_percentage },
+    {
+      id: "small",
+      label: dict.product.fitStats.small,
+      percent: stats.small_percentage,
+    },
     {
       id: "true_to_size",
-      label: "True to size",
+      label: dict.product.fitStats.trueToSize,
       percent: stats.true_to_size_percentage,
     },
-    { id: "large", label: "Large", percent: stats.large_percentage },
+    {
+      id: "large",
+      label: dict.product.fitStats.large,
+      percent: stats.large_percentage,
+    },
   ];
 }
 
@@ -89,7 +97,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
 
   const fallbackImages = [product.image_url, ...product.additional_images];
   const reviews = product.latest_comments.map(mapCommentToReview);
-  const fitStats = mapFitStats(product.fit_stats);
+  const fitStats = mapFitStats(product.fit_stats, dict);
 
   const breadcrumbItems = [
     { id: "home", label: dict.breadcrumb.home, href: `/${lang}/demo` },

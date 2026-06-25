@@ -624,6 +624,11 @@
     "recommendedProducts": "Tavsiya etilgan mahsulotlar",
     "fastShipping": "Tez yetkazib berish",
     "previousReviews": "Oldingi sharhlar",
-    "nextReviews": "Keyingi sharhlar"
+    "nextReviews": "Keyingi sharhlar",
+    "fitStats": {
+      "small": "Kichik",
+      "trueToSize": "O'lchamiga mos",
+      "large": "Katta"
+    }
   }
 }
