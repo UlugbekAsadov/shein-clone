@@ -64,7 +64,7 @@ export function SearchBar({
 
   return (
     <div ref={containerRef} className="relative flex flex-1">
-      <div className="relative flex h-12.5 w-full items-stretch rounded-md bg-muted/60 ring-1 ring-border">
+      <div className="relative flex h-9.5 w-full items-stretch rounded-[9px] bg-white ring-1 ring-border">
         {/* <Select defaultValue={searchCategories[0].id}>
           <SelectTrigger
             className="h-full! rounded-l-full border-0 bg-transparent pl-4 pr-2.25 text-sm font-medium text-foreground shadow-none hover:bg-muted/80 focus:ring-0 border-r"
@@ -85,7 +85,7 @@ export function SearchBar({
           </SelectContent>
         </Select> */}
 
-        <div className="flex flex-1 items-center px-2">
+        <div className="flex flex-1 items-center px-2 ">
           <SearchIcon className="size-6 text-muted-foreground" />
           <input
             type="text"
@@ -94,7 +94,7 @@ export function SearchBar({
             placeholder={placeholder}
             onFocus={() => setOpen(true)}
             onKeyDown={(e) => e.key === "Enter" && goToSearch(searchValue)}
-            className="flex-1 bg-transparent pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
+            className="flex-1 bg-white pl-1.5 pr-10 text-sm placeholder:text-muted-foreground placeholder:font-medium focus:outline-none"
           />
           {searchValue.length ? (
             <button

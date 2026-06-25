@@ -43,7 +43,7 @@ export function HeaderUserAction({
   return (
     <Link
       href={`/${lang}/profile/account`}
-      className="flex items-center gap-2 rounded-full pl-1 pr-3"
+      className="flex items-center gap-2 rounded-full pl-1 pr-3 text-white"
     >
       <Image
         src={avatarSrc}

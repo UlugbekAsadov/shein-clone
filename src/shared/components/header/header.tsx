@@ -25,31 +25,34 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
     <HeaderScrollWrapper isSticky={isSticky}>
       <div
         suppressHydrationWarning
-        className="mx-auto flex max-w-360 items-center gap-10 px-6"
+        className="flex w-screen items-center gap-10 px-6"
       >
-        <Link
-          href={`/${lang}/demo`}
-          className="mr-25 shrink-0"
-          aria-label="Home"
-        >
+        <Link href={`/${lang}/demo`} className="shrink-0" aria-label="Home">
           <Image
-            src="/logo.svg"
+            src="/logo-white.svg"
             alt="2020Mall logo"
-            width={120}
+            width={180}
             height={60}
             priority
             style={{ height: "auto" }}
           />
         </Link>
 
-        <SearchBar
-          lang={lang}
-          placeholder={dict.header.searchPlaceholder}
-          searchLabel={dict.header.search}
-          visualSearchDict={dict.visualSearch}
-        />
+        <div className="flex flex-1 justify-center">
+          <div className="flex w-full max-w-2xl">
+            <SearchBar
+              lang={lang}
+              placeholder={dict.header.searchPlaceholder}
+              searchLabel={dict.header.search}
+              visualSearchDict={dict.visualSearch}
+            />
+          </div>
+        </div>
 
-        <div suppressHydrationWarning className="flex items-center gap-4">
+        <div
+          suppressHydrationWarning
+          className="flex shrink-0 items-center gap-4"
+        >
           <LocaleSwitcher current={lang} />
           <CurrencySwitcher />
 
@@ -61,7 +64,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
             aria-label="Wishlist"
             className="rounded-full"
           >
-            <Heart className="size-6 text-secondary-foreground" />
+            <Heart className="size-6 text-white" />
           </Link>
 
           <div className="h-8 w-px bg-border" aria-hidden />

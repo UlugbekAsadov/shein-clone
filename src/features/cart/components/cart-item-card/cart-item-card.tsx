@@ -75,14 +75,14 @@ export function CartItemCard({
       <div className="flex gap-4">
         <Link
           href={productHref}
-          className="relative aspect-3/4 w-20 md:w-28 shrink-0 overflow-hidden rounded-[8px] md:rounded-lg bg-muted sm:w-44"
+          className="relative aspect-3/4 w-20 md:w-37 shrink-0 overflow-hidden rounded-[8px] md:rounded-lg bg-muted sm:w-44"
         >
           <Image
             src={product.image_url}
             alt={product.title}
             fill
             quality={90}
-            sizes="(max-width: 640px) 112px, 176px"
+            sizes="(max-width: 640px) 148px, 176px"
             className="object-cover"
           />
         </Link>
@@ -100,7 +100,10 @@ export function CartItemCard({
 
           <div className="mt-2 flex flex-col gap-1.5 text-sm">
             {attributes.map((attribute) => (
-              <div key={attribute.slug} className="flex items-center text-xs md:text-sm">
+              <div
+                key={attribute.slug}
+                className="flex items-center text-xs md:text-sm"
+              >
                 <span className="text-muted-foreground">
                   {attributeLabel(attribute.slug, attribute.name)}:
                 </span>

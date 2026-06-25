@@ -17,7 +17,7 @@ export function HeaderCartButton({ lang }: IProps) {
       aria-label="Cart"
       className="relative rounded-full"
     >
-      <CartLarge2 className="size-6 text-secondary-foreground" />
+      <CartLarge2 className="size-6 text-white" />
       {totalQuantity > 0 && (
         <span className="absolute -right-1.5 -top-1.5 grid h-4 min-w-4 place-items-center rounded-full bg-rose-500 px-1 text-[10px] font-semibold text-white">
           {totalQuantity}

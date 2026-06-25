@@ -36,7 +36,7 @@ export function HomePage({
       <MobileHeader lang={lang} />
       <Header lang={lang} dict={dict} />
 
-      <main className="flex-1">
+      <main className="flex-1 mt-10">
         {marketingBadge && (
           <div className="hidden md:block">
             <PromoBanner badge={marketingBadge} />

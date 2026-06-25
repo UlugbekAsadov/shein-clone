@@ -22,7 +22,7 @@ export function HeaderScrollWrapper({ isSticky, children }: IProps) {
     <header
       suppressHydrationWarning
       className={cn(
-        "top-0 z-40 hidden bg-background/95 md:block pt-5 space-y-4",
+        "top-0 z-40 hidden bg-primary md:block pt-5 space-y-4",
         isScrolled && "header-shadow",
         isSticky && "sticky",
       )}

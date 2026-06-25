@@ -36,16 +36,13 @@ export function CurrencySwitcher() {
   }
 
   return (
-    <Select
-      value={currency}
-      onValueChange={handleChange}
-    >
+    <Select value={currency} onValueChange={handleChange}>
       <SelectTrigger
-        className="h-auto gap-1.5 border-0 bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0 cursor-pointer"
+        className="h-auto gap-1.5 border-0 text-white bg-transparent px-0 py-1 text-sm font-medium shadow-none hover:opacity-80 focus:ring-0 cursor-pointer"
         aria-label="Currency"
       >
-        <DollarMinimalistic className="size-5.25 text-secondary-foreground" />
-        <SelectValue className="text-secondary-foreground font-medium uppercase">
+        <DollarMinimalistic className="size-5.25 text-white" />
+        <SelectValue className=" font-medium uppercase text-white!">
           {currency}
         </SelectValue>
       </SelectTrigger>

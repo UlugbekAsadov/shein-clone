@@ -47,17 +47,19 @@ export function CategoryNav({
       className="relative hidden md:block"
       onMouseLeave={() => setOpen(false)}
     >
-      <div className="mx-auto flex max-w-360 items-center gap-6 px-6 pb-3">
+      <div className="flex w-screen items-center gap-6 px-6 pb-2">
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
           onMouseEnter={() => setOpen(true)}
-          className={cn("flex items-center gap-2 text-base font-medium")}
+          className={cn(
+            "flex items-center gap-2 text-sm font-medium text-white",
+          )}
           aria-expanded={open}
         >
-          <LayoutGridSolid className="size-6" />
+          <LayoutGridSolid className="size-5 fill-white" />
           {categoriesLabel}
-          <AltArrowDown className="size-6" />
+          <AltArrowDown className="size-5" />
         </button>
 
         <nav
@@ -76,7 +78,7 @@ export function CategoryNav({
                 setOpen(true);
                 setActiveSlug(c.slug);
               }}
-              className="whitespace-nowrap font-medium transition-colors text-muted-foreground hover:text-foreground"
+              className="whitespace-nowrap text-sm font-medium transition-colors text-white hover:text-white"
             >
               {c.title}
             </Link>
@@ -88,7 +90,7 @@ export function CategoryNav({
             type="button"
             aria-label="Scroll left"
             onClick={() => scrollBy(-1)}
-            className="grid size-8 place-items-center cursor-pointer"
+            className="grid size-8 place-items-center cursor-pointer text-primary-foreground"
           >
             <AltArrowLeft className="size-6" />
           </button>
@@ -96,7 +98,7 @@ export function CategoryNav({
             type="button"
             aria-label="Scroll right"
             onClick={() => scrollBy(1)}
-            className="grid size-8 place-items-center cursor-pointer"
+            className="grid size-8 place-items-center cursor-pointer text-primary-foreground"
           >
             <AltArrowRight className="size-6" />
           </button>
@@ -114,7 +116,7 @@ export function CategoryNav({
       <div
         aria-hidden={!open}
         className={cn(
-          "absolute inset-x-0 top-full z-40 mx-auto max-w-360 px-6 transition-all duration-300 ease-out",
+          "absolute inset-x-0 top-full z-40 w-screen  transition-all duration-300 ease-out",
           open
             ? "translate-y-0 opacity-100"
             : "pointer-events-none -translate-y-3 opacity-0",
