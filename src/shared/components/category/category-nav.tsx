@@ -35,6 +35,24 @@ export function CategoryNav({
   const [open, setOpen] = useState(false);
   const [activeSlug, setActiveSlug] = useState(categories[0]?.slug ?? "");
   const scrollRef = useRef<HTMLElement>(null);
+  const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const cancelScheduledOpen = () => {
+    if (openTimerRef.current) {
+      clearTimeout(openTimerRef.current);
+      openTimerRef.current = null;
+    }
+  };
+
+  const scheduleOpen = () => {
+    cancelScheduledOpen();
+    openTimerRef.current = setTimeout(() => setOpen(true), 300);
+  };
+
+  const closeMenu = () => {
+    cancelScheduledOpen();
+    setOpen(false);
+  };
 
   const scrollBy = (direction: 1 | -1) => {
     const el = scrollRef.current;
@@ -45,13 +63,16 @@ export function CategoryNav({
   return (
     <div
       className="relative hidden md:block"
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={closeMenu}
     >
       <div className="flex w-screen items-center gap-6 px-6 pb-2">
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
-          onMouseEnter={() => setOpen(true)}
+          onClick={() => {
+            cancelScheduledOpen();
+            setOpen((v) => !v);
+          }}
+          onMouseEnter={scheduleOpen}
           className={cn(
             "flex items-center gap-2 text-sm font-medium text-white",
           )}
@@ -71,7 +92,7 @@ export function CategoryNav({
               key={c.slug}
               href={getCategoryHref(lang, c)}
               onMouseEnter={() => {
-                setOpen(true);
+                scheduleOpen();
                 setActiveSlug(c.slug);
               }}
               onFocus={() => {
@@ -107,7 +128,7 @@ export function CategoryNav({
 
       <div
         aria-hidden={!open}
-        onClick={() => setOpen(false)}
+        onClick={closeMenu}
         className={cn(
           "fixed inset-x-0 bottom-0 top-32.5 z-30 bg-black/50 transition-opacity duration-300 ease-out",
           open ? "opacity-100" : "pointer-events-none opacity-0",

@@ -37,7 +37,7 @@ export function CategoryMegaMenu({
   const activeCategory = categories.find((c) => c.slug === activeSlug);
 
   return (
-    <div className="p-5">
+    <div className="flex max-h-[70vh] flex-col p-5">
       <div className="mb-6 flex items-center gap-2">
         <FilterChip
           icon={<Sale className="size-4.5" weight="Bold" />}
@@ -61,8 +61,8 @@ export function CategoryMegaMenu({
         />
       </div>
 
-      <div className="grid grid-cols-[260px_1fr_300px]">
-        <ul className="flex flex-col border-r border-border pr-5">
+      <div className="grid min-h-0 flex-1 grid-cols-[260px_1fr_300px]">
+        <ul className="flex min-h-0 flex-col overflow-y-auto border-r border-border pr-5 scrollbar-hidden">
           {categories.map((c) => (
             <li key={c.slug}>
               <Link
@@ -81,9 +81,11 @@ export function CategoryMegaMenu({
           ))}
         </ul>
 
-        <div className="px-5">
-          <h3 className="mb-4 text-base font-bold">{picksTitle}</h3>
-          <div className="grid grid-cols-8 gap-4">
+        <div className="min-h-0 overflow-y-auto px-5 scrollbar-hidden">
+          <h3 className="sticky top-0 mb-4 bg-background text-base font-bold">
+            {picksTitle}
+          </h3>
+          <div className="flex flex-wrap gap-4">
             {activeCategory?.children?.map((item) => (
               <Link
                 key={item.slug}
@@ -108,8 +110,10 @@ export function CategoryMegaMenu({
           </div>
         </div>
 
-        <div className="border-l border-border pl-5">
-          <h3 className="mb-4 text-base font-bold">{featuredTitle}</h3>
+        <div className="min-h-0 overflow-y-auto border-l border-border pl-5 scrollbar-hidden">
+          <h3 className="sticky top-0 mb-4 bg-background text-base font-bold">
+            {featuredTitle}
+          </h3>
           <div className="grid grid-cols-3 gap-x-3 gap-y-5">
             {categories.map((item) => (
               <Link
