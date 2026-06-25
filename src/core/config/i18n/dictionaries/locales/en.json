@@ -271,8 +271,12 @@
       "uploadPhoto": "Upload Photo",
       "deletePhoto": "Delete Photo",
       "save": "Save",
+      "apply": "Apply",
+      "dobPlaceholder": "DD.MM.YYYY",
       "fields": {
         "fullName": "Full name",
+        "name": "Name",
+        "surname": "Surname",
         "dateOfBirth": "Date of birth",
         "gender": "Gender"
       },

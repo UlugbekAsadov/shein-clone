@@ -269,8 +269,12 @@
       "uploadPhoto": "Загрузить фото",
       "deletePhoto": "Удалить фото",
       "save": "Сохранить",
+      "apply": "Применить",
+      "dobPlaceholder": "ДД.ММ.ГГГГ",
       "fields": {
         "fullName": "Полное имя",
+        "name": "Имя",
+        "surname": "Фамилия",
         "dateOfBirth": "Дата рождения",
         "gender": "Пол"
       },

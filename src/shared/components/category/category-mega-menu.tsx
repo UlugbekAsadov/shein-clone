@@ -34,7 +34,7 @@ export function CategoryMegaMenu({
   const activeCategory = categories.find((c) => c.slug === activeSlug);
 
   return (
-    <div className="flex max-h-[70vh] flex-col p-5">
+    <div className="flex max-h-[70vh] min-h-[70vh] flex-col p-5">
       <div className="grid min-h-0 flex-1 grid-cols-[260px_1fr_300px]">
         <ul className="flex min-h-0 flex-col overflow-y-auto border-r border-border pr-5 scrollbar-hidden">
           {categories.map((c) => (

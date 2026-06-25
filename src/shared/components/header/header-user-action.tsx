@@ -9,15 +9,10 @@ import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
   lang: (typeof locales)[number];
-  helloSignInLabel: string;
   signUpLabel: string;
 }
 
-export function HeaderUserAction({
-  lang,
-  helloSignInLabel,
-  signUpLabel,
-}: IProps) {
+export function HeaderUserAction({ lang, signUpLabel }: IProps) {
   const { user, isAuthenticated } = useUser();
   const { open } = useAuthDialog();
 
@@ -54,9 +49,6 @@ export function HeaderUserAction({
       />
       <span className="hidden text-left leading-tight md:block">
         <span className="block font-semibold">{displayName}</span>
-        <span className="block text-xs text-secondary-foreground">
-          {helloSignInLabel}
-        </span>
       </span>
     </Link>
   );

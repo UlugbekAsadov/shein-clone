@@ -17,7 +17,9 @@ export function ProfileUserCard({ user }: IProps) {
       />
       <div className="leading-tight">
         <p className="text-lg font-semibold">{user.name}</p>
-        <p className="text-sm text-muted-foreground">{user.subtitle}</p>
+        {user.subtitle && (
+          <p className="text-sm text-muted-foreground">{user.subtitle}</p>
+        )}
       </div>
     </div>
   );

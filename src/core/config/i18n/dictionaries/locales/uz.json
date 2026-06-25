@@ -271,8 +271,12 @@
       "uploadPhoto": "Rasm yuklash",
       "deletePhoto": "Rasmni o'chirish",
       "save": "Saqlash",
+      "apply": "Saqlash",
+      "dobPlaceholder": "KK.OO.YYYY",
       "fields": {
         "fullName": "To'liq ism",
+        "name": "Ism",
+        "surname": "Familiya",
         "dateOfBirth": "Tug'ilgan sana",
         "gender": "Jinsi"
       },

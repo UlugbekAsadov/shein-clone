@@ -11,7 +11,9 @@ export const getCurrentUser = cache(async (): Promise<IAuthUser | null> => {
 
   try {
     const result = await authApi.getMe();
-    return result.data ?? null;
+    const user = result.data;
+    if (!user) return null;
+    return { ...user, avatar: user.avatar ?? user.image };
   } catch (error) {
     if (error instanceof ApiError && error.isUnauthorized) return null;
     throw error;

@@ -83,6 +83,8 @@ async function request<TData>(
   const { searchParams, headers, next, skipAuth, signal, ...rest } = options;
   const url = buildUrl(endpoint, searchParams);
 
+  const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
+
   const dynamicHeaders = await buildDynamicHeaders(skipAuth ?? false);
 
   const finalHeaders: Record<string, string> = {
@@ -90,6 +92,8 @@ async function request<TData>(
     ...dynamicHeaders,
     ...(headers as Record<string, string> | undefined),
   };
+
+  if (isFormData) delete finalHeaders["Content-Type"];
 
   const controller = new AbortController();
   const timeoutId = setTimeout(
@@ -106,7 +110,7 @@ async function request<TData>(
       ...rest,
       method,
       headers: finalHeaders,
-      body: body === undefined ? undefined : JSON.stringify(body),
+      body: body === undefined ? undefined : isFormData ? (body as FormData) : JSON.stringify(body),
       signal: controller.signal,
       cache: "no-store",
       next,

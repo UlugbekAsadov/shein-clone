@@ -71,11 +71,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
 
           <div className="h-8 w-px bg-border" aria-hidden />
 
-          <HeaderUserAction
-            lang={lang}
-            helloSignInLabel={dict.header.helloSignIn}
-            signUpLabel={dict.header.signUp}
-          />
+          <HeaderUserAction lang={lang} signUpLabel={dict.header.signUp} />
         </div>
       </div>
 
