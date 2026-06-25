@@ -27,16 +27,18 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
         suppressHydrationWarning
         className="flex w-screen items-center gap-10 px-6"
       >
-        <Link href={`/${lang}/demo`} className="shrink-0" aria-label="Home">
-          <Image
-            src="/logo-white.svg"
-            alt="2020Mall logo"
-            width={180}
-            height={60}
-            priority
-            style={{ height: "auto" }}
-          />
-        </Link>
+        <div className="flex flex-1 basis-0">
+          <Link href={`/${lang}/demo`} className="shrink-0" aria-label="Home">
+            <Image
+              src="/logo-white.svg"
+              alt="2020Mall logo"
+              width={180}
+              height={60}
+              priority
+              style={{ height: "auto" }}
+            />
+          </Link>
+        </div>
 
         <div className="flex flex-1 justify-center">
           <div className="flex w-full max-w-2xl">
@@ -51,7 +53,7 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
 
         <div
           suppressHydrationWarning
-          className="flex shrink-0 items-center gap-4"
+          className="flex flex-1 basis-0 shrink-0 items-center justify-end gap-4"
         >
           <LocaleSwitcher current={lang} />
           <CurrencySwitcher />

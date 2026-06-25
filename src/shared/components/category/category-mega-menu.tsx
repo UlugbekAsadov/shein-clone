@@ -6,9 +6,7 @@ import type { locales } from "@/core/config/i18n/i18n-config";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
 import { getCategoryHref } from "@/features/category/utils/category-tree.utils";
 import { cn } from "@/lib/utils";
-import { FilterChip } from "./filter-chip";
-import { AltArrowRight, Sale, ShieldCheck, Tag } from "@solar-icons/react";
-import { TruckIconSolid } from "../icons/solid";
+import { AltArrowRight } from "@solar-icons/react";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -29,7 +27,6 @@ export function CategoryMegaMenu({
   lang,
   picksTitle,
   featuredTitle,
-  filters,
   activeSlug,
   onActiveChange,
   categories,
@@ -38,29 +35,6 @@ export function CategoryMegaMenu({
 
   return (
     <div className="flex max-h-[70vh] flex-col p-5">
-      <div className="mb-6 flex items-center gap-2">
-        <FilterChip
-          icon={<Sale className="size-4.5" weight="Bold" />}
-          label={filters.onSale}
-          tone="rose"
-        />
-        <FilterChip
-          icon={<TruckIconSolid className="size-4.5" fill="#21BE65" />}
-          label={filters.freeDelivery}
-          tone="emerald"
-        />
-        <FilterChip
-          icon={<ShieldCheck className="size-4.5" weight="Bold" />}
-          label={filters.original}
-          tone="blue"
-        />
-        <FilterChip
-          icon={<Tag className="size-4.5" weight="Bold" />}
-          label={filters.new}
-          tone="amber"
-        />
-      </div>
-
       <div className="grid min-h-0 flex-1 grid-cols-[260px_1fr_300px]">
         <ul className="flex min-h-0 flex-col overflow-y-auto border-r border-border pr-5 scrollbar-hidden">
           {categories.map((c) => (

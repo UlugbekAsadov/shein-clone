@@ -143,7 +143,7 @@ export function CategoryNav({
             : "pointer-events-none -translate-y-3 opacity-0",
         )}
       >
-        <div className="origin-top overflow-hidden rounded-b-2xl border border-border bg-background shadow-2xl">
+        <div className="origin-top overflow-hidden border border-border bg-background shadow-2xl">
           <CategoryMegaMenu
             lang={lang}
             picksTitle={picksTitle}
