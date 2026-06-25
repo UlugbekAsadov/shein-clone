@@ -78,6 +78,7 @@ export default async function RootLayout({
         geistMono.variable,
         "font-sans",
         inter.variable,
+        "scrollbar-hidden"
       )}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
