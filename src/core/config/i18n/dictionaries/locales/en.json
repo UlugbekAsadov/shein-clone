@@ -634,5 +634,12 @@
       "trueToSize": "True to size",
       "large": "Large"
     }
+  },
+  "policyBanner": {
+    "title": "Policy",
+    "description": "The estimated delivery window is based on historical data, including data regarding when most orders were delivered. In most cases, the package should be delivered within the estimated delivery window. However, the actual delivery date may be affected by flight arrangements, weather conditions, processing delays, carrier delays, and other",
+    "moreLabel": "more...",
+    "moreHref": "#",
+    "accept": "Accept All"
   }
 }

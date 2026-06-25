@@ -634,5 +634,12 @@
       "trueToSize": "O'lchamiga mos",
       "large": "Katta"
     }
+  },
+  "policyBanner": {
+    "title": "Siyosat",
+    "description": "Taxminiy yetkazib berish muddati tarixiy maʼlumotlarga, jumladan koʻpchilik buyurtmalar qachon yetkazib berilganiga asoslanadi. Aksariyat hollarda joʻnatma taxminiy muddat ichida yetkazib beriladi. Biroq haqiqiy yetkazib berish sanasi parvoz jadvali, ob-havo sharoiti, qayta ishlash kechikishlari, tashuvchi kechikishlari va boshqa omillarga bogʻliq boʻlishi mumkin",
+    "moreLabel": "batafsil...",
+    "moreHref": "#",
+    "accept": "Barchasini qabul qilish"
   }
 }

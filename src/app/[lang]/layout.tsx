@@ -10,6 +10,7 @@ import { Providers } from "@/core/providers/providers";
 import { getCurrentUser } from "@/features/auth/services/auth.service";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 import { SquircleClipPath } from "@/shared/components/category/squircle-clip-path";
+import { PolicyBanner } from "@/shared/components/policy-banner/policy-banner";
 
 const googleSans = localFont({
   variable: "--font-sans",
@@ -90,6 +91,7 @@ export default async function RootLayout({
         <Providers user={user} dict={dict}>
           {children}
           <MobileBottomNav lang={lang} dict={dict} />
+          <PolicyBanner dict={dict} />
         </Providers>
       </body>
     </html>
