@@ -10,6 +10,7 @@ import type { IApiProductsMeta } from "@/features/products/utils/products-respon
 import type {
   IApiFilterOptions,
   IApiFilterCategoryNode,
+  IApiFilterAttribute,
 } from "@/types/filter-options.interface";
 import type { IActiveFilters } from "@/features/category/pages/[slug]/utils/active-filters.interface";
 import { Tuning2 } from "@solar-icons/react";
@@ -33,7 +34,20 @@ const FILTER_PARAM_KEYS = [
   "is_new",
 ] as const;
 
-function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
+function buildItemSlugMap(
+  attributes: IApiFilterAttribute[],
+): Map<number, string> {
+  const map = new Map<number, string>();
+  for (const attribute of attributes) {
+    for (const item of attribute.items) map.set(item.id, attribute.slug);
+  }
+  return map;
+}
+
+function parseFiltersFromUrl(
+  params: URLSearchParams,
+  attributes: IApiFilterAttribute[],
+): IActiveFilters {
   const getIds = (key: string): number[] =>
     params
       .get(key)
@@ -45,7 +59,7 @@ function parseFiltersFromUrl(params: URLSearchParams): IActiveFilters {
     categoryIds: getIds("category_ids"),
     brandIds: getIds("brand_ids"),
     seasonIds: getIds("season_ids"),
-    attributeItemIds: getIds("attribute_ids"),
+    attributeItemIds: attributes.flatMap((attribute) => getIds(attribute.slug)),
     minPrice:
       params.get("min_price") !== null ? Number(params.get("min_price")) : null,
     maxPrice:
@@ -88,9 +102,11 @@ function hasActiveFilters(filters: IActiveFilters): boolean {
 function mergeParamsWithFilters(
   base: Record<string, string>,
   filters: IActiveFilters,
+  attributes: IApiFilterAttribute[],
 ): Record<string, string> {
   const result = { ...base };
   FILTER_PARAM_KEYS.forEach((key) => delete result[key]);
+  attributes.forEach((attribute) => delete result[attribute.slug]);
 
   if (filters.categoryIds.length > 0)
     result.category_ids = filters.categoryIds.join(",");
@@ -98,8 +114,18 @@ function mergeParamsWithFilters(
     result.brand_ids = filters.brandIds.join(",");
   if (filters.seasonIds.length > 0)
     result.season_ids = filters.seasonIds.join(",");
-  if (filters.attributeItemIds.length > 0)
-    result.attribute_ids = filters.attributeItemIds.join(",");
+  if (filters.attributeItemIds.length > 0) {
+    const itemSlug = buildItemSlugMap(attributes);
+    const grouped: Record<string, number[]> = {};
+    for (const id of filters.attributeItemIds) {
+      const slug = itemSlug.get(id);
+      if (!slug) continue;
+      (grouped[slug] ??= []).push(id);
+    }
+    Object.entries(grouped).forEach(([slug, ids]) => {
+      result[slug] = ids.join(",");
+    });
+  }
   if (filters.minPrice !== null) result.min_price = String(filters.minPrice);
   if (filters.maxPrice !== null) result.max_price = String(filters.maxPrice);
   if (filters.hasDiscount) result.has_discount = "1";
@@ -232,9 +258,17 @@ export function ProductsInfinite({
   const rawSearchParams = useSearchParams();
   const { confirmed: adultConfirmed, confirmAdult } = useAdultConsent();
 
+  const attributes = useMemo(
+    () => filterOptions?.attributes ?? [],
+    [filterOptions],
+  );
+
   const [baseParams, setBaseParams] = useState<Record<string, string>>(() => {
     const result = { ...initialParams };
     FILTER_PARAM_KEYS.forEach((key) => delete result[key]);
+    (filterOptions?.attributes ?? []).forEach(
+      (attribute) => delete result[attribute.slug],
+    );
     return result;
   });
 
@@ -271,7 +305,10 @@ export function ProductsInfinite({
   }, [queryParam]);
 
   const [initialFilters] = useState<IActiveFilters>(() =>
-    parseFiltersFromUrl(new URLSearchParams(rawSearchParams?.toString() ?? "")),
+    parseFiltersFromUrl(
+      new URLSearchParams(rawSearchParams?.toString() ?? ""),
+      filterOptions?.attributes ?? [],
+    ),
   );
 
   const startsWithFilters = useRef(hasActiveFilters(initialFilters));
@@ -295,7 +332,7 @@ export function ProductsInfinite({
 
   useEffect(() => {
     const key = makeCacheKey(
-      mergeParamsWithFilters(baseParams, EMPTY_FILTERS),
+      mergeParamsWithFilters(baseParams, EMPTY_FILTERS, attributes),
       1,
     );
     resultCache.set(key, { products: initialProducts, meta: initialMeta });
@@ -305,7 +342,7 @@ export function ProductsInfinite({
 
   const fetchPage = useCallback(
     async (page: number, filters: IActiveFilters) => {
-      const mergedParams = mergeParamsWithFilters(baseParams, filters);
+      const mergedParams = mergeParamsWithFilters(baseParams, filters, attributes);
       const cacheKey = makeCacheKey(mergedParams, page);
       const cached = resultCache.get(cacheKey);
 
@@ -348,7 +385,7 @@ export function ProductsInfinite({
         else setIsFetchingNextPage(false);
       }
     },
-    [baseParams, fetchProducts],
+    [baseParams, fetchProducts, attributes],
   );
 
   useEffect(() => {
@@ -365,13 +402,13 @@ export function ProductsInfinite({
   const handleApplyFilters = useCallback(
     (filters: IActiveFilters) => {
       setAppliedFilters(filters);
-      const merged = mergeParamsWithFilters(baseParams, filters);
+      const merged = mergeParamsWithFilters(baseParams, filters, attributes);
       onFiltersChange?.(merged);
       const params = new URLSearchParams(merged);
       const str = params.toString();
       router.replace(`${pathname}${str ? `?${str}` : ""}`, { scroll: false });
     },
-    [router, pathname, baseParams, onFiltersChange],
+    [router, pathname, baseParams, onFiltersChange, attributes],
   );
 
   const loadMore = useCallback(async () => {
