@@ -9,6 +9,7 @@ import { env } from "@/core/config/env";
 import { Providers } from "@/core/providers/providers";
 import { getCurrentUser } from "@/features/auth/services/auth.service";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
+import { SquircleClipPath } from "@/shared/components/category/squircle-clip-path";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -82,6 +83,7 @@ export default async function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
+        <SquircleClipPath />
         <Providers user={user} dict={dict}>
           {children}
           <MobileBottomNav lang={lang} dict={dict} />

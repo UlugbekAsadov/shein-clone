@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { ICategory } from "@/features/category/utils/category-group.interface";
 import { getCategoryHref } from "@/features/category/utils/category-tree.utils";
 import { cn } from "@/lib/utils";
+import { CategorySquircle } from "@/shared/components/category/category-squircle";
 import { AltArrowRight } from "@solar-icons/react";
 
 interface IProps {
@@ -66,16 +66,13 @@ export function CategoryMegaMenu({
                 href={getCategoryHref(lang, item)}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
-                <span className="relative size-20 rounded-[36px] bg-muted overflow-hidden ring-3 ring-border">
-                  <Image
-                    src={item.image_url ?? "/placeholders/category.svg"}
-                    alt={item.title}
-                    fill
-                    quality={95}
-                    sizes="80px"
-                    className="object-cover group-hover:scale-110 transition-transform"
-                  />
-                </span>
+                <CategorySquircle
+                  src={item.image_url ?? "/placeholders/category.svg"}
+                  alt={item.title}
+                  sizes="80px"
+                  className="size-20"
+                  imageClassName="group-hover:scale-110 transition-transform"
+                />
                 <span className="line-clamp-1 text-xs text-foreground">
                   {item.title}
                 </span>
@@ -95,16 +92,13 @@ export function CategoryMegaMenu({
                 href={getCategoryHref(lang, item)}
                 className="flex flex-col items-center gap-2.5 text-center cursor-pointer group relative"
               >
-                <span className="relative size-20 rounded-[36px] bg-muted overflow-hidden ring-3 ring-border">
-                  <Image
-                    src={item.image_url ?? "/placeholders/category.svg"}
-                    alt={item.title}
-                    fill
-                    quality={95}
-                    sizes="80px"
-                    className="object-cover group-hover:scale-110 transition-transform"
-                  />
-                </span>
+                <CategorySquircle
+                  src={item.image_url ?? "/placeholders/category.svg"}
+                  alt={item.title}
+                  sizes="80px"
+                  className="size-20"
+                  imageClassName="group-hover:scale-110 transition-transform"
+                />
                 <span className="line-clamp-1 text-xs text-foreground">
                   {item.title}
                 </span>
