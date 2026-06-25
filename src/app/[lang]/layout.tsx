@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -11,16 +11,21 @@ import { getCurrentUser } from "@/features/auth/services/auth.service";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 import { SquircleClipPath } from "@/shared/components/category/squircle-clip-path";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const googleSans = localFont({
+  variable: "--font-sans",
+  display: "swap",
+  src: [
+    {
+      path: "../../../public/fonts/google_sans/GoogleSans-VariableFont_GRAD,opsz,wght.ttf",
+      style: "normal",
+      weight: "400 700",
+    },
+    {
+      path: "../../../public/fonts/google_sans/GoogleSans-Italic-VariableFont_GRAD,opsz,wght.ttf",
+      style: "italic",
+      weight: "400 700",
+    },
+  ],
 });
 
 export async function generateMetadata({
@@ -75,10 +80,8 @@ export default async function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
+        googleSans.variable,
         "font-sans",
-        inter.variable,
         "scrollbar-hidden"
       )}
     >
