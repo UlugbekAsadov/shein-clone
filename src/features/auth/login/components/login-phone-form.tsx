@@ -8,6 +8,7 @@ import { LoginPhoneInput } from "./login-phone-input";
 import { LoginSocialButtons } from "./login-social-buttons";
 import { cn } from "@/lib/utils";
 import { XIcon } from "@/shared/components/icons/outline";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   labels: {
@@ -46,6 +47,7 @@ export function LoginPhoneForm({
   onClose,
   isPending = false,
 }: IProps) {
+  const dict = useDictionary();
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const isComplete = phone.length === PHONE_DIGIT_COUNT;
   const canSubmit = isComplete && acceptedTerms && !isPending;
@@ -63,7 +65,7 @@ export function LoginPhoneForm({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label={dict.common.close}
           className="text-muted-foreground cursor-pointer"
         >
           <XIcon className="size-6" />

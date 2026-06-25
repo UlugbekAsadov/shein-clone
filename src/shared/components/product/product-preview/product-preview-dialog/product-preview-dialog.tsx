@@ -10,6 +10,7 @@ import { ProductVariantProvider } from "@/features/products/pages/[slug]/provide
 import { ProductGalleryPanel } from "@/features/products/pages/[slug]/components/product-gallery-panel";
 import { ProductInfoPanel } from "@/features/products/pages/[slug]/components/product-info/product-info-panel";
 import { ProductPreviewSkeleton } from "./product-preview-skeleton";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   product: IProduct;
@@ -18,6 +19,7 @@ interface IProps {
 }
 
 export function ProductPreviewDialog({ product, open, onClose }: IProps) {
+  const dict = useDictionary();
   const [mounted, setMounted] = useState(false);
   const [closing, setClosing] = useState(false);
   const slug = product.slug ?? String(product.id);
@@ -78,7 +80,7 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label={dict.common.close}
           className="z-20 grid cursor-pointer place-items-center rounded-full text-foreground ml-auto"
         >
           <XIcon className="size-6" />
@@ -98,7 +100,7 @@ export function ProductPreviewDialog({ product, open, onClose }: IProps) {
           ) : error && !loading ? (
             <div className="grid place-items-center py-20 text-center">
               <p className="text-secondary-foreground">
-                Couldn&apos;t load this product. Please try again.
+                {dict.common.productLoadFailed}
               </p>
             </div>
           ) : (

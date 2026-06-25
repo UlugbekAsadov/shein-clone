@@ -2,6 +2,7 @@
 
 import { PlusIcon } from "@/shared/components/icons/outline";
 import { MinusIcon } from "../../icons/outline/minus-icon";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   value: number;
@@ -9,9 +10,11 @@ interface IProps {
 }
 
 export function ProductQtyStepper({ value, onChange }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div className="">
-      <div className="mb-2 font-bold">Qty:</div>
+      <div className="mb-2 font-bold">{dict.product.qty}:</div>
       <div className="flex items-center gap-2 border w-fit rounded-md">
         <button
           type="button"

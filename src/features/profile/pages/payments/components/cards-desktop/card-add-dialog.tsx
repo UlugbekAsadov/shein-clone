@@ -79,7 +79,7 @@ export function CardAddDialog({ open, onOpenChange, dict, onAdd }: IProps) {
         <div className="flex items-center justify-between">
           <DialogTitle className="text-2xl">{tForm.title}</DialogTitle>
           <DialogClose
-            aria-label="Close"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
           >
             <XIcon className="size-6" />

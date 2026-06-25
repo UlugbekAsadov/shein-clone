@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "@solar-icons/react";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   title: string;
@@ -10,6 +11,7 @@ interface IProps {
 
 export function AddressesMobileHeader({ title, fallbackHref }: IProps) {
   const router = useRouter();
+  const dict = useDictionary();
 
   const handleBack = () => {
     if (window.history.length > 1) {
@@ -25,7 +27,7 @@ export function AddressesMobileHeader({ title, fallbackHref }: IProps) {
         <button
           type="button"
           onClick={handleBack}
-          aria-label="Go back"
+          aria-label={dict.common.goBack}
           className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
           <ArrowLeft className="size-6" />

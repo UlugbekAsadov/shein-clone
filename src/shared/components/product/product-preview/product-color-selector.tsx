@@ -3,6 +3,7 @@
 import Image from "next/image";
 import type { ISwatch } from "@/types/swatch.interface";
 import { cn } from "@/lib/utils";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   swatches: ISwatch[];
@@ -17,17 +18,18 @@ export function ProductColorSelector({
   error,
   onChange,
 }: IProps) {
+  const dict = useDictionary();
   const selected = swatches.find((s) => s.id === value);
 
   return (
     <div className={cn(error && "animate-[shake_0.4s_ease-in-out]")}>
       <div className="mb-2">
-        <span className="font-bold">Color:</span>{" "}
+        <span className="font-bold">{dict.product.color}:</span>{" "}
         {selected ? (
           <span className="text-muted-foreground text-xs">{selected.name}</span>
         ) : error ? (
           <span className="text-destructive text-xs font-medium">
-            Please select a color
+            {dict.common.selectColorError}
           </span>
         ) : null}
       </div>

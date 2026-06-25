@@ -20,7 +20,7 @@ export function ProfileBreadcrumb({ lang, dict, sectionLabel }: IProps) {
   ];
 
   return (
-    <nav aria-label="Breadcrumb" className="text-sm">
+    <nav aria-label={dict.common.breadcrumb} className="text-sm">
       <ol className="flex flex-wrap items-center gap-1.5 text-muted-foreground">
         {trail.map((item, idx) => {
           const isLast = idx === trail.length - 1;

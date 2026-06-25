@@ -11,6 +11,7 @@ import {
 import { Button } from "@/shared/components/ui/button";
 import type { IMeasurementOption } from "@/features/profile/pages/measurements/utils/measurement.interface";
 import { MeasurementMobileOption } from "./measurement-mobile-option";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   open: boolean;
@@ -31,6 +32,7 @@ export function MeasurementMobileDrawer({
   onApply,
   applyLabel,
 }: IProps) {
+  const dict = useDictionary();
   const [draftValue, setDraftValue] = useState<string | null>(selectedValue);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ export function MeasurementMobileDrawer({
             {title}
           </DrawerTitle>
           <DrawerClose
-            aria-label="Close"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full text-muted-foreground"
           >
             <XIcon className="size-6" />

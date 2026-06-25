@@ -4,6 +4,7 @@ import type { ISwatch } from "@/types/swatch.interface";
 import type { ISize } from "@/types/size.interface";
 import { ProductMobileColor } from "@/features/products/pages/[slug]/components/product-mobile/product-mobile-color";
 import { ProductSizeSelector } from "@/shared/components/product/product-preview/product-size-selector";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   colors: ISwatch[];
@@ -30,6 +31,8 @@ export function SelectSizeView({
   onSizeChange,
   onShowGuide,
 }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div>
       {colors.length > 0 && (
@@ -55,7 +58,7 @@ export function SelectSizeView({
               onClick={onShowGuide}
               className="cursor-pointer text-sm font-medium text-sky-500"
             >
-              Size Guide &gt;
+              {dict.common.sizeGuide} &gt;
             </button>
           }
         />

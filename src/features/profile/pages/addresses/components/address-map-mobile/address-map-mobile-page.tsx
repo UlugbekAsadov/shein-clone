@@ -210,7 +210,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
             <button
               type="button"
               onClick={() => mapRef.current?.zoomIn()}
-              aria-label="Zoom in"
+              aria-label={dict.common.zoomIn}
               className="pointer-events-auto grid size-11 place-items-center border-b border-border"
             >
               <PlusIcon className="size-6" />
@@ -218,7 +218,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
             <button
               type="button"
               onClick={() => mapRef.current?.zoomOut()}
-              aria-label="Zoom out"
+              aria-label={dict.common.zoomOut}
               className="pointer-events-auto grid size-11 place-items-center"
             >
               <MinusCircle className="size-6" weight="Outline" />
@@ -227,7 +227,7 @@ export function AddressMapMobilePage({ lang, dict, apiKey }: IProps) {
           <button
             type="button"
             onClick={() => mapRef.current?.setCenter(DEFAULT_CENTER, 15)}
-            aria-label="My location"
+            aria-label={dict.common.myLocation}
             className="pointer-events-auto grid size-11 place-items-center rounded-sm bg-background text-foreground shadow-md"
           >
             <MapArrowRight className="size-5 -rotate-45" weight="Bold" />

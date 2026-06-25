@@ -9,6 +9,7 @@ import { ACTIVE_SLOT_WIDTH, EASING, SLOT_WIDTH, TRANSITION_MS } from "@/features
 import { storyApi } from "@/features/home/api/story.api";
 import { getClientSessionId } from "@/lib/session-id";
 import { StoryCard } from "@/features/home/components/stories/story-viewer/story-card";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   highlights: IApiShopHighlight[];
@@ -39,6 +40,7 @@ function toShop(highlight: IApiShopHighlight): IShopStory {
 }
 
 export function ShopHighlightViewer({ highlights, initialIndex, onClose }: IProps) {
+  const dict = useDictionary();
   const sessionId = useMemo(() => getClientSessionId(), []);
   const shops = useMemo(() => highlights.map(toShop), [highlights]);
 
@@ -183,7 +185,7 @@ export function ShopHighlightViewer({ highlights, initialIndex, onClose }: IProp
           setStoryIndex(0);
         }}
         disabled={highlightIndex === 0}
-        aria-label="Previous highlight"
+        aria-label={dict.shop.previousHighlight}
         className="absolute left-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowLeft className="size-5" weight="Outline" />
@@ -196,7 +198,7 @@ export function ShopHighlightViewer({ highlights, initialIndex, onClose }: IProp
           setStoryIndex(0);
         }}
         disabled={highlightIndex === highlights.length - 1}
-        aria-label="Next highlight"
+        aria-label={dict.shop.nextHighlight}
         className="absolute right-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowRight className="size-5" weight="Outline" />

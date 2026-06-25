@@ -128,7 +128,13 @@
     "next": "Далее",
     "added": "Добавлено в корзину",
     "removed": "Удалено из корзины",
-    "cleared": "Корзина очищена"
+    "cleared": "Корзина очищена",
+    "couldntRemoveItem": "Не удалось удалить товар",
+    "couldntUpdateItem": "Не удалось обновить товар",
+    "couldntClearCart": "Не удалось очистить корзину",
+    "decreaseQuantity": "Уменьшить количество",
+    "increaseQuantity": "Увеличить количество",
+    "selectItem": "Выбрать товар"
   },
   "sections": {
     "shopByCategory": "Магазин по категориям",
@@ -244,7 +250,9 @@
       "averageReplyTime": "Среднее время ответа",
       "memberSincePrefix": "Участник с",
       "establishedSeller": "Опытный продавец"
-    }
+    },
+    "previousHighlight": "Предыдущий момент",
+    "nextHighlight": "Следующий момент"
   },
   "breadcrumb": {
     "home": "Главная",
@@ -554,5 +562,66 @@
       "address": "Лос-Анджелес, Калифорния",
       "addressLabel": "США"
     }
+  },
+  "common": {
+    "goBack": "Назад",
+    "back": "Назад",
+    "close": "Закрыть",
+    "delete": "Удалить",
+    "dismiss": "Закрыть",
+    "apply": "Применить",
+    "filter": "Фильтр",
+    "viewAll": "Смотреть все",
+    "addToCart": "В корзину",
+    "buyNow": "Купить сейчас",
+    "follow": "Подписаться",
+    "breadcrumb": "Навигация",
+    "zoomIn": "Приблизить",
+    "zoomOut": "Отдалить",
+    "myLocation": "Моё местоположение",
+    "selectSize": "Выберите размер",
+    "selectColor": "Выберите цвет",
+    "selectSizeError": "Пожалуйста, выберите размер",
+    "selectColorError": "Пожалуйста, выберите цвет",
+    "sizeGuide": "Таблица размеров",
+    "viewMode": "Вид",
+    "addedToCart": "Добавлено в корзину",
+    "couldntAddToCart": "Не удалось добавить в корзину",
+    "productLoadFailed": "Не удалось загрузить товар. Пожалуйста, попробуйте снова."
+  },
+  "stories": {
+    "previousStory": "Предыдущая история",
+    "nextStory": "Следующая история",
+    "mute": "Выключить звук",
+    "unmute": "Включить звук",
+    "play": "Воспроизвести",
+    "pause": "Пауза",
+    "previousShop": "Предыдущий магазин",
+    "nextShop": "Следующий магазин"
+  },
+  "hero": {
+    "previousSlide": "Предыдущий слайд",
+    "nextSlide": "Следующий слайд"
+  },
+  "product": {
+    "color": "Цвет",
+    "size": "Размер",
+    "fit": "Посадка",
+    "qty": "Кол-во",
+    "description": "Описание",
+    "reviews": "отзывов",
+    "sold": "продано",
+    "helpful": "Полезно",
+    "rating": "Рейтинг",
+    "overFit": "Соответствие размеру",
+    "recommendedForYou": "Рекомендуем вам",
+    "mediaGallery": "Фото и видео",
+    "comments": "Комментарии",
+    "customerReviews": "Отзывы покупателей",
+    "similarProducts": "Похожие товары",
+    "recommendedProducts": "Рекомендуемые товары",
+    "fastShipping": "Быстрая доставка",
+    "previousReviews": "Предыдущие отзывы",
+    "nextReviews": "Следующие отзывы"
   }
 }

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "@solar-icons/react";
 import { CheckRead } from "@solar-icons/react/ssr";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   title: string;
@@ -16,6 +17,7 @@ export function NotificationsMobileHeader({
   onMarkAll,
 }: IProps) {
   const router = useRouter();
+  const dict = useDictionary();
 
   return (
     <div className="sticky top-0 z-30 bg-background">
@@ -23,7 +25,7 @@ export function NotificationsMobileHeader({
         <button
           type="button"
           onClick={() => router.back()}
-          aria-label="Go back"
+          aria-label={dict.common.goBack}
           className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
           <ArrowLeft className="size-6" />

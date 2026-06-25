@@ -10,6 +10,7 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
 import { AddressTypeIcon } from "./address-type-icon";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   open: boolean;
@@ -30,6 +31,7 @@ export function AddressTypeDrawer({
   typeLabels,
   onConfirm,
 }: IProps) {
+  const dict = useDictionary();
   const [selected, setSelected] = useState<"home" | "work" | "other">("other");
 
   useEffect(() => {
@@ -49,7 +51,7 @@ export function AddressTypeDrawer({
             {title}
           </DrawerTitle>
           <DrawerClose
-            aria-label="Close"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full bg-secondary text-muted-foreground"
           >
             <XIcon className="size-5" />

@@ -8,12 +8,14 @@ import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
 import { ProductSellerStat } from "./product-seller-stat";
 import { Tag } from "@/shared/components/tag/tag";
 import { VerifiedCheck, Star } from "@solar-icons/react";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   shop: IApiShop;
 }
 
 export function ProductSellerCard({ shop }: IProps) {
+  const dict = useDictionary();
   const { lang } = useParams<{ lang: string }>();
   const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
@@ -36,7 +38,7 @@ export function ProductSellerCard({ shop }: IProps) {
             className="object-cover"
           />
           <span className="absolute right-3 top-2">
-            <Tag label="Fast shipping" size="sm" />
+            <Tag label={dict.product.fastShipping} size="sm" />
           </span>
         </div>
       </Link>
@@ -81,7 +83,7 @@ export function ProductSellerCard({ shop }: IProps) {
             </div>
           </div>
 
-          <Button className="rounded-full px-5">Follow</Button>
+          <Button className="rounded-full px-5">{dict.common.follow}</Button>
         </div>
       </div>
     </div>

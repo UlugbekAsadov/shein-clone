@@ -3,8 +3,10 @@
 import { viewModes } from "@/shared/constants/listing.constants";
 import { cn } from "@/lib/utils";
 import { useListingView } from "./hooks/use-listing-view";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 export function ListingViewToggle() {
+  const dict = useDictionary();
   const { view, setView } = useListingView();
 
   return (
@@ -16,7 +18,7 @@ export function ListingViewToggle() {
             key={id}
             type="button"
             onClick={() => setView(id)}
-            aria-label={`View ${id}`}
+            aria-label={`${dict.common.viewMode} ${id}`}
             className={cn(
               "grid size-7.5 place-items-center rounded-[8px] transition-colors cursor-pointer",
               active

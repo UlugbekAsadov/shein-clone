@@ -130,7 +130,13 @@
     "next": "Next",
     "added": "Added to cart",
     "removed": "Removed from cart",
-    "cleared": "Cart cleared"
+    "cleared": "Cart cleared",
+    "couldntRemoveItem": "Couldn't remove item",
+    "couldntUpdateItem": "Couldn't update item",
+    "couldntClearCart": "Couldn't clear cart",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "selectItem": "Select item"
   },
   "sections": {
     "shopByCategory": "Shop by Category",
@@ -246,7 +252,9 @@
       "averageReplyTime": "Average reply time",
       "memberSincePrefix": "Member since",
       "establishedSeller": "Established seller"
-    }
+    },
+    "previousHighlight": "Previous highlight",
+    "nextHighlight": "Next highlight"
   },
   "breadcrumb": {
     "home": "Home",
@@ -556,5 +564,66 @@
       "address": "Los Angeles, CA",
       "addressLabel": "United States"
     }
+  },
+  "common": {
+    "goBack": "Go back",
+    "back": "Back",
+    "close": "Close",
+    "delete": "Delete",
+    "dismiss": "Dismiss",
+    "apply": "Apply",
+    "filter": "Filter",
+    "viewAll": "View all",
+    "addToCart": "Add to cart",
+    "buyNow": "Buy now",
+    "follow": "Follow",
+    "breadcrumb": "Breadcrumb",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "myLocation": "My location",
+    "selectSize": "Select a size",
+    "selectColor": "Select a color",
+    "selectSizeError": "Please select a size",
+    "selectColorError": "Please select a color",
+    "sizeGuide": "Size guide",
+    "viewMode": "View",
+    "addedToCart": "Added to cart",
+    "couldntAddToCart": "Couldn't add to cart",
+    "productLoadFailed": "Couldn't load this product. Please try again."
+  },
+  "stories": {
+    "previousStory": "Previous story",
+    "nextStory": "Next story",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "play": "Play",
+    "pause": "Pause",
+    "previousShop": "Previous shop",
+    "nextShop": "Next shop"
+  },
+  "hero": {
+    "previousSlide": "Previous slide",
+    "nextSlide": "Next slide"
+  },
+  "product": {
+    "color": "Color",
+    "size": "Size",
+    "fit": "Fit",
+    "qty": "Qty",
+    "description": "Description",
+    "reviews": "reviews",
+    "sold": "sold",
+    "helpful": "Helpful",
+    "rating": "Rating",
+    "overFit": "Over Fit",
+    "recommendedForYou": "Recommended for you",
+    "mediaGallery": "Image and video",
+    "comments": "Comments",
+    "customerReviews": "Customer Reviews",
+    "similarProducts": "Similar Products",
+    "recommendedProducts": "Recommended Products",
+    "fastShipping": "Fast shipping",
+    "previousReviews": "Previous reviews",
+    "nextReviews": "Next reviews"
   }
 }

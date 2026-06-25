@@ -65,7 +65,7 @@ export function CartItemCard({
           checked={selected}
           onCheckedChange={onToggleSelect}
           disabled={!item.isAvailable}
-          aria-label="Select item"
+          aria-label={dict.selectItem}
           className="size-6 md:size-7 cursor-pointer rounded-[8px]"
         />
       </div>

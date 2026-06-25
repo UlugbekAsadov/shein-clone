@@ -7,6 +7,7 @@ import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 import { cn } from "@/lib/utils";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IBanner } from "@/features/home/utils/banner.interface";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { BannerSlide } from "./banner-slide";
 
 interface IProps {
@@ -15,6 +16,7 @@ interface IProps {
 }
 
 export function HeroCarousel({ lang, banners }: IProps) {
+  const dict = useDictionary();
   const autoplay = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
@@ -61,7 +63,7 @@ export function HeroCarousel({ lang, banners }: IProps) {
         <button
           type="button"
           onClick={goPrev}
-          aria-label="Previous slide"
+          aria-label={dict.hero.previousSlide}
           className="absolute cursor-pointer left-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
           <AltArrowLeft className="size-6" />
@@ -69,7 +71,7 @@ export function HeroCarousel({ lang, banners }: IProps) {
         <button
           type="button"
           onClick={goNext}
-          aria-label="Next slide"
+          aria-label={dict.hero.nextSlide}
           className="absolute cursor-pointer right-4 top-1/2 hidden size-10 -translate-y-1/2 place-items-center rounded-full bg-background/60 backdrop-blur hover:bg-background md:grid"
         >
           <AltArrowRight className="size-6" />

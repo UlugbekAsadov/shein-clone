@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { AltArrowRight } from "@solar-icons/react/ssr";
 import { ProductGrid } from "@/shared/components/product/product-grid";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import type { IProduct } from "@/types/product.interface";
 import type { ISimilarProductAutoFilter } from "@/features/products/pages/[slug]/utils/similar-product.interface";
 import type { locales } from "@/core/config/i18n/i18n-config";
@@ -43,20 +46,23 @@ export function RecommendedProducts({
   lang,
   autoFilter,
 }: IProps) {
+  const dict = useDictionary();
   if (!products.length) return null;
 
   return (
     <section className="flex flex-col gap-4">
       <div className="flex items-end justify-between">
         <div>
-          <h2 className="text-xl font-bold">Recommended Products</h2>
+          <h2 className="text-xl font-bold">
+            {dict.product.recommendedProducts}
+          </h2>
           <p className="text-xs text-muted-foreground">{countLabel}</p>
         </div>
         <Link
           href={buildViewAllHref(lang, autoFilter)}
           className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
         >
-          View all
+          {dict.common.viewAll}
           <AltArrowRight className="size-4" weight="Outline" />
         </Link>
       </div>

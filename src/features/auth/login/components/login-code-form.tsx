@@ -7,6 +7,7 @@ import { LoginCodeInput } from "./login-code-input";
 import { LoginResendTimer } from "./login-resend-timer";
 import { cn } from "@/lib/utils";
 import { XIcon } from "@/shared/components/icons/outline";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   labels: {
@@ -34,6 +35,7 @@ export function LoginCodeForm({
   onResend,
   onClose,
 }: IProps) {
+  const dict = useDictionary();
   const [code, setCode] = useState("");
   const [resendSignal, setResendSignal] = useState(0);
   const [isResending, startResend] = useTransition();
@@ -81,7 +83,7 @@ export function LoginCodeForm({
         <button
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label={dict.common.close}
           className="text-muted-foreground cursor-pointer"
         >
           <XIcon className="size-6" />

@@ -13,6 +13,7 @@ import { CardBrandIcon } from "./card-brand-icon";
 import { CardDeleteDrawer } from "./card-delete-drawer";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "@/shared/components/icons/outline";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   card: ICard;
@@ -34,6 +35,7 @@ export function CardRow({
   onDelete,
   onSetDefault,
 }: IProps) {
+  const dict = useDictionary();
   const label = CARD_KIND_LABELS[card.card_type];
   const [isPending, startTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
@@ -107,7 +109,7 @@ export function CardRow({
         trigger={
           <button
             type="button"
-            aria-label="Delete"
+            aria-label={dict.common.delete}
             className="grid size-9 shrink-0 place-items-center rounded-full text-muted-foreground transition-colors hover:text-foreground"
           >
             <TrashBinTrash className="size-6" />

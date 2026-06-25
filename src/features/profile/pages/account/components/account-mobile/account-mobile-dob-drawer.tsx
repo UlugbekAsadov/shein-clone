@@ -10,6 +10,7 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
 import { WheelPickerColumn } from "./wheel-picker-column";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   open: boolean;
@@ -46,6 +47,7 @@ export function AccountMobileDobDrawer({
   months,
   onSave,
 }: IProps) {
+  const dict = useDictionary();
   const initial = parseDate(value);
   const [year, setYear] = useState(initial.year);
   const [month, setMonth] = useState(initial.month);
@@ -102,7 +104,7 @@ export function AccountMobileDobDrawer({
             {title}
           </DrawerTitle>
           <DrawerClose
-            aria-label="Close"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full bg-secondary text-muted-foreground"
           >
             <XIcon className="size-4" />

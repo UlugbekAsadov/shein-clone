@@ -11,6 +11,7 @@ import {
 } from "@/shared/components/ui/drawer";
 import { Button } from "@/shared/components/ui/button";
 import { OrdersMobileFilterRow } from "./orders-mobile-filter-row";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   trigger: ReactNode;
@@ -31,6 +32,8 @@ export function OrdersMobileFilterDrawer({
   applyLabel,
   statusLabels,
 }: IProps) {
+  const dict = useDictionary();
+
   return (
     <Drawer>
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
@@ -40,7 +43,7 @@ export function OrdersMobileFilterDrawer({
             {title}
           </DrawerTitle>
           <DrawerClose
-            aria-label="Close filter"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
             <XIcon className="size-4" />

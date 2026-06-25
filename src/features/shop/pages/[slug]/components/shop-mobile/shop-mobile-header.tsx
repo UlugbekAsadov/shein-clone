@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Tuning2 } from "@solar-icons/react";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   title: string;
@@ -9,6 +10,7 @@ interface IProps {
 
 export function ShopMobileHeader({ title }: IProps) {
   const router = useRouter();
+  const dict = useDictionary();
 
   return (
     <div className="sticky top-0 z-30 bg-background">
@@ -16,7 +18,7 @@ export function ShopMobileHeader({ title }: IProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          aria-label="Go back"
+          aria-label={dict.common.goBack}
           className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
           <ArrowLeft className="size-6" />
@@ -28,7 +30,7 @@ export function ShopMobileHeader({ title }: IProps) {
 
         <button
           type="button"
-          aria-label="Filter"
+          aria-label={dict.common.filter}
           className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
           <Tuning2 className="size-6 rotate-90" />

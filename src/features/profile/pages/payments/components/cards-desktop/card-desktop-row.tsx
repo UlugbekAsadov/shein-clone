@@ -7,6 +7,7 @@ import type { ICard } from "@/features/profile/pages/payments/utils/card.interfa
 import { CARD_KIND_LABELS } from "@/features/profile/pages/payments/utils/card.interface";
 import { setDefaultCardAction } from "@/features/profile/pages/payments/services/card.actions";
 import { CardBrandIcon } from "@/features/profile/pages/payments/components/cards-mobile/card-brand-icon";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   card: ICard;
@@ -21,6 +22,7 @@ export function CardDesktopRow({
   onDeleteClick,
   onSetDefault,
 }: IProps) {
+  const dict = useDictionary();
   const label = CARD_KIND_LABELS[card.card_type];
   const [isPending, startTransition] = useTransition();
 
@@ -69,7 +71,7 @@ export function CardDesktopRow({
       <button
         type="button"
         onClick={onDeleteClick}
-        aria-label="Delete card"
+        aria-label={dict.common.delete}
         className="grid size-11.5 shrink-0 place-items-center rounded-sm cursor-pointer border border-border text-foreground transition-colors hover:bg-secondary"
       >
         <TrashBinTrash className="size-6" />

@@ -20,6 +20,7 @@ import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { useProductVariant } from "@/features/products/pages/[slug]/providers/product-variant.provider";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   product: IProductDetail;
@@ -27,6 +28,7 @@ interface IProps {
 }
 
 export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
+  const dict = useDictionary();
   const { currency } = useCurrency();
   const { add } = useCart();
   const { colorId, setColorId } = useProductVariant();
@@ -78,9 +80,10 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
       qty,
       buildSelectedSkuInfo(sizeId, colorId),
     ).then((result) => {
-      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+      if (!result.ok)
+        toast.error(result.message ?? dict.common.couldntAddToCart);
     });
-    toast.success("Added to cart");
+    toast.success(dict.common.addedToCart);
   }
 
   const handleSizeChange = useCallback(
@@ -102,11 +105,11 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
           <ProductRatingStars />
           <span className="text-muted-foreground">|</span>
           <span className="text-muted-foreground">
-            {product.reviews_count} reviews
+            {product.reviews_count} {dict.product.reviews}
           </span>
           <span className="text-muted-foreground">|</span>
           <span className="text-muted-foreground">
-            {product.sold_count} sold
+            {product.sold_count} {dict.product.sold}
           </span>
         </div>
       </div>
@@ -156,7 +159,7 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
           variant="default"
           size="lg"
         >
-          Add to cart
+          {dict.common.addToCart}
         </Button>
 
         <Button
@@ -166,7 +169,7 @@ export function ProductInfoPanel({ product, syncToUrl = true }: IProps) {
           variant="outline"
           size="lg"
         >
-          Buy now
+          {dict.common.buyNow}
         </Button>
       </div>
     </div>

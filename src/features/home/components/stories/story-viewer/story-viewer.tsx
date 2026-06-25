@@ -7,6 +7,7 @@ import type { IStory } from "@/features/home/utils/story.interface";
 import { ACTIVE_SLOT_WIDTH, EASING, SLOT_WIDTH, TRANSITION_MS } from "@/features/home/utils/brand-story.constants";
 import { storyApi } from "@/features/home/api/story.api";
 import { getClientSessionId } from "@/lib/session-id";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { StoryCard } from "./story-card";
 
 interface IProps {
@@ -21,6 +22,7 @@ function firstUnviewedIdx(stories: IStory[]): number {
 }
 
 export function StoryViewer({ shops, initialShopIndex, onClose }: IProps) {
+  const dict = useDictionary();
   const sessionId = useMemo(() => getClientSessionId(), []);
 
   const [shopIndex, setShopIndex] = useState(initialShopIndex);
@@ -208,7 +210,7 @@ export function StoryViewer({ shops, initialShopIndex, onClose }: IProps) {
           setStoryIndex(firstUnviewedIdx(storyCacheRef.current[prevShopId] ?? []));
         }}
         disabled={isFirst}
-        aria-label="Previous shop"
+        aria-label={dict.stories.previousShop}
         className="absolute left-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-x-1/2 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowLeft className="size-5" weight="Outline" />
@@ -222,7 +224,7 @@ export function StoryViewer({ shops, initialShopIndex, onClose }: IProps) {
           setStoryIndex(firstUnviewedIdx(storyCacheRef.current[nextShopId] ?? []));
         }}
         disabled={isLast}
-        aria-label="Next shop"
+        aria-label={dict.stories.nextShop}
         className="absolute right-[calc(50%-225px)] top-1/2 z-40 grid size-11 -translate-y-1/2 translate-x-1/2 cursor-pointer place-items-center rounded-full bg-white text-foreground shadow-md transition hover:bg-white/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowRight className="size-5" weight="Outline" />

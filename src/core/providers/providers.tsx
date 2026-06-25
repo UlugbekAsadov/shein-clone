@@ -9,6 +9,7 @@ import { CartProvider } from "@/features/cart/providers/cart-provider";
 import { LoginDialog } from "@/features/auth/login/components/login-dialog";
 import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
+import { DictionaryProvider } from "@/core/config/i18n/dictionary-provider";
 import Scroll from "@/shared/components/scroll";
 import { CurrencyProvider } from "@/shared/providers/currency-provider";
 import { AdultDialogProvider } from "@/shared/providers/adult-dialog-provider";
@@ -27,21 +28,23 @@ export function Providers({ user, dict, children }: IProps) {
       <Scroll />
       <NextTopLoader color="var(--primary)" showSpinner={false} />
       <SolarProvider>
-        <TooltipProvider>
-          <CurrencyProvider>
-            <UserProvider user={user}>
-              <CartProvider>
-                <AuthDialogProvider>
-                  <AdultDialogProvider>
-                    {children}
-                    <LoginDialog dict={dict} />
-                    <AdultGateDialog dict={dict.listing.adult} />
-                  </AdultDialogProvider>
-                </AuthDialogProvider>
-              </CartProvider>
-            </UserProvider>
-          </CurrencyProvider>
-        </TooltipProvider>
+        <DictionaryProvider dict={dict}>
+          <TooltipProvider>
+            <CurrencyProvider>
+              <UserProvider user={user}>
+                <CartProvider>
+                  <AuthDialogProvider>
+                    <AdultDialogProvider>
+                      {children}
+                      <LoginDialog dict={dict} />
+                      <AdultGateDialog dict={dict.listing.adult} />
+                    </AdultDialogProvider>
+                  </AuthDialogProvider>
+                </CartProvider>
+              </UserProvider>
+            </CurrencyProvider>
+          </TooltipProvider>
+        </DictionaryProvider>
       </SolarProvider>
       <Toaster />
     </>

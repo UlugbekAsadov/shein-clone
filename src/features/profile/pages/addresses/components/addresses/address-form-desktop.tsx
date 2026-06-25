@@ -203,7 +203,7 @@ export function AddressFormDesktop({
           <button
             type="button"
             onClick={() => router.push(`/${lang}/profile/addresses`)}
-            aria-label="Back"
+            aria-label={dict.common.back}
             className="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-foreground transition-colors hover:bg-secondary/80 cursor-pointer"
           >
             <ArrowLeft className="size-5" weight="Outline" />
@@ -339,7 +339,7 @@ export function AddressFormDesktop({
             <button
               type="button"
               onClick={() => mapRef.current?.zoomIn()}
-              aria-label="Zoom in"
+              aria-label={dict.common.zoomIn}
               className="grid size-11 place-items-center border-b border-border"
             >
               <PlusIcon className="size-5" />
@@ -347,7 +347,7 @@ export function AddressFormDesktop({
             <button
               type="button"
               onClick={() => mapRef.current?.zoomOut()}
-              aria-label="Zoom out"
+              aria-label={dict.common.zoomOut}
               className="grid size-11 place-items-center"
             >
               <MinusCircle className="size-5" weight="Outline" />
@@ -356,7 +356,7 @@ export function AddressFormDesktop({
           <button
             type="button"
             onClick={() => mapRef.current?.setCenter(DEFAULT_CENTER, 15)}
-            aria-label="My location"
+            aria-label={dict.common.myLocation}
             className="grid size-11 place-items-center rounded-sm bg-background text-foreground shadow-md"
           >
             <MapArrowRight className="size-5 -rotate-45" weight="Bold" />

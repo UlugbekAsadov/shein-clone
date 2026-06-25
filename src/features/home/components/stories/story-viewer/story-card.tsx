@@ -7,6 +7,7 @@ import type { IShopStory } from "@/features/home/utils/shop-story.interface";
 import type { IStory, IStoryText } from "@/features/home/utils/story.interface";
 import { Pause, Play, VolumeCross, VolumeLoud } from "@solar-icons/react";
 import { XIcon } from "@/shared/components/icons/outline";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { cn } from "@/lib/utils";
 import { EASING, TRANSITION_MS } from "@/features/home/utils/brand-story.constants";
 import { StoryMedia } from "./story-media";
@@ -46,6 +47,7 @@ export function StoryCard({
   onClose,
 }: IProps) {
   const { lang } = useParams<{ lang: string }>();
+  const dict = useDictionary();
   const absDist = Math.abs(distance);
   const story = stories[storyIndex];
   const shopHref = `/${lang}/demo/shop/${shop.id}`;
@@ -92,13 +94,13 @@ export function StoryCard({
       <button
         type="button"
         onClick={isActive ? onGoBack : onSelect}
-        aria-label="Previous story"
+        aria-label={dict.stories.previousStory}
         className="absolute left-0 top-0 z-20 h-full w-[10%] cursor-pointer"
       />
       <button
         type="button"
         onClick={isActive ? onAdvance : onSelect}
-        aria-label="Next story"
+        aria-label={dict.stories.nextStory}
         className="absolute right-0 top-0 z-20 h-full w-[90%] cursor-pointer"
       />
 
@@ -155,7 +157,7 @@ export function StoryCard({
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); onToggleMute(); }}
-                  aria-label={isMuted ? "Unmute" : "Mute"}
+                  aria-label={isMuted ? dict.stories.unmute : dict.stories.mute}
                   className="grid size-9 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
                 >
                   {isMuted ? <VolumeCross className="size-4" weight="Outline" /> : <VolumeLoud className="size-4" weight="Outline" />}
@@ -163,7 +165,7 @@ export function StoryCard({
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); onTogglePause(); }}
-                  aria-label={isPaused ? "Play" : "Pause"}
+                  aria-label={isPaused ? dict.stories.play : dict.stories.pause}
                   className="grid size-9 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
                 >
                   {isPaused ? <Play className="size-4" weight="Outline" /> : <Pause className="size-4" weight="Outline" />}
@@ -173,7 +175,7 @@ export function StoryCard({
             <button
               type="button"
               onClick={(e) => { e.stopPropagation(); onClose(); }}
-              aria-label="Close"
+              aria-label={dict.common.close}
               className="grid size-9 cursor-pointer place-items-center rounded-full text-white hover:bg-white/10"
             >
               <XIcon className="size-5" />

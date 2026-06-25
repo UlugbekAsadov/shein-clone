@@ -1,8 +1,11 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { VerifiedCheck, Star } from "@solar-icons/react/ssr";
 import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
 import { XIcon } from "@/shared/components/icons/outline";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { FeaturedShopFollowButton } from "./featured-shop-follow-button";
 
 interface IProps {
@@ -18,11 +21,13 @@ export function FeaturedShopMobileCard({
   followingLabel,
   lang,
 }: IProps) {
+  const dict = useDictionary();
+
   return (
     <article className="relative flex flex-col items-center rounded-[21px] border border-border bg-card p-4 pt-3">
       <button
         type="button"
-        aria-label="Dismiss"
+        aria-label={dict.common.dismiss}
         className="absolute right-2 top-2 grid size-7 place-items-center rounded-full text-foreground hover:bg-muted"
       >
         <XIcon className="size-5" />

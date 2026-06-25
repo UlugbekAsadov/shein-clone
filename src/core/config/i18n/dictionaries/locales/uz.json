@@ -130,7 +130,13 @@
     "next": "Davom etish",
     "added": "Savatga qo'shildi",
     "removed": "Savatdan o'chirildi",
-    "cleared": "Savat tozalandi"
+    "cleared": "Savat tozalandi",
+    "couldntRemoveItem": "Mahsulotni o'chirib bo'lmadi",
+    "couldntUpdateItem": "Mahsulotni yangilab bo'lmadi",
+    "couldntClearCart": "Savatni tozalab bo'lmadi",
+    "decreaseQuantity": "Sonini kamaytirish",
+    "increaseQuantity": "Sonini oshirish",
+    "selectItem": "Mahsulotni tanlash"
   },
   "sections": {
     "shopByCategory": "Kategoriya bo'yicha",
@@ -246,7 +252,9 @@
       "averageReplyTime": "O'rtacha javob vaqti",
       "memberSincePrefix": "A'zo bo'lgan",
       "establishedSeller": "Tajribali sotuvchi"
-    }
+    },
+    "previousHighlight": "Oldingi lavha",
+    "nextHighlight": "Keyingi lavha"
   },
   "breadcrumb": {
     "home": "Bosh sahifa",
@@ -556,5 +564,66 @@
       "address": "Los Anjeles, CA",
       "addressLabel": "AQSh"
     }
+  },
+  "common": {
+    "goBack": "Orqaga",
+    "back": "Orqaga",
+    "close": "Yopish",
+    "delete": "O'chirish",
+    "dismiss": "Yopish",
+    "apply": "Qo'llash",
+    "filter": "Filtr",
+    "viewAll": "Hammasini ko'rish",
+    "addToCart": "Savatga qo'shish",
+    "buyNow": "Hozir sotib olish",
+    "follow": "Kuzatish",
+    "breadcrumb": "Yo'l xaritasi",
+    "zoomIn": "Kattalashtirish",
+    "zoomOut": "Kichiklashtirish",
+    "myLocation": "Mening joylashuvim",
+    "selectSize": "O'lchamni tanlang",
+    "selectColor": "Rangni tanlang",
+    "selectSizeError": "Iltimos, o'lcham tanlang",
+    "selectColorError": "Iltimos, rang tanlang",
+    "sizeGuide": "O'lcham yo'riqnomasi",
+    "viewMode": "Ko'rinish",
+    "addedToCart": "Savatga qo'shildi",
+    "couldntAddToCart": "Savatga qo'shib bo'lmadi",
+    "productLoadFailed": "Mahsulotni yuklab bo'lmadi. Iltimos, qayta urinib ko'ring."
+  },
+  "stories": {
+    "previousStory": "Oldingi hikoya",
+    "nextStory": "Keyingi hikoya",
+    "mute": "Ovozni o'chirish",
+    "unmute": "Ovozni yoqish",
+    "play": "Ijro etish",
+    "pause": "To'xtatish",
+    "previousShop": "Oldingi do'kon",
+    "nextShop": "Keyingi do'kon"
+  },
+  "hero": {
+    "previousSlide": "Oldingi slayd",
+    "nextSlide": "Keyingi slayd"
+  },
+  "product": {
+    "color": "Rang",
+    "size": "O'lcham",
+    "fit": "Moslik",
+    "qty": "Soni",
+    "description": "Tavsif",
+    "reviews": "sharhlar",
+    "sold": "sotildi",
+    "helpful": "Foydali",
+    "rating": "Reyting",
+    "overFit": "Moslik darajasi",
+    "recommendedForYou": "Siz uchun tavsiya etiladi",
+    "mediaGallery": "Rasm va video",
+    "comments": "Izohlar",
+    "customerReviews": "Mijozlar sharhlari",
+    "similarProducts": "O'xshash mahsulotlar",
+    "recommendedProducts": "Tavsiya etilgan mahsulotlar",
+    "fastShipping": "Tez yetkazib berish",
+    "previousReviews": "Oldingi sharhlar",
+    "nextReviews": "Keyingi sharhlar"
   }
 }

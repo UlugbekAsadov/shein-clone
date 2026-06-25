@@ -1,14 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import { Like, User } from "@solar-icons/react/ssr";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import type { IReview } from "@/features/products/pages/[slug]/utils/review.interface";
 import { ProductReviewMeta } from "./product-review-meta";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   review: IReview;
 }
 
 export function ProductReviewCard({ review }: IProps) {
+  const dict = useDictionary();
   return (
     <article className="flex h-full flex-col bg-secondary p-5 rounded-[26px]">
       <div className="flex items-center gap-3">
@@ -60,7 +64,7 @@ export function ProductReviewCard({ review }: IProps) {
             type="button"
             className="flex cursor-pointer items-center gap-1.5 hover:text-foreground"
           >
-            Helpful ({review.helpful})
+            {dict.product.helpful} ({review.helpful})
             <Like className="size-3.5" weight="Outline" />
           </button>
         </div>

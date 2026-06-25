@@ -22,6 +22,7 @@ import {
 import { getOriginalPrice } from "@/shared/utils/product-display";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { ProductMobileGallery } from "./product-mobile-gallery";
 import { ProductMobileRatingRow } from "./product-mobile-rating-row";
 import { ProductMobileDescription } from "./product-mobile-description";
@@ -59,6 +60,7 @@ export function ProductMobilePage({
   followLabel,
   followingLabel,
 }: IProps) {
+  const dict = useDictionary();
   const { lang } = useParams<{ lang: string }>();
   const router = useRouter();
   const pathname = usePathname();
@@ -113,9 +115,10 @@ export function ProductMobilePage({
       1,
       buildSelectedSkuInfo(sizeId, colorId),
     ).then((result) => {
-      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+      if (!result.ok)
+        toast.error(result.message ?? dict.common.couldntAddToCart);
     });
-    toast.success("Added to cart");
+    toast.success(dict.common.addedToCart);
   }
 
   const handleSizeChange = useCallback(
@@ -185,7 +188,7 @@ export function ProductMobilePage({
 
         {reviewMedia.length > 0 && (
           <ProductMobileMediaGallery
-            title="Image and video"
+            title={dict.product.mediaGallery}
             images={reviewMedia}
             viewAllHref={commentsHref}
           />
@@ -193,7 +196,7 @@ export function ProductMobilePage({
 
         {reviews.length > 0 && (
           <ProductMobileCommentsCarousel
-            title="Comments"
+            title={dict.product.comments}
             reviews={reviews}
             viewAllHref={commentsHref}
           />
@@ -218,7 +221,7 @@ export function ProductMobilePage({
         <ProductMobileSimilar products={similar} />
 
         <ProductMobileCta
-          label="Add to cart"
+          label={dict.common.addToCart}
           onClick={handleAddToCart}
           price={product.price}
           originalPrice={getOriginalPrice(

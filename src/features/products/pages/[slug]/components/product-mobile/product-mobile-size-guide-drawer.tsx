@@ -12,6 +12,7 @@ import {
 import { Button } from "@/shared/components/ui/button";
 import { sizeGuide, sizes } from "@/shared/mocks/product-preview.mocks";
 import { cn } from "@/lib/utils";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   open: boolean;
@@ -24,6 +25,7 @@ export function ProductMobileSizeGuideDrawer({
   onOpenChange,
   selectedSize,
 }: IProps) {
+  const dict = useDictionary();
   return (
     <Drawer open={open} onOpenChange={onOpenChange}>
       <DrawerContent className="z-100 max-h-[80vh]">
@@ -32,17 +34,17 @@ export function ProductMobileSizeGuideDrawer({
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              aria-label="Back"
+              aria-label={dict.common.back}
               className="grid size-7 place-items-center"
             >
               <AltArrowLeft className="size-6" />
             </button>
             <DrawerTitle className="text-xs font-bold text-foreground">
-              Select a size
+              {dict.common.selectSize}
             </DrawerTitle>
           </div>
           <DrawerClose
-            aria-label="Close"
+            aria-label={dict.common.close}
             className="grid size-8 place-items-center rounded-full bg-secondary text-foreground"
           >
             <XIcon className="size-4" />
@@ -110,7 +112,7 @@ export function ProductMobileSizeGuideDrawer({
               size="lg"
               className="h-13 w-full rounded-[14px] text-base font-bold"
             >
-              Apply
+              {dict.common.apply}
             </Button>
           </DrawerClose>
         </div>

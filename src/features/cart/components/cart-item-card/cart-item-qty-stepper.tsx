@@ -2,6 +2,7 @@
 
 import { PlusIcon } from "@/shared/components/icons/outline";
 import { MinusIcon } from "@/shared/components/icons/outline/minus-icon";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   value: number;
@@ -9,12 +10,13 @@ interface IProps {
 }
 
 export function CartItemQtyStepper({ value, onChange }: IProps) {
+  const dict = useDictionary();
   return (
     <div className="inline-flex items-center gap-1.5 rounded-3xl bg-white border border-border">
       <button
         type="button"
         onClick={() => onChange(value - 1)}
-        aria-label="Decrease quantity"
+        aria-label={dict.cart.decreaseQuantity}
         className="grid size-8 md:size-11 cursor-pointer place-items-center rounded-[8px] md:rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <MinusIcon className="size-5" />
@@ -25,7 +27,7 @@ export function CartItemQtyStepper({ value, onChange }: IProps) {
       <button
         type="button"
         onClick={() => onChange(value + 1)}
-        aria-label="Increase quantity"
+        aria-label={dict.cart.increaseQuantity}
         className="grid size-8 md:size-11 cursor-pointer place-items-center rounded-[8px] md:rounded-sm bg-[#ECECF2] text-foreground transition hover:bg-[#ececf2d4]"
       >
         <PlusIcon className="size-5" />

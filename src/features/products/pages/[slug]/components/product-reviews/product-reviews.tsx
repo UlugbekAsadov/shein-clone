@@ -5,12 +5,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { AltArrowLeft, AltArrowRight } from "@solar-icons/react";
 import { IReview } from "../../utils/review.interface";
 import { ProductReviewCard } from "./product-review-card";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   reviews: IReview[];
 }
 
 export const ProductReviews = ({ reviews }: IProps) => {
+  const dict = useDictionary();
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -54,7 +56,7 @@ export const ProductReviews = ({ reviews }: IProps) => {
         type="button"
         onClick={() => emblaApi?.scrollPrev()}
         disabled={!canPrev}
-        aria-label="Previous reviews"
+        aria-label={dict.product.previousReviews}
         className="absolute -left-5 top-1/2 z-10 grid size-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-background text-foreground shadow-md transition hover:bg-background/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowLeft className="size-5" weight="Outline" />
@@ -64,7 +66,7 @@ export const ProductReviews = ({ reviews }: IProps) => {
         type="button"
         onClick={() => emblaApi?.scrollNext()}
         disabled={!canNext}
-        aria-label="Next reviews"
+        aria-label={dict.product.nextReviews}
         className="absolute -right-5 top-1/2 z-10 grid size-10 -translate-y-1/2 cursor-pointer place-items-center rounded-full bg-background text-foreground shadow-md transition hover:bg-background/90 disabled:cursor-not-allowed disabled:opacity-40"
       >
         <AltArrowRight className="size-5" weight="Outline" />

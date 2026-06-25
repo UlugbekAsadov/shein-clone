@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import type { ISize } from "@/types/size.interface";
 import { cn } from "@/lib/utils";
 import { VerifiedCheck } from "@solar-icons/react";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   sizes: ISize[];
@@ -30,6 +31,8 @@ export function ProductSizeSelector({
   error = false,
   className,
 }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div
       className={cn(
@@ -41,10 +44,10 @@ export function ProductSizeSelector({
       {showHeader && (
         <div className="mb-2 text-sm flex items-center justify-between font-bold">
           <span>
-            Size:{" "}
+            {dict.product.size}:{" "}
             {error && !value && (
               <span className="text-destructive font-medium">
-                Please select a size
+                {dict.common.selectSizeError}
               </span>
             )}
           </span>
@@ -117,7 +120,7 @@ export function ProductSizeSelector({
       {showRecommendation && (
         <div className="mt-3 flex items-center gap-2 text-sm">
           <VerifiedCheck className="size-6 text-white fill-emerald-500 " />
-          <span className="text-muted-foreground">Recommended for you:</span>
+          <span className="text-muted-foreground">{dict.product.recommendedForYou}:</span>
           <span className="font-semibold text-emerald-500">{recommended}</span>
         </div>
       )}

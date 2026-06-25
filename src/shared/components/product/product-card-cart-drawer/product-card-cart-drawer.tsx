@@ -19,6 +19,7 @@ import { useCurrency } from "@/shared/hooks/use-currency";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
 import { useProductDetail } from "@/features/products/hooks/use-product-detail";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import {
   getVariantColorSwatches,
   getVariantSizeDetail,
@@ -39,6 +40,7 @@ type View = "select" | "guide";
 const VIEW_TRANSITION_MS = 300;
 
 export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
+  const dict = useDictionary();
   const { currency } = useCurrency();
   const { add } = useCart();
   const slug = product.slug ?? String(product.id);
@@ -89,9 +91,9 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
       1,
       buildSelectedSkuInfo(sizeId, colorId),
     ).then((result) => {
-      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+      if (!result.ok) toast.error(result.message ?? dict.common.couldntAddToCart);
     });
-    toast.success("Added to cart");
+    toast.success(dict.common.addedToCart);
     onOpenChange(false);
   }
 
@@ -103,7 +105,7 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
             {view === "guide" && (
               <button
                 type="button"
-                aria-label="Back"
+                aria-label={dict.common.back}
                 onClick={() => setView("select")}
                 className="grid size-7 cursor-pointer place-items-center duration-200 animate-in fade-in slide-in-from-left-2"
               >
@@ -111,13 +113,13 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
               </button>
             )}
             <DrawerTitle className="text-lg font-bold">
-              {view === "guide" ? "Size guide" : "Select a size"}
+              {view === "guide" ? dict.common.sizeGuide : dict.common.selectSize}
             </DrawerTitle>
           </div>
           <DrawerClose asChild>
             <button
               type="button"
-              aria-label="Close"
+              aria-label={dict.common.close}
               className="grid size-7 cursor-pointer place-items-center rounded-full bg-secondary text-foreground"
             >
               <XIcon className="size-4" />
@@ -130,7 +132,7 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
         ) : error && !data ? (
           <div className="grid place-items-center px-5 py-12 text-center">
             <p className="text-sm text-secondary-foreground">
-              Couldn&apos;t load this product. Please try again.
+              {dict.common.productLoadFailed}
             </p>
           </div>
         ) : (
@@ -184,7 +186,7 @@ export function ProductCardCartDrawer({ product, open, onOpenChange }: IProps) {
                 className="h-12 w-full rounded-sm text-base font-semibold"
                 onClick={handleAddToCart}
               >
-                <span>Add to cart</span>
+                <span>{dict.common.addToCart}</span>
                 <CartLarge2 className="ml-1 size-6" />
               </Button>
             </div>

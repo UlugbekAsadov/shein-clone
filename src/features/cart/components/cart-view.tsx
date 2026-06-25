@@ -90,11 +90,11 @@ export function CartView({ lang, dict }: IProps) {
     if (nextCount < 1) {
       const result = await remove(item.product.id);
       if (result.ok) toast.success(dict.cart.removed);
-      else toast.error(result.message ?? "Couldn't remove item");
+      else toast.error(result.message ?? dict.cart.couldntRemoveItem);
       return;
     }
     const result = await update(item.product.id, item.line.sku_id, nextCount);
-    if (!result.ok) toast.error(result.message ?? "Couldn't update item");
+    if (!result.ok) toast.error(result.message ?? dict.cart.couldntUpdateItem);
   }
 
   async function handleClear() {
@@ -103,7 +103,7 @@ export function CartView({ lang, dict }: IProps) {
     setClearing(false);
     setConfirmClearOpen(false);
     if (result.ok) toast.success(dict.cart.cleared);
-    else toast.error(result.message ?? "Couldn't clear cart");
+    else toast.error(result.message ?? dict.cart.couldntClearCart);
   }
 
   if (loading && items.length === 0) return <CartSkeleton />;

@@ -14,12 +14,14 @@ import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { buildSelectedSkuInfo } from "@/features/cart/utils/cart.helpers";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   product: IProductDetail;
 }
 
 export function ProductStickyBar({ product }: IProps) {
+  const dict = useDictionary();
   const { currency } = useCurrency();
   const { add } = useCart();
   const searchParams = useSearchParams();
@@ -54,9 +56,10 @@ export function ProductStickyBar({ product }: IProps) {
       1,
       buildSelectedSkuInfo(size, color),
     ).then((result) => {
-      if (!result.ok) toast.error(result.message ?? "Couldn't add to cart");
+      if (!result.ok)
+        toast.error(result.message ?? dict.common.couldntAddToCart);
     });
-    toast.success("Added to cart");
+    toast.success(dict.common.addedToCart);
   }
 
   return (
@@ -110,7 +113,7 @@ export function ProductStickyBar({ product }: IProps) {
               className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
               size="lg"
             >
-              Add to cart
+              {dict.common.addToCart}
             </Button>
             <Button
               type="button"
