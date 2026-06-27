@@ -31,19 +31,39 @@ export interface IProductVariant {
   sizes: IProductVariantSize[];
 }
 
+export interface IProductCommentUser {
+  name: string;
+  avatar: string | null;
+}
+
+export interface IProductCommentSpec {
+  label: string;
+  value: string;
+}
+
+export interface IProductCommentCountry {
+  name: string;
+  flag: string;
+}
+
+export interface IProductCommentShopReply {
+  shop: IProductCommentUser;
+  created_at: string;
+  content: string;
+}
+
 export interface IProductComment {
   id: number;
-  user_name: string;
-  rating: number;
-  content: string;
-  fit: string;
-  color: string;
-  size: string;
-  country: string;
-  helpful_count: number;
-  reply: string;
-  images: string[];
+  user: IProductCommentUser;
   created_at: string;
+  rating: number;
+  specs: IProductCommentSpec[];
+  content: string;
+  images: string[];
+  country: IProductCommentCountry | null;
+  helpful_count: number;
+  is_liked: boolean;
+  shop_reply: IProductCommentShopReply | null;
 }
 
 export interface IProductDetail {

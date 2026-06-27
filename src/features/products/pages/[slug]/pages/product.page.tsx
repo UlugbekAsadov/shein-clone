@@ -40,21 +40,25 @@ interface IProps {
 function mapCommentToReview(comment: IProductComment): IReview {
   return {
     id: String(comment.id),
-    user: comment.user_name,
+    user: comment.user.name,
     date: comment.created_at,
     rating: comment.rating,
-    meta: [
-      { id: "color", label: "Color", value: comment?.color },
-      { id: "size", label: "Size", value: comment?.size },
-      { id: "fit", label: "Fit", value: comment?.fit.replace(/_/g, " ") },
-    ],
+    meta: comment.specs.map((spec, index) => ({
+      id: `${comment.id}-${index}`,
+      label: spec.label,
+      value: spec.value,
+    })),
     text: comment.content,
     images: comment.images,
-    countryFlag: "",
-    countryLabel: comment.country,
+    countryFlag: comment.country?.flag ?? "",
+    countryLabel: comment.country?.name ?? "",
     helpful: comment.helpful_count,
-    sellerResponse: comment.reply
-      ? { shopName: "", date: comment.created_at, text: comment.reply }
+    sellerResponse: comment.shop_reply
+      ? {
+          shopName: comment.shop_reply.shop.name,
+          date: comment.shop_reply.created_at,
+          text: comment.shop_reply.content,
+        }
       : undefined,
   };
 }
