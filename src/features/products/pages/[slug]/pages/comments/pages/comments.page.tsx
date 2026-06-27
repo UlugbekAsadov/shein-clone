@@ -191,7 +191,9 @@ export function CommentsPage({ lang, dict, slug }: IProps) {
           </div>
         </main>
 
-        {/* {product && <CommentsStickyBar product={toStickyProduct(product)} />} */}
+        {product && (
+          <CommentsStickyBar product={toStickyProduct(product)} lang={lang} />
+        )}
         <Footer dict={dict} />
       </div>
     </>

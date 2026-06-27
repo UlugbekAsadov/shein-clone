@@ -1,18 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Heart } from "@solar-icons/react";
 import { Button } from "@/shared/components/ui/button";
 import type { IProductDetailUI } from "@/features/products/pages/[slug]/pages/comments/utils/product-detail.interface";
+import type { locales } from "@/core/config/i18n/i18n-config";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
 import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   product: IProductDetailUI;
+  lang: (typeof locales)[number];
 }
 
-export function CommentsStickyBar({ product }: IProps) {
+export function CommentsStickyBar({ product, lang }: IProps) {
   const { currency } = useCurrency();
   const dict = useDictionary();
   return (
@@ -49,11 +52,14 @@ export function CommentsStickyBar({ product }: IProps) {
 
         <div className="flex items-center gap-3">
           <Button
-            type="button"
+            asChild
+            variant="outline"
             className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
             size="lg"
           >
-            {dict.comments.addToCart}
+            <Link href={`/${lang}/products/${product.slug}`}>
+              {dict.comments.backToProduct}
+            </Link>
           </Button>
           <Button
             type="button"
