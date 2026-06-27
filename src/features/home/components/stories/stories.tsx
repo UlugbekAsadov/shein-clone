@@ -1,8 +1,14 @@
-import { getShopStories } from "@/features/home/services/shop-stories.service";
-import { StoriesList } from "./stories-list";
+"use client";
 
-export async function Stories() {
-  const shops = await getShopStories();
+import { useShopStories } from "@/features/home/hooks/use-shop-stories";
+import { StoriesList } from "./stories-list";
+import { StoriesSkeleton } from "./stories-skeleton";
+
+export function Stories() {
+  const { data: shops = [], isPending } = useShopStories();
+
+  if (isPending) return <StoriesSkeleton />;
+
   const activeShops = shops.filter((shop) => shop.has_active_stories);
 
   if (activeShops.length === 0) return null;

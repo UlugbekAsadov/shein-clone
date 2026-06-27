@@ -1,3 +1,5 @@
+"use client";
+
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
@@ -6,31 +8,28 @@ import { MobileSearchBar } from "@/shared/components/header/mobile-search-bar";
 import { Footer } from "@/shared/components/footer/footer";
 import { PromoBanner } from "@/features/home/components/promo-banner";
 import { HeroCarousel } from "@/features/home/components/hero-carousel/hero-carousel";
+import { HeroCarouselSkeleton } from "@/features/home/components/hero-carousel/hero-carousel-skeleton";
 import { Categories } from "@/features/home/components/categories/categories";
 import { ProductSections } from "@/features/home/components/product-sections/product-sections";
+import { ProductSectionsSkeleton } from "@/features/home/components/product-sections/product-sections-skeleton";
 import { Stories } from "@/features/home/components/stories/stories";
-import type { IBanner } from "@/features/home/utils/banner.interface";
-import type { IMarketingBadge } from "@/features/home/utils/marketing-badge.interface";
-import type { IProductSection } from "@/features/home/utils/product-section.interface";
-import type { IApiFeaturedShop } from "@/features/home/utils/featured-shop.interface";
+import { useBanners } from "@/features/home/hooks/use-banners";
+import { useMarketingBadge } from "@/features/home/hooks/use-marketing-badge";
+import { useProductSections } from "@/features/home/hooks/use-product-sections";
+import { useFeaturedShops } from "@/features/home/hooks/use-featured-shops";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
-  banners: IBanner[];
-  marketingBadge: IMarketingBadge | null;
-  productSections: IProductSection[];
-  featuredShops: IApiFeaturedShop[];
 }
 
-export function HomePage({
-  lang,
-  dict,
-  banners,
-  marketingBadge,
-  productSections,
-  featuredShops,
-}: IProps) {
+export function HomePage({ lang, dict }: IProps) {
+  const { data: banners = [], isPending: isBannersPending } = useBanners();
+  const { data: marketingBadge = null } = useMarketingBadge();
+  const { data: productSections = [], isPending: isSectionsPending } =
+    useProductSections();
+  const { data: featuredShops = [] } = useFeaturedShops();
+
   return (
     <>
       <MobileHeader lang={lang} />
@@ -49,23 +48,30 @@ export function HomePage({
           visualSearchDict={dict.visualSearch}
         />
 
-        <HeroCarousel lang={lang} banners={banners} />
+        {isBannersPending ? (
+          <HeroCarouselSkeleton />
+        ) : (
+          <HeroCarousel lang={lang} banners={banners} />
+        )}
         <Categories
           lang={lang}
           title={dict.sections.shopByCategory}
           viewAllLabel={dict.sections.viewAll}
         />
-        <ProductSections
-          lang={lang}
-          sections={productSections}
-          featuredShops={featuredShops}
-          viewAllLabel={dict.sections.viewAll}
-          featuredShopsTitle={dict.sections.featuredShops}
-          featuredShopsSubtitle={dict.sections.featuredSubtitle}
-          followLabel={dict.sections.follow}
-          followingLabel={dict.sections.following}
-        />
-        {/* <DiscountBanners discountLabel={dict.sections.discount} /> */}
+        {isSectionsPending ? (
+          <ProductSectionsSkeleton />
+        ) : (
+          <ProductSections
+            lang={lang}
+            sections={productSections}
+            featuredShops={featuredShops}
+            viewAllLabel={dict.sections.viewAll}
+            featuredShopsTitle={dict.sections.featuredShops}
+            featuredShopsSubtitle={dict.sections.featuredSubtitle}
+            followLabel={dict.sections.follow}
+            followingLabel={dict.sections.following}
+          />
+        )}
       </main>
 
       <Footer dict={dict} />

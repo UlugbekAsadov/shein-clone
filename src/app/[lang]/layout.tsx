@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { notFound } from "next/navigation";
@@ -7,7 +8,6 @@ import { hasLocale, locales } from "@/core/config/i18n/i18n-config";
 import { getDictionary } from "@/core/config/i18n/dictionaries";
 import { env } from "@/core/config/env";
 import { Providers } from "@/core/providers/providers";
-import { getCurrentUser } from "@/features/auth/services/auth.service";
 import { MobileBottomNav } from "@/shared/components/mobile-bottom-nav/mobile-bottom-nav";
 import { SquircleClipPath } from "@/shared/components/category/squircle-clip-path";
 import { PolicyBanner } from "@/shared/components/policy-banner/policy-banner";
@@ -73,7 +73,6 @@ export default async function RootLayout({
   if (!hasLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
-  const user = await getCurrentUser();
 
   return (
     <html
@@ -88,10 +87,12 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <SquircleClipPath />
-        <Providers user={user} dict={dict}>
-          {children}
-          <MobileBottomNav lang={lang} dict={dict} />
-          <PolicyBanner dict={dict} />
+        <Providers dict={dict}>
+          <Suspense fallback={null}>
+            {children}
+            <MobileBottomNav lang={lang} dict={dict} />
+            <PolicyBanner dict={dict} />
+          </Suspense>
         </Providers>
       </body>
     </html>

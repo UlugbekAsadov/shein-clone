@@ -1,12 +1,14 @@
-import { Suspense } from "react";
+"use client";
+
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { Header } from "@/shared/components/header/header";
 import { Footer } from "@/shared/components/footer/footer";
-import { getProducts } from "@/features/products/services/products.service";
-import { getCategoryFilterOptions } from "@/features/category/services/category.service";
+import { useProducts } from "@/features/products/hooks/use-products";
+import { useCategoryFilterOptions } from "@/features/category/hooks/use-category-filter-options";
 import { ProductsInfinite } from "@/features/products/components/products-infinite";
 import { ProductsBreadcrumb } from "@/features/products/components/products-breadcrumb";
+import { ProductsPageSkeleton } from "@/features/products/components/products-page-skeleton";
 
 interface IProps {
   lang: (typeof locales)[number];
@@ -14,11 +16,9 @@ interface IProps {
   params: Record<string, string>;
 }
 
-export async function ProductsPage({ lang, dict, params }: IProps) {
-  const [data, filterOptions] = await Promise.all([
-    getProducts(params),
-    getCategoryFilterOptions(params.query),
-  ]);
+export function ProductsPage({ lang, dict, params }: IProps) {
+  const { data = null, isPending } = useProducts(params);
+  const { data: filterOptions = null } = useCategoryFilterOptions(params.query);
 
   const initialProducts = data ? data.data : [];
   const initialMeta = data?.meta ?? {
@@ -34,7 +34,8 @@ export async function ProductsPage({ lang, dict, params }: IProps) {
     <>
       <Header lang={lang} dict={dict} />
       <main className="flex-1">
-        <Suspense>
+        {isPending && <ProductsPageSkeleton />}
+        {!isPending && (
           <ProductsInfinite
             title={title}
             header={
@@ -57,7 +58,7 @@ export async function ProductsPage({ lang, dict, params }: IProps) {
             }}
             quickFiltersLabels={dict.nav.filters}
           />
-        </Suspense>
+        )}
       </main>
       <Footer dict={dict} />
     </>

@@ -1,7 +1,10 @@
+"use client";
+
 import type { ReactNode } from "react";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import { getCurrentUser } from "@/features/auth/services/auth.service";
+import { useUser } from "@/features/auth/hooks/use-user";
+import { useCurrentUser } from "@/features/auth/hooks/use-current-user";
 import { profileUser as guestProfileUser } from "@/features/profile/mocks/profile-user.mocks";
 import type { IProfileUser } from "@/features/profile/utils/profile-user.interface";
 import { ProfileBreadcrumb } from "./profile-breadcrumb";
@@ -24,14 +27,10 @@ interface IProps {
   children: ReactNode;
 }
 
-export async function ProfileShell({
-  lang,
-  dict,
-  activeId,
-  children,
-}: IProps) {
+export function ProfileShell({ lang, dict, activeId, children }: IProps) {
   const sectionLabel = dict.profile.nav[activeId];
-  const user = await getCurrentUser();
+  const { user } = useUser();
+  const { isPending: isUserPending } = useCurrentUser();
 
   const profileUser: IProfileUser = user
     ? {
@@ -55,6 +54,7 @@ export async function ProfileShell({
           dict={dict}
           user={profileUser}
           activeId={activeId}
+          isUserPending={isUserPending}
         />
         <section className="min-w-0 flex-1">{children}</section>
       </div>

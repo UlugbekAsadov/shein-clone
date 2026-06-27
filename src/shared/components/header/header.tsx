@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
-import { getCategories } from "@/features/category/services/category.service";
+import { useCategories } from "@/features/category/hooks/use-categories";
 import { SearchBar } from "./search-bar";
 import { LocaleSwitcher } from "./locale-switcher";
 import { CurrencySwitcher } from "./currency-switcher";
@@ -10,6 +12,7 @@ import { HeaderUserAction } from "./header-user-action";
 import { HeaderScrollWrapper } from "./header-scroll-wrapper";
 import { HeaderCartButton } from "./header-cart-button";
 import { CategoryNav } from "../category/category-nav";
+import { CategoryNavSkeleton } from "../category/category-nav-skeleton";
 import { Heart } from "@solar-icons/react/ssr";
 
 interface IProps {
@@ -18,8 +21,9 @@ interface IProps {
   isSticky?: boolean;
 }
 
-export async function Header({ lang, dict, isSticky = true }: IProps) {
-  const categories = await getCategories();
+export function Header({ lang, dict, isSticky = true }: IProps) {
+  const { data: categories = [], isPending: isCategoriesPending } =
+    useCategories();
 
   return (
     <HeaderScrollWrapper isSticky={isSticky}>
@@ -75,14 +79,18 @@ export async function Header({ lang, dict, isSticky = true }: IProps) {
         </div>
       </div>
 
-      <CategoryNav
-        lang={lang}
-        categoriesLabel={dict.nav.categories}
-        picksTitle={dict.categoryMenu.picksForYou}
-        featuredTitle={dict.categoryMenu.featured}
-        filters={dict.nav.filters}
-        categories={categories}
-      />
+      {isCategoriesPending ? (
+        <CategoryNavSkeleton />
+      ) : (
+        <CategoryNav
+          lang={lang}
+          categoriesLabel={dict.nav.categories}
+          picksTitle={dict.categoryMenu.picksForYou}
+          featuredTitle={dict.categoryMenu.featured}
+          filters={dict.nav.filters}
+          categories={categories}
+        />
+      )}
     </HeaderScrollWrapper>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { UserContext } from "@/features/auth/providers/user-provider";
+import { UserContext } from "@/features/auth/providers/user-context";
 import type { IUserContextValue } from "@/features/auth/utils/user-context.interface";
 
 export function useUser(): IUserContextValue {

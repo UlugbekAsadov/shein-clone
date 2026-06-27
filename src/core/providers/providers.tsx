@@ -7,9 +7,9 @@ import { UserProvider } from "@/features/auth/providers/user-provider";
 import { AuthDialogProvider } from "@/features/auth/providers/auth-dialog-provider";
 import { CartProvider } from "@/features/cart/providers/cart-provider";
 import { LoginDialog } from "@/features/auth/login/components/login-dialog";
-import type { IAuthUser } from "@/features/auth/utils/auth.interface";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import { DictionaryProvider } from "@/core/config/i18n/dictionary-provider";
+import { QueryProvider } from "@/core/providers/query-provider";
 import Scroll from "@/shared/components/scroll";
 import { CurrencyProvider } from "@/shared/providers/currency-provider";
 import { AdultDialogProvider } from "@/shared/providers/adult-dialog-provider";
@@ -17,21 +17,21 @@ import { AdultGateDialog } from "@/shared/components/product/adult-confirm/adult
 import { TooltipProvider } from "@/shared/components/ui/tooltip";
 
 interface IProps {
-  user: IAuthUser | null;
   dict: IDictionary;
   children: React.ReactNode;
 }
 
-export function Providers({ user, dict, children }: IProps) {
+export function Providers({ dict, children }: IProps) {
   return (
     <>
       <Scroll />
       <NextTopLoader color="var(--primary)" showSpinner={false} />
       <SolarProvider>
+        <QueryProvider>
         <DictionaryProvider dict={dict}>
           <TooltipProvider>
             <CurrencyProvider>
-              <UserProvider user={user}>
+              <UserProvider>
                 <CartProvider>
                   <AuthDialogProvider>
                     <AdultDialogProvider>
@@ -45,6 +45,7 @@ export function Providers({ user, dict, children }: IProps) {
             </CurrencyProvider>
           </TooltipProvider>
         </DictionaryProvider>
+        </QueryProvider>
       </SolarProvider>
       <Toaster />
     </>

@@ -5,12 +5,16 @@ import type { IHttpOptions } from "./interfaces/http-options.interface";
 
 const isServer = typeof window === "undefined";
 
+const CLIENT_BFF_PREFIX = "/api/bff";
+
 function buildUrl(
   endpoint: string,
   searchParams?: IHttpOptions["searchParams"],
 ): string {
   const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-  const url = new URL(`${API_CONFIG.baseUrl}${path}`);
+  const url = isServer
+    ? new URL(`${API_CONFIG.baseUrl}${path}`)
+    : new URL(`${CLIENT_BFF_PREFIX}${path}`, window.location.origin);
   if (searchParams) {
     for (const [key, value] of Object.entries(searchParams)) {
       if (value === undefined || value === null) continue;
@@ -28,11 +32,6 @@ function buildUrl(
 
 function mapCurrency(raw: string): string {
   return raw === "RUB" ? "RUBLE" : raw;
-}
-
-function getCookie(name: string, cookieHeader: string): string | undefined {
-  const match = cookieHeader.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-  return match ? decodeURIComponent(match[1]) : undefined;
 }
 
 async function buildDynamicHeaders(
@@ -54,12 +53,8 @@ async function buildDynamicHeaders(
       const token = store.get(AUTH_COOKIES.accessToken)?.value;
       if (token) result.Authorization = `Bearer ${token}`;
     }
-  } else {
-    const raw = document.cookie;
-    const locale = getCookie("locale", raw) ?? "uz";
-    const currency = getCookie("currency", raw) ?? "USD";
-    result["Accept-language"] = locale.toUpperCase();
-    result["Accept-currency"] = mapCurrency(currency);
+  } else if (skipAuth) {
+    result["x-skip-auth"] = "1";
   }
 
   return result;

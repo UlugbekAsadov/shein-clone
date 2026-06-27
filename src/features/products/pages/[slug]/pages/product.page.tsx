@@ -1,3 +1,5 @@
+"use client";
+
 import { notFound } from "next/navigation";
 import type { locales } from "@/core/config/i18n/i18n-config";
 import type { IDictionary } from "@/core/config/i18n/dictionaries";
@@ -14,12 +16,11 @@ import { RecommendedProducts } from "@/features/products/pages/[slug]/components
 import { ProductMobilePage } from "@/features/products/pages/[slug]/components/product-mobile/product-mobile-page";
 import { ProductVariantProvider } from "@/features/products/pages/[slug]/providers/product-variant.provider";
 import { ProductGalleryPanel } from "@/features/products/pages/[slug]/components/product-gallery-panel";
-import {
-  getProductDetail,
-  getSimilarProducts,
-  getRecommendedProducts,
-} from "@/features/products/services/products-detail.service";
-import { getShopById } from "@/features/shop/services/shop.service";
+import { ProductPageSkeleton } from "@/features/products/pages/[slug]/components/product-page-skeleton/product-page-skeleton";
+import { useProductDetail } from "@/features/products/pages/[slug]/hooks/use-product-detail";
+import { useSimilarProducts } from "@/features/products/pages/[slug]/hooks/use-similar-products";
+import { useRecommendedProducts } from "@/features/products/pages/[slug]/hooks/use-recommended-products";
+import { useShopById } from "@/features/shop/hooks/use-shop-by-id";
 import type {
   IProductComment,
   IProductFitStats,
@@ -78,18 +79,27 @@ function mapFitStats(stats: IProductFitStats, dict: IDictionary): IFitStat[] {
   ];
 }
 
-export async function ProductPage({ lang, dict, slug }: IProps) {
-  const product = await getProductDetail(slug);
+export function ProductPage({ lang, dict, slug }: IProps) {
+  const { data: product, isPending } = useProductDetail(slug);
+  const { data: shop = null } = useShopById(product?.shop_id ?? undefined);
+  const { data: similarResult } = useSimilarProducts(product?.id);
+  const { data: recommendedResult } = useRecommendedProducts(product?.id);
+
+  if (isPending) {
+    return (
+      <>
+        <Header lang={lang} dict={dict} isSticky={false} />
+        <main className="flex-1">
+          <ProductPageSkeleton />
+        </main>
+        <Footer dict={dict} />
+      </>
+    );
+  }
   if (!product) notFound();
 
-  const [shop, similarResult, recommendedResult] = await Promise.all([
-    product.shop_id ? getShopById(product.shop_id) : Promise.resolve(null),
-    getSimilarProducts(product.id),
-    getRecommendedProducts(product.id),
-  ]);
-
-  const similarProducts = similarResult.products;
-  const recommendedProducts = recommendedResult.products;
+  const similarProducts = similarResult?.products ?? [];
+  const recommendedProducts = recommendedResult?.products ?? [];
 
   const sellerFallbackHighlight = product.highlights.find((h) =>
     h.title.startsWith("Sold by"),
@@ -163,7 +173,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
               products={similarProducts}
               countLabel={`${similarProducts.length}+ products`}
               lang={lang}
-              autoFilter={similarResult.autoFilter}
+              autoFilter={similarResult?.autoFilter ?? null}
             />
 
             {recommendedProducts.length > 0 && (
@@ -171,7 +181,7 @@ export async function ProductPage({ lang, dict, slug }: IProps) {
                 products={recommendedProducts}
                 countLabel={`${recommendedProducts.length}+ products`}
                 lang={lang}
-                autoFilter={recommendedResult.autoFilter}
+                autoFilter={recommendedResult?.autoFilter ?? null}
               />
             )}
           </div>

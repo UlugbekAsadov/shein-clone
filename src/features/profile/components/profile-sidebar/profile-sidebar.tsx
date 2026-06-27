@@ -12,6 +12,7 @@ import type { IDictionary } from "@/core/config/i18n/dictionaries";
 import type { IProfileNavItem } from "@/features/profile/utils/profile-nav-item.interface";
 import type { IProfileUser } from "@/features/profile/utils/profile-user.interface";
 import { ProfileUserCard } from "@/features/profile/components/profile-user-card";
+import { ProfileUserCardSkeleton } from "@/features/profile/components/profile-user-card-skeleton";
 import { ProfileSidebarItem } from "./profile-sidebar-item";
 import { ProfileSidebarLogout } from "./profile-sidebar-logout";
 import { SupportIcon } from "@/shared/components/icons/outline";
@@ -21,9 +22,16 @@ interface IProps {
   dict: IDictionary;
   user: IProfileUser;
   activeId: string;
+  isUserPending?: boolean;
 }
 
-export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
+export function ProfileSidebar({
+  lang,
+  dict,
+  user,
+  activeId,
+  isUserPending,
+}: IProps) {
   const items: IProfileNavItem[] = [
     {
       id: "account",
@@ -77,7 +85,11 @@ export function ProfileSidebar({ lang, dict, user, activeId }: IProps) {
 
   return (
     <aside className="w-full max-w-[260px] shrink-0 space-y-3">
-      <ProfileUserCard user={user} />
+      {isUserPending ? (
+        <ProfileUserCardSkeleton />
+      ) : (
+        <ProfileUserCard user={user} />
+      )}
       <nav>
         <ul className="flex flex-col gap-1">
           {items.map((item) => (
