@@ -20,7 +20,7 @@ import { ProductPageSkeleton } from "@/features/products/pages/[slug]/components
 import { useProductDetail } from "@/features/products/pages/[slug]/hooks/use-product-detail";
 import { useSimilarProducts } from "@/features/products/pages/[slug]/hooks/use-similar-products";
 import { useRecommendedProducts } from "@/features/products/pages/[slug]/hooks/use-recommended-products";
-import { useShopById } from "@/features/shop/hooks/use-shop-by-id";
+import { useShopHeader } from "@/features/shop/hooks/use-shop-header";
 import type { IProductFitStats } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 import type { IFitStat } from "@/features/products/pages/[slug]/utils/review.interface";
 import { mapCommentToReview } from "@/features/products/pages/[slug]/utils/map-comment-to-review";
@@ -55,7 +55,9 @@ function mapFitStats(stats: IProductFitStats, dict: IDictionary): IFitStat[] {
 
 export function ProductPage({ lang, dict, slug }: IProps) {
   const { data: product, isPending } = useProductDetail(slug);
-  const { data: shop = null } = useShopById(product?.shop_id ?? undefined);
+  const { data: shop = null } = useShopHeader(
+    product?.shop_id != null ? String(product.shop_id) : undefined,
+  );
   const { data: similarResult } = useSimilarProducts(product?.id);
   const { data: recommendedResult } = useRecommendedProducts(product?.id);
 
