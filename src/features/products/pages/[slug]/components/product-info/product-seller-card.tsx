@@ -83,7 +83,7 @@ export function ProductSellerCard({ shop }: IProps) {
             </div>
           </div>
 
-          <Button className="rounded-full px-5">{dict.common.follow}</Button>
+          <Button className="rounded-[10px] px-5">{dict.common.follow}</Button>
         </div>
       </div>
     </div>
