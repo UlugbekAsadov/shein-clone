@@ -14,37 +14,31 @@ export const shopApi = {
   getById(id: number) {
     return apiClient.get<IApiResponse<IApiShopByIdData>>(
       SHOP_ENDPOINTS.byId(id),
-      { skipAuth: true },
     );
   },
   getHeader(slug: string) {
-    return apiClient.get<IApiResponse<IApiShop>>(
-      SHOP_ENDPOINTS.header(slug),
-      { skipAuth: true },
-    );
+    return apiClient.get<IApiResponse<IApiShop>>(SHOP_ENDPOINTS.header(slug));
   },
   getAbout(id: number) {
     return apiClient.get<IApiResponse<IApiShopAbout>>(
       SHOP_ENDPOINTS.about(id),
-      { skipAuth: true },
     );
   },
   getPromoCodes(id: number) {
     return apiClient.get<IApiResponse<IApiShopPromoCode[]>>(
       SHOP_ENDPOINTS.promoCodes(id),
-      { skipAuth: true },
     );
   },
   getProducts(id: number, searchParams?: Record<string, string | number | string[] | number[] | undefined>) {
     return apiClient.get<IApiShopProductsResponse>(
       SHOP_ENDPOINTS.products(id),
-      { skipAuth: true, searchParams },
+      { searchParams },
     );
   },
   getFilterOptions(id: number, searchParams?: Record<string, string | number | string[] | number[] | undefined>) {
     return apiClient.get<IApiResponse<IApiShopFilterOptions>>(
       SHOP_ENDPOINTS.filterOptions(id),
-      { skipAuth: true, searchParams },
+      { searchParams },
     );
   },
   toggleFollow(id: number) {

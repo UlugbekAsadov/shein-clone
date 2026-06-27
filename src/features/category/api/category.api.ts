@@ -11,7 +11,6 @@ import {
 export const categoryApi = {
   getAll() {
     return apiClient.get<IApiResponse<ICategory[]>>(CATEGORY_ENDPOINTS.list, {
-      skipAuth: true,
       next: { tags: [CATEGORY_CACHE_TAG] },
     });
   },
@@ -20,7 +19,6 @@ export const categoryApi = {
     return apiClient.get<IApiResponse<IApiFilterOptions>>(
       CATEGORY_ENDPOINTS.filterOptions,
       {
-        skipAuth: true,
         searchParams: params,
         next: { tags: [CATEGORY_FILTER_OPTIONS_CACHE_TAG] },
       },

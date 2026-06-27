@@ -22,8 +22,6 @@ export function CommentsReviewItem({ review }: IProps) {
     review.helpful,
   );
 
-  console.log({ like: review.isLiked });
-
   return (
     <div>
       <article className="rounded-xl bg-secondary p-5">

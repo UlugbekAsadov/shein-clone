@@ -4,6 +4,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ApiError } from "@/core/api/api-error";
 import { productDetailApi } from "@/features/products/api/products-detail.api";
 import { useApiDeps } from "@/shared/hooks/use-api-deps";
+import { getClientSessionId } from "@/lib/session-id";
 import { COMMENTS_PER_PAGE } from "@/features/products/pages/[slug]/pages/comments/utils/comments-query.constants";
 import type { IProductCommentsData } from "@/features/products/pages/[slug]/pages/comments/utils/product-comments.interface";
 import type { ICommentsFilterState } from "@/features/products/pages/[slug]/pages/comments/utils/comments-filter-state.interface";
@@ -34,6 +35,7 @@ export function useProductComments(
           productId as number,
           filters,
           COMMENTS_PER_PAGE,
+          getClientSessionId(),
           signal,
         );
         return result.data ?? null;

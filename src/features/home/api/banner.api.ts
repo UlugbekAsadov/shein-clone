@@ -6,7 +6,6 @@ import type { IBanner } from "@/features/home/utils/banner.interface";
 export const bannerApi = {
   getAll() {
     return apiClient.get<IApiResponse<IBanner[]>>(BANNER_ENDPOINTS.list, {
-      skipAuth: true,
       next: { tags: [BANNER_CACHE_TAG] },
     });
   },

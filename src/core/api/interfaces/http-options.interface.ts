@@ -7,5 +7,4 @@ export interface IHttpOptions extends Omit<RequestInit, "body" | "method"> {
     revalidate?: number | false;
     tags?: string[];
   };
-  skipAuth?: boolean;
 }

@@ -11,7 +11,6 @@ export const marketingBadgeApi = {
     return apiClient.get<IApiResponse<IMarketingBadge>>(
       MARKETING_BADGE_ENDPOINTS.get,
       {
-        skipAuth: true,
         next: { tags: [MARKETING_BADGE_CACHE_TAG] },
       }
     );

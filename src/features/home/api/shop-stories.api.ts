@@ -8,7 +8,6 @@ export const shopStoriesApi = {
     return apiClient.get<IApiResponse<IShopStory[]>>(
       SHOP_STORIES_ENDPOINTS.list,
       {
-        skipAuth: true,
         searchParams: { session_id: sessionId },
         next: { tags: [SHOP_STORIES_CACHE_TAG] },
       },

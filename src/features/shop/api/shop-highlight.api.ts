@@ -8,7 +8,6 @@ export const shopHighlightApi = {
     return apiClient.get<IApiResponse<IApiShopHighlight[]>>(
       SHOP_HIGHLIGHT_ENDPOINTS.list(shopId),
       {
-        skipAuth: true,
         searchParams: { session_id: sessionId },
       },
     );

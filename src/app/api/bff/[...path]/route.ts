@@ -6,7 +6,7 @@ function mapCurrency(raw: string): string {
   return raw === "RUB" ? "RUBLE" : raw;
 }
 
-async function buildHeaders(skipAuth: boolean): Promise<Headers> {
+async function buildHeaders(): Promise<Headers> {
   const store = await cookies();
   const headerStore = await headers();
 
@@ -19,10 +19,8 @@ async function buildHeaders(skipAuth: boolean): Promise<Headers> {
   result.set("Accept-language", locale.toUpperCase());
   result.set("Accept-currency", mapCurrency(currency));
 
-  if (!skipAuth) {
-    const token = store.get(AUTH_COOKIES.accessToken)?.value;
-    if (token) result.set("Authorization", `Bearer ${token}`);
-  }
+  const token = store.get(AUTH_COOKIES.accessToken)?.value;
+  if (token) result.set("Authorization", `Bearer ${token}`);
 
   return result;
 }
@@ -36,8 +34,7 @@ async function forward(
   const search = request.nextUrl.search;
   const url = `${API_CONFIG.baseUrl}/${path}${search}`;
 
-  const skipAuth = request.headers.get("x-skip-auth") === "1";
-  const outgoing = await buildHeaders(skipAuth);
+  const outgoing = await buildHeaders();
 
   let body: BodyInit | undefined;
   if (method !== "GET" && method !== "DELETE") {

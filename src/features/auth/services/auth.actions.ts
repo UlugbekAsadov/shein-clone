@@ -44,9 +44,9 @@ function extractRefreshToken(
   return data?.refresh_token ?? data?.refreshToken;
 }
 
-function authCookieOptions(maxAge: number) {
+function authCookieOptions(maxAge: number, httpOnly: boolean) {
   return {
-    httpOnly: true,
+    httpOnly,
     secure: env.isProduction,
     sameSite: "lax" as const,
     path: "/",
@@ -63,14 +63,14 @@ async function persistTokens(
   store.set(
     AUTH_COOKIES.accessToken,
     accessToken,
-    authCookieOptions(ACCESS_MAX_AGE_SECONDS),
+    authCookieOptions(ACCESS_MAX_AGE_SECONDS, false),
   );
   const refreshToken = extractRefreshToken(data);
   if (refreshToken) {
     store.set(
       AUTH_COOKIES.refreshToken,
       refreshToken,
-      authCookieOptions(REFRESH_MAX_AGE_SECONDS),
+      authCookieOptions(REFRESH_MAX_AGE_SECONDS, true),
     );
   }
   updateTag(ME_CACHE_TAG);

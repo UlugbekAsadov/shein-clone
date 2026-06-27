@@ -13,29 +13,21 @@ const ME_CACHE_TAG = "auth-me";
 
 export const authApi = {
   sendCode(payload: ISendCodeRequest) {
-    return apiClient.post<IApiResponse<null>>(AUTH_ENDPOINTS.sendCode, payload, {
-      skipAuth: true,
-    });
+    return apiClient.post<IApiResponse<null>>(AUTH_ENDPOINTS.sendCode, payload);
   },
   checkCode(payload: ILoginRequest) {
-    return apiClient.post<IApiResponse<null>>(
-      AUTH_ENDPOINTS.checkCode,
-      payload,
-      { skipAuth: true },
-    );
+    return apiClient.post<IApiResponse<null>>(AUTH_ENDPOINTS.checkCode, payload);
   },
   login(payload: ILoginRequest) {
     return apiClient.post<IApiResponse<ILoginResponseData>>(
       AUTH_ENDPOINTS.login,
       payload,
-      { skipAuth: true },
     );
   },
   register(payload: IRegisterRequest) {
     return apiClient.post<IApiResponse<ILoginResponseData>>(
       AUTH_ENDPOINTS.register,
       payload,
-      { skipAuth: true },
     );
   },
   getMe() {

@@ -13,7 +13,6 @@ export const storyApi = {
     return apiClient.get<IApiResponse<IStoriesData>>(
       STORY_ENDPOINTS.list(shopId),
       {
-        skipAuth: true,
         searchParams: { session_id: sessionId },
       },
     );
@@ -24,7 +23,6 @@ export const storyApi = {
       STORY_ENDPOINTS.markViewed(shopId, storyId),
       undefined,
       {
-        skipAuth: true,
         searchParams: { session_id: sessionId },
       },
     );

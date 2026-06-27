@@ -8,7 +8,6 @@ export const featuredShopsApi = {
     return apiClient.get<IApiResponse<IApiFeaturedShop[]>>(
       FEATURED_SHOPS_ENDPOINTS.list,
       {
-        skipAuth: true,
         searchParams: { limit },
         next: { tags: [FEATURED_SHOPS_CACHE_TAG] },
       },

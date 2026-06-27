@@ -1,4 +1,5 @@
 import { API_CONFIG, AUTH_COOKIES } from "./api-config";
+import { getClientCookie } from "@/lib/client-cookie";
 import { ApiError } from "./api-error";
 import type { IApiErrorBody } from "./interfaces/api-response.interface";
 import type { IHttpOptions } from "./interfaces/http-options.interface";
@@ -34,9 +35,7 @@ function mapCurrency(raw: string): string {
   return raw === "RUB" ? "RUBLE" : raw;
 }
 
-async function buildDynamicHeaders(
-  skipAuth: boolean,
-): Promise<Record<string, string>> {
+async function buildDynamicHeaders(): Promise<Record<string, string>> {
   const result: Record<string, string> = {};
 
   if (isServer) {
@@ -49,12 +48,11 @@ async function buildDynamicHeaders(
     result["Accept-language"] = locale.toUpperCase();
     result["Accept-currency"] = mapCurrency(currency);
 
-    if (!skipAuth) {
-      const token = store.get(AUTH_COOKIES.accessToken)?.value;
-      if (token) result.Authorization = `Bearer ${token}`;
-    }
-  } else if (skipAuth) {
-    result["x-skip-auth"] = "1";
+    const token = store.get(AUTH_COOKIES.accessToken)?.value;
+    if (token) result.Authorization = `Bearer ${token}`;
+  } else {
+    const token = getClientCookie(AUTH_COOKIES.accessToken);
+    if (token) result.Authorization = `Bearer ${token}`;
   }
 
   return result;
@@ -75,12 +73,12 @@ async function request<TData>(
   body: unknown,
   options: IHttpOptions = {},
 ): Promise<TData> {
-  const { searchParams, headers, next, skipAuth, signal, ...rest } = options;
+  const { searchParams, headers, next, signal, ...rest } = options;
   const url = buildUrl(endpoint, searchParams);
 
   const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
 
-  const dynamicHeaders = await buildDynamicHeaders(skipAuth ?? false);
+  const dynamicHeaders = await buildDynamicHeaders();
 
   const finalHeaders: Record<string, string> = {
     ...API_CONFIG.defaultHeaders,

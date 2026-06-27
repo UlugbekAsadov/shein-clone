@@ -7,7 +7,6 @@ export const productsApi = {
     return apiClient.get<IApiProductsResponse>(
       PRODUCTS_ENDPOINTS.list,
       {
-        skipAuth: true,
         searchParams: { ...params, page },
       },
     );

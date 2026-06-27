@@ -12,7 +12,6 @@ export const productDetailApi = {
     return apiClient.get<IApiResponse<IProductDetail>>(
       PRODUCT_DETAIL_ENDPOINTS.bySlug(slug),
       {
-        skipAuth: true,
         searchParams: { variant_clothes: "true" },
         signal,
       },
@@ -22,14 +21,12 @@ export const productDetailApi = {
   getSimilarProducts(id: number) {
     return apiClient.get<IApiResponse<ISimilarProductsData>>(
       PRODUCT_DETAIL_ENDPOINTS.similarProducts(id),
-      { skipAuth: true },
     );
   },
 
   getRecommendedProducts(id: number) {
     return apiClient.get<IApiResponse<ISimilarProductsData>>(
       PRODUCT_DETAIL_ENDPOINTS.recommendedProducts(id),
-      { skipAuth: true },
     );
   },
 
@@ -37,14 +34,15 @@ export const productDetailApi = {
     id: number,
     filters: ICommentsFilterState,
     limit: number,
+    sessionId: string,
     signal?: AbortSignal,
   ) {
     return apiClient.get<IApiResponse<IProductCommentsData>>(
       PRODUCT_DETAIL_ENDPOINTS.comments(id),
       {
-        skipAuth: true,
         searchParams: {
           limit,
+          session_id: sessionId,
           sort: filters.sort || undefined,
           rating: filters.ratings.length ? filters.ratings.join(",") : undefined,
           content_type: filters.contentTypes.length
@@ -61,7 +59,7 @@ export const productDetailApi = {
   getCommentsFilterOptions(id: number, signal?: AbortSignal) {
     return apiClient.get<IApiResponse<ICommentFilterOptions>>(
       PRODUCT_DETAIL_ENDPOINTS.commentsFilterOptions(id),
-      { skipAuth: true, signal },
+      { signal },
     );
   },
 
@@ -69,7 +67,6 @@ export const productDetailApi = {
     return apiClient.post<IApiResponse<unknown>>(
       PRODUCT_DETAIL_ENDPOINTS.likeComment(commentId),
       { session_id: sessionId },
-      { skipAuth: true },
     );
   },
 };

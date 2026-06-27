@@ -8,7 +8,6 @@ export const productSectionsApi = {
     return apiClient.get<IApiResponse<IProductSection[]>>(
       PRODUCT_SECTIONS_ENDPOINTS.list,
       {
-        skipAuth: true,
         next: { tags: [PRODUCT_SECTIONS_CACHE_TAG] },
       },
     );
