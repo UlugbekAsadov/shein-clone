@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import { Like, User } from "@solar-icons/react/ssr";
+import { cn } from "@/lib/utils";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import type { IReview } from "@/features/products/pages/[slug]/utils/review.interface";
+import { useCommentLike } from "@/features/products/pages/[slug]/pages/comments/hooks/use-comment-like";
 import { ProductReviewMeta } from "./product-review-meta";
 import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
@@ -13,6 +15,12 @@ interface IProps {
 
 export function ProductReviewCard({ review }: IProps) {
   const dict = useDictionary();
+  const { liked, count, toggle } = useCommentLike(
+    review.id,
+    review.isLiked ?? false,
+    review.helpful,
+  );
+
   return (
     <article className="flex h-full flex-col bg-secondary p-5 rounded-[26px]">
       <div className="flex items-center gap-3">
@@ -62,10 +70,14 @@ export function ProductReviewCard({ review }: IProps) {
           </span>
           <button
             type="button"
-            className="flex cursor-pointer items-center gap-1.5 hover:text-foreground"
+            onClick={toggle}
+            className={cn(
+              "flex cursor-pointer items-center gap-1.5 hover:text-foreground",
+              liked && "text-rose-500 hover:text-rose-500",
+            )}
           >
-            {dict.product.helpful} ({review.helpful})
-            <Like className="size-3.5" weight="Outline" />
+            {dict.product.helpful} ({count})
+            <Like className="size-3.5" weight={liked ? "Bold" : "Outline"} />
           </button>
         </div>
     </article>

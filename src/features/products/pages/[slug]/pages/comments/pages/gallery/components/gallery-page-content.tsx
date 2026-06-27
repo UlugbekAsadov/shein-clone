@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { locales } from "@/core/config/i18n/i18n-config";
 import { CommentsStickyBar } from "@/features/products/pages/[slug]/pages/comments/components/comments-sticky-bar";
 import type { IProductDetailUI } from "@/features/products/pages/[slug]/pages/comments/utils/product-detail.interface";
 import type { IGalleryItem } from "@/features/products/pages/[slug]/pages/comments/pages/gallery/utils/gallery-item.interface";
@@ -11,9 +12,10 @@ interface IProps {
   items: IGalleryItem[];
   product: IProductDetailUI;
   backHref: string;
+  lang: (typeof locales)[number];
 }
 
-export function GalleryPageContent({ items, product, backHref }: IProps) {
+export function GalleryPageContent({ items, product, backHref, lang }: IProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export function GalleryPageContent({ items, product, backHref }: IProps) {
           onClose={() => setActiveIndex(null)}
         />
       )}
-      <CommentsStickyBar product={product} />
+      <CommentsStickyBar product={product} lang={lang} />
     </div>
   );
 }

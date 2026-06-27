@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ApiError } from "@/core/api/api-error";
 import { productDetailApi } from "@/features/products/api/products-detail.api";
+import { getClientSessionId } from "@/lib/session-id";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 
 const detailCache = new Map<string, IProductDetail>();
@@ -29,7 +30,7 @@ export function useProductDetail(slug: string, enabled: boolean) {
     setError(false);
 
     productDetailApi
-      .getBySlug(slug, controller.signal)
+      .getBySlug(slug, getClientSessionId(), controller.signal)
       .then((result) => {
         if (controller.signal.aborted) return;
         if (result.data) {

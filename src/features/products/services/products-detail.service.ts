@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { cookies } from "next/headers";
 import { ApiError } from "@/core/api/api-error";
 import { productDetailApi } from "@/features/products/api/products-detail.api";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
@@ -12,8 +13,11 @@ interface IProductListResult {
 
 export const getProductDetail = cache(
   async (slug: string): Promise<IProductDetail | null> => {
+    const cookieStore = await cookies();
+    const sessionId = cookieStore.get("session_id")?.value ?? "guest";
+
     try {
-      const result = await productDetailApi.getBySlug(slug);
+      const result = await productDetailApi.getBySlug(slug, sessionId);
       return result.data ?? null;
     } catch (error) {
       if (error instanceof ApiError) return null;

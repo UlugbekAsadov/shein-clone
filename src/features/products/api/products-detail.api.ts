@@ -8,11 +8,11 @@ import type { ICommentsFilterState } from "@/features/products/pages/[slug]/page
 import { PRODUCT_DETAIL_ENDPOINTS } from "./products-detail.endpoints";
 
 export const productDetailApi = {
-  getBySlug(slug: string, signal?: AbortSignal) {
+  getBySlug(slug: string, sessionId: string, signal?: AbortSignal) {
     return apiClient.get<IApiResponse<IProductDetail>>(
       PRODUCT_DETAIL_ENDPOINTS.bySlug(slug),
       {
-        searchParams: { variant_clothes: "true" },
+        searchParams: { variant_clothes: "true", session_id: sessionId },
         signal,
       },
     );
@@ -50,6 +50,25 @@ export const productDetailApi = {
             : undefined,
           colors: filters.colors.length ? filters.colors.join(",") : undefined,
           sizes: filters.sizes.length ? filters.sizes.join(",") : undefined,
+        },
+        signal,
+      },
+    );
+  },
+
+  getImageComments(
+    id: number,
+    limit: number,
+    sessionId: string,
+    signal?: AbortSignal,
+  ) {
+    return apiClient.get<IApiResponse<IProductCommentsData>>(
+      PRODUCT_DETAIL_ENDPOINTS.comments(id),
+      {
+        searchParams: {
+          content_type: "image",
+          limit,
+          session_id: sessionId,
         },
         signal,
       },

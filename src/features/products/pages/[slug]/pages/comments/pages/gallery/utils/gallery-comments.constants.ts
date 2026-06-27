@@ -1,0 +1,1 @@
+export const GALLERY_COMMENTS_LIMIT = 50;

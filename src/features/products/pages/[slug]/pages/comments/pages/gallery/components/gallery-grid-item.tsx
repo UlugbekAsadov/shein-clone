@@ -12,7 +12,7 @@ export function GalleryGridItem({ item, onClick }: IProps) {
     <button
       type="button"
       onClick={onClick}
-      className="relative aspect-square cursor-pointer overflow-hidden rounded-lg bg-muted"
+      className="relative aspect-3/4 cursor-pointer overflow-hidden rounded-lg bg-muted"
     >
       <Image
         src={item.src}
