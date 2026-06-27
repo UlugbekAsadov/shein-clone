@@ -1,23 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { Checkbox } from "@/shared/components/ui/checkbox";
 import type { ICountedOption } from "@/features/products/pages/[slug]/pages/comments/utils/comments-filter.interface";
 
 interface IProps {
   options: ICountedOption[];
-  defaultSelected?: string[];
+  selected: string[];
+  onToggle: (id: string) => void;
 }
 
-export function CountedCheckboxList({ options, defaultSelected = [] }: IProps) {
-  const [selected, setSelected] = useState<string[]>(defaultSelected);
-
-  const toggle = (id: string) => {
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
-    );
-  };
-
+export function CountedCheckboxList({ options, selected, onToggle }: IProps) {
   return (
     <div className="flex flex-col gap-2.5">
       {options.map((option) => (
@@ -28,7 +20,7 @@ export function CountedCheckboxList({ options, defaultSelected = [] }: IProps) {
           <span className="flex items-center gap-2.5">
             <Checkbox
               checked={selected.includes(option.id)}
-              onCheckedChange={() => toggle(option.id)}
+              onCheckedChange={() => onToggle(option.id)}
             />
             <span className="text-foreground">{option.label}</span>
           </span>

@@ -2,6 +2,9 @@ import { apiClient } from "@/core/api/api-client";
 import type { IApiResponse } from "@/core/api/interfaces/api-response.interface";
 import type { IProductDetail } from "@/features/products/pages/[slug]/utils/product-detail.interface";
 import type { ISimilarProductsData } from "@/features/products/pages/[slug]/utils/similar-product.interface";
+import type { IProductCommentsData } from "@/features/products/pages/[slug]/pages/comments/utils/product-comments.interface";
+import type { ICommentFilterOptions } from "@/features/products/pages/[slug]/pages/comments/utils/comment-filter-options.interface";
+import type { ICommentsFilterState } from "@/features/products/pages/[slug]/pages/comments/utils/comments-filter-state.interface";
 import { PRODUCT_DETAIL_ENDPOINTS } from "./products-detail.endpoints";
 
 export const productDetailApi = {
@@ -27,6 +30,38 @@ export const productDetailApi = {
     return apiClient.get<IApiResponse<ISimilarProductsData>>(
       PRODUCT_DETAIL_ENDPOINTS.recommendedProducts(id),
       { skipAuth: true },
+    );
+  },
+
+  getComments(
+    id: number,
+    filters: ICommentsFilterState,
+    limit: number,
+    signal?: AbortSignal,
+  ) {
+    return apiClient.get<IApiResponse<IProductCommentsData>>(
+      PRODUCT_DETAIL_ENDPOINTS.comments(id),
+      {
+        skipAuth: true,
+        searchParams: {
+          limit,
+          sort: filters.sort || undefined,
+          rating: filters.ratings.length ? filters.ratings.join(",") : undefined,
+          content_type: filters.contentTypes.length
+            ? filters.contentTypes.join(",")
+            : undefined,
+          colors: filters.colors.length ? filters.colors.join(",") : undefined,
+          sizes: filters.sizes.length ? filters.sizes.join(",") : undefined,
+        },
+        signal,
+      },
+    );
+  },
+
+  getCommentsFilterOptions(id: number, signal?: AbortSignal) {
+    return apiClient.get<IApiResponse<ICommentFilterOptions>>(
+      PRODUCT_DETAIL_ENDPOINTS.commentsFilterOptions(id),
+      { skipAuth: true, signal },
     );
   },
 };

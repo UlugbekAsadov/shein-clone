@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { AltArrowRight, Play } from "@solar-icons/react/ssr";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import type { locales } from "@/core/config/i18n/i18n-config";
 
 interface IProps {
@@ -16,15 +19,17 @@ export function CommentsMediaGallery({
   images,
   videoIndex,
 }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div className="rounded-lg border border-border p-5">
       <div className="mb-3.5 flex items-center justify-between">
-        <span className="font-bold">Image and video</span>
+        <span className="font-bold">{dict.comments.mediaTitle}</span>
         <Link
           href={`/${lang}/products/${slug}/comments/gallery`}
           className="flex cursor-pointer items-center gap-1 text-muted-foreground hover:text-foreground"
         >
-          View all
+          {dict.comments.viewAll}
           <AltArrowRight className="size-5" weight="Outline" />
         </Link>
       </div>

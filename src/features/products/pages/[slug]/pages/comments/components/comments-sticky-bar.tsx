@@ -6,6 +6,7 @@ import { Button } from "@/shared/components/ui/button";
 import type { IProductDetailUI } from "@/features/products/pages/[slug]/pages/comments/utils/product-detail.interface";
 import { formatPrice } from "@/shared/utils/format-price";
 import { useCurrency } from "@/shared/hooks/use-currency";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
 interface IProps {
   product: IProductDetailUI;
@@ -13,6 +14,7 @@ interface IProps {
 
 export function CommentsStickyBar({ product }: IProps) {
   const { currency } = useCurrency();
+  const dict = useDictionary();
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background shadow-[0_-4px_12px_rgba(0,0,0,0.04)]">
       <div className="mx-auto flex max-w-360 items-center gap-4 px-6 py-3">
@@ -51,14 +53,14 @@ export function CommentsStickyBar({ product }: IProps) {
             className="min-w-[220px] rounded-lg px-10 py-3 text-sm font-semibold"
             size="lg"
           >
-            Add to cart
+            {dict.comments.addToCart}
           </Button>
           <Button
             type="button"
             variant="secondary"
             size="icon"
             className="size-11 rounded-full"
-            aria-label="Add to wishlist"
+            aria-label={dict.comments.addToWishlist}
           >
             <Heart className="size-5" weight="Outline" />
           </Button>

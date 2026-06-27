@@ -641,5 +641,26 @@
     "moreLabel": "batafsil...",
     "moreHref": "#",
     "accept": "Barchasini qabul qilish"
+  },
+  "comments": {
+    "title": "Sharhlar",
+    "customerReviews": "Mijozlar sharhlari",
+    "summaryRating": "Reyting",
+    "mediaTitle": "Rasm va video",
+    "viewAll": "Barchasini ko'rish",
+    "filterTitle": "Filtr",
+    "filterSort": "Saralash",
+    "filterRating": "Reyting",
+    "filterContentType": "Kontent turi",
+    "filterColor": "Rang",
+    "filterSize": "O'lcham",
+    "sortDate": "Sana",
+    "sortRating": "Reyting",
+    "helpful": "Foydali",
+    "sellerResponse": "Sotuvchi javobi",
+    "addToCart": "Savatga qo'shish",
+    "addToWishlist": "Sevimlilarga qo'shish",
+    "goBack": "Orqaga",
+    "closeFilter": "Filtrni yopish"
   }
 }

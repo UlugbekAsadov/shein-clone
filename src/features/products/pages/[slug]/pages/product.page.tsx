@@ -21,46 +21,16 @@ import { useProductDetail } from "@/features/products/pages/[slug]/hooks/use-pro
 import { useSimilarProducts } from "@/features/products/pages/[slug]/hooks/use-similar-products";
 import { useRecommendedProducts } from "@/features/products/pages/[slug]/hooks/use-recommended-products";
 import { useShopById } from "@/features/shop/hooks/use-shop-by-id";
-import type {
-  IProductComment,
-  IProductFitStats,
-} from "@/features/products/pages/[slug]/utils/product-detail.interface";
-import type {
-  IFitStat,
-  IReview,
-} from "@/features/products/pages/[slug]/utils/review.interface";
+import type { IProductFitStats } from "@/features/products/pages/[slug]/utils/product-detail.interface";
+import type { IFitStat } from "@/features/products/pages/[slug]/utils/review.interface";
+import { mapCommentToReview } from "@/features/products/pages/[slug]/utils/map-comment-to-review";
 import { ProductReviews } from "../components/product-reviews/product-reviews";
+import { getShopHeader } from "@/features/shop/services/shop.service";
 
 interface IProps {
   lang: (typeof locales)[number];
   dict: IDictionary;
   slug: string;
-}
-
-function mapCommentToReview(comment: IProductComment): IReview {
-  return {
-    id: String(comment.id),
-    user: comment.user.name,
-    date: comment.created_at,
-    rating: comment.rating,
-    meta: comment.specs.map((spec, index) => ({
-      id: `${comment.id}-${index}`,
-      label: spec.label,
-      value: spec.value,
-    })),
-    text: comment.content,
-    images: comment.images,
-    countryFlag: comment.country?.flag ?? "",
-    countryLabel: comment.country?.name ?? "",
-    helpful: comment.helpful_count,
-    sellerResponse: comment.shop_reply
-      ? {
-          shopName: comment.shop_reply.shop.name,
-          date: comment.shop_reply.created_at,
-          text: comment.shop_reply.content,
-        }
-      : undefined,
-  };
 }
 
 function mapFitStats(stats: IProductFitStats, dict: IDictionary): IFitStat[] {

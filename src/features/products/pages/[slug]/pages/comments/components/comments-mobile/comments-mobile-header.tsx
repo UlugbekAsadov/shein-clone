@@ -2,15 +2,26 @@
 
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Tuning2 } from "@solar-icons/react";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
+import type { ICommentsFilterGroup } from "@/features/products/pages/[slug]/pages/comments/utils/comments-filter-group.interface";
+import type { ICommentsSortControl } from "@/features/products/pages/[slug]/pages/comments/utils/comments-sort.interface";
 import { CommentsMobileFilterDrawer } from "./comments-mobile-filter-drawer";
 
 interface IProps {
   title: string;
   applyLabel: string;
+  groups: ICommentsFilterGroup[];
+  sort: ICommentsSortControl;
 }
 
-export function CommentsMobileHeader({ title, applyLabel }: IProps) {
+export function CommentsMobileHeader({
+  title,
+  applyLabel,
+  groups,
+  sort,
+}: IProps) {
   const router = useRouter();
+  const dict = useDictionary();
 
   return (
     <div className="sticky top-0 z-30 bg-background">
@@ -18,7 +29,7 @@ export function CommentsMobileHeader({ title, applyLabel }: IProps) {
         <button
           type="button"
           onClick={() => router.back()}
-          aria-label="Go back"
+          aria-label={dict.comments.goBack}
           className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
         >
           <ArrowLeft className="size-6" />
@@ -30,10 +41,12 @@ export function CommentsMobileHeader({ title, applyLabel }: IProps) {
 
         <CommentsMobileFilterDrawer
           applyLabel={applyLabel}
+          groups={groups}
+          sort={sort}
           trigger={
             <button
               type="button"
-              aria-label="Filter"
+              aria-label={dict.comments.filterTitle}
               className="grid size-9 shrink-0 place-items-center rounded-full bg-secondary text-foreground"
             >
               <Tuning2 className="size-6 rotate-90" />

@@ -1,25 +1,22 @@
 "use client";
 
-import { useState } from "react";
 import { cn } from "@/lib/utils";
+import type { ICommentsSortControl } from "@/features/products/pages/[slug]/pages/comments/utils/comments-sort.interface";
 
-const options = [
-  { id: "date", label: "Date" },
-  { id: "rating", label: "Rating" },
-];
+interface IProps {
+  sort: ICommentsSortControl;
+}
 
-export function SortFilter() {
-  const [selected, setSelected] = useState<string>("rating");
-
+export function CommentsSortList({ sort }: IProps) {
   return (
     <div className="flex flex-col gap-2.5">
-      {options.map((option) => {
-        const active = selected === option.id;
+      {sort.options.map((option) => {
+        const active = sort.value === option.id;
         return (
           <button
             key={option.id}
             type="button"
-            onClick={() => setSelected(option.id)}
+            onClick={() => sort.onChange(option.id)}
             className="flex cursor-pointer items-center gap-2.5 text-sm"
           >
             <span
@@ -28,9 +25,7 @@ export function SortFilter() {
                 active ? "border-foreground" : "border-input",
               )}
             >
-              {active && (
-                <span className="size-2 rounded-full bg-foreground" />
-              )}
+              {active && <span className="size-2 rounded-full bg-foreground" />}
             </span>
             <span className="text-foreground">{option.label}</span>
           </button>

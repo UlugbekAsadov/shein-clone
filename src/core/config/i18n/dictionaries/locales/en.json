@@ -641,5 +641,26 @@
     "moreLabel": "more...",
     "moreHref": "#",
     "accept": "Accept All"
+  },
+  "comments": {
+    "title": "Comments",
+    "customerReviews": "Customer Reviews",
+    "summaryRating": "Rating",
+    "mediaTitle": "Image and video",
+    "viewAll": "View all",
+    "filterTitle": "Filter",
+    "filterSort": "Sort",
+    "filterRating": "Rating",
+    "filterContentType": "Content type",
+    "filterColor": "Color",
+    "filterSize": "Size",
+    "sortDate": "Date",
+    "sortRating": "Rating",
+    "helpful": "Helpful",
+    "sellerResponse": "Seller's Response",
+    "addToCart": "Add to cart",
+    "addToWishlist": "Add to wishlist",
+    "goBack": "Go back",
+    "closeFilter": "Close filter"
   }
 }

@@ -639,5 +639,26 @@
     "moreLabel": "подробнее...",
     "moreHref": "#",
     "accept": "Принять все"
+  },
+  "comments": {
+    "title": "Отзывы",
+    "customerReviews": "Отзывы покупателей",
+    "summaryRating": "Рейтинг",
+    "mediaTitle": "Фото и видео",
+    "viewAll": "Смотреть все",
+    "filterTitle": "Фильтр",
+    "filterSort": "Сортировка",
+    "filterRating": "Рейтинг",
+    "filterContentType": "Тип контента",
+    "filterColor": "Цвет",
+    "filterSize": "Размер",
+    "sortDate": "Дата",
+    "sortRating": "Рейтинг",
+    "helpful": "Полезно",
+    "sellerResponse": "Ответ продавца",
+    "addToCart": "В корзину",
+    "addToWishlist": "В избранное",
+    "goBack": "Назад",
+    "closeFilter": "Закрыть фильтр"
   }
 }

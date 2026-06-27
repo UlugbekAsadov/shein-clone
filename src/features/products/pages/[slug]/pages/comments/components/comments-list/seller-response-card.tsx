@@ -1,4 +1,7 @@
+"use client";
+
 import { Shop, UndoLeftRound } from "@solar-icons/react/ssr";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import type { ISellerResponse } from "@/features/products/pages/[slug]/utils/review.interface";
 
 interface IProps {
@@ -6,6 +9,8 @@ interface IProps {
 }
 
 export function SellerResponseCard({ response }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div className="mt-4 rounded-xl border border-border bg-background p-4">
       <div className="flex items-start justify-between gap-3">
@@ -22,7 +27,7 @@ export function SellerResponseCard({ response }: IProps) {
         </div>
         <span className="flex items-center gap-1 text-xs text-muted-foreground">
           <UndoLeftRound className="size-3.5" weight="Outline" />
-          Seller&apos;s Response
+          {dict.comments.sellerResponse}
         </span>
       </div>
       <p className="mt-3 text-sm leading-relaxed">{response.text}</p>

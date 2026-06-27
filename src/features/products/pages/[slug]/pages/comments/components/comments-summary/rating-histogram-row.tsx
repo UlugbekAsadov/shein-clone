@@ -13,11 +13,7 @@ export function RatingHistogramRow({ bucket }: IProps) {
         <span className="text-xs font-semibold">{bucket.stars}</span>
         <div className="flex items-center gap-0.5">
           {Array.from({ length: bucket.stars }).map((_, i) => (
-            <Star
-              key={i}
-              className="size-3 fill-foreground text-foreground"
-              weight="Outline"
-            />
+            <Star key={i} className="size-3 fill-foreground text-foreground" />
           ))}
         </div>
       </div>

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { Like, User } from "@solar-icons/react/ssr";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/products/pages/[slug]/components/product-reviews/product-review-meta";
 import type { IReview } from "@/features/products/pages/[slug]/utils/review.interface";
@@ -10,6 +13,8 @@ interface IProps {
 }
 
 export function CommentsReviewItem({ review }: IProps) {
+  const dict = useDictionary();
+
   return (
     <div>
       <article className="rounded-xl bg-secondary p-5">
@@ -62,7 +67,7 @@ export function CommentsReviewItem({ review }: IProps) {
             type="button"
             className="flex cursor-pointer items-center gap-1.5 hover:text-foreground"
           >
-            Helpful ({review.helpful})
+            {dict.comments.helpful} ({review.helpful})
             <Like className="size-3.5" weight="Outline" />
           </button>
         </div>
