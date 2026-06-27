@@ -638,6 +638,17 @@
       "soldByTitle": "Sold by TY DIRECT Marketplace",
       "soldByDescription": "Ships from TY DIRECT Marketplace"
     },
+    "shippingModal": {
+      "title": "Shipping Info",
+      "shippingTo": "Shipping to:",
+      "country": "Uzbekistan",
+      "shipmentCost": "Shipment & Cost",
+      "estDelivery": "Est. Delivery",
+      "standardShipping": "Standart shipping",
+      "free": "FREE",
+      "logisticsTitle": "Logistics Policy",
+      "logisticsText": "The estimated delivery window is based on historical data, including data regarding when most orders were delivered. In most cases, the package should be delivered within the estimated delivery window. However, the actual delivery date may be affected by flight arrangements, weather conditions, processing delays, carrier delays, and other factors. The delivery time for items shipped directly from the supplier may vary."
+    },
     "returnPolicy": {
       "title": "Return Policy",
       "logisticsTitle": "Logistics Policy",

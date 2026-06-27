@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 import { ProductShippingRow } from "./product-shipping-row";
 import { ProductReturnPolicyModal } from "./product-return-policy-modal";
+import { ProductShippingModal } from "./product-shipping-modal";
 import { TruckIconSolid } from "@/shared/components/icons/solid";
 import { DollarMinimalistic, ShieldCheck, Shop } from "@solar-icons/react/ssr";
 import { useDictionary } from "@/core/config/i18n/use-dictionary";
@@ -20,6 +21,7 @@ export function ProductShippingInfo() {
   const dict = useDictionary();
   const t = dict.product.shippingHighlights;
   const [returnPolicyOpen, setReturnPolicyOpen] = useState(false);
+  const [shippingOpen, setShippingOpen] = useState(false);
 
   const highlights: IShippingHighlight[] = [
     {
@@ -27,6 +29,7 @@ export function ProductShippingInfo() {
       title: t.freeShippingTitle,
       description: t.freeShippingDescription,
       icon: <TruckIconSolid className="size-6 fill-emerald-600" />,
+      onClick: () => setShippingOpen(true),
     },
     {
       id: "freeReturns",
@@ -67,6 +70,11 @@ export function ProductShippingInfo() {
           </div>
         </ProductShippingRow>
       ))}
+
+      <ProductShippingModal
+        open={shippingOpen}
+        onOpenChange={setShippingOpen}
+      />
 
       <ProductReturnPolicyModal
         open={returnPolicyOpen}

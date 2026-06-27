@@ -638,6 +638,17 @@
       "soldByTitle": "TY DIRECT Marketplace tomonidan sotiladi",
       "soldByDescription": "TY DIRECT Marketplace tomonidan yuboriladi"
     },
+    "shippingModal": {
+      "title": "Yetkazib berish ma'lumoti",
+      "shippingTo": "Yetkazib beriladi:",
+      "country": "O'zbekiston",
+      "shipmentCost": "Yetkazish va narx",
+      "estDelivery": "Taxminiy yetkazish",
+      "standardShipping": "Standart yetkazib berish",
+      "free": "BEPUL",
+      "logisticsTitle": "Logistika siyosati",
+      "logisticsText": "Taxminiy yetkazib berish muddati tarixiy ma'lumotlarga, jumladan ko'pchilik buyurtmalar qachon yetkazib berilgani haqidagi ma'lumotlarga asoslangan. Aksariyat hollarda paket taxminiy yetkazib berish muddati ichida yetkaziladi. Biroq haqiqiy yetkazib berish sanasi parvozlar tartibi, ob-havo sharoiti, qayta ishlashdagi kechikishlar, tashuvchining kechikishlari va boshqa omillarga bog'liq bo'lishi mumkin. To'g'ridan-to'g'ri yetkazib beruvchidan jo'natiladigan mahsulotlarning yetkazib berish vaqti farq qilishi mumkin."
+    },
     "returnPolicy": {
       "title": "Qaytarish siyosati",
       "logisticsTitle": "Logistika siyosati",
