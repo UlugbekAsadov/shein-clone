@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { Like, User } from "@solar-icons/react/ssr";
+import { cn } from "@/lib/utils";
 import { useDictionary } from "@/core/config/i18n/use-dictionary";
 import { ProductRatingStars } from "@/shared/components/product/product-preview/product-rating-stars";
 import { ProductReviewMeta } from "@/features/products/pages/[slug]/components/product-reviews/product-review-meta";
+import { useCommentLike } from "@/features/products/pages/[slug]/pages/comments/hooks/use-comment-like";
 import type { IReview } from "@/features/products/pages/[slug]/utils/review.interface";
 import { SellerResponseCard } from "./seller-response-card";
 
@@ -14,6 +16,13 @@ interface IProps {
 
 export function CommentsReviewItem({ review }: IProps) {
   const dict = useDictionary();
+  const { liked, count, toggle } = useCommentLike(
+    review.id,
+    review.isLiked ?? false,
+    review.helpful,
+  );
+
+  console.log({ like: review.isLiked });
 
   return (
     <div>
@@ -65,10 +74,14 @@ export function CommentsReviewItem({ review }: IProps) {
           </span>
           <button
             type="button"
-            className="flex cursor-pointer items-center gap-1.5 hover:text-foreground"
+            onClick={toggle}
+            className={cn(
+              "flex cursor-pointer items-center gap-1.5 hover:text-foreground",
+              liked && "text-rose-500 hover:text-rose-500",
+            )}
           >
-            {dict.comments.helpful} ({review.helpful})
-            <Like className="size-3.5" weight="Outline" />
+            {dict.comments.helpful} ({count})
+            <Like className="size-3.5" weight={liked ? "Bold" : "Outline"} />
           </button>
         </div>
 

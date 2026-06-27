@@ -21,6 +21,7 @@ export interface IReview {
   countryFlag: string;
   countryLabel: string;
   helpful: number;
+  isLiked?: boolean;
   sellerResponse?: ISellerResponse;
 }
 

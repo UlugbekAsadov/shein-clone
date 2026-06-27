@@ -17,6 +17,7 @@ export function mapCommentToReview(comment: IProductComment): IReview {
     countryFlag: comment.country?.flag ?? "",
     countryLabel: comment.country?.name ?? "",
     helpful: comment.helpful_count,
+    isLiked: comment.is_liked,
     sellerResponse: comment.shop_reply
       ? {
           shopName: comment.shop_reply.shop.name,

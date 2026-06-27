@@ -69,7 +69,11 @@ export function CommentsMobileReviewCard({ review }: IProps) {
           <span aria-hidden>{review.countryFlag}</span>
           {countryClean}
         </span>
-        <CommentsMobileHelpful count={review.helpful} />
+        <CommentsMobileHelpful
+          commentId={review.id}
+          count={review.helpful}
+          initialLiked={review.isLiked}
+        />
       </div>
 
       {review.sellerResponse && (

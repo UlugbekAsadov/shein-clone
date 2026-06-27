@@ -64,4 +64,12 @@ export const productDetailApi = {
       { skipAuth: true, signal },
     );
   },
+
+  likeComment(commentId: string, sessionId: string) {
+    return apiClient.post<IApiResponse<unknown>>(
+      PRODUCT_DETAIL_ENDPOINTS.likeComment(commentId),
+      { session_id: sessionId },
+      { skipAuth: true },
+    );
+  },
 };

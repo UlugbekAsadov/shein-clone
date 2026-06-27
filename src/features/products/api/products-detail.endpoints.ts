@@ -5,4 +5,5 @@ export const PRODUCT_DETAIL_ENDPOINTS = {
   comments: (id: number) => `/_c/products/${id}/comments`,
   commentsFilterOptions: (id: number) =>
     `/_c/products/${id}/comments/filter-options`,
+  likeComment: (commentId: string) => `/_c/comments/${commentId}/like`,
 } as const;
