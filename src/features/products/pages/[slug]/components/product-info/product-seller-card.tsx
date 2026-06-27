@@ -4,7 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Button } from "@/shared/components/ui/button";
+import { cn } from "@/lib/utils";
 import type { IApiShop } from "@/features/shop/utils/shop-response.interface";
+import { useShopFollow } from "@/features/shop/hooks/use-shop-follow";
 import { ProductSellerStat } from "./product-seller-stat";
 import { Tag } from "@/shared/components/tag/tag";
 import { VerifiedCheck, Star } from "@solar-icons/react";
@@ -17,6 +19,10 @@ interface IProps {
 export function ProductSellerCard({ shop }: IProps) {
   const dict = useDictionary();
   const { lang } = useParams<{ lang: string }>();
+  const { isFollowing, toggle, isPending } = useShopFollow(
+    shop.id,
+    shop.is_followed,
+  );
   const shopHref = `/${lang}/demo/shop/${shop.id}`;
 
   const stats = [
@@ -83,7 +89,18 @@ export function ProductSellerCard({ shop }: IProps) {
             </div>
           </div>
 
-          <Button className="rounded-[10px] px-5">{dict.common.follow}</Button>
+          <Button
+            type="button"
+            onClick={toggle}
+            disabled={isPending}
+            className={cn(
+              "rounded-[10px] px-5",
+              isFollowing &&
+                "border border-foreground bg-background text-foreground",
+            )}
+          >
+            {isFollowing ? dict.common.following : dict.common.follow}
+          </Button>
         </div>
       </div>
     </div>
