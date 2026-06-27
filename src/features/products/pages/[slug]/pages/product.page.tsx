@@ -133,7 +133,7 @@ export function ProductPage({ lang, dict, slug }: IProps) {
 
                 <div className="flex flex-col gap-6">
                   <ProductInfoPanel product={product} />
-                  <ProductShippingInfo highlights={product.highlights} />
+                  <ProductShippingInfo />
                   {shop ? <ProductSellerCard shop={shop} /> : null}
                 </div>
 

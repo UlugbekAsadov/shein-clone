@@ -628,6 +628,24 @@
     "similarProducts": "O'xshash mahsulotlar",
     "recommendedProducts": "Tavsiya etilgan mahsulotlar",
     "fastShipping": "Tez yetkazib berish",
+    "shippingHighlights": {
+      "freeShippingTitle": "Bepul yetkazib berish ($20.00 dan ortiq buyurtmalar)",
+      "freeShippingDescription": "$20.00 dan ortiq buyurtmalarga bepul yetkazib berish",
+      "freeReturnsTitle": "30 kun ichida bepul qaytarish",
+      "freeReturnsDescription": "Mahsulotlarni xarid qilingandan keyin 30 kun ichida bepul qaytaring",
+      "securityTitle": "Xarid xavfsizligi",
+      "securityDescription": "Xavfsiz to'lovlar va maxfiylik himoyasi",
+      "soldByTitle": "TY DIRECT Marketplace tomonidan sotiladi",
+      "soldByDescription": "TY DIRECT Marketplace tomonidan yuboriladi"
+    },
+    "returnPolicy": {
+      "title": "Qaytarish siyosati",
+      "logisticsTitle": "Logistika siyosati",
+      "intro": "Quyidagi shartlar bajarilishi kerak:",
+      "condition1": "Mahsulotlar yetkazib berilgan kundan boshlab 30 kun ichida qaytarilishi kerak.",
+      "condition2": "Mahsulotlar kiyilmagan, shikastlanmagan va asl qadoqda bo'lishi kerak.",
+      "condition3": "Agar tekshiruvimiz qaytarilgan mahsulot ishlatilgan yoki shikastlangan va qayta sotishga yaroqsiz deb topsa, biz pulni qaytarmaymiz."
+    },
     "previousReviews": "Oldingi sharhlar",
     "nextReviews": "Keyingi sharhlar",
     "fitStats": {

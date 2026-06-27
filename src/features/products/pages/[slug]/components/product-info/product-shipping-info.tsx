@@ -1,26 +1,63 @@
+"use client";
+
+import { useState } from "react";
+import type { ReactNode } from "react";
 import { ProductShippingRow } from "./product-shipping-row";
+import { ProductReturnPolicyModal } from "./product-return-policy-modal";
 import { TruckIconSolid } from "@/shared/components/icons/solid";
 import { DollarMinimalistic, ShieldCheck, Shop } from "@solar-icons/react/ssr";
-import type { IProductHighlight } from "@/features/products/pages/[slug]/utils/product-detail.interface";
+import { useDictionary } from "@/core/config/i18n/use-dictionary";
 
-interface IProps {
-  highlights: IProductHighlight[];
+interface IShippingHighlight {
+  id: string;
+  title: string;
+  description: string;
+  icon: ReactNode;
+  onClick?: () => void;
 }
 
-const HIGHLIGHT_ICONS = [
-  <TruckIconSolid key="truck" className="size-6 fill-emerald-600" />,
-  <DollarMinimalistic key="dollar" className="size-6 text-foreground" weight="Bold" />,
-  <ShieldCheck key="shield" className="size-6 text-foreground" weight="Bold" />,
-  <Shop key="shop" className="size-6 text-foreground" weight="Bold" />,
-];
+export function ProductShippingInfo() {
+  const dict = useDictionary();
+  const t = dict.product.shippingHighlights;
+  const [returnPolicyOpen, setReturnPolicyOpen] = useState(false);
 
-export function ProductShippingInfo({ highlights }: IProps) {
+  const highlights: IShippingHighlight[] = [
+    {
+      id: "freeShipping",
+      title: t.freeShippingTitle,
+      description: t.freeShippingDescription,
+      icon: <TruckIconSolid className="size-6 fill-emerald-600" />,
+    },
+    {
+      id: "freeReturns",
+      title: t.freeReturnsTitle,
+      description: t.freeReturnsDescription,
+      icon: (
+        <DollarMinimalistic className="size-6 text-foreground" weight="Bold" />
+      ),
+      onClick: () => setReturnPolicyOpen(true),
+    },
+    {
+      id: "security",
+      title: t.securityTitle,
+      description: t.securityDescription,
+      icon: <ShieldCheck className="size-6 text-foreground" weight="Bold" />,
+    },
+    {
+      id: "soldBy",
+      title: t.soldByTitle,
+      description: t.soldByDescription,
+      icon: <Shop className="size-6 text-foreground" weight="Bold" />,
+    },
+  ];
+
   return (
     <div className="rounded-[12px] bg-secondary p-5 space-y-4">
-      {highlights.map((highlight, i) => (
+      {highlights.map((highlight) => (
         <ProductShippingRow
-          key={highlight.title}
-          icon={HIGHLIGHT_ICONS[i] ?? HIGHLIGHT_ICONS[HIGHLIGHT_ICONS.length - 1]}
+          key={highlight.id}
+          icon={highlight.icon}
+          onClick={highlight.onClick}
         >
           <div className="font-semibold text-foreground text-xs">
             {highlight.title}
@@ -30,6 +67,11 @@ export function ProductShippingInfo({ highlights }: IProps) {
           </div>
         </ProductShippingRow>
       ))}
+
+      <ProductReturnPolicyModal
+        open={returnPolicyOpen}
+        onOpenChange={setReturnPolicyOpen}
+      />
     </div>
   );
 }

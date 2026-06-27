@@ -628,6 +628,24 @@
     "similarProducts": "Similar Products",
     "recommendedProducts": "Recommended Products",
     "fastShipping": "Fast shipping",
+    "shippingHighlights": {
+      "freeShippingTitle": "Free Shipping (Orders $20.00)",
+      "freeShippingDescription": "Free Shipping on orders above $20.00",
+      "freeReturnsTitle": "30-Day Free Returns",
+      "freeReturnsDescription": "Return items within 30 days of purchase for free",
+      "securityTitle": "Shopping Security",
+      "securityDescription": "Safe payments and privacy protection",
+      "soldByTitle": "Sold by TY DIRECT Marketplace",
+      "soldByDescription": "Ships from TY DIRECT Marketplace"
+    },
+    "returnPolicy": {
+      "title": "Return Policy",
+      "logisticsTitle": "Logistics Policy",
+      "intro": "The following conditions must be met:",
+      "condition1": "Items must be returned within 30 days after the delivery date.",
+      "condition2": "Items must be unworn, undamaged and in original packaging.",
+      "condition3": "If our inspection finds that the returned item has been used or damaged and is not suitable for resale, we will not issue a refund."
+    },
     "previousReviews": "Previous reviews",
     "nextReviews": "Next reviews",
     "fitStats": {
